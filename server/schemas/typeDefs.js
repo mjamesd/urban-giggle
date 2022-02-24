@@ -32,3 +32,39 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
+/*
+
+queries:
+  user(userId: ID!): User
+  me: User
+
+  hunts: [Hunt]!
+  hunt(huntId: ID!): Hunt
+
+  huntItems: [HuntItem]!
+  huntItem(huntItemId: ID!): HuntItem
+
+  badges: [Badge]!
+  badge(badgeId: ID!): Badge
+
+
+mutations:
+  addUser(username: String!, email: String!, password: String!): Auth
+  updateUser(userId: ID!): Auth
+  login: Auth
+
+  addHunt: Hunt
+  updateHunt: Hunt
+  removeHunt: Hunt
+  
+  addHuntItem: HuntItem
+  updateHuntItem: HuntItem
+  removeHuntItem: HuntItem
+  
+  addBadge: Badge
+  updateBadge: Badge
+  removeBadge: Badge
+  
+
+*/
