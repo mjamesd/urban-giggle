@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 //TODOS: Complete  mutations. -JM
 //DONE: types and queries. -JM
+//NOTE: The queries might not be complete. If there are issues, look here first.
 
 const typeDefs = gql`
   type User {
@@ -34,7 +35,7 @@ const typeDefs = gql`
 
   type HuntItem {
     _id: ID
-    name: String!
+    name: String! 
     qrId: String
     hint1: String!
     hint2: String!
@@ -51,27 +52,31 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: [User]!
+    users: [User!]
     user(_id: ID!): User
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: User
     hunts: [Hunt!]
     hunt(_id: ID!): Hunt
-    huntitems: [HuntItem]
-    huntitem(_d: ID!): HuntItem
-    badges: [Badge]!
+    huntItems: [HuntItem]
+    huntItem(_id: ID!): HuntItem
+    allBadges: [Badge!]
     badge(_id: ID!): Badge
 
 
   }
 
   type Mutation {
-    addProfile(name: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-
-    addSkill(profileId: ID!, skill: String!): Profile
-    removeProfile: Profile
-    removeSkill(skill: String!): Profile
+    addUser(username: String!, email: String!, password: String!): Auth
+    updateUser(userId: ID!): Auth
+    addHunt(_id: ID!): Hunt
+    updateHunt(_id: ID!): Hunt
+    removeHunt(_id: ID!): Hunt
+    addHuntItem(_id: ID!): HuntItem
+    removeHuntItem(_id: ID!): HuntItem
+    addBadge(_id: ID!): Badge
+    updateBadge(_id: ID!): Badge
+    removeBadge(_id: ID!): Badge
   }
 `;
 
