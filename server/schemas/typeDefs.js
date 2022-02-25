@@ -30,7 +30,7 @@ const typeDefs = gql`
     name: String!
     description: String!
     points: Int
-    huntItems: [huntItem]
+    huntItems: [HuntItem]
   }
 
   type HuntItem {
@@ -60,7 +60,7 @@ const typeDefs = gql`
     hunt(_id: ID!): Hunt
     huntItems: [HuntItem]
     huntItem(_id: ID!): HuntItem
-    allBadges: [Badge!]
+    badges: [Badge!]
     badge(_id: ID!): Badge
 
 
