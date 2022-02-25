@@ -24,9 +24,9 @@ const userSchema = new Schema({
         type: Number,
         default: 10, // start out with ten points!
         required: true,
-        min: [0, "Can't spend what'cha don't got"],
+        min: [0, "You are out of points -- find hunt items and complete scavenger hunts to obtain more!"],
     },
-    foundItems: [
+    foundHuntItems: [
         {
             type: Schema.Types.ObjectId,
             ref: 'HuntItem',
