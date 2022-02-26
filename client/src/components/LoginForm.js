@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -9,7 +11,8 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    IconButton
+    IconButton,
+    TextField,
 } from '@mui/material/'
 import {
     Visibility,
@@ -18,30 +21,30 @@ import {
 
 
 const LoginForm = () => {
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
+
+    // state values for the password box 
     const [values, setValues] = React.useState({
-        amount: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
-      });
-    
-      const handleChange = (prop) => (event) => {
+    });
+
+    const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-      };
-    
-      const handleClickShowPassword = () => {
+    };
+
+    const handleClickShowPassword = () => {
         setValues({
-          ...values,
-          showPassword: !values.showPassword,
+            ...values,
+            showPassword: !values.showPassword,
         });
-      };
-    
-      const handleMouseDownPassword = (event) => {
+    };
+
+    const handleMouseDownPassword = (event) => {
         event.preventDefault();
-      };
-    
+    };
+
 
     const [formState, setFormState] = useState({ email: '', password: '' });
     const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -79,28 +82,33 @@ const LoginForm = () => {
 
 
     return (
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-                id="outlined-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={handleChange('password')}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                        >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                }
-                label="Password"
-            />
-        </FormControl>
+        <FormControl>
+            <TextField variant="outlined" label="Username" /><br />
+            <TextField variant="outlined" label="Email" /><br />
+            <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                    variant="outlined"
+                    id="password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    label="Password"
+                />
+            </FormControl><br />
+            <Button className={buttonStyles}>START HERE</Button></FormControl>
     )
 }
 

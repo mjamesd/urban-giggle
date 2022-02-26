@@ -41,9 +41,13 @@ const userSchema = new Schema({
     badges: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Badge'
+            ref: 'Badge',
         },
     ],
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
