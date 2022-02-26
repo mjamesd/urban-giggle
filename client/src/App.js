@@ -24,7 +24,8 @@ import Login from './pages/Login'
 import Footer from './components/Footer';
 import Home from './pages/Home'
 import Signup from './pages/Signup'
-import Banner from "./components/Banner";
+import Marquee from "./components/TopMarquee";
+import BottomMarquee from "./components/BottomMarquee"
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,25 +50,23 @@ function App() {
   return (
     <AnimateSharedLayout type='crossfade'>
       <AnimatePresence>
-      <ApolloProvider client={client}>
-        <Router >
-
-          <div className="app-container">
-            <Header />
-            <Banner />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </Routes>
-            <Footer />
-          </div>
-        </Router>
-      </ApolloProvider>
+        <ApolloProvider client={client}>
+          <Router >
+            <div className="app-container">
+              <Header />
+              <Marquee />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </Routes>
+              <BottomMarquee />
+              <Footer />
+            </div>
+          </Router>
+        </ApolloProvider>
       </AnimatePresence>
     </AnimateSharedLayout>
-
-
   )
 }
 

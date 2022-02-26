@@ -58,7 +58,6 @@ const Header = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              flex
             >
               <MenuIcon />
             </IconButton>

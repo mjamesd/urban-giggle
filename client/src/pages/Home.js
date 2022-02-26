@@ -12,7 +12,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
     margin: 'auto',
-    marginTop: 100,
+    marginTop: 0,
     borderRadius: spacing(2), // 16px
     transition: '0.3s',
     boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
@@ -94,7 +94,7 @@ export const Home = React.memo(function BlogCard() {
             'A cool website, thats what'
           }
         />
-        <Button className={buttonStyles}>Read more</Button>
+        <Button className={buttonStyles}>START HERE</Button>
       </CardContent>
     </Card>
   );
