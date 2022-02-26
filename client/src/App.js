@@ -26,6 +26,7 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Marquee from "./components/TopMarquee";
 import BottomMarquee from "./components/BottomMarquee"
+import Experiences from "./components/Experiences"
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -61,6 +62,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
               </Routes>
               <BottomMarquee />
+              <Experiences />
               <Footer />
             </div>
           </Router>
