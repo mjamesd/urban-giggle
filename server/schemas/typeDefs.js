@@ -1,8 +1,4 @@
-const { gql } = require('apollo-server-express');
-
-//TODOS: Complete  mutations. -JM
-//DONE: types and queries. -JM
-//NOTE: The queries might not be complete. If there are issues, look here first.
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -11,9 +7,9 @@ const typeDefs = gql`
     email: String!
     password: String!
     points: Int
-    foundItems: [HuntItem]
-    completedHunts: [Hunt]
-    badges: [Badge]
+    foundItems: [HuntItem!]!
+    completedHunts: [Hunt!]!
+    badges: [Badge!]!
     createdAt: String
   }
 
@@ -30,12 +26,12 @@ const typeDefs = gql`
     name: String!
     description: String!
     points: Int
-    huntItems: [HuntItem]
+    huntItems: [HuntItem!]!
   }
 
   type HuntItem {
     _id: ID
-    name: String! 
+    name: String!
     qrId: String
     hint1: String!
     hint2: String!
@@ -53,30 +49,79 @@ const typeDefs = gql`
 
   type Query {
     users: [User!]
-    user(_id: ID!): User
-    # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
+    user(userId: ID!): User
     me: User
     hunts: [Hunt!]
-    hunt(_id: ID!): Hunt
+    hunt(huntId: ID!): Hunt
     huntItems: [HuntItem]
-    huntItem(_id: ID!): HuntItem
+    huntItem(huntItemId: ID!): HuntItem
     badges: [Badge!]
-    badge(_id: ID!): Badge
-
-
+    badge(badgeId: ID!): Badge
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    updateUser(userId: ID!): Auth
-    addHunt(_id: ID!): Hunt
-    updateHunt(_id: ID!): Hunt
-    removeHunt(_id: ID!): Hunt
-    addHuntItem(_id: ID!): HuntItem
-    removeHuntItem(_id: ID!): HuntItem
-    addBadge(_id: ID!): Badge
-    updateBadge(_id: ID!): Badge
-    removeBadge(_id: ID!): Badge
+    createBadge(
+      name: String!
+      icon: String!
+      description: String!
+      points: Int!
+    ): Badge!
+    updateBadge(
+      badgeId: ID!
+      newName: String
+      newIcon: String
+      newDescription: String
+      newPoints: Int
+    ): Badge!
+    removeBadge(badgeId: ID!): Badge
+
+    createHunt(name: String!, description: String!, points: Int!): Hunt!
+    updateHunt(
+      huntId: ID!
+      newName: String
+      newDescription: String
+      newPoints: Int
+    ): Hunt!
+    removeHunt(huntId: ID!): Hunt
+
+    createHuntItem(
+      name: String!
+      hint1: String!
+      hint2: String!
+      hint3: String!
+      solutionLocation: String!
+      solutionDescription: String!
+      solutionImg: String
+      points: Int!
+    ): HuntItem!
+    updateHuntItem(
+      huntItemId: ID!
+      newName: String
+      newHint1: String
+      newHint2: String
+      newHint3: String
+      newSolutionLocation: String
+      newSolutionDescription: String
+      newSolutionImg: String
+      newPoints: Int
+    ): HuntItem!
+    removeHuntItem(huntItemId: ID!): HuntItem
+
+    createUser(username: String!, email: String!, password: String!): Auth
+    updateUser(
+      username: String!
+      newUsername: String
+      email: String!
+      newEmail: String
+      password: String!
+      newPassword: String!
+    ): Auth
+    removeUser: User
+    login(email: String!, password: String!): Auth
+    changePoints(pointsToChange: Int): Auth
+    userFoundHuntItem(huntItemId: ID!): Auth
+    userCompletedHunt(huntId: ID!): Auth
+    userAddBadge(badgeId: ID!): Auth
   }
 `;
 
