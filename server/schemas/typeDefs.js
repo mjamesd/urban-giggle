@@ -7,9 +7,9 @@ const typeDefs = gql`
     email: String!
     password: String!
     points: Int
-    foundItems: [HuntItem!]!
-    completedHunts: [Hunt!]!
-    badges: [Badge!]!
+    foundItems: [HuntItem!]
+    completedHunts: [Hunt!]
+    badges: [Badge!]
     isAdmin: Boolean
     createdAt: String
   }
@@ -76,7 +76,7 @@ const typeDefs = gql`
     ): Badge!
     removeBadge(badgeId: ID!): Badge
 
-    createHunt(name: String!, description: String!, points: Int!): Hunt!
+    createHunt(name: String!, description: String!, points: Int): Hunt!
     updateHunt(
       huntId: ID!
       newName: String
@@ -110,12 +110,10 @@ const typeDefs = gql`
 
     createUser(username: String!, email: String!, password: String!): Auth
     updateUser(
-      username: String!
-      newUsername: String
-      email: String!
-      newEmail: String
+      username: String
+      email: String
       password: String!
-      newPassword: String!
+      newPassword: String
     ): Auth
     removeUser: User
     login(email: String!, password: String!): Auth
