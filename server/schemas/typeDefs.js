@@ -107,6 +107,7 @@ const typeDefs = gql`
       newPoints: Int
     ): HuntItem!
     removeHuntItem(huntItemId: ID!): HuntItem
+    addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
     createUser(username: String!, email: String!, password: String!): Auth
     updateUser(
