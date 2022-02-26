@@ -47,7 +47,7 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, flexGrow: 8, display: { xs: 'none', md: 'flex' } }}
           >
-            TOTAL QUEST
+            <Link to="/">TOTAL QUEST</Link>
           </Typography>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
