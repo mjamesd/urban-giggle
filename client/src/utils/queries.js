@@ -64,8 +64,8 @@ export const QUERY_ME = gql`
   }
 `
 export const GET_HUNT_ITEM = gql`
-query huntitem($_id: ID!) {
-  huntitem(_id: $_id) {
+query huntItem($_id: ID!) {
+  huntItem(_id: $_id) {
     _id
     name
     qrId
@@ -81,18 +81,19 @@ query huntitem($_id: ID!) {
 `
 
 export const GET_HUNT_ITEMS = gql`
-query huntitem{
-  huntitems
-  _id
-  name
-  qrId
-  hint1
-  hint2
-  hint3
-  solutionLocation
-  solutionDescription
-  solutionImg
-  points
+query huntItem{
+  huntItems{
+    _id
+    name
+    qrId
+    hint1
+    hint2
+    hint3
+    solutionLocation
+    solutionDescription
+    solutionImg
+    points
+  }
 }
 
 `
