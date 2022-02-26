@@ -11,7 +11,7 @@ import {
     OutlinedInput,
     IconButton,
     TextField,
-    Input
+    Button
 } from '@mui/material/'
 import {
     Visibility,
@@ -20,6 +20,12 @@ import {
 
 
 const LoginForm = () => {
+
+    const styles = {
+        input: {
+            margin: "10px"
+        }
+    }
 
     // state values for the password box 
     const [values, setValues] = React.useState({
@@ -79,11 +85,11 @@ const LoginForm = () => {
 
 
     return (
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-        <TextField label="Name"  />
-        <TextField label="Email" />
-        
-          
+        <FormControl>
+        <TextField variant="outlined" label="Name" style={styles.input} /><br/>
+        <TextField variant="outlined" label="Email" style={styles.input}/><br/>
+          <FormControl style={styles.input} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
           variant="outlined"
             id="password"
@@ -105,6 +111,7 @@ const LoginForm = () => {
             label="Password"
           />
         </FormControl>
+        <Button>HELLO I'M A BUTTON!!!</Button></FormControl>
     )
 }
 

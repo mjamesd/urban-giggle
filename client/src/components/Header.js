@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate, Link } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,6 +16,8 @@ const pages = ['Login', 'Signup', 'Profile'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
+  let navigate = useNavigate();
+
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -96,6 +99,8 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page}
+                component={Link}
+                to={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -107,7 +112,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* LOGO HERE */}
+                USER MENU BUTTON
               </IconButton>
             </Tooltip>
             <Menu
@@ -128,7 +133,7 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" component={Link} to={setting}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
