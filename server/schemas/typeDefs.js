@@ -10,6 +10,7 @@ const typeDefs = gql`
     foundItems: [HuntItem!]!
     completedHunts: [Hunt!]!
     badges: [Badge!]!
+    isAdmin: Boolean
     createdAt: String
   }
 
