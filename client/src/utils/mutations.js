@@ -8,40 +8,16 @@ import { gql } from '@apollo/client';
 // updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt!
 // removeHunt(huntId: ID!): Hunt
 
-// createHuntItem(
-//   name: String!
-//   hint1: String!
-//   hint2: String!
-//   hint3: String!
-//   solutionLocation: String!
-//   solutionDescription: String!
-//   solutionImg: String
-//   points: Int!
-// ): HuntItem!
-// updateHuntItem(
-//   huntItemId: ID!
-//   newName: String
-//   newHint1: String
-//   newHint2: String
-//   newHint3: String
-//   newSolutionLocation: String
-//   newSolutionDescription: String
-//   newSolutionImg: String
-//   newPoints: Int
-// ): HuntItem!
+// createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
+// updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem!
 // removeHuntItem(huntItemId: ID!): HuntItem
 
-// createUser(username: String!, email: String!, password: String!): Auth
-// updateUser(
-//   username: String!
-//   newUsername: String
-//   email: String!
-//   newEmail: String
-//   password: String!
-//   newPassword: String!
-// ): Auth
+// createUser(username: String!, email: String!, password: String!): Auth  -- done JM
+// updateUser(username: String! newUsername: String email: String! newEmail: String password: String! newPassword: String!): Auth - done
 // removeUser: User
-// login(email: String!, password: String!): Auth
+// login(email: String!, password: String!): Auth --done JM
+
+
 // changePoints(pointsToChange: Int): Auth
 // userFoundHuntItem(huntItemId: ID!): Auth
 // userCompletedHunt(huntId: ID!): Auth
@@ -49,11 +25,13 @@ import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(name: $name, email: $email, password: $password) {
+    createUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
         username
+        email
+        password
       }
     }
   }
@@ -65,6 +43,10 @@ export const UPDATE_USER = gql`
       _id
       username
       newUsername
+      email
+      newEmail
+      password
+      newPassword
     }
   }
 `;
@@ -73,20 +55,21 @@ export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
-      profile {
+      user {
         _id
-        name
+        username
       }
     }
   }
 `;
 
-export const REMOVE_SKILL = gql`
-  mutation removeSkill($skill: String!) {
-    removeSkill(skill: $skill) {
+export const REMOVE_USER = gql`
+  mutation removeUser($username: String!) {
+    removeUser(username: $username) {
       _id
-      name
-      skills
+      username
+      email
+      password
     }
   }
 `;

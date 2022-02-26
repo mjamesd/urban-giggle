@@ -25,6 +25,7 @@ query user($_id: ID!) {
     completedHunts
     badges
     createdAt
+    isAdmin
   }
 }
 `
@@ -41,6 +42,7 @@ query users{
     completedHunts
     badges
     createdAt
+    isAdmin
   }
   
 }
@@ -55,7 +57,7 @@ export const QUERY_ME = gql`
       password
       points
       foundItems
-      completedHuntes
+      completedHunts
       badges
       createdAt
     }
@@ -80,7 +82,7 @@ query huntitem($_id: ID!) {
 
 export const GET_HUNT_ITEMS = gql`
 query huntitem{
-  huntitemsP
+  huntitems
   _id
   name
   qrId
