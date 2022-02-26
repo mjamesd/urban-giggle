@@ -25,6 +25,7 @@ query user($_id: ID!) {
     completedHunts
     badges
     createdAt
+    isAdmin
   }
 }
 `
@@ -41,6 +42,7 @@ query users{
     completedHunts
     badges
     createdAt
+    isAdmin
   }
   
 }
@@ -55,15 +57,15 @@ export const QUERY_ME = gql`
       password
       points
       foundItems
-      completedHuntes
+      completedHunts
       badges
       createdAt
     }
   }
 `
 export const GET_HUNT_ITEM = gql`
-query huntitem($_id: ID!) {
-  huntitem(_id: $_id) {
+query huntItem($_id: ID!) {
+  huntItem(_id: $_id) {
     _id
     name
     qrId
@@ -79,18 +81,19 @@ query huntitem($_id: ID!) {
 `
 
 export const GET_HUNT_ITEMS = gql`
-query huntitem{
-  huntitemsP
-  _id
-  name
-  qrId
-  hint1
-  hint2
-  hint3
-  solutionLocation
-  solutionDescription
-  solutionImg
-  points
+query huntItem{
+  huntItems{
+    _id
+    name
+    qrId
+    hint1
+    hint2
+    hint3
+    solutionLocation
+    solutionDescription
+    solutionImg
+    points
+  }
 }
 
 `
