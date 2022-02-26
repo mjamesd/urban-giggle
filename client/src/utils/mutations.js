@@ -4,8 +4,8 @@ import { gql } from '@apollo/client';
 // updateBadge(badgeId: ID! newName: String newIcon: String newDescription: String newPoints: Int ): Badge!
 // removeBadge(badgeId: ID!): Badge
 
-// createHunt(name: String!, description: String!, points: Int!): Hunt!
-// updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt!
+// createHunt(name: String!, description: String!, points: Int!): Hunt! -- done JM
+// updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt! -- done JM
 // removeHunt(huntId: ID!): Hunt
 
 // createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
@@ -73,3 +73,47 @@ export const REMOVE_USER = gql`
     }
   }
 `;
+
+// createHunt(name: String!, description: String!, points: Int!): Hunt!
+
+export const CREATE_HUNT = gql`
+  mutation createHunt($name: String!, $description: String!, $points: Int!){
+    createHunt(name: $name, description: $description, points: $points){
+     hunt{ 
+      _id
+      name
+      description
+      points
+     }
+    }
+  }
+
+`
+
+// updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt! -- is this going to work?
+
+export const UPDATE_HUNT = gql`
+  mutation updateHunt($_id: ID!, $newName: String, $newDescription: String, $newPoints: Int){
+    updateHunt(_id: $_id, newName: $newName, newDescription: $newDescription, newPoints: $newPoints){
+      hunt{
+        _id
+        newName
+        newDescription
+        newPoints
+      }
+    }
+  }
+`
+
+// removeHunt(huntId: ID!): Hunt
+
+export const REMOVE_HUNT = gql`
+    mutation removeHunt($_id: ID!){
+      removeHunt(_id: $_id){
+        hunt{
+          _id
+        }
+      }
+    }
+
+`
