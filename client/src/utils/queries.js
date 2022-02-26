@@ -7,10 +7,10 @@ import { gql } from '@apollo/client';
 //   me: User -- done
 //   hunts: [Hunt!] -- done
 //   hunt(huntId: ID!): Hunt -- done
-//   huntItems: [HuntItem]
-//   huntItem(huntItemId: ID!): HuntItem
-//   badges: [Badge!]
-//   badge(badgeId: ID!): Badge
+//   huntItems: [HuntItem] -- done
+//   huntItem(huntItemId: ID!): HuntItem -- done
+//   badges: [Badge!] -- done
+//   badge(badgeId: ID!): Badge -- done
 // }
 
 export const GET_USER = gql`
@@ -51,16 +51,33 @@ query users{
 export const QUERY_ME = gql`
   query me {
     me {
+      __typename
       _id
       username
       email
       password
       points
-      foundItems
-      completedHunts
-      badges
+      foundItems {
+        __typename
+        _id
+        name
+      }
+      completedHunts {
+        __typename
+        _id
+        name
+      }
+      badges {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+      }
+      isAdmin
       createdAt
-    }
+  }
   }
 `
 export const GET_HUNT_ITEM = gql`
