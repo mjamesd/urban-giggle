@@ -122,7 +122,7 @@ export const REMOVE_HUNT = gql`
 // createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
 
 export const CREATE_HUNT_ITEM = gql`
-    mutation createHuntItem($name: String!, $hint1: String!, $hint2: String, $hint3: String!, $solutionLocation: String!, $solutionDescription: String!, $solutionImg: $String, $points: Int!){
+    mutation createHuntItem($name: String!, $hint1: String!, $hint2: String, $hint3: String!, $solutionLocation: String!, $solutionDescription: String!, $solutionImg: String, $points: Int!){
       createHuntItem(name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionDescription: $solutionDescription, solutionImg: $solutionImg, points: $points){
         huntItem{
           name
