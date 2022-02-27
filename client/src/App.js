@@ -1,5 +1,5 @@
 // Dependencies
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,9 +24,7 @@ import Login from './pages/Login'
 import Footer from './components/Footer';
 import Home from './pages/Home'
 import Signup from './pages/Signup'
-import Marquee from "./components/TopMarquee";
-import BottomMarquee from "./components/BottomMarquee"
-import Experiences from "./components/Experiences"
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -48,9 +46,18 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loading
+      ? document.querySelector("body").classList.add("loading")
+      : document.querySelector("body").classList.remove("loading");
+  }, [loading]);
+
   return (
-    <AnimateSharedLayout type='crossfade'>
-      <AnimatePresence>
+
+      <AnimatePresence exitBeforeEnter>
         <ApolloProvider client={client}>
           <Router >
             <div className="app-container">
@@ -66,8 +73,9 @@ function App() {
             </div>
           </Router>
         </ApolloProvider>
+        
       </AnimatePresence>
-    </AnimateSharedLayout>
+
   )
 }
 

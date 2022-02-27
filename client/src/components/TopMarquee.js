@@ -29,7 +29,7 @@ const Marquee = () => {
           animate="animate"
         >
           <h1>
-            TOTAL
+            EXPLORE
           </h1>
         </motion.div>
       </div>
