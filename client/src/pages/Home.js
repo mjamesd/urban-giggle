@@ -9,6 +9,10 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
+import TopMarquee from '../components/TopMarquee'
+import BottomMarquee from '../components/BottomMarquee'
+import Experiences from '../components/Experiences';
+
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
     margin: 'auto',
@@ -77,7 +81,10 @@ export const Home = React.memo(function BlogCard() {
     ...contentStyles
   } = useBlogTextInfoContentStyles();
   const shadowStyles = useOverShadowStyles();
+
   return (
+    <>
+    <TopMarquee />
     <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
         className={styles.media}
@@ -97,6 +104,9 @@ export const Home = React.memo(function BlogCard() {
         <Button className={buttonStyles}>START HERE</Button>
       </CardContent>
     </Card>
+    <BottomMarquee/>
+    <Experiences />
+    </>
   );
 });
 

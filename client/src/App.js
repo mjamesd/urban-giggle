@@ -55,14 +55,13 @@ function App() {
           <Router >
             <div className="app-container">
               <Header />
-              <Marquee />
+              
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
               </Routes>
-              <BottomMarquee />
-              <Experiences />
+              
               <Footer />
             </div>
           </Router>
