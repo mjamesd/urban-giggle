@@ -4,6 +4,7 @@
     position: relative;
     width: 100vw;
     max-width: 100%;
+    margin-top: -10;
     height: 130px;
     overflow-x: none;
     overflow-y: none;
@@ -23,5 +24,6 @@
     font-family: 'Barlow Semi Condensed', sans-serif;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #f4955c;
+    -webkit-text-fill-color: white;
     text-transform: uppercase;
   }

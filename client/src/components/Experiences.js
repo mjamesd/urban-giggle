@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   card: ({ color }) => ({
-    marginTop: 60,
+    marginTop: 10,
     width: 256,
     borderRadius: 16,
     boxShadow: 'none',

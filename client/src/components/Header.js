@@ -4,6 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,8 +13,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Login', 'Signup', 'Profile'];
+const pages = ['Login', 'Signup'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const styles = {
+    title: {
+      textDecoration: 'none',
+      color: '#fd5238',
+    },
+    links : {
+      textDecoration: 'none',
+      color: '#fd5238',
+      padding: 10,
+    }
+}
 
 const Header = () => {
   let navigate = useNavigate();
@@ -38,7 +51,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar elevation={0} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -47,7 +60,7 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, flexGrow: 8, display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/">TOTAL QUEST</Link>
+            <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
           </Typography>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -61,30 +74,6 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
           <Typography
             variant="h6"
@@ -92,26 +81,26 @@ const Header = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                component={Link}
-                to={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+
+            <Button><Link style={styles.links}to="/signup"><h2>SIGNUP</h2></Link></Button>
+            <Button><Link style={styles.links}to="/login"><h2>LOGIN</h2></Link></Button>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                USER MENU BUTTON
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenUserMenu}
+                color="inherit"
+              >
+                <AccountCircle />
               </IconButton>
             </Tooltip>
             <Menu
