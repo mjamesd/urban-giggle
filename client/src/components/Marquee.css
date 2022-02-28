@@ -4,8 +4,10 @@
     position: relative;
     width: 100vw;
     max-width: 100%;
+    margin-top: -10;
     height: 130px;
-    overflow-x: hidden;
+    overflow-x: none;
+    overflow-y: none;
   }
   
   .track {
@@ -17,9 +19,11 @@
     margin: 30px 0;
     font-size: 90px;
     font-weight: normal;
+    overflow-x: none;
+    overflow-y: hidden;
     font-family: 'Barlow Semi Condensed', sans-serif;
-    /* -webkit-text-fill-color: rgba(255, 255, 255, 0); */
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #f4955c;
+    -webkit-text-fill-color: white;
     text-transform: uppercase;
   }

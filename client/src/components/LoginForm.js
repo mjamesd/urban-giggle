@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
@@ -83,7 +82,6 @@ const LoginForm = () => {
 
     return (
         <FormControl>
-            <TextField variant="outlined" label="Username" /><br />
             <TextField variant="outlined" label="Email" /><br />
             <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -108,7 +106,7 @@ const LoginForm = () => {
                     label="Password"
                 />
             </FormControl><br />
-            <Button className={buttonStyles}>START HERE</Button></FormControl>
+            <Button className={buttonStyles}>Login</Button></FormControl>
     )
 }
 
