@@ -4,6 +4,7 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { validateEmail, validatePassword } from '../utils/helpers';
 
 import {
     FormControl,
@@ -30,6 +31,8 @@ const LoginForm = () => {
         showPassword: false,
     });
     const [login, { error, data }] = useMutation(LOGIN_USER);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -50,6 +53,25 @@ const LoginForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(values);
+
+        if (!validateEmail(values.email)) {
+            setErrorMessage('Please enter a valid email address');
+            return;
+        }
+
+        if (!values.password) {
+            setErrorMessage('please enter a valid password');
+            return;
+        }
+
+        if (values.email && values.password) {
+            setSuccessMessage(
+                'Login Successful!! Welcome Back!'
+            )
+        }
+
+
+
         try {
             const { data } = await login({
                 variables: { email: values.email, password: values.password },
@@ -60,12 +82,16 @@ const LoginForm = () => {
             console.error(e);
         }
 
+
         // clear form values
         setValues({
             email: '',
             password: '',
             showPassword: false,
         });
+
+        setErrorMessage('');
+
     };
 
 
@@ -97,7 +123,18 @@ const LoginForm = () => {
                     label="Password"
                 />
             </FormControl><br />
-            <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl></form>
+            <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl><br/>
+            {errorMessage && (
+
+                <p>{errorMessage}</p>
+
+            )}
+            {successMessage && (
+
+                <p>{successMessage}</p>
+
+            )}
+            </form>
     )
 }
 
