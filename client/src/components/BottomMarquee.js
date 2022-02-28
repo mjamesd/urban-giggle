@@ -1,19 +1,25 @@
 import React from "react";
-// 1. Importing framer-motion
 import { motion } from "framer-motion";
 
 import "./Marquee.css";
 
-// 2. Defining Variants
-const marqueeVariants = {
+const firstMarqueeVariants = {
   animate: {
-    x: [1550, -250],
+    y: [-1000, 1],
     transition: {
       x: {
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 10,
-        ease: "linear",
+        duration: 5,
+      },
+    },
+  },
+};
+
+const secondMarqueeVariants = {
+  animate: {
+    x: [1300, 750],
+    transition: {
+      x: {
+        duration: 4,
       },
     },
   },
@@ -25,11 +31,24 @@ const Marquee = () => {
       <div className="marquee">
         <motion.div
           className="track"
-          variants={marqueeVariants}
+          variants={firstMarqueeVariants}
           animate="animate"
         >
           <h1>
-            DISCOVER
+            T
+            <br/>O
+            <br/>T
+            <br/>A
+            <br/>L
+          </h1>
+        </motion.div>
+        <motion.div
+          className="track"
+          variants={secondMarqueeVariants}
+          animate="animate"
+        >
+          <h1>
+            QUEST
           </h1>
         </motion.div>
       </div>

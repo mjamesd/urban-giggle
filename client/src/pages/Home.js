@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'clsx';
+import { motion } from 'framer-motion';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,13 +11,13 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
 import TopMarquee from '../components/TopMarquee'
-import BottomMarquee from '../components/BottomMarquee'
 import Experiences from '../components/Experiences';
 
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
     margin: 'auto',
-    marginTop: 0,
+    marginBottom: 50,
+    marginTop: 50,
     borderRadius: spacing(2), // 16px
     transition: '0.3s',
     boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
@@ -83,7 +84,12 @@ export const Home = React.memo(function BlogCard() {
   const shadowStyles = useOverShadowStyles();
 
   return (
-    <>
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 2 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+    >
     <TopMarquee />
     <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
@@ -104,9 +110,8 @@ export const Home = React.memo(function BlogCard() {
         <Button className={buttonStyles}>START HERE</Button>
       </CardContent>
     </Card>
-    <BottomMarquee/>
     <Experiences />
-    </>
+    </motion.div>
   );
 });
 
