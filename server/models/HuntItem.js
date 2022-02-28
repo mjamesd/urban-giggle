@@ -35,9 +35,12 @@ const huntItemSchema = new Schema({
     },
     points: {
         type: Number,
-        required: true,
         min: [1, "Must be a positive number"],
     },
+    city: {
+        type: String,
+        required: true
+    }
 });
 
 huntItemSchema.pre('save', async function (next) {
