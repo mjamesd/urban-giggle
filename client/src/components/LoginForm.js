@@ -24,10 +24,12 @@ const LoginForm = () => {
 
 
     // state values for the password box 
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
+        email: '',
         password: '',
         showPassword: false,
     });
+    const [login, { error, data }] = useMutation(LOGIN_USER);
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -44,27 +46,13 @@ const LoginForm = () => {
         event.preventDefault();
     };
 
-
-    const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error, data }] = useMutation(LOGIN_USER);
-
-    // update state based on form input changes
-    const handleFormChange = (event) => {
-        const { name, value } = event.target;
-
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
-    };
-
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
+        console.log(values);
         try {
             const { data } = await login({
-                variables: { ...formState },
+                variables: { email: values.email, password: values.password },
             });
 
             Auth.login(data.login.token);
@@ -73,17 +61,20 @@ const LoginForm = () => {
         }
 
         // clear form values
-        setFormState({
+        setValues({
             email: '',
             password: '',
+            showPassword: false,
         });
     };
 
 
     return (
-        <FormControl>
-            <TextField variant="outlined" label="Email" /><br />
+        <form onSubmit={handleFormSubmit}>
             <FormControl variant="outlined">
+            <TextField variant="outlined" label="Email" value={values.email} onChange={handleChange('email')}/><br />
+            
+            <FormControl variant="outlined" >
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                 <OutlinedInput
                     variant="outlined"
@@ -106,7 +97,7 @@ const LoginForm = () => {
                     label="Password"
                 />
             </FormControl><br />
-            <Button className={buttonStyles}>Login</Button></FormControl>
+            <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl></form>
     )
 }
 
