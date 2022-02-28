@@ -7,9 +7,9 @@ const typeDefs = gql`
     email: String!
     password: String!
     points: Int
-    foundItems: [HuntItem!]
-    completedHunts: [Hunt!]
-    badges: [Badge!]
+    foundItems: [HuntItem]
+    completedHunts: [Hunt]
+    badges: [Badge]
     isAdmin: Boolean
     createdAt: String
   }

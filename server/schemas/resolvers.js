@@ -80,6 +80,7 @@ const resolvers = {
                 solutionDescription
                 solutionImg
                 points
+                city
             }
         }
         */
@@ -100,6 +101,7 @@ const resolvers = {
                 solutionDescription
                 solutionImg
                 points
+                city
             }
         }
         */
@@ -425,6 +427,7 @@ const resolvers = {
                 icon,
                 description,
                 points,
+                city,
             });
             return badge;
         },
@@ -433,12 +436,14 @@ const resolvers = {
             if (!args.newName) args.newName = hunt.name;
             if (!args.newDescription) args.newDescription = hunt.description;
             if (!args.newPoints) args.newPoints = hunt.points;
+            if(!args.newCity) args.newCity = hunt.city
             return await Hunt.findByIdAndUpdate(
                 huntId,
                 {
                     name: newName,
                     description: newDescription,
                     points: newPoints,
+                    city: newCity,
                 },
                 {
                     new: true,

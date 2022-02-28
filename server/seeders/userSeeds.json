@@ -1,0 +1,33 @@
+[
+    {
+        "username": "johnjohnson",
+        "email": "john@johnson.com",
+        "password": "password12345",
+        "isAdmin": true
+    },
+    {
+        "username": "sallysallyson",
+        "email": "sally@sallyson.com",
+        "password": "password12345",
+        "isAdmin": false
+    },
+    {
+        "username": "stevesteveson",
+        "email": "steve@steveson.com",
+        "password": "password12345",
+        "isAdmin": false
+    },
+    {
+        "username": "janejaneson",
+        "email": "jane@janeson.com",
+        "password": "password12345",
+        "isAdmin": false
+    },
+    {
+        "username": "bobbobson",
+        "email": "bob@bobson.com",
+        "password": "password12345",
+        "isAdmin": false
+    }
+
+]
