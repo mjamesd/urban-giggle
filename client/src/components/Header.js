@@ -13,9 +13,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { FullscreenExit, WrapText } from '@mui/icons-material';
+import Auth from '../utils/auth';
 
 const pages = ['Login', 'Signup'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 const styles = {
     title: {
@@ -44,6 +45,11 @@ const Header = () => {
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -95,8 +101,16 @@ const Header = () => {
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-            <Button><Link style={styles.links}to="/signup"><h2>SIGNUP</h2></Link></Button>
-            <Button><Link style={styles.links}to="/login"><h2>LOGIN</h2></Link></Button>
+          {Auth.loggedIn() ? (
+            <>
+            <Button onClick={logout}><Link style={styles.links} to="/"><h2>LOGOUT</h2></Link></Button>
+            </>
+          ) : (
+            <>
+              <Button><Link style={styles.links} to="/signup"><h2>SIGNUP</h2></Link></Button>
+            <Button><Link style={styles.links} to="/login"><h2>LOGIN</h2></Link></Button>
+            </>
+          )}
 
           </Box>
 

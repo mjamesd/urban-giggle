@@ -3,113 +3,152 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { validateEmail, validatePassword } from '../utils/helpers';
 
 import {
-    FormControl,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    IconButton,
-    TextField,
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  IconButton,
+  TextField,
 } from '@mui/material/'
 import {
-    Visibility,
-    VisibilityOff
+  Visibility,
+  VisibilityOff
 } from '@mui/icons-material'
 
 
 const SignUpForm = () => {
-    const { button: buttonStyles } = useBlogTextInfoContentStyles();
+  const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
 
-    // state values for the password box 
-    const [values, setValues] = React.useState({
-        password: '',
-        showPassword: false,
+  // state values for the password box 
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    showPassword: false,
+  });
+  const [createUser, { error, data }] = useMutation(CREATE_USER);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('')
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
     });
+  };
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
-    };
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(values);
 
-    const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error, data }] = useMutation(LOGIN_USER);
+    if (!values.username) {
+      setErrorMessage('Please enter a username');
+      return;
+  }
 
-    // update state based on form input changes
-    const handleFormChange = (event) => {
-        const { name, value } = event.target;
+    if (!validateEmail(values.email)) {
+      setErrorMessage('Please enter a valid email address');
+      return;
+  }
 
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
-    };
+  if (!values.password) {
+      setErrorMessage('please enter a valid password');
+      return;
+  }
 
-    // submit form
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        console.log(formState);
-        try {
-            const { data } = await login({
-                variables: { ...formState },
-            });
-
-            Auth.login(data.login.token);
-        } catch (e) {
-            console.error(e);
-        }
-
-        // clear form values
-        setFormState({
-            email: '',
-            password: '',
-        });
-    };
+  if (values.username && values.email && values.password) {
+      setSuccessMessage(
+          'Welcome!! Your are now signed up!'
+      )
+  }
 
 
-    return (
-        <FormControl>
-          <TextField variant="outlined" label="Username" /><br />
-            <TextField variant="outlined" label="Email" /><br />
-            <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                    variant="outlined"
-                    id="password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
-                    onChange={handleChange('password')}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                    label="Password"
-                />
-            </FormControl><br />
-            <Button className={buttonStyles}>Signup</Button></FormControl>
-    )
+    try {
+      const { data } = await createUser({
+        variables: { username: values.username, email: values.email, password: values.password },
+      });
+
+      Auth.login(data.createUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // clear form values
+    setValues({
+      username: '',
+      email: '',
+      password: '',
+      showPassword: false,
+  });
+
+  setErrorMessage('');
+  };
+
+
+  return (
+    <form onSubmit={handleFormSubmit}>
+      <FormControl variant="outlined">
+        <TextField variant="outlined" label="Username" type="text" value={values.username} onChange={handleChange('username')} /><br />
+
+        <TextField variant="outlined" label="Email" type="email" value={values.email} onChange={handleChange('email')} /><br />
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            variant="outlined"
+            id="password"
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl><br />
+        <Button className={buttonStyles} type="submit" value="send">Signup</Button></FormControl><br/>
+        {errorMessage && (
+
+<p>{errorMessage}</p>
+
+)}
+{successMessage && (
+
+<p>{successMessage}</p>
+
+)}</form>
+  )
 }
 
 export default SignUpForm
