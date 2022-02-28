@@ -8,6 +8,15 @@
         "solutionLocation":"Seattle Center",
         "solutionDescription":"The Space Needle"
 
+    },
+    {
+        "name":"The Gum Wall",
+        "qrId": "998877665",
+        "hint1":"A sticky situation.",
+        "hint2":"Tourists add their own contributions, after chewing them.",
+        "hint3":"Kinda gross attraction at Pike Place Market",
+        "solutionLocation":"Pike Place Market",
+        "solutionDescription":"The Gum Wall at Pike Place Market"
     }
 ]
 
