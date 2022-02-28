@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { FullscreenExit, WrapText } from '@mui/icons-material';
 
 const pages = ['Login', 'Signup'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,6 +26,15 @@ const styles = {
       textDecoration: 'none',
       color: '#fd5238',
       padding: 10,
+    },
+    dropdownLinks : {
+      textDecoration: 'none',
+      color: '#fd5238',
+      padding: 5,
+      flexWrap: 'wrap',
+    },
+    dropdown: {
+      flexWrap: 'wrap',
     }
 }
 
@@ -120,8 +130,8 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" component={Link} to={setting}>{setting}</Typography>
+                <MenuItem style={styles.dropdown} key={setting} onClick={handleCloseUserMenu}>
+                  <Typography style={styles.dropdownLinks} textAlign="center" component={Link} to={setting}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

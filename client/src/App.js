@@ -20,10 +20,11 @@ import './index.css';
 
 // Components
 import Header from './components/Header';
-import Login from './pages/Login'
+import Login from './pages/Login';
 import Footer from './components/Footer';
-import Home from './pages/Home'
-import Signup from './pages/Signup'
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Start from './pages/Start';
 
 
 const httpLink = createHttpLink({
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/start" element={<Start />} />
               </Routes>
               
               <Footer />
