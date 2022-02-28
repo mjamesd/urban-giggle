@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { validateEmail, validatePassword } from '../utils/helpers';
 
 import {
     FormControl,
@@ -11,7 +13,6 @@ import {
     OutlinedInput,
     IconButton,
     TextField,
-    Button
 } from '@mui/material/'
 import {
     Visibility,
@@ -20,55 +21,60 @@ import {
 
 
 const LoginForm = () => {
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    const styles = {
-        input: {
-            margin: "10px"
-        }
-    }
 
     // state values for the password box 
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
+        email: '',
         password: '',
         showPassword: false,
-      });
-    
-      const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
-    
-      const handleClickShowPassword = () => {
-        setValues({
-          ...values,
-          showPassword: !values.showPassword,
-        });
-      };
-    
-      const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-      };
-    
-
-    const [formState, setFormState] = useState({ email: '', password: '' });
+    });
     const [login, { error, data }] = useMutation(LOGIN_USER);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
 
-    // update state based on form input changes
-    const handleFormChange = (event) => {
-        const { name, value } = event.target;
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
 
-        setFormState({
-            ...formState,
-            [name]: value,
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
         });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
     };
 
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
+        console.log(values);
+
+        if (!validateEmail(values.email)) {
+            setErrorMessage('Please enter a valid email address');
+            return;
+        }
+
+        if (!values.password) {
+            setErrorMessage('please enter a valid password');
+            return;
+        }
+
+        if (values.email && values.password) {
+            setSuccessMessage(
+                'Login Successful!! Welcome Back!'
+            )
+        }
+
+
+
         try {
             const { data } = await login({
-                variables: { ...formState },
+                variables: { email: values.email, password: values.password },
             });
 
             Auth.login(data.login.token);
@@ -76,42 +82,59 @@ const LoginForm = () => {
             console.error(e);
         }
 
+
         // clear form values
-        setFormState({
+        setValues({
             email: '',
             password: '',
+            showPassword: false,
         });
+
+        setErrorMessage('');
+
     };
 
 
     return (
-        <FormControl>
-        <TextField variant="outlined" label="Name" style={styles.input} /><br/>
-        <TextField variant="outlined" label="Email" style={styles.input}/><br/>
-          <FormControl style={styles.input} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-          variant="outlined"
-            id="password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl>
-        <Button>HELLO I'M A BUTTON!!!</Button></FormControl>
+        <form onSubmit={handleFormSubmit}>
+            <FormControl variant="outlined">
+            <TextField variant="outlined" label="Email" value={values.email} onChange={handleChange('email')}/><br />
+            
+            <FormControl variant="outlined" >
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                    variant="outlined"
+                    id="password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    label="Password"
+                />
+            </FormControl><br />
+            <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl><br/>
+            {errorMessage && (
+
+                <p>{errorMessage}</p>
+
+            )}
+            {successMessage && (
+
+                <p>{successMessage}</p>
+
+            )}
+            </form>
     )
 }
 

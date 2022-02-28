@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;600;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -35,7 +35,6 @@ main {
   display: block;
 }
 
-.header {
-  font-family: 'Monoton', cursive;
+h2 {
+  font-family: 'Poiret One', cursive;
 }
-
