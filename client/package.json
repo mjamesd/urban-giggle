@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "@apollo/client": "^3.3.5",
+    "@emailjs/browser": "^3.4.0",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui-treasury/components": "^1.10.1",
@@ -17,7 +18,9 @@
     "clsx": "^1.1.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.4.0",
+    "install": "^0.13.0",
     "jwt-decode": "^3.1.2",
+    "npm": "^8.5.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.2.1",
