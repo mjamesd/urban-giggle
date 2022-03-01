@@ -1,5 +1,5 @@
 // Dependencies
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,12 +20,12 @@ import './index.css';
 
 // Components
 import Header from './components/Header';
-import Login from './pages/Login'
+import Login from './pages/Login';
 import Footer from './components/Footer';
-import Home from './pages/Home'
-import Signup from './pages/Signup'
-import Marquee from "./components/TopMarquee";
-import BottomMarquee from "./components/BottomMarquee"
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Start from './pages/Start';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -47,26 +47,37 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loading
+      ? document.querySelector("body").classList.add("loading")
+      : document.querySelector("body").classList.remove("loading");
+  }, [loading]);
+
   return (
-    <AnimateSharedLayout type='crossfade'>
-      <AnimatePresence>
+
+      <AnimatePresence exitBeforeEnter>
         <ApolloProvider client={client}>
           <Router >
             <div className="app-container">
               <Header />
-              <Marquee />
+              
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/start" element={<Start />} />
               </Routes>
-              <BottomMarquee />
+              
               <Footer />
             </div>
           </Router>
         </ApolloProvider>
+        
       </AnimatePresence>
-    </AnimateSharedLayout>
+
   )
 }
 

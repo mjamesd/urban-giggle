@@ -19,10 +19,11 @@ import { gql } from '@apollo/client';
 // login(email: String!, password: String!): Auth --done JM
 
 
-// changePoints(pointsToChange: Int): Auth 
-// userFoundHuntItem(huntItemId: ID!): Auth
-// userCompletedHunt(huntId: ID!): Auth
-// userAddBadge(badgeId: ID!): Auth
+// changePoints(pointsToChange: Int): Auth  -- done JM
+// userFoundHuntItem(huntItemId: ID!): Auth -- done JM
+// userCompletedHunt(huntId: ID!): Auth -- done JM
+// userAddBadge(badgeId: ID!): Auth -- done JM
+// addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
@@ -133,6 +134,7 @@ export const CREATE_HUNT_ITEM = gql`
           solutionDescription
           solutionImg
           points
+          city
         }
       }
     }
@@ -154,6 +156,7 @@ export const UPDATE_HUNT_ITEM = gql`
           newSolutionDescription
           newSolutionImg
           newPoints
+          newCity
         }
       }
     }
@@ -175,20 +178,65 @@ export const REMOVE_HUNT_ITEM = gql`
 
 // changePoints(pointsToChange: Int): Auth
 
-// export const CHANGE_POINTS = gql`
-//   mutation changePoints($pointsToChange: Int){
-//     changePoints(pointsToChange: $pointsToChange){
-
-//     }
-//   }
-// `
+export const CHANGE_POINTS = gql`
+  mutation changePoints($pointsToChange: Int){
+    changePoints(pointsToChange: $pointsToChange){
+      token
+      user{
+        points
+      }
+    }
+  }
+`
 
 // userFoundHuntItem(huntItemId: ID!): Auth
 
-// export const USER_FOUND_HUNT_ITEM = gql`
-//   mutation userFoundHuntItem($huntItemId: ID!){
-//     userFoundHuntItem(huntItemId: $huntItemId){
+export const USER_FOUND_HUNT_ITEM = gql`
+  mutation userFoundHuntItem($huntItemId: ID!){
+    userFoundHuntItem(huntItemId: $huntItemId){
+      token
+      user{
+        foundItems
+      }
+    }
+  }
+`
 
-//     }
-//   }
-// `
+// userCompletedHunt(huntId: ID!): Auth
+
+export const USER_COMPLETED_HUNT = gql`
+  mutation userCompletedHunt($huntId: ID!){
+    userCompletedHunt(huntId: $huntId){
+      token
+      user{
+        completedHunts
+      }
+    }
+  }
+
+`
+
+// userAddBadge(badgeId: ID!): Auth
+
+export const USER_ADD_BADGE = gql`
+  mutation userAddBadge($badgeId: ID!){
+    userAddBadge(badgeId: $badgeId){
+      token
+      user{
+        badges
+      }
+    }
+  }
+`
+
+// addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
+
+export const ADD_HUNT_ITEM_TO_HUNT = gql`
+  mutation addHuntItemToHunt($huntId: ID!, $huntItemId: ID!){
+    addHuntItemToHunt(huntId: $huntId, huntItemId: $huntItemId){
+      hunt{
+        huntItems
+      }
+    }
+  }
+`
