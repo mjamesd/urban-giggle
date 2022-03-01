@@ -134,6 +134,7 @@ export const CREATE_HUNT_ITEM = gql`
           solutionDescription
           solutionImg
           points
+          city
         }
       }
     }
@@ -155,6 +156,7 @@ export const UPDATE_HUNT_ITEM = gql`
           newSolutionDescription
           newSolutionImg
           newPoints
+          newCity
         }
       }
     }

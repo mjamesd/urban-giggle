@@ -93,6 +93,7 @@ query huntItem($_id: ID!) {
     solutionDescription
     solutionImg
     points
+    city
   }
 }
 `

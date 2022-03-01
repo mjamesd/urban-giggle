@@ -17,10 +17,11 @@ const badgeSchema = new Schema ({
     },
     points: {
         type: Number,
+        default: 0,
         min: [0, "Must be at least zero"],
     },
 });
 
-const Badge = model('Profile', badgeSchema);
+const Badge = model('Badge', badgeSchema);
 
 module.exports = Badge;
