@@ -10,6 +10,10 @@ const huntItemSchema = new Schema({
     qrId: {
         type: String, // see .pre function below
     },
+    city: {
+        type: String,
+        required: true
+    },
     hint1: {
         type: String,
         required: true,
@@ -35,12 +39,9 @@ const huntItemSchema = new Schema({
     },
     points: {
         type: Number,
+        default: 1,
         min: [1, "Must be a positive number"],
     },
-    city: {
-        type: String,
-        required: true
-    }
 });
 
 huntItemSchema.pre('save', async function (next) {
