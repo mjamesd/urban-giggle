@@ -40,7 +40,8 @@ const typeDefs = gql`
     solutionLocation: String!
     solutionDescription: String!
     solutionImg: String
-    points: Int!
+    points: Int
+    city: String!
   }
 
   type Auth {
@@ -67,6 +68,7 @@ const typeDefs = gql`
       description: String!
       points: Int!
     ): Badge!
+    
     updateBadge(
       badgeId: ID!
       newName: String
@@ -74,9 +76,11 @@ const typeDefs = gql`
       newDescription: String
       newPoints: Int
     ): Badge!
+
     removeBadge(badgeId: ID!): Badge
 
     createHunt(name: String!, description: String!, points: Int): Hunt!
+
     updateHunt(
       huntId: ID!
       newName: String
@@ -94,7 +98,9 @@ const typeDefs = gql`
       solutionDescription: String!
       solutionImg: String
       points: Int!
+      city: String!
     ): HuntItem!
+
     updateHuntItem(
       huntItemId: ID!
       newName: String
@@ -105,8 +111,11 @@ const typeDefs = gql`
       newSolutionDescription: String
       newSolutionImg: String
       newPoints: Int
+      newCity: String
     ): HuntItem!
+
     removeHuntItem(huntItemId: ID!): HuntItem
+
     addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
     createUser(username: String!, email: String!, password: String!): Auth
@@ -116,7 +125,8 @@ const typeDefs = gql`
       password: String!
       newPassword: String
     ): Auth
-    removeUser: User
+
+    removeUser(username: String!): User
     login(email: String!, password: String!): Auth
     changePoints(pointsToChange: Int): Auth
     userFoundHuntItem(huntItemId: ID!): Auth
