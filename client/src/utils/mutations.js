@@ -25,6 +25,7 @@ import { gql } from '@apollo/client';
 // userAddBadge(badgeId: ID!): Auth -- done JM
 // addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
+//tested, works
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
@@ -39,6 +40,7 @@ export const CREATE_USER = gql`
   }
 `;
 
+//not sure how to test this in the playground
 export const UPDATE_USER = gql`
   mutation updateUser($username: String, $newUsername: String, $email: String, $newEmail: String, $password: String!, $newPassword: String!) {
     updateUser(username: $username, newUsername: $newUsername, email: $email, newEmail: $newEmail, password: $password, newPassword: $newPassword) {
@@ -53,6 +55,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
+//not sure how to test this in the playground
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -65,6 +68,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
+//couldnt test bc of auth
 export const REMOVE_USER = gql`
   mutation removeUser($username: String!) {
     removeUser(username: $username) {
@@ -77,17 +81,16 @@ export const REMOVE_USER = gql`
 `;
 
 // createHunt(name: String!, description: String!, points: Int!): Hunt!
-
+//tested in playground, works
 export const CREATE_HUNT = gql`
-  mutation createHunt($name: String!, $description: String!, $points: Int!){
-    createHunt(name: $name, description: $description, points: $points){
-     hunt{ 
-      _id
-      name
-      description
-      points
-     }
-    }
+mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!){
+  createHunt(name: $name, description: $description, points: $points, city:$city){
+    _id
+    name
+    description
+    points
+    city
+}
   }
 
 `
@@ -97,12 +100,11 @@ export const CREATE_HUNT = gql`
 export const UPDATE_HUNT = gql`
   mutation updateHunt($huntId: ID!, $newName: String, $newDescription: String, $newPoints: Int){
     updateHunt(huntId: $huntId, newName: $newName, newDescription: $newDescription, newPoints: $newPoints){
-      hunt{
         _id
         newName
         newDescription
         newPoints
-      }
+
     }
   }
 `
@@ -121,11 +123,26 @@ export const REMOVE_HUNT = gql`
 `
 
 // createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
-
+//tested in playground, works
 export const CREATE_HUNT_ITEM = gql`
-    mutation createHuntItem($name: String!, $hint1: String!, $hint2: String, $hint3: String!, $solutionLocation: String!, $solutionDescription: String!, $solutionImg: String, $points: Int!){
-      createHuntItem(name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionDescription: $solutionDescription, solutionImg: $solutionImg, points: $points){
-        huntItem{
+mutation createHuntItem($name: String!, 
+  $hint1: String!, 
+  $hint2: String!, 
+  $hint3: String!, 
+  $solutionLocation: String!, 
+  $solutionDescription: String!, 
+  $solutionImg: String, 
+  $points: Int!,
+	$city:String!){
+      createHuntItem(name: $name, 
+        hint1: $hint1, 
+        hint2: $hint2, 
+        hint3: $hint3, 
+        solutionLocation: $solutionLocation, 
+        solutionDescription: $solutionDescription, 
+        solutionImg: $solutionImg, 
+        points: $points
+      	city:$city){
           name
           hint1
           hint2
@@ -135,10 +152,8 @@ export const CREATE_HUNT_ITEM = gql`
           solutionImg
           points
           city
-        }
       }
     }
-
 `
 
 // updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem!
@@ -217,10 +232,10 @@ export const USER_COMPLETED_HUNT = gql`
 `
 
 // userAddBadge(badgeId: ID!): Auth
-
-export const USER_ADD_BADGE = gql`
-  mutation userAddBadge($badgeId: ID!){
-    userAddBadge(badgeId: $badgeId){
+//need auth to test
+export const CREATE_BADGE = gql`
+  mutation createBadge($badgeId: ID!){
+    createBadge(badgeId: $badgeId){
       token
       user{
         badges

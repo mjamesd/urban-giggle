@@ -50,45 +50,35 @@
         "solutionDescription": "Congratulations! 🎉 Show this page to your server to get a free vegan queso!",
         "solutionImg": "https://images.squarespace-cdn.com/content/v1/59b9e816e9bfdf9e756fbee3/b248096f-0ddd-49c0-be8e-7e452cc59522/ElBorracho+2.0-Logo-Final-02.png",
         "points": 4
+    },
+    {
+        "name":"Seattle Great Wheel",
+        "qrId":"223344556",
+        "hint1":"There are great views from this revolving attraction.",
+        "hint2":"An iconic part of the Seattle skyline since 2012",
+        "hint3":"Maybe get some fish at Ivar's while you're nearby.",
+        "solutionLocation":"Pier 57, at the ticket kiosk",
+        "solutionDescription":"The Seattle Great Wheel",
+        "city":"Seattle"
+    },
+    {
+        "name":"Smith Tower",
+        "qrId":"83838888",
+        "hint1":"This was once the tallest building West of the Mississippi",
+        "hint2":"There's a great bar at the top.",
+        "hint3":"The observation deck has great views of Elliott Bay and Pioneer Square",
+        "solutionLocation":"Smith Tower, at the ticket kiosk",
+        "solutionDescription":"Smith Tower",
+        "city":"Seattle"
+    },
+    {
+        "name":"Jimi Hendrix Statue",
+        "qrId":"7877788877",
+        "hint1":"One of the greatest American musicians, remembered.",
+        "hint2":"A guitar legend of the 60s.",
+        "hint3":"Excuse me while I kiss the sky.",
+        "solutionLocation":"On the corner of Broadway and Pine",
+        "solutionDescription":"The Jimi Hendrix Statue",
+        "city":"Seattle"
     }
 ]
-
-
-// const huntItemSchema = new Schema({
-//     name: {
-//         type: String,
-//         required: true,
-//         unique: true,
-//     },
-//     qrId: {
-//         type: String, // see .pre function below
-//     },
-//     hint1: {
-//         type: String,
-//         required: true,
-//     },
-//     hint2: {
-//         type: String,
-//         required: true,
-//     },
-//     hint3: {
-//         type: String,
-//         required: true,
-//     },
-//     solutionLocation: {
-//         type: String, // description and/or lat&long
-//         required: true,
-//     },
-//     solutionDescription: {
-//         type: String,
-//         required: true,
-//     },
-//     solutionImg: {
-//         type: String,
-//     },
-//     points: {
-//         type: Number,
-//         required: true,
-//         min: [1, "Must be a positive number"],
-//     },
-// });
