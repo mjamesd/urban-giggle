@@ -79,6 +79,7 @@ export const Home = React.memo(function BlogCard() {
         </CardContent>
       </CardActionArea>
     </Card>
+    <br />
     <Experiences />
     </motion.div>
   );

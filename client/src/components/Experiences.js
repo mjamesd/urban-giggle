@@ -1,7 +1,7 @@
 import React from 'react';
 import Color from 'color';
 import { makeStyles } from '@material-ui/core/styles';
-import NoSsr from '@mui/base/NoSsr';
+import { useTransform, useViewportScroll, motion } from 'framer-motion';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -81,8 +81,14 @@ export const Experiences = React.memo(function SolidGameCard() {
   const styles = useStyles({ color: '#0b3954' });
   const styles2 = useStyles({ color: '#FF6F00' });
   const styles3 = useStyles({ color: '#c81d25' });
+
+  const { scrollYProgress } = useViewportScroll()
+  const scale = useTransform(scrollYProgress, [0, 1], [0.2, 1]);
+
   return (
-    <>
+    <motion.div
+      style={{ scale }}
+    >
       <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
         <Grid item>
           <CustomCard
@@ -113,7 +119,12 @@ export const Experiences = React.memo(function SolidGameCard() {
           />
         </Grid>
       </Grid>
-    </>
+      <motion.div
+        style={{
+          scaleY: scrollYProgress
+        }}
+      />
+    </motion.div>
   );
 });
 export default Experiences
