@@ -70,7 +70,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
-                <Route path="/updateprofile" element={<UpdateProfile />} />
+                <Route path="/profile" element={<UpdateProfile />} />
               </Routes>
               
               <Footer />

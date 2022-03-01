@@ -49,6 +49,7 @@ const UpdateUserForm = ({user}) => {
 
     // showing the password or not when clicking the eyeball
     const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     // mutation for update user
     const [updateUser, { error, data }] = useMutation(UPDATE_USER);
@@ -70,12 +71,22 @@ const UpdateUserForm = ({user}) => {
             setEmail(inputValue);
         } else if (inputType === 'password') {
             setPassword(inputValue);
+        } else if (inputType === 'confirmpassword') {
+            setNewPassword(inputValue);
         }
     };
 
     const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
+        
+            setShowPassword(!showPassword);
+        
     };
+
+    const handleClickShowPasswordConfirm = () => {
+       
+           setShowConfirmPassword(!showConfirmPassword);
+        
+   };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -156,28 +167,28 @@ const UpdateUserForm = ({user}) => {
                                     {showPassword ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                             </InputAdornment>}
-                            label="Current Password" />
+                            label="New Password" />
                     </FormControl><br />
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
                         <OutlinedInput
-                            name="password"
+                            name="confirmpassword"
                             variant="outlined"
                             id="password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            value={newPassword}
                             onChange={handleChange}
                             endAdornment={<InputAdornment position="end">
                                 <IconButton
                                     aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
+                                    onClick={handleClickShowPasswordConfirm}
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                 >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                             </InputAdornment>}
-                            label="New Password" />
+                            label="Confirm New Password" />
                     </FormControl><br />
                     <Button className={buttonStyles} type="submit" value="send">Submit Changes</Button></FormControl><br />
                 {errorMessage && (
