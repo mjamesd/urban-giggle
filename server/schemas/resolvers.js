@@ -2,449 +2,135 @@ const { AuthenticationError } = require("apollo-server-express");
 const { Badge, Hunt, HuntItem, User } = require("../models");
 const { signToken } = require("../utils/auth");
 
+class MissingArgumentError extends Error {
+    constructor(message) {
+        this.name = "MissingArgumentError";
+        super(`${this.name}: ${message}`);
+    }
+}
+
 const resolvers = {
     Query: {
         // BADGE
-        /*
-        query getAllBadges {
-            badges {
-                __typename
-                _id
-                name
-                icon
-                description
-                points
-            }
-        }
-        */
         badges: async () => {
             return Badge.find();
         },
-        /*
-        query getOneBadge($badgeId: ID!) {
-            badge(badgeId: $badgeId) {
-                __typename
-                _id
-                name
-                icon
-                description
-                points
-            }
-        }
-        */
         badge: async (parent, { badgeId }) => {
+            if (!badgeId)
+                throw new MissingArgumentError('Badge_badge: no badgeId');
+
             return Badge.findById(badgeId);
         },
-
         // HUNT
-        /*
-        query getAllScavengerHunts {
-            hunts {
-                __typename
-                _id
-                name
-                description
-                points
-            }
-        }
-        */
         hunts: async () => {
-            return Hunt.find();
+            return Hunt.find().populate('huntItems');
         },
-        /*
-        query getOneScavengerHunt($huntId: ID!) {
-            hunt(huntId: $huntId) {
-                __typename
-                _id
-                name
-                description
-            }
-        }
-        */
         hunt: async (parent, { huntId }) => {
-            return Hunt.findById(huntId);
-        },
+            if (!huntId)
+                throw new MissingArgumentError('Hunt_hunt: no huntId');
 
+            return await Hunt.findById(huntId).populate('huntItems');
+        },
+        huntsByCity: async (parent, { city }) => {
+            if (!city)
+                throw new MissingArgumentError('Hunt_huntsByCity: no city');
+
+            return Hunt.find({ city }).populate('huntItems');
+        },
         // HUNTITEM
-        /*
-        query getAllScavengerHuntItems {
-            huntItems {
-                __typename
-                _id
-                name
-                qrId
-                hint1
-                hint2
-                hint3
-                solutionLocation
-                solutionDescription
-                solutionImg
-                points
-                city
-            }
-        }
-        */
         huntItems: async () => {
             return HuntItem.find();
         },
-        /*
-        query getOneScavengerHuntItem($huntItemId: ID!) {
-            huntItem(huntItemId: $huntItemId) {
-                __typename
-                _id
-                name
-                qrId
-                hint1
-                hint2
-                hint3
-                solutionLocation
-                solutionDescription
-                solutionImg
-                points
-                city
-            }
-        }
-        */
         huntItem: async (parent, { huntItemId }) => {
-            return HuntItem.findById(huntItemId);
-        },
+            if (!huntItemId)
+                throw new MissingArgumentError('HuntItem_huntItem: no huntItemId');
 
+            return await HuntItem.findById(huntItemId);
+        },
+        huntItemByQrCode: async (parent, { qrId }) => {
+            if (!qrId)
+                throw new MissingArgumentError('HuntItem_huntItemByQrCode: no qrId');
+            return await HuntItem.findOne({ qrId });
+        },
+        huntItemsByCity: async (parent, { city }) => {
+            if (!city)
+                throw new MissingArgumentError('HuntItem_huntItemsByCity: no city');
+
+            return HuntItem.find({ city }); // find --> findAll
+        },
         // USER
-        /*
-        query getAllUsers {
-            users {
-                __typename
-                _id
-                username
-                email
-                password
-                points
-                foundItems {
-                    __typename
-                    _id
-                    name
-                }
-                completedHunts {
-                    __typename
-                    _id
-                    name
-                }
-                badges {
-                    __typename
-                    _id
-                    name
-                    icon
-                    description
-                    points
-                }
-                isAdmin
-                createdAt
-            }
-        }
-        */
         users: async () => {
-            return User.find();
+            return User.find().populate('completedHunts').populate('foundHuntItems')
+                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
         },
-        /*
-        query getOneUser($userId: ID!) {
-            user(userId: $userId) {
-                __typename
-                _id
-                username
-                email
-                password
-                points
-                foundItems {
-                    __typename
-                    _id
-                    name
-                }
-                completedHunts {
-                    __typename
-                    _id
-                    name
-                }
-                badges {
-                    __typename
-                    _id
-                    name
-                    icon
-                    description
-                    points
-                }
-                isAdmin
-                createdAt
-            }
-        }
-        */
         user: async (parent, { userId }) => {
-            return User.findById(userId);
+            if (!userId)
+                throw new MissingArgumentError('User_user: no userId');
+
+            return User.findById(userId).populate('completedHunts').populate('foundHuntItems')
+                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
         },
-        /*
-        query getMyUser {
-            me {
-                __typename
-                _id
-                username
-                email
-                password
-                points
-                foundItems {
-                    __typename
-                    _id
-                    name
-                }
-                completedHunts {
-                    __typename
-                    _id
-                    name
-                }
-                badges {
-                    __typename
-                    _id
-                    name
-                    icon
-                    description
-                    points
-                }
-                isAdmin
-                createdAt
-            }
-        }
-        HTTP HEADERS:
-        {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZGlzaW50ZWdyYXRvckBlbWFpbC5jb20iLCJfaWQiOiI2MjFhOWZmNjM0OGUyMDAyYThiNzVjZWMifSwiaWF0IjoxNjQ1OTEyMDU0LCJleHAiOjE2NDU5MTkyNTR9.Hzpr-EHoqYu0Ewh9T0gNarf8SnK9-QtzQ4aEINmWmAY"
-        }
-        */
         me: async (parent, args, context) => {
-            if (context.user) {
-                return User.findById(context.user._id);
-            }
-            throw new AuthenticationError("You need to be logged in! (me)");
+            if (!context.user)
+                throw new AuthenticationError("You need to be logged in! (me)");
+
+            return User.findById(context.user._id).populate('completedHunts').populate('foundHuntItems')
+                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
         },
     },
 
+    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+    // MUTATIONS =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
     Mutation: {
         // BADGE
-        /*
-        mutation createNewBadge(
-            $name: String!
-            $icon: String!
-            $description: String!
-            $points: Int!
-            ) {
-            createBadge(
-                name: $name
-                icon: $icon
-                description: $description
-                points: $points
-            ) {
-                __typename
-                _id
-                name
-                icon
-                description
-                points
-            }
-        }
-        QUERY VARIABLES:
-        {
-            "name": "The Name",
-            "icon": "TheIcon",
-            "description": "The description!",
-            "points": 999
-        }
-    
-        */
-        createBadge: async (parent, { name, icon, description, points }) => {
-            return await Badge.create({
-                name,
-                icon,
-                description,
-                points,
-            });
+        createBadge: async (parent, args) => {
+            return await Badge.create(args);
         },
-        /*
-        mutation updateThisBadge(
-            $badgeId: ID!
-            $newName: String
-            $newDescription: String
-            $newPoints: Int
-        ) {
-            updateBadge(
-                badgeId: $badgeId
-                newName: $newName
-                newDescription: $newDescription
-                newPoints: $newPoints
-            ) {
-                __typename
-                _id
-                name
-                icon
-                description
-                points
-            }
-        }
-        QUERY VARIABLES:
-        {
-            "badgeId": "idGoesHere"
-            # all other variables are optional
-            "name": "Updated name"
-            "icon": "Updated icon"
-            "description": "Updated description"
-            "points": 888
-        }
-        */
-        updateBadge: async (parent, args) => {
-            const badge = await Badge.findById(args.badgeId);
-            if (!args.newName) args.newName = badge.name;
-            if (!args.newIcon) args.newIcon = badge.icon;
-            if (!args.newDescription) args.newDescription = badge.description;
-            if (!args.newPoints) args.newPoints = badge.points;
+        updateBadge: async (parent, { badgeId, ...args }) => {
+            if (Object.entries(args).length === 0)
+                return await Badge.findById(badgeId);
 
             return await Badge.findByIdAndUpdate(
-                args.badgeId,
-                {
-                    name: args.newName,
-                    icon: args.newIcon,
-                    description: args.newDescription,
-                    points: args.newPoints,
-                },
+                badgeId,
+                args,
                 {
                     new: true,
                     runValidators: true,
                 }
             );
         },
-        /*
-        mutation deleteThisBadge($badgeId: ID!) {
-            removeBadge(badgeId: $badgeId) {
-                __typename
-                _id
-                name
-                icon
-                description
-                points
-            }
-        }
-        QUERY VARIABLES:
-        {
-            "badgeId": "idGoesHere"
-        }
-        */
         removeBadge: async (parent, { badgeId }) => {
             return await Badge.findByIdAndDelete(badgeId);
         },
-
         // HUNT
-        /*
-        mutation createNewScavengerHunt(
-            $name: String!
-            $description: String!
-            $points: Int!
-        ) {
-            createHunt(
-                name: $name
-                description: $description
-                points: $points
-            ) {
-                __typename
-                _id
-                name
-                description
-                points
-            }
-        }
-        QUERY VARIABLES:
-        {
-            "name": "This hunt title",
-            "description": "This hunt description",
-            "points": 1 # `points` is optional
-        }
-        */
         createHunt: async (parent, args) => {
-            if (!args.points) args.points = 0;
-            return await Hunt.create({
-                name: args.name,
-                description: args.description,
-                points: args.points,
-            });
+            return await Hunt.create(args);
         },
-        /*
-        mutation updateThisScavengerHunt(
-            $huntId: ID!
-            $name: String
-            $description: String
-            $points: Int
-        ) {
-            updateHunt(
-                huntId: $huntId
-                name: $name
-                description: $description
-                points: $points
-            ) {
-                __typename
-                _id
-                name
-                description
-                points
-            }
-        }
-        QUERY VARIABLES:
-        {
-            "huntId": "idGoesHere",
-            "name": "Updated hunt title",
-            "description": "UPdated hunt description",
-            "points": 50 # `points` is optional
-        }
-        */
         updateHunt: async (parent, { huntId, ...args }) => {
-            const hunt = await Hunt.findById(huntId);
-            if (!args.newName) args.newName = hunt.name;
-            if (!args.newDescription) args.newDescription = hunt.description;
-            if (!args.newPoints) args.newPoints = hunt.points;
+            if (Object.entries(args).length === 0) return await Hunt.findById(huntId).populate('huntItems');
             return await Hunt.findByIdAndUpdate(
                 huntId,
-                {
-                    name: newName,
-                    description: newDescription,
-                    points: newPoints,
-                },
+                args,
                 {
                     new: true,
                     runValidators: true,
                 }
-            );
+            ).populate('huntItems');
         },
         removeHunt: async (parent, { huntId }) => {
             return await Hunt.findByIdAndDelete(huntId);
         },
-
         // HUNTITEM
-        createHuntItem: async (parent, { name, icon, description, points }) => {
-            const badge = await Badge.create({
-                name,
-                icon,
-                description,
-                points,
-                city,
-            });
-            return badge;
+        createHuntItem: async (parent, args) => {
+            return await HuntItem.create(args);
         },
         updateHuntItem: async (parent, { huntItemId, ...args }) => {
-            const huntItem = await HuntItem.findById(huntItemId);
-            if (!args.newName) args.newName = hunt.name;
-            if (!args.newDescription) args.newDescription = hunt.description;
-            if (!args.newPoints) args.newPoints = hunt.points;
-            if(!args.newCity) args.newCity = hunt.city
-            return await Hunt.findByIdAndUpdate(
-                huntId,
-                {
-                    name: newName,
-                    description: newDescription,
-                    points: newPoints,
-                    city: newCity,
-                },
+            if (Object.entries(args).length === 0) return await HuntItem.findById(huntItemId);
+            return await HuntItem.findByIdAndUpdate(
+                huntItemId,
+                args,
                 {
                     new: true,
                     runValidators: true,
@@ -455,7 +141,9 @@ const resolvers = {
             return await HuntItem.findByIdAndDelete(huntItemId);
         },
         addHuntItemToHunt: async (parent, { huntId, huntItemId }) => {
-            return await Hunt.findByIdAndUpdate(
+            console.log('huntId: ', huntId);
+            console.log('huntItemId: ', huntItemId);
+            const hunt = await Hunt.findByIdAndUpdate(
                 huntId,
                 {
                     $addToSet: { huntItems: huntItemId },
@@ -464,8 +152,13 @@ const resolvers = {
                     new: true,
                 }
             );
+            console.log(hunt);
         },
-
+        removeHuntItemFromHunt: async (parent, { huntId, huntItemId }) => {
+            const hunt = await Hunt.findById(huntId);
+            hunt.huntItems.id(huntItemId).remove();
+            return hunt;
+        },
         // USER
         createUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password });
@@ -473,69 +166,39 @@ const resolvers = {
 
             return { token, user };
         },
-        /*
-        mutation updateThisUser(
-            $username: String
-            $email: String
-            $password: String!
-            $newPassword: String
-        ) {
-            updateUser(
-                username: $username
-                password: 
-            ) {
-                __typename
-                token
-                user {
-                    __typename
-                    _id
-                    username
-                }
-            }
-        }
-    
-        QUERY VARIABLES:
-        {
-            
-        }
-        HTTP HEADERS:
-        {
-            "Authorization": "Bearer tokenGoesHere"
-        }
-        */
-        updateUser: async (
-            parent,
-            { username, email, password, newPassword },
-            context
-        ) => {
+        updateUser: async (parent, { password, ...args }, context) => {
             if (!context.user)
                 throw new AuthenticationError(
                     "You need to be logged in! (updateUser: loggedIn check)"
                 );
+            // get current `user` from db to check if supplied `password` arg is correct
             const user = await User.findById(context.user._id);
             const correctPwd = await user.isCorrectPassword(password);
             if (!correctPwd)
                 throw new AuthenticationError(
                     "You supplied the wrong password. Please try again. (updateUser: pwd check)"
                 );
-            if (!username) username = context.user.username;
-            if (!email) email = context.user.email;
-            if (!newPassword) newPassword = password;
-            // const updatedUser =
-            return await User.findOneAndUpdate(
-                { _id: context.user._id },
-                {
-                    username: username,
-                    email: email,
-                    password: newPassword,
-                },
-                {
-                    new: true,
-                    runValidators: true,
-                }
-            );
-            // const token = signToken(updatedUser);
-            // return { token, updatedUser };
+            if (args.newPassword !== args.password) {
+                args.password = args.newPassword;
+            } else {
+                delete args.password;
+            }
+            if (Object.entries(args).length > 0) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    context.user._id,
+                    args,
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+                const token = signToken(updatedUser);
+                return { token, updatedUser };
+            } else {
+                // they didn't supply any info to update, so just re-sign the token and return the Auth obj
+                const token = signToken(user);
+                return { token, user };
+            }
         },
         // Logged in user can only remove their profile, no one else's
         removeUser: async (parent, { password }, context) => {
@@ -549,7 +212,9 @@ const resolvers = {
                 throw new AuthenticationError(
                     "You supplied the wrong password. Please try again. (removeUser: pwd check)"
                 );
-            return await User.findByIdAndDelete(context.user._id);
+            const token = signToken(user, Date.now() / 1000); // re-sign token with expiration of current time (i.e., immediately expires)
+            const deletedUser = await User.findByIdAndDelete(context.user._id);
+            return { token, deletedUser };
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -580,7 +245,7 @@ const resolvers = {
                 },
                 {
                     new: true,
-                    runValidators: true, // StackOverflow says this doesn't work with `findOneAndUpdate`... let's see.
+                    runValidators: true, // StackOverflow says this doesn't work with `findByIdAndUpdate`... let's see.
                 }
             );
         },
