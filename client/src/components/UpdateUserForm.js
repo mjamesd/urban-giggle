@@ -38,8 +38,9 @@ const UpdateUserForm = ({user}) => {
     const [username, setUsername] = useState('')
     const [newUsername, setNewUsername] = useState('')
 
+    console.log(username, "USERNAME STATE!!!!")
     // email states
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(user.email)
     const [newEmail, setNewEmail] = useState('')
 
     // password states
@@ -118,7 +119,7 @@ const UpdateUserForm = ({user}) => {
 
 
         // clear form values
-        setUsername('')
+        setUsername(`${user.username}`)
         setEmail('')
         setPassword('')
         setShowPassword(false)
@@ -128,14 +129,13 @@ const UpdateUserForm = ({user}) => {
 
     return (
         <div>
-            <span>Fill in only the areas you wish to update</span>
         {Auth.loggedIn() ? (
         <form ref={form} onSubmit={handleFormSubmit}>
                 <FormControl variant="outlined">
                     Update Your Username
-                    <TextField variant="outlined" label="New Username" name="username" type="text" value={username} onChange={handleChange} /><br /><br />
+                    <TextField variant="outlined" name="username" type="text" value={user.username} onChange={handleChange} /><br /><br />
                     Update Your Email
-                    <TextField variant="outlined" label="New Email" name="email" type="email" value={email} onChange={handleChange} /><br /><br />
+                    <TextField variant="outlined" name="email" type="email" value={user.email} onChange={handleChange} /><br /><br />
                     Update Your Password
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
@@ -191,7 +191,7 @@ const UpdateUserForm = ({user}) => {
 
                 )}</form> ) : (
                     <p>
-                      You need to be logged in to endorse skills. Please{' '}
+                      You need to be logged in to update your profile. Please{' '}
                       <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
                     </p>
                   )}
