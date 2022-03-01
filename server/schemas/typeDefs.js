@@ -43,7 +43,6 @@ const typeDefs = gql`
     solutionDescription: String!
     solutionImg: String
     points: Int
-    city: String!
   }
 
   type Auth {
