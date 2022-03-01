@@ -73,7 +73,7 @@ const Start = () => {
                                 className={styles.selection}
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Seattle</MenuItem>
+                                <MenuItem value={10}>Seattle</MenuItem><br/>
                                 <MenuItem value={20}>Spokane</MenuItem>
                                 
                             </Select>
