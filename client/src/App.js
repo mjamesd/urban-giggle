@@ -25,6 +25,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
+import UpdateProfile from './pages/UpdateProfile';
 
 
 const httpLink = createHttpLink({
@@ -69,6 +70,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
+                <Route path="/updateprofile" element={<UpdateProfile />} />
               </Routes>
               
               <Footer />

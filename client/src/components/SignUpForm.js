@@ -27,37 +27,51 @@ init("NZ0ltP_Q1eOniKe9w");
 const SignUpForm = () => {
   const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-  // state values for the password box 
+  // ref for the email confirmation variables
   const form = useRef();
 
+  // form states
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+
+  // mutation for creating the user
   const [createUser, { error, data }] = useMutation(CREATE_USER);
+
+  // validation messages
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('')
 
-  const [values, setValues] = useState({
-    username: username,
-    email: email,
-  });
+  // handling the onchange as information is being inputed into the form
+  const handleChange = (event) => {
+    const { target } = event;
+    const inputType = target.name;
+    const inputValue = target.value;
 
-  // const handleChange = (prop) => (event) => {
-  //   setShowPassword(event.target.value);
-  // };
+    if (inputType === 'username') {
+      setUsername(inputValue);
+    } else if (inputType === 'email') {
+      setEmail(inputValue);
+    } else if (inputType === 'password') {
+      setPassword(inputValue);
+    }
+  };
 
+  // handles the show of the password when eyeball is clicked
   const handleClickShowPassword = () => {
-    setShowPassword( !showPassword);
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
+  // submition of the signup form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(event)
+
+    // validation process
     if (!username) {
       setErrorMessage('Please enter a username');
       return;
@@ -74,19 +88,21 @@ const SignUpForm = () => {
     }
 
     if (username && email && password) {
+      // sends the welcome email
       sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
+      // sets the success messages
       setSuccessMessage(
         'Welcome!! Your are now signed up!'
       )
     }
 
-    
 
+    // creating the new user
     try {
       const { data } = await createUser({
         variables: { username: username, email: email, password: password },
       });
-      Auth.login(data.createUser.token);      
+      Auth.login(data.createUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -104,16 +120,17 @@ const SignUpForm = () => {
   return (
     <><form ref={form} onSubmit={handleFormSubmit}>
       <FormControl variant="outlined">
-        <TextField variant="outlined" label="Username" name="username" type="text" value={username} onChange={(event) => setUsername(event.target.value)} /><br />
-        <TextField variant="outlined" label="Email" name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} /><br />
+        <TextField variant="outlined" label="Username" name="username" type="text" value={username} onChange={handleChange} /><br />
+        <TextField variant="outlined" label="Email" name="email" type="email" value={email} onChange={handleChange} /><br />
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
+            name="password"
             variant="outlined"
             id="password"
             type={showPassword ? 'text' : 'password'}
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={handleChange}
             endAdornment={<InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
@@ -136,7 +153,7 @@ const SignUpForm = () => {
 
         <p>{successMessage}</p>
 
-      )}</form><br/><span>Already have an account? <Link to="/login">Login Here!</Link></span></>
+      )}</form><br /><span>Already have an account? <Link to="/login">Login Here!</Link></span></>
   )
 }
 

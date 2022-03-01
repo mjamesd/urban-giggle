@@ -1,154 +1,202 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutations';
+
+import { UPDATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { validateEmail, validatePassword } from '../utils/helpers';
+import { init, sendForm } from '@emailjs/browser';
 
 import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  IconButton,
-  TextField,
+    FormControl,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+    IconButton,
+    TextField,
 } from '@mui/material/'
 import {
-  Visibility,
-  VisibilityOff
+    Visibility,
+    VisibilityOff
 } from '@mui/icons-material'
 
 
-const UpdateUserForm = () => {
-  const { button: buttonStyles } = useBlogTextInfoContentStyles();
+init("NZ0ltP_Q1eOniKe9w");
+
+const UpdateUserForm = ({user}) => {
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
+
+    // form ref for sending any emails
+    const form = useRef();
+    const { _id } = useParams();
+
+   
+
+    // username states
+    const [username, setUsername] = useState('')
+    const [newUsername, setNewUsername] = useState('')
+
+    // email states
+    const [email, setEmail] = useState('')
+    const [newEmail, setNewEmail] = useState('')
+
+    // password states
+    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+
+    // showing the password or not when clicking the eyeball
+    const [showPassword, setShowPassword] = useState(false)
+
+    // mutation for update user
+    const [updateUser, { error, data }] = useMutation(UPDATE_USER);
+   
+    // validation messages
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
 
 
-  // state values for the password box 
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    showPassword: false,
-  });
-  const [createUser, { error, data }] = useMutation(CREATE_USER);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('')
+    // handling the input changes as typed into the form
+    const handleChange = (event) => {
+        const { target } = event;
+        const inputType = target.name;
+        const inputValue = target.value;
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+        if (inputType === 'username') {
+            setUsername(inputValue);
+        } else if (inputType === 'email') {
+            setEmail(inputValue);
+        } else if (inputType === 'password') {
+            setPassword(inputValue);
+        }
+    };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(event)
+        if (!username) {
+            setErrorMessage('Please enter a username');
+            return;
+        }
 
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+        if (!validateEmail(email)) {
+            setErrorMessage('Please enter a valid email address');
+            return;
+        }
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    console.log(values);
+        if (!password) {
+            setErrorMessage('please enter a valid password');
+            return;
+        }
 
-    if (!values.username) {
-      setErrorMessage('Please enter a username');
-      return;
-    }
-
-    if (!validateEmail(values.email)) {
-      setErrorMessage('Please enter a valid email address');
-      return;
-    }
-
-    if (!values.password) {
-      setErrorMessage('please enter a valid password');
-      return;
-    }
-
-    if (values.username && values.email && values.password) {
-      setSuccessMessage(
-        'Welcome!! Your are now signed up!'
-      )
-    }
+        if (username && email && password) {
+            sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
+            setSuccessMessage(
+                'Welcome!! Your are now signed up!'
+            )
+        }
 
 
-    try {
-      const { data } = await createUser({
-        variables: { username: values.username, email: values.email, password: values.password },
-      });
 
-      Auth.login(data.createUser.token);
-    } catch (e) {
-      console.error(e);
-    }
-
-    // clear form values
-    setValues({
-      username: '',
-      email: '',
-      password: '',
-      showPassword: false,
-    });
-
-    setErrorMessage('');
-  };
+        try {
+            const { data } = await updateUser({
+                variables: { username: username, email: email, password: password },
+            });
+            Auth.getProfile();
+        } catch (e) {
+            console.error(e);
+        }
 
 
-  return (
-    <form onSubmit={handleFormSubmit}>
-      <FormControl variant="outlined">
-        <TextField variant="outlined" label="Username" type="text" value={values.username} onChange={handleChange('username')} /><br />
+        // clear form values
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setShowPassword(false)
+        setErrorMessage('');
+    };
 
-        <TextField variant="outlined" label="Email" type="email" value={values.email} onChange={handleChange('email')} /><br />
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            variant="outlined"
-            id="password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl><br />
-        <Button className={buttonStyles} type="submit" value="send">Signup</Button></FormControl><br />
-      {errorMessage && (
 
-        <p>{errorMessage}</p>
+    return (
+        <div>
+            <span>Fill in only the areas you wish to update</span>
+        {Auth.loggedIn() ? (
+        <form ref={form} onSubmit={handleFormSubmit}>
+                <FormControl variant="outlined">
+                    Update Your Username
+                    <TextField variant="outlined" label="New Username" name="username" type="text" value={username} onChange={handleChange} /><br /><br />
+                    Update Your Email
+                    <TextField variant="outlined" label="New Email" name="email" type="email" value={email} onChange={handleChange} /><br /><br />
+                    Update Your Password
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+                        <OutlinedInput
+                            name="password"
+                            variant="outlined"
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={handleChange}
+                            endAdornment={<InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>}
+                            label="Current Password" />
+                    </FormControl><br />
+                    <FormControl variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
+                        <OutlinedInput
+                            name="password"
+                            variant="outlined"
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={handleChange}
+                            endAdornment={<InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>}
+                            label="New Password" />
+                    </FormControl><br />
+                    <Button className={buttonStyles} type="submit" value="send">Submit Changes</Button></FormControl><br />
+                {errorMessage && (
 
-      )}
-      {successMessage && (
+                    <p>{errorMessage}</p>
 
-        <p>{successMessage}</p>
+                )}
+                {successMessage && (
 
-      )}</form>
-  )
+                    <p>{successMessage}</p>
+
+                )}</form> ) : (
+                    <p>
+                      You need to be logged in to endorse skills. Please{' '}
+                      <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+                    </p>
+                  )}
+                  </div>
+    )
 }
 
 export default UpdateUserForm
