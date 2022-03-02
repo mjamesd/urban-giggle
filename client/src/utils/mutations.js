@@ -40,22 +40,36 @@ export const CREATE_USER = gql`
   }
 `;
 
-//not sure how to test this in the playground
+//tested, works
 export const UPDATE_USER = gql`
-  mutation updateUser($username: String, $newUsername: String, $email: String, $newEmail: String, $password: String!, $newPassword: String!) {
-    updateUser(username: $username, newUsername: $newUsername, email: $email, newEmail: $newEmail, password: $password, newPassword: $newPassword) {
+mutation updateThisUser(
+  $password: String!
+  $username: String
+  $email: String
+  $newPassword: String
+) {
+  updateUser(
+    username: $username
+    email: $email
+    password: $password
+    newPassword: $newPassword
+  ) {
+    __typename
+    token
+    user {
+      __typename
       _id
       username
-      newUsername
       email
-      newEmail
       password
-      newPassword
     }
   }
+}
 `;
 
-//not sure how to test this in the playground
+
+
+//works
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -70,12 +84,15 @@ export const LOGIN_USER = gql`
 
 //couldnt test bc of auth
 export const REMOVE_USER = gql`
-  mutation removeUser($username: String!) {
+  mutation removeUser($username: String, $email: String, $password: String) {
     removeUser(username: $username) {
+      token
+      user{
       _id
       username
       email
       password
+      }
     }
   }
 `;
@@ -83,13 +100,16 @@ export const REMOVE_USER = gql`
 // createHunt(name: String!, description: String!, points: Int!): Hunt!
 //tested in playground, works
 export const CREATE_HUNT = gql`
-mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!){
-  createHunt(name: $name, description: $description, points: $points, city:$city){
+mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID]){
+  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, $rewards: rewards){
     _id
     name
     description
     points
     city
+    description
+    huntItems
+    rewards
 }
   }
 
