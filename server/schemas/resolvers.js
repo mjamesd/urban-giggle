@@ -1,7 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Badge, Hunt, HuntItem, User } = require("../models");
 const { signToken } = require("../utils/auth");
-const bcrypt = require('bcrypt');
 
 class MissingArgumentError extends Error {
     constructor(message) {
@@ -216,19 +215,15 @@ const resolvers = {
                 );
             if (args.newPassword !== args.password) {
                 args.password = args.newPassword;
+                user.password = args.password;
             } else {
                 delete args.password;
             }
-            args.password = await bcrypt.hash(args.password, 10);
+            if (args.username) user.username = args.username;
+            if (args.email) user.email = args.email;
             if (Object.entries(args).length > 0) {
-                const updatedUser = await User.findByIdAndUpdate(
-                    context.user._id,
-                    args,
-                    {
-                        new: true,
-                        runValidators: true,
-                    }
-                );
+                user.save();
+                const updatedUser = await User.findById(user._id);
                 const token = signToken(updatedUser);
                 return { token, user: updatedUser };
             } else {
