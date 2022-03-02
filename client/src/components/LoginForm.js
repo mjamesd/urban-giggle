@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { validateEmail, validatePassword } from '../utils/helpers';
+import { Link } from 'react-router-dom';
 
 import {
     FormControl,
@@ -96,20 +97,19 @@ const LoginForm = () => {
 
 
     return (
-        <form onSubmit={handleFormSubmit}>
+        <><form onSubmit={handleFormSubmit}>
             <FormControl variant="outlined">
-            <TextField variant="outlined" label="Email" value={values.email} onChange={handleChange('email')}/><br />
-            
-            <FormControl variant="outlined" >
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                    variant="outlined"
-                    id="password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
-                    onChange={handleChange('password')}
-                    endAdornment={
-                        <InputAdornment position="end">
+                <TextField variant="outlined" label="Email" value={values.email} onChange={handleChange('email')} /><br />
+
+                <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput
+                        variant="outlined"
+                        id="password"
+                        type={values.showPassword ? 'text' : 'password'}
+                        value={values.password}
+                        onChange={handleChange('password')}
+                        endAdornment={<InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
@@ -118,12 +118,10 @@ const LoginForm = () => {
                             >
                                 {values.showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
-                        </InputAdornment>
-                    }
-                    label="Password"
-                />
-            </FormControl><br />
-            <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl><br/>
+                        </InputAdornment>}
+                        label="Password" />
+                </FormControl><br />
+                <Button className={buttonStyles} type="submit" value="send">Login</Button></FormControl><br />
             {errorMessage && (
 
                 <p>{errorMessage}</p>
@@ -134,7 +132,7 @@ const LoginForm = () => {
                 <p>{successMessage}</p>
 
             )}
-            </form>
+        </form><br /><span>First time here? <Link to="/signup">Create New Account!</Link></span></>
     )
 }
 

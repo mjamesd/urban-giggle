@@ -26,22 +26,34 @@ const userSchema = new Schema({
         required: true,
         min: [0, "You are out of points -- find hunt items and complete scavenger hunts to obtain more!"],
     },
-    foundHuntItems: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'HuntItem',
-        },
-    ],
     completedHunts: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Hunt',
         }
     ],
+    foundHuntItems: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'HuntItem',
+        },
+    ],
     badges: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Badge',
+        },
+    ],
+    favoriteHunts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Hunt',
+        }
+    ],
+    favoriteHuntItems: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'HuntItem',
         },
     ],
     isAdmin: {

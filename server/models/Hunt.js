@@ -6,18 +6,29 @@ const huntSchema = new Schema ({
         required: true,
         unique: true,
     },
+    city: {
+        type: String,
+        required: true,
+    },
     description: {
         type: String,
         required: true,
     },
     points: {
         type: Number,
+        default: 1,
         min: [1, "Must be a positive number"],
     },
     huntItems: [
         {
             type: Schema.Types.ObjectId,
             ref: 'HuntItem',
+        }
+    ],
+    rewards: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Badge',
         }
     ],
 });

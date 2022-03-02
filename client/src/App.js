@@ -29,6 +29,7 @@ import Seattle from './pages/Seattle';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
 import Spokane from './pages/Spokane';
+import UpdateProfile from './pages/UpdateProfile';
 
 
 const httpLink = createHttpLink({
@@ -77,6 +78,7 @@ function App() {
                 <Route path="/spokane" element={<Spokane />} />
                 <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
                 <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                <Route path="/profile" element={<UpdateProfile />} />
               </Routes>
               
               <Footer />
