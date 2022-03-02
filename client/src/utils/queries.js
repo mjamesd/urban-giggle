@@ -132,7 +132,7 @@ export const QUERY_ME = gql`
       email
       password
       points
-      foundItems {
+      foundHuntItems {
         __typename
         _id
         name

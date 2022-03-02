@@ -65,22 +65,16 @@ const LoginForm = () => {
             return;
         }
 
-        if (values.email && values.password) {
-            setSuccessMessage(
-                'Login Successful!! Welcome Back!'
-            )
-        }
-
-
 
         try {
             const { data } = await login({
                 variables: { email: values.email, password: values.password },
             });
-
             Auth.login(data.login.token);
+            setSuccessMessage('Login Successful! Welcome Back!')
         } catch (e) {
             console.error(e);
+            setErrorMessage('Something has gone wrong');
         }
 
 

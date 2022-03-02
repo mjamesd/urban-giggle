@@ -42,15 +42,17 @@ export const CREATE_USER = gql`
 
 //not sure how to test this in the playground
 export const UPDATE_USER = gql`
-  mutation updateUser($username: String, $newUsername: String, $email: String, $newEmail: String, $password: String!, $newPassword: String!) {
-    updateUser(username: $username, newUsername: $newUsername, email: $email, newEmail: $newEmail, password: $password, newPassword: $newPassword) {
-      _id
-      username
-      newUsername
-      email
-      newEmail
-      password
-      newPassword
+  mutation updateUser($username: String, $email: String, $password: String!, $newPassword: String) {
+    updateUser(username: $username, email: $email, password: $password, newPassword: $newPassword) {
+      __typename
+      token
+      user {
+        __typename
+        _id
+        username
+        email
+        password
+      }
     }
   }
 `;

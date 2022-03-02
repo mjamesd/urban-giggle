@@ -38,12 +38,16 @@ const UpdateProfile = (props) => {
       );
 
       const user = data?.me || data?.profile || {};
-      console.log(data)
+      console.log(user)
 
 
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
+
+  if (loading) {
+    return <h2>LOADING.....</h2>
+  }
 
   return (
     <motion.div
