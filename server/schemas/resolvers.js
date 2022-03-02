@@ -230,7 +230,7 @@ const resolvers = {
                     }
                 );
                 const token = signToken(updatedUser);
-                return { token, updatedUser };
+                return { token, user: updatedUser };
             } else {
                 // they didn't supply any info to update, so just re-sign the token and return the Auth obj
                 const token = signToken(user);
@@ -251,7 +251,7 @@ const resolvers = {
                 );
             const token = signToken(user, Date.now() / 1000); // re-sign token with expiration of current time (i.e., immediately expires)
             const deletedUser = await User.findByIdAndDelete(context.user._id);
-            return { token, deletedUser };
+            return { token, user: deletedUser };
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -351,7 +351,7 @@ const resolvers = {
                 }
             ).populate('foundHuntItems').populate('completedHunts').populate('badges');
             const token = signToken(updatedUser);
-            return { token, updatedUser };
+            return { token, user: updatedUser };
         },
         userCompletedHunt: async (parent, { huntId }, context) => {
             if (!context.user)
