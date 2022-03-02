@@ -151,7 +151,11 @@ const typeDefs = gql`
       email: String
       newPassword: String
     ): Auth
-    removeUser: Auth
+    removeUser(
+      username: String
+      email: String
+      password: String
+    ): Auth
     login(
         email: String!
         password: String!

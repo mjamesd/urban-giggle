@@ -24,7 +24,7 @@ query user($userId: ID!) {
     points
     createdAt
     isAdmin
-    foundItems {
+    foundHuntItems {
     	  _id
     		name
    			city
@@ -63,6 +63,30 @@ query user($userId: ID!) {
    		icon
     	description
     	points
+    }
+    favoriteHunts{
+      name
+      city
+      description
+      points
+      huntItems{
+        name
+        qrId
+        city
+        hint1
+        hint2
+        hint3
+        solutionLocation
+        solutionDescription
+        solutionImg
+        points
+        rewards{
+          name
+          icon
+          description
+          points
+        }
+      }
     }
   }
 }
@@ -78,7 +102,7 @@ query users{
     points
     createdAt
     isAdmin
-    foundItems {
+    foundHuntItems {
     	  _id
     		name
    			city
@@ -118,11 +142,35 @@ query users{
     	description
     	points
     }
+    favoriteHunts{
+      name
+      city
+      description
+      points
+      huntItems{
+        name
+        qrId
+        city
+        hint1
+        hint2
+        hint3
+        solutionLocation
+        solutionDescription
+        solutionImg
+        points
+        rewards{
+          name
+          icon
+          description
+          points
+        }
+      }
+    }
   }
   
 }
 `
-//need to be able to log in to test this one
+//tested in playground, works
 export const QUERY_ME = gql`
   query me {
     me {
@@ -162,15 +210,31 @@ query huntItem($huntItemId: ID!) {
   huntItem(huntItemId: $huntItemId) {
     _id
     name
-    qrId
+    qrId 
+    city
     hint1
     hint2
+    hint2DisplayedTo{
+      __typename
+      _id
+      username
+    }
     hint3
+    hint3DisplayedTo{
+      __typename
+      _id
+      username
+    }
     solutionLocation
     solutionDescription
+    solutionDisplayedTo{
+      __typename
+      _id
+      username
+    }
     solutionImg
     points
-    city
+   
   }
 }
 `
@@ -180,15 +244,30 @@ query huntItem{
   huntItems{
     _id
     name
-    qrId
+    qrId 
+    city
     hint1
     hint2
+    hint2DisplayedTo{
+      __typename
+      _id
+      username
+    }
     hint3
+    hint3DisplayedTo{
+      __typename
+      _id
+      username
+    }
     solutionLocation
     solutionDescription
+    solutionDisplayedTo{
+      __typename
+      _id
+      username
+    }
     solutionImg
     points
-    city
   }
 }
 
@@ -216,6 +295,13 @@ query hunt($huntId: ID!) {
     	solutionImg
     	points
     }
+    rewards{
+      _id
+      name
+      icon
+      description
+      points
+    }
   }
 }
 `
@@ -225,9 +311,10 @@ query hunt{
   hunts{
     _id
     name
+    city
     description
     points
-   huntItems{
+    huntItems{
       _id
     	name
     	city
@@ -239,6 +326,13 @@ query hunt{
     	solutionDescription
     	solutionImg
     	points
+    }
+    rewards{
+      _id
+      name
+      icon
+      description
+      points
     }
   }
 }
