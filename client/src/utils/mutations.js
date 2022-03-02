@@ -42,6 +42,7 @@ export const CREATE_USER = gql`
 
 //tested, works
 export const UPDATE_USER = gql`
+
 mutation updateThisUser(
   $password: String!
   $username: String

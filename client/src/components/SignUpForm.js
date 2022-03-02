@@ -87,14 +87,6 @@ const SignUpForm = () => {
       return;
     }
 
-    if (username && email && password) {
-      // sends the welcome email
-      sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
-      // sets the success messages
-      setSuccessMessage(
-        'Welcome!! Your are now signed up!'
-      )
-    }
 
 
     // creating the new user
@@ -103,7 +95,10 @@ const SignUpForm = () => {
         variables: { username: username, email: email, password: password },
       });
       Auth.login(data.createUser.token);
+      setSuccessMessage('Welcome!! Your are now signed up!')
+      sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
     } catch (e) {
+      setErrorMessage("I'm sorry, something has gone wrong. Please try again")
       console.error(e);
     }
 
