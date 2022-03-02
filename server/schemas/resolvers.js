@@ -1,7 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Badge, Hunt, HuntItem, User } = require("../models");
 const { signToken } = require("../utils/auth");
-const bcrypt = require('bcrypt');
 
 class MissingArgumentError extends Error {
     constructor(message) {
@@ -216,21 +215,17 @@ const resolvers = {
                 );
             if (args.newPassword !== args.password) {
                 args.password = args.newPassword;
+                user.password = args.password;
             } else {
                 delete args.password;
             }
-            args.password = await bcrypt.hash(args.password, 10);
+            if (args.username) user.username = args.username;
+            if (args.email) user.email = args.email;
             if (Object.entries(args).length > 0) {
-                const updatedUser = await User.findByIdAndUpdate(
-                    context.user._id,
-                    args,
-                    {
-                        new: true,
-                        runValidators: true,
-                    }
-                );
+                user.save();
+                const updatedUser = await User.findById(user._id);
                 const token = signToken(updatedUser);
-                return { token, updatedUser };
+                return { token, user: updatedUser };
             } else {
                 // they didn't supply any info to update, so just re-sign the token and return the Auth obj
                 const token = signToken(user);
@@ -251,7 +246,7 @@ const resolvers = {
                 );
             const token = signToken(user, Date.now() / 1000); // re-sign token with expiration of current time (i.e., immediately expires)
             const deletedUser = await User.findByIdAndDelete(context.user._id);
-            return { token, deletedUser };
+            return { token, user: deletedUser };
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -351,7 +346,7 @@ const resolvers = {
                 }
             ).populate('foundHuntItems').populate('completedHunts').populate('badges');
             const token = signToken(updatedUser);
-            return { token, updatedUser };
+            return { token, user: updatedUser };
         },
         userCompletedHunt: async (parent, { huntId }, context) => {
             if (!context.user)
