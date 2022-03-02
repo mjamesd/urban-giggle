@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,7 +15,6 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import {FormControl} from '@mui/material/'
 
-import City from './City'
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -46,6 +46,7 @@ const Start = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const textCardContentStyles = useN04TextInfoContentStyles();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
+    const cities = ['Seattle', 'Spokane']
 
     const [city, setCity] = React.useState(true);
 
@@ -61,8 +62,6 @@ const Start = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                {city ?
-
                     <Card className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -70,25 +69,12 @@ const Start = () => {
                                 overline={'Welcome'}
                                 heading={'Choose a City'} />
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">City</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={city}
-                                    label="City"
-                                    className={styles.selection}
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={10}>Seattle</MenuItem>
-                                    <br />
-                                    <MenuItem value={20}>Spokane</MenuItem>
-
-                                </Select>
-                                <Button onClick={() => setCity(false)} className={buttonStyles}>Next</Button>
+                                <Button component={Link} to={'/seattle'} className={buttonStyles}>Seattle</Button>
+                                <br/>
+                                <Button component={Link} to={'/spokane'} className={buttonStyles}>Spokane</Button>
                             </FormControl>
                         </CardContent>
                     </Card>
-                    : <City />}
             </motion.div >
             );
         </>

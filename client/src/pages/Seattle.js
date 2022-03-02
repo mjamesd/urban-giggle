@@ -1,6 +1,7 @@
 import React from 'react';
 import Color from 'color';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -78,7 +79,7 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
     );
 };
 
-export const City = React.memo(function SolidGameCard() {
+export const Seattle = React.memo(function SolidGameCard() {
     const gridStyles = useGridStyles();
     const styles = useStyles({ color: '#0b3954' });
     const styles2 = useStyles({ color: '#FF6F00' });
@@ -92,18 +93,20 @@ export const City = React.memo(function SolidGameCard() {
             transition={{ duration: 1 }}
         >
             <Box>
-            <h2 style={{textAlign: "center"}}>CHOOSE YOUR HUNT</h2>
+                <h1 style={{ textAlign: "center" }}>SEATTLE</h1>
+                <h2 style={{ textAlign: "center" }}>CHOOSE YOUR HUNT</h2>
             </Box>
             <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
                 <Grid item>
-                    <CustomCard
-                        classes={styles}
-                        title={'EXPLORE'}
-                        subtitle={'Looking to explore the city? Try our EXPLORE experience to find the local spots, sightsee and EXPLORE the city the best way!'}
-                        image={
-                            'https://s31606.pcdn.co/wp-content/uploads/2019/10/young-traveler-woman-in-kuala-lumpur-chinatown-district-picture-id1063308558.jpg'
-                        }
-                    />
+                    <Link style={{ textDecoration: 'none' }} to='./SeattleExploreHunt'>
+                        <CustomCard
+                            classes={styles}
+                            title={'EXPLORE'}
+                            subtitle={'Looking to explore the city? Try our EXPLORE experience to find the local spots, sightsee and EXPLORE the city the best way!'}
+                            image={
+                                'https://s31606.pcdn.co/wp-content/uploads/2019/10/young-traveler-woman-in-kuala-lumpur-chinatown-district-picture-id1063308558.jpg'
+                            }
+                        /></Link>
                 </Grid>
                 <Grid item>
                     <CustomCard
@@ -127,4 +130,4 @@ export const City = React.memo(function SolidGameCard() {
         </motion.div>
     );
 });
-export default City
+export default Seattle

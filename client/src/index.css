@@ -38,3 +38,9 @@ main {
 h2 {
   font-family: 'Poiret One', cursive;
 }
+
+h1 {
+  font-family: 'Poiret One', cursive;
+  font-size: 40px;
+  color: #fd5238 !important;
+}
