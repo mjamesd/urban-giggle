@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Badge, Hunt, HuntItem, User } = require("../models");
 const { signToken } = require("../utils/auth");
+const bcrypt = require('bcrypt');
 
 class MissingArgumentError extends Error {
     constructor(message) {
@@ -168,16 +169,13 @@ const resolvers = {
         },
         userAsksForHint: async (parent, { huntItemId, hint2, hint3, solution }, context) => {
             let toAddToSet = {};
-            let pointsToChange = 0;
+            const pointsToChange = -1;
             if (hint2) {
                 toAddToSet.hint2DisplayedTo = context.user._id;
-                pointsToChange = -1;
             } else if (hint3) {
                 toAddToSet.hint3DisplayedTo = context.user._id;
-                pointsToChange = -2;
             } else if (solution) {
                 toAddToSet.solutionDisplayedTo = context.user._id;
-                pointsToChange = -3;
             }
 
             const user = await User.findByIdAndUpdate(
@@ -221,6 +219,7 @@ const resolvers = {
             } else {
                 delete args.password;
             }
+            args.password = await bcrypt.hash(args.password, 10);
             if (Object.entries(args).length > 0) {
                 const updatedUser = await User.findByIdAndUpdate(
                     context.user._id,
