@@ -25,6 +25,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
+import Seattle from './pages/Seattle';
+import SeattleExploreHunt from './pages/SeattleExploreHunt';
+import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
+import Spokane from './pages/Spokane';
 import UpdateProfile from './pages/UpdateProfile';
 
 
@@ -70,6 +74,10 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
+                <Route path="/seattle" element={<Seattle />} />
+                <Route path="/spokane" element={<Spokane />} />
+                <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
+                <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
                 <Route path="/profile" element={<UpdateProfile />} />
               </Routes>
               

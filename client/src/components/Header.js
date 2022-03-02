@@ -7,44 +7,41 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { FullscreenExit, WrapText } from '@mui/icons-material';
 import Auth from '../utils/auth';
 
-const pages = ['Login', 'Signup'];
-const settings = ['Profile', 'Account', 'Dashboard'];
-
 const styles = {
-    title: {
-      textDecoration: 'none',
-      color: '#fd5238',
-    },
-    links : {
-      textDecoration: 'none',
-      color: '#fd5238',
-      padding: 10,
-    },
-    dropdownLinks : {
-      textDecoration: 'none',
-      color: '#fd5238',
-      padding: 5,
-      flexWrap: 'wrap',
-    },
-    dropdown: {
-      flexWrap: 'wrap',
-    }
+  title: {
+    textDecoration: 'none',
+    color: '#fd5238',
+  },
+  links: {
+    textDecoration: 'none',
+    color: '#fd5238',
+    padding: 10,
+  },
+  dropdownLinks: {
+    textDecoration: 'none',
+    color: '#fd5238',
+    padding: 5,
+    flexWrap: 'wrap',
+    color: '#0b3954'
+  },
+  dropdown: {
+    flexWrap: 'wrap',
+  }
 }
 
 const Header = () => {
   let navigate = useNavigate();
 
-  
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const logout = (event) => {
     event.preventDefault();
@@ -54,16 +51,16 @@ const Header = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -78,19 +75,6 @@ const Header = () => {
           >
             <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
           </Typography>
-
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -99,18 +83,18 @@ const Header = () => {
           >
             <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { md: 'flex' } }}>
 
-          {Auth.loggedIn() ? (
-            <>
-            <Button onClick={logout}><Link style={styles.links} to="/"><h2>LOGOUT</h2></Link></Button>
-            </>
-          ) : (
-            <>
-              <Button><Link style={styles.links} to="/signup"><h2>SIGNUP</h2></Link></Button>
-            <Button><Link style={styles.links} to="/login"><h2>LOGIN</h2></Link></Button>
-            </>
-          )}
+            {Auth.loggedIn() ? (
+              <>
+                <Button onClick={logout}><Link style={styles.links} to="/"><h2>LOGOUT</h2></Link></Button>
+              </>
+            ) : (
+              <>
+                <Button><Link style={styles.links} to="/signup"><h2>SIGNUP</h2></Link></Button>
+                <Button><Link style={styles.links} to="/login"><h2>LOGIN</h2></Link></Button>
+              </>
+            )}
 
           </Box>
 
@@ -119,36 +103,61 @@ const Header = () => {
               <IconButton
                 size="large"
                 aria-label="account of current user"
-                aria-controls="menu-appbar"
+                aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup="true"
-                onClick={handleOpenUserMenu}
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
                 color="inherit"
               >
                 <AccountCircle />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: 'visible',
+                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  mt: 1.5,
+                  '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: 'background.paper',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0,
+                  },
+                },
               }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-              {settings.map((setting) => (
-                <MenuItem style={styles.dropdown} key={setting} onClick={handleCloseUserMenu}>
-                  <Typography style={styles.dropdownLinks} textAlign="center" component={Link} to={setting}>{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link style={styles.dropdownLinks} to="/profile">PROFILE</Link>
+              </MenuItem>
+              <br />
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link style={styles.dropdownLinks} to="/dashboard">DASHBOARD</Link>
+              </MenuItem>
             </Menu>
+
           </Box>
         </Toolbar>
       </Container>
