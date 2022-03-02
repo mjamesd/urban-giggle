@@ -7,9 +7,11 @@ const typeDefs = gql`
     email: String!
     password: String!
     points: Int
-    foundItems: [HuntItem]
+    foundHuntItems: [HuntItem]
     completedHunts: [Hunt]
     badges: [Badge]
+    favoriteHunts: [Hunt]
+    favoriteHuntItems: [HuntItem]
     isAdmin: Boolean
     createdAt: String
   }
@@ -29,6 +31,7 @@ const typeDefs = gql`
     description: String!
     points: Int
     huntItems: [HuntItem!]!
+    rewards: [Badge]
   }
 
   type HuntItem {
@@ -38,11 +41,15 @@ const typeDefs = gql`
     qrId: String
     hint1: String!
     hint2: String!
+    hint2DisplayedTo: [User]
     hint3: String!
+    hint3DisplayedTo: [User]
     solutionLocation: String!
     solutionDescription: String!
     solutionImg: String
+    solutionDisplayedTo: [User]
     points: Int
+    rewards: [Badge]
   }
 
   type Auth {
@@ -54,7 +61,7 @@ const typeDefs = gql`
     users: [User!]
     user(userId: ID!): User
     me: User
-    hunts: [Hunt!]
+    hunts: [Hunt]
     hunt(huntId: ID!): Hunt
     huntsByCity(city: String!): [Hunt]
     huntItems: [HuntItem]
@@ -72,7 +79,6 @@ const typeDefs = gql`
       description: String!
       points: Int
     ): Badge!
-    
     updateBadge(
       badgeId: ID!
       name: String
@@ -80,14 +86,15 @@ const typeDefs = gql`
       description: String
       points: Int
     ): Badge!
-
     removeBadge(badgeId: ID!): Badge
 
     createHunt(
-        name: String!
-        city: String!
-        description: String!
-        points: Int
+      name: String!
+      city: String!
+      description: String!
+      points: Int
+      huntItems: [ID]
+      rewards: [ID]
     ): Hunt!
     updateHunt(
       huntId: ID!
@@ -95,6 +102,8 @@ const typeDefs = gql`
       city: String
       description: String
       points: Int
+      huntItems: [ID]
+      rewards: [ID]
     ): Hunt!
     removeHunt(huntId: ID!): Hunt
 
@@ -108,26 +117,28 @@ const typeDefs = gql`
       solutionDescription: String!
       solutionImg: String
       points: Int!
-      city: String!
+      rewards: [ID]
     ): HuntItem!
-
     updateHuntItem(
       huntItemId: ID!
       name: String
       city: String
       hint1: String
       hint2: String
+      hint2DisplayToUser: [ID]
       hint3: String
+      hint3DisplayToUser: [ID]
       solutionLocation: String
       solutionDescription: String
       solutionImg: String
+      solutionDisplayToUser: [ID]
       points: Int
+      rewards: [ID]
     ): HuntItem!
-
     removeHuntItem(huntItemId: ID!): HuntItem
 
-    addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
     removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
+    userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
 
     createUser(
         username: String!
