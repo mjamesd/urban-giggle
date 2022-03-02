@@ -25,6 +25,9 @@ import { gql } from '@apollo/client';
 // userAddBadge(badgeId: ID!): Auth -- done JM
 // addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
+
+//~~~~~~~~~~USER~~~~~~~~~~~
+
 //tested, works
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
@@ -97,73 +100,141 @@ export const REMOVE_USER = gql`
   }
 `;
 
+
+//~~~~~~~~~~HUNT~~~~~~~~~~~~~
+
 // createHunt(name: String!, description: String!, points: Int!): Hunt!
 //tested in playground, works
 export const CREATE_HUNT = gql`
 mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID]){
-  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, $rewards: rewards){
+  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, rewards: $rewards){
     _id
     name
     description
     points
     city
     description
-    huntItems
-    rewards
-}
+    huntItems{
+      __typename
+      _id
+      name
+      qrId
+      city
+      hint1
+      hint2
+      hint3
+      solutionLocation
+      solutionDescription
+      solutionImg
+      points
+      hint2DisplayedTo{
+        __typename
+      	_id
+        username
+      }
+      hint3DisplayedTo{
+        __typename
+        _id
+        username
+      }
+      solutionDisplayedTo{
+        __typename
+        _id
+        username
+      }
+			rewards{
+        name
+        icon
+        description
+        points
+      }
+    }
+    rewards{
+      name
+      icon
+      description
+      points
+    }
   }
-
+}
 `
 
 // updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt! -- is this going to work?
 
 export const UPDATE_HUNT = gql`
-  mutation updateHunt($huntId: ID!, $newName: String, $newDescription: String, $newPoints: Int){
-    updateHunt(huntId: $huntId, newName: $newName, newDescription: $newDescription, newPoints: $newPoints){
+mutation updateHunt($huntId: ID!, $name: String, $city: String $description: String, $points: Int, $huntItems: [ID], $rewards: [ID]){
+  updateHunt(huntId: $huntId, name: $name, city: $city, description: $description, points: $points, huntItems: $huntItems, rewards: $rewards){
+    _id
+    name
+    description
+    points
+    city
+    description
+    huntItems{
+      __typename
+      _id
+      name
+      qrId
+      city
+      hint1
+      hint2
+      hint3
+      solutionLocation
+      solutionDescription
+      solutionImg
+      points
+      hint2DisplayedTo{
+        __typename
         _id
-        newName
-        newDescription
-        newPoints
-
-    }
-  }
-`
-
-// removeHunt(huntId: ID!): Hunt
-
-export const REMOVE_HUNT = gql`
-    mutation removeHunt($_id: ID!){
-      removeHunt(_id: $_id){
-        hunt{
-          _id
-        }
+        username
+      }
+      hint3DisplayedTo{
+        __typename
+        _id
+        username
+      }
+      solutionDisplayedTo{
+        __typename
+        _id
+        username
+      }
+      rewards{
+        name
+        icon
+        description
+        points
       }
     }
+    rewards{
+      name
+      icon
+      description
+      points
+    }
+  }
+}
+`
+
+export const REMOVE_HUNT = gql`
+mutation removeHunt($huntId: ID!){
+  removeHunt(huntId: $huntId){
+    _id
+    name
+  }
+}
 
 `
+
+//~~~~~~~~~~~~~~~HUNT ITEM~~~~~~~~~~~~~~~
 
 // createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
 //tested in playground, works
 export const CREATE_HUNT_ITEM = gql`
-mutation createHuntItem($name: String!, 
-  $hint1: String!, 
-  $hint2: String!, 
-  $hint3: String!, 
-  $solutionLocation: String!, 
-  $solutionDescription: String!, 
-  $solutionImg: String, 
-  $points: Int!,
-	$city:String!){
-      createHuntItem(name: $name, 
-        hint1: $hint1, 
-        hint2: $hint2, 
-        hint3: $hint3, 
-        solutionLocation: $solutionLocation, 
-        solutionDescription: $solutionDescription, 
-        solutionImg: $solutionImg, 
-        points: $points
-      	city:$city){
+mutation createHuntItem($name: String!, $hint1: String!, $hint2: String!, $hint3: String!, $solutionLocation: String!, $solutionDescription: String!, $solutionImg: String, $points: Int!, $city:String!, $qrId: String, $hint2DisplayedTo: [ID], $hint3DisplayedTo: [ID], $rewards: [ID]){
+      createHuntItem(name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionDescription: $solutionDescription, solutionImg: $solutionImg, points: $points, city: $city, qrId: $qrId, hint2DisplayedTo: $hint2DisplayedTo, hint3DisplayedTo: $hint3DisplayedTo, rewards: $rewards){
+          _id
           name
+          qrId
           hint1
           hint2
           hint3
@@ -172,9 +243,32 @@ mutation createHuntItem($name: String!,
           solutionImg
           points
           city
+          hint2DisplayedTo{
+            __typename
+            _id
+            username
+          }
+          hint3DisplayedTo{
+            __typename
+            _id
+            username
+          }
+          solutionDisplayedTo{
+            __typename
+            _id
+            username
+          }
+          rewards{
+            name
+            icon
+            description
+            points
+          }
       }
     }
 `
+
+
 
 // updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem!
 
