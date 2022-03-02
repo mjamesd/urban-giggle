@@ -30,6 +30,8 @@ import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
 import Spokane from './pages/Spokane';
 import UpdateProfile from './pages/UpdateProfile';
+import Contact from './pages/Contact';
+import About from './pages/About'
 
 
 const httpLink = createHttpLink({
@@ -66,7 +68,8 @@ function App() {
       <AnimatePresence exitBeforeEnter>
         <ApolloProvider client={client}>
           <Router >
-            <div className="app-container">
+            <div id="root" className="app-container">
+              <div className="content-wrapper">
               <Header />
               
               <Routes>
@@ -79,8 +82,10 @@ function App() {
                 <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
                 <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
                 <Route path="/profile" element={<UpdateProfile />} />
+                <Route path="/contact" element={<Contact />}/>
+                <Route path="/about" element={<About />}/>
               </Routes>
-              
+              </div>
               <Footer />
             </div>
           </Router>

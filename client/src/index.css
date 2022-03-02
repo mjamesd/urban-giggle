@@ -7,11 +7,14 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-html {
+html, root {
   line-height: 1.15;
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  min-height: 100vh;
+
+ height: 100% 
 }
 
 /* Sections
@@ -28,11 +31,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  font-family: "Darker Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 /**
  * Render the `main` element consistently in IE.
  */
 main {
   display: block;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
 }
 
 h2 {
@@ -43,4 +64,8 @@ h1 {
   font-family: 'Poiret One', cursive;
   font-size: 40px;
   color: #fd5238 !important;
+}
+
+footer {
+  margin-bottom: 0 !important;
 }
