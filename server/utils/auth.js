@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'mysecretssshhhhhhh';
+const secret = 'm!t2#1Tsn#vLl6w3&!YWm^wMNXLTe5vFYhZcFJ1qCnMTveljbyH^*T&DOyIMBi0QwnTD$J2v9t#cHYVegUN5TfRT#8VMdZs@0uZ';
 const expiration = '2h';
 
 module.exports = {
@@ -28,8 +28,10 @@ module.exports = {
     // return the request object so it can be passed to the resolver as `context`
     return req;
   },
-  signToken: function ({ email, name, _id }) {
-    const payload = { email, name, _id };
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  signToken: function ({ email, name, _id, isAdmin }, setExpiration) {
+    const payload = { email, name, _id, isAdmin };
+    // can supply optional `setExpiration`, i.e. set to Date.now()/1000 to make it immediately expire
+    const thisExpiration = (setExpiration) ? setExpiration : expiration;
+    return jwt.sign({ data: payload }, secret, { expiresIn: thisExpiration });
   },
 };

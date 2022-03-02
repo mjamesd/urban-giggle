@@ -13,23 +13,61 @@ import { gql } from '@apollo/client';
 //   badge(badgeId: ID!): Badge -- done
 // }
 
+//tested in playground, works
 export const GET_USER = gql`
-query user($_id: ID!) {
-  user(_id: $_id) {
+query user($userId: ID!) {
+  user(userId: $userId) {
     _id
     username
     email
     password
     points
-    foundItems
-    completedHunts
-    badges
     createdAt
     isAdmin
+    foundItems {
+    	  _id
+    		name
+   			city
+    		qrId
+    		hint1
+    		hint2
+    		hint3
+    		solutionLocation
+   			solutionDescription
+    		solutionImg
+    		points
+    }
+    completedHunts{
+      _id
+    	name
+      city
+    	description
+    	points
+    	huntItems{
+         _id
+    		name
+   			city
+    		qrId
+    		hint1
+    		hint2
+    		hint3
+    		solutionLocation
+   			solutionDescription
+    		solutionImg
+    		points
+      }
+    }
+    badges{
+      _id
+    	name
+   		icon
+    	description
+    	points
+    }
   }
 }
 `
-
+//tested in playground, works
 export const GET_USERS = gql`
 query users{
   users{
@@ -38,16 +76,53 @@ query users{
     email
     password
     points
-    foundItems
-    completedHunts
-    badges
     createdAt
     isAdmin
+    foundItems {
+    	  _id
+    		name
+   			city
+    		qrId
+    		hint1
+    		hint2
+    		hint3
+    		solutionLocation
+   			solutionDescription
+    		solutionImg
+    		points
+    }
+    completedHunts{
+      _id
+    	name
+      city
+    	description
+    	points
+    	huntItems{
+         _id
+    		name
+   			city
+    		qrId
+    		hint1
+    		hint2
+    		hint3
+    		solutionLocation
+   			solutionDescription
+    		solutionImg
+    		points
+      }
+    }
+    badges{
+      _id
+    	name
+   		icon
+    	description
+    	points
+    }
   }
   
 }
 `
-
+//need to be able to log in to test this one
 export const QUERY_ME = gql`
   query me {
     me {
@@ -80,9 +155,11 @@ export const QUERY_ME = gql`
   }
   }
 `
+
+//tested in playground, works
 export const GET_HUNT_ITEM = gql`
-query huntItem($_id: ID!) {
-  huntItem(_id: $_id) {
+query huntItem($huntItemId: ID!) {
+  huntItem(huntItemId: $huntItemId) {
     _id
     name
     qrId
@@ -97,7 +174,7 @@ query huntItem($_id: ID!) {
   }
 }
 `
-
+//tested in playground, works
 export const GET_HUNT_ITEMS = gql`
 query huntItem{
   huntItems{
@@ -111,24 +188,38 @@ query huntItem{
     solutionDescription
     solutionImg
     points
+    city
   }
 }
 
 `
 
-
+//tested in playground, works
 export const GET_HUNT = gql`
-query hunt($_id: ID!) {
-  hunt(_id: $_id) {
+query hunt($huntId: ID!) {
+  hunt(huntId: $huntId) {
     _id
     name
+    city
     description
     points
-    huntItems
+    huntItems{
+      _id
+    	name
+    	city
+    	qrId
+    	hint1
+    	hint2
+    	hint3
+    	solutionLocation
+    	solutionDescription
+    	solutionImg
+    	points
+    }
   }
 }
 `
-
+//tested in playground, works
 export const GET_HUNTS = gql`
 query hunt{
   hunts{
@@ -136,10 +227,21 @@ query hunt{
     name
     description
     points
-    huntItems
+   huntItems{
+      _id
+    	name
+    	city
+    	qrId
+    	hint1
+    	hint2
+    	hint3
+    	solutionLocation
+    	solutionDescription
+    	solutionImg
+    	points
+    }
   }
 }
-
 `
 
 
@@ -158,8 +260,8 @@ query badge {
 
 export const GET_BADGE = gql`
 
-query badge($_id: ID!){
-  badge(_id: $_id){
+query badge($badgeId: ID!){
+  badge(badgeId: $badgeId){
     _id
     name
     icon

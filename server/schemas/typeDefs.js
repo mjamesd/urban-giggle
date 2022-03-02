@@ -7,9 +7,11 @@ const typeDefs = gql`
     email: String!
     password: String!
     points: Int
-    foundItems: [HuntItem]
+    foundHuntItems: [HuntItem]
     completedHunts: [Hunt]
     badges: [Badge]
+    favoriteHunts: [Hunt]
+    favoriteHuntItems: [HuntItem]
     isAdmin: Boolean
     createdAt: String
   }
@@ -25,22 +27,29 @@ const typeDefs = gql`
   type Hunt {
     _id: ID
     name: String!
+    city: String!
     description: String!
     points: Int
     huntItems: [HuntItem!]!
+    rewards: [Badge]
   }
 
   type HuntItem {
     _id: ID
     name: String!
+    city: String!
     qrId: String
     hint1: String!
     hint2: String!
+    hint2DisplayedTo: [User]
     hint3: String!
+    hint3DisplayedTo: [User]
     solutionLocation: String!
     solutionDescription: String!
     solutionImg: String
-    points: Int!
+    solutionDisplayedTo: [User]
+    points: Int
+    rewards: [Badge]
   }
 
   type Auth {
@@ -52,10 +61,13 @@ const typeDefs = gql`
     users: [User!]
     user(userId: ID!): User
     me: User
-    hunts: [Hunt!]
+    hunts: [Hunt]
     hunt(huntId: ID!): Hunt
+    huntsByCity(city: String!): [Hunt]
     huntItems: [HuntItem]
     huntItem(huntItemId: ID!): HuntItem
+    huntItemByQrCode(qrId: String!): HuntItem
+    huntItemsByCity(city: String!): [HuntItem]
     badges: [Badge!]
     badge(badgeId: ID!): Badge
   }
@@ -65,28 +77,39 @@ const typeDefs = gql`
       name: String!
       icon: String!
       description: String!
-      points: Int!
+      points: Int
     ): Badge!
     updateBadge(
       badgeId: ID!
-      newName: String
-      newIcon: String
-      newDescription: String
-      newPoints: Int
+      name: String
+      icon: String
+      description: String
+      points: Int
     ): Badge!
     removeBadge(badgeId: ID!): Badge
 
-    createHunt(name: String!, description: String!, points: Int): Hunt!
+    createHunt(
+      name: String!
+      city: String!
+      description: String!
+      points: Int
+      huntItems: [ID]
+      rewards: [ID]
+    ): Hunt!
     updateHunt(
       huntId: ID!
-      newName: String
-      newDescription: String
-      newPoints: Int
+      name: String
+      city: String
+      description: String
+      points: Int
+      huntItems: [ID]
+      rewards: [ID]
     ): Hunt!
     removeHunt(huntId: ID!): Hunt
 
     createHuntItem(
       name: String!
+      city: String!
       hint1: String!
       hint2: String!
       hint3: String!
@@ -94,30 +117,45 @@ const typeDefs = gql`
       solutionDescription: String!
       solutionImg: String
       points: Int!
+      rewards: [ID]
     ): HuntItem!
     updateHuntItem(
       huntItemId: ID!
-      newName: String
-      newHint1: String
-      newHint2: String
-      newHint3: String
-      newSolutionLocation: String
-      newSolutionDescription: String
-      newSolutionImg: String
-      newPoints: Int
+      name: String
+      city: String
+      hint1: String
+      hint2: String
+      hint2DisplayToUser: [ID]
+      hint3: String
+      hint3DisplayToUser: [ID]
+      solutionLocation: String
+      solutionDescription: String
+      solutionImg: String
+      solutionDisplayToUser: [ID]
+      points: Int
+      rewards: [ID]
     ): HuntItem!
     removeHuntItem(huntItemId: ID!): HuntItem
-    addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
-    createUser(username: String!, email: String!, password: String!): Auth
+    removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
+    userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
+
+    createUser(
+        username: String!
+        email: String!
+        password: String!
+    ): Auth
     updateUser(
+      password: String!
       username: String
       email: String
-      password: String!
       newPassword: String
     ): Auth
-    removeUser: User
-    login(email: String!, password: String!): Auth
+    removeUser: Auth
+    login(
+        email: String!
+        password: String!
+    ): Auth
     changePoints(pointsToChange: Int): Auth
     userFoundHuntItem(huntItemId: ID!): Auth
     userCompletedHunt(huntId: ID!): Auth
@@ -126,39 +164,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-/*
-
-queries:
-  user(userId: ID!): User
-  me: User
-
-  hunts: [Hunt]!
-  hunt(huntId: ID!): Hunt
-
-  huntItems: [HuntItem]!
-  huntItem(huntItemId: ID!): HuntItem
-
-  badges: [Badge]!
-  badge(badgeId: ID!): Badge
-
-
-mutations:
-  addUser(username: String!, email: String!, password: String!): Auth
-  updateUser(userId: ID!): Auth
-  login: Auth
-
-  addHunt: Hunt
-  updateHunt: Hunt
-  removeHunt: Hunt
-  
-  addHuntItem: HuntItem
-  updateHuntItem: HuntItem
-  removeHuntItem: HuntItem
-  
-  addBadge: Badge
-  updateBadge: Badge
-  removeBadge: Badge
-  
-
-*/
