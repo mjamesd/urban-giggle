@@ -63,7 +63,7 @@ const Profile = (props) => {
           <TextInfoContent
             classes={textCardContentStyles}
             overline={`Hello, ${user.username}` }
-            heading={'Update Profile'}
+            heading={'User Profile'}
             body={
               <UpdateUserForm user={user}/>
             }

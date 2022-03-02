@@ -98,8 +98,9 @@ const UpdateUserForm = ({ user }) => {
         }
 
         if (!password) {
-            setErrorMessage('Your current password is required for update')
+            setErrorMessage('Your current password is required to make updates')
         }
+
         if (username && email && password && !newPassword) {
             try {
                 const { data } = await updateUser({
@@ -130,17 +131,6 @@ const UpdateUserForm = ({ user }) => {
             return
         }
 
-
-    //     try {
-    //         const { data } = await updateUser({ ...data });
-    //         setShowPassword(false)
-    //         setErrorMessage('');
-    //         await navigate("/dashboard");
-    //     } catch (e) {
-    //         setErrorMessage("I'm sorry, something has gone wrong. Please try again")
-    //         console.error(e);
-    //     }
-
     }
 
 
@@ -149,11 +139,11 @@ const UpdateUserForm = ({ user }) => {
             {Auth.loggedIn() ? (
                 <form ref={form} onSubmit={handleFormSubmit}>
                     <FormControl variant="outlined">
-                        Update Your Username
-                        <TextField variant="outlined" name="username" type="text" value={username} onChange={handleChange} /><br /><br />
-                        Update Your Email
-                        <TextField variant="outlined" name="email" type="email" value={email} onChange={handleChange} /><br /><br />
-                        Update Your Password
+                        Username
+                        <TextField variant="outlined" name="username" type="text" value={username} onChange={handleChange} /><br />
+                        Email
+                        <TextField variant="outlined" name="email" type="email" value={email} onChange={handleChange} /><br />
+                        Current Password <br/>(Required to Submit Changes)
                         <FormControl variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Current Password</InputLabel>
                             <OutlinedInput
@@ -175,6 +165,7 @@ const UpdateUserForm = ({ user }) => {
                                 </InputAdornment>}
                                 label="New Password" />
                         </FormControl><br />
+                        Update Your Password
                         <FormControl variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
                             <OutlinedInput
