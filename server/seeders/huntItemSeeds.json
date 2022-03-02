@@ -80,5 +80,125 @@
         "solutionLocation":"On the corner of Broadway and Pine",
         "solutionDescription":"The Jimi Hendrix Statue",
         "city":"Seattle"
+    },
+    {
+        "name": "Clock Tower",
+        "city": "Spokane",
+        "hint1": "The Great Northern Railroad depot was finished in 1902",
+        "hint2": "An iconic landmark for the 1974 World's Fair",
+        "hint3": "Was the only remaining building on Havermale Island after it was remodled",
+        "solutionLocation": "The Spokane Clock Tower at Riverfront Park",
+        "solutionDescription": "The Spokane Clock Tower"
+    },
+    {
+        "name": "Fox Theater",
+        "city": "Spokane",
+        "hint1": "This iconic Art Deco building was opened in 1931.",
+        "hint2": "After a recent renovation, the building is the home of the Spokane Symphony.",
+        "hint3": "It was part of the Fox Film Corporation Empire founded by studio mogul William Fox",
+        "solutionLocation": "Fox Theater, 1001 W. Sprague Ave.",
+        "solutionDescription": "The Martin Woldson Theater at the FOX" 
+    },
+    {
+        "name": "St Johns Cathedral",
+        "city": "Spokane",
+        "hint1": "This building is built entirely of cut stone with the carvings and figures in stained glass.",
+        "hint2": "The organ was built and installed in 1957 with 4,039 pipes.",
+        "hint3": "It rises prominently on the crest of a hill making it visable from much of downtown and areas to the north",
+        "solutionLocation": "127 E 12th Avenue.",
+        "solutionDescription": "St. John's Cathedral"    
+    },
+    {
+        "name": "Steam Plant Brew Pub",
+        "city": "Spokane",
+        "hint1": "This building was originaly purposed to heat and supply power to homes and businesses",
+        "hint2": "The twin iconic strucures tower 225 feet",
+        "hint3": "In the summer of 1996 it was transformed into a gastro pub",
+        "solutionLocation": "159 South Lincoln",
+        "solutionDescription": "You did it! 🎉 Show this page to your server to get 15% off your next meal!",
+        "solutionImg": "https://i.imgur.com/DQ5r4Fd.jpg"
+    },
+    {
+        "name": "Clinkerdagger",
+        "city": "Spokane",
+        "hint1": "40 year old steak house.",
+        "hint2": "A Spokane landmark that overlooks the Spokane River and city skyline.",
+        "hint3": "That's one sharp sounding name!",
+        "solutionLocation": "The Flour Mill 621 W. Mallon Ave.",
+        "solutionDescription": "Congratulations! Show this page to your server to get 10% off any appetizer!",
+        "solutionImg": "https://i.imgur.com/18pYWHH.jpg",
+        "points": 4
+    },
+    {
+        "name":"Pavilion",
+        "qrId":"",
+        "hint1":"This structure was a gift to Spokane from the United Stated government.",
+        "hint2":"It's initial purpose was to house exibits that focused on enviornmental issues.", 
+        "hint3":"Richard Nixon delared that Expo '74 was officially open to all the citizens of the world at the base of this structure.",
+        "solutionLocation":"U.S. Pavillion, Riverfront Park",
+        "solutionDescription":"U.S. Pavilion",
+        "city":"Spokane"
+    },
+    {
+        "name": "Garland Milk Bottle",
+        "city": "Spokane",
+        "hint1": "The lactose intollerant need not apply.",
+        "hint2": "This place was built in 1935 and designed to build better men and women by making milk more attractive to boys and girls.",
+        "hint3": "Notable for it's bottle architecture.",
+        "solutionLocation": "802 W Garland Ave",
+        "solutionDescription": "You cheesed it! Show this page to your server for a free glass of milk! What fun.",
+        "solutionImg": "https://i.imgur.com/dgbRGzc.jpg",
+        "points": 2
+    },
+    {
+        "name": "Arbor Crest Wine Cellars",
+        "city": "Spokane",
+        "hint1": "This building has one heck of a view.",
+        "hint2": "Overlooking the Spokane Valley it sits alone on a ridge.",
+        "hint3": "Probably want to watch your step, especially with all this alcohol around. ",
+        "solutionLocation": "4705 N Fruit Hill Rd",
+        "solutionDescription": "Arbor Crest Wine Cellars",
+        "solutionImg":"https://i.imgur.com/vd62DNF.jpg"
+    },
+    {
+        "name":"Bowl and Pitcher",
+        "qrId":"",
+        "hint1":"You really need a lot of imagination to see these two things.",
+        "hint2":"While you're there you might as well check out the famous rope bridge.",
+        "hint3":"If you see a dead body just leave it for the wolves.",
+        "solutionLocation":"Riverside State Park swinging bridge",
+        "solutionDescription":"The Bowl and Pitcher at Riverside State Park",
+        "city":"Spokane"
+    },
+    {   "name": "Taco Bell",
+        "city": "Spokane",
+        "hint1": "Feels like a sweatpants kind of night.",
+        "hint2": "Your one stop shop for grilled stuffed burritos. And sadness.",
+        "hint3": "Go to the one on 3rd, next to the Carlise Hotel. Dinner and a show.",
+        "solutionLocation": "825 W 3rd Ave",
+        "solutionDescription": "Congratulations! You have diarrhea. Is it a coincidence that you're also at Taco Bell?",
+        "solutionImg": "https://i.imgur.com/qPlsR6y.jpg",
+        "points": 4
+
+    },
+    {
+        "name":"Campbell House",
+        "qrId":"",
+        "hint1":"This is a historic house museum.",
+        "hint2":"The Northwest Museum of Arts and Culture is nearby.",
+        "hint3":"The owner was in the mining business with the Rockefeller and Gould families.",
+        "solutionLocation":"2316 W 1st Ave",
+        "solutionDescription":"The Campbell House",
+        "city":"Spokane"
+    },
+    {
+        "name":"Manito Park",
+        "qrId":"",
+        "hint1":"A 90 acre park with an arboretum and conservatory.",
+        "hint2":"This was at one time a zoo until 1932 when it was closed due to the Great Depression.",
+        "hint3":"The lilac garden has over 100 cultivars represented. Spokane is known as the Lilac City.",
+        "solutionLocation":"1702 S Gran Blvd at the conservatory front desk",
+        "solutionDescription":"Manito Park",
+        "city":"Spokane"
     }
 ]
