@@ -102,7 +102,7 @@ export const REMOVE_USER = gql`
 //tested in playground, works
 export const CREATE_HUNT = gql`
 mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID]){
-  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, $rewards: rewards){
+  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, rewards: $rewards){
     _id
     name
     description
