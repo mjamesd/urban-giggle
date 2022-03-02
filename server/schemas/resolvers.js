@@ -194,6 +194,26 @@ const resolvers = {
                 },
             ).populate('rewards').populate('hint2DisplayedTo').populate('hint3DisplayedTo').populate('solutionDisplayedTo');
         },
+        userSignsHuntItemGuestbook: async (parent, { huntItemId, message }, context) => {
+            if (!context.user) return new AuthenticationError('You need to be logged in! (guestbook)');
+            const user = await User.findById(context.user._id);
+            const months = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const nowStamp = new Date();
+            const timestamp = `${months[nowStamp.getMonth()]} ${nowStamp.getDate()}, ${nowStamp.getFullYear()} @ ${(nowStamp.getHours() > 12) ? nowStamp.getHours() - 12 : nowStamp.getHours()}:${(nowStamp.getMinutes() < 10) ? '0' : ''}${nowStamp.getMinutes()}${(nowStamp.getHours() >= 12) ? 'pm' : 'am'}`;
+            message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let newMessage = `<div class="huntItemGuestbookItem">
+    <div class="guestbook-message">${message}</div>
+    <div class="guestbook-author">${user.username}</div>
+    <div class="guestbook-timestamp">${timestamp}</div>
+</div>`;
+            const huntItem = await HuntItem.findById(huntItemId);
+            // console.log(huntItem);
+            huntItem.guestbook.push(newMessage);
+            huntItem.save((err) => {
+                if (err) return new Error(err);
+            });
+            return huntItem;
+        },
         // USER
         createUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password });

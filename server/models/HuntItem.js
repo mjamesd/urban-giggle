@@ -66,6 +66,11 @@ const huntItemSchema = new Schema({
             ref: 'Badge',
         }
     ],
+    guestbook: [
+        {
+            type: String,
+        },
+    ],
 });
 
 huntItemSchema.pre('save', async function (next) {
