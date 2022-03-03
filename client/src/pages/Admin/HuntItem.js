@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { Box } from '@mui/system';
 import { useQuery } from '@apollo/client';
 import { GET_HUNT_ITEM } from '../../utils/queries';
@@ -40,13 +42,23 @@ const HuntItemAdmin = () => {
             transition={{ duration: 1 }}
         >
             <Box>
-                <h1 style={{ textAlign: "center" }}></h1>
+                <h1 style={{ textAlign: "center" }}>{huntItem.name}</h1>
+                <p style={{ textAlign: "center" }}><button>Update</button></p>
             </Box>
-            <Grid classes={gridStyles} container spacing={4} wrap={'wrap'}>
-                {huntItem.name}
-                
-                <button></button>
-            </Grid>
+            
+            <Card className={cx(styles.root, shadowStyles.root)}>
+        <CardContent>
+          <TextInfoContent
+            classes={textCardContentStyles}
+            overline={'Welcome Back'}
+            heading={'Login'}
+            body={
+              <LoginForm />
+            }
+          />
+        </CardContent>
+      </Card>
+            
             </motion.div >
     );
 }
