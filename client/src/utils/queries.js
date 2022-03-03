@@ -23,7 +23,6 @@ query user($userId: ID!) {
     password
     points
     createdAt
-    isAdmin
     foundHuntItems {
     	  _id
     		name
@@ -101,7 +100,6 @@ query users{
     password
     points
     createdAt
-    isAdmin
     foundHuntItems {
     	  _id
     		name
@@ -198,7 +196,6 @@ export const QUERY_ME = gql`
         description
         points
       }
-      isAdmin
       createdAt
   }
   }
