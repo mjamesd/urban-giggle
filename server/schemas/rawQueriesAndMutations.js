@@ -634,6 +634,22 @@ HTTP HEADERS:
 {
   "Authorization": "Bearer pasteTokenHere"
 }
+mutation userSignsHuntItemGuestbook($huntItemId: ID!, $message: String!) {
+    userSignsHuntItemGuestbook(huntItemId: $huntItemId, message: $message) {
+        __typename
+        _id
+        guestbook
+    }
+}
+QUERY VARIABLES:
+{
+  "huntItemId": "idGoesHere",
+  "message": "My message!"
+}
+HTTP HEADERS:
+{
+  "Authorization": "Bearer pasteTokenHere"
+}
 
 ===================================================================================================================================
 USERS
