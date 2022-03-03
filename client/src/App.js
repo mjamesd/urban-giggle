@@ -83,8 +83,8 @@ function App() {
                 <Route path="/start" element={<Start />} />
                 <Route path="/seattle" element={<Seattle />} />
                 <Route path="/spokane" element={<Spokane />} />
-                <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
-                <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                <Route path="/seattle/seattleexplorehunt" element={<SeattleExploreHunt />} />
+                <Route path="/seattle/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
