@@ -33,6 +33,9 @@ import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 
+//admin pages
+import Admin from './pages/Admin/Dashboard'
+import HuntItemAdmin from './pages/Admin/HuntItem'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -65,33 +68,54 @@ function App() {
 
   return (
 
-      <AnimatePresence exitBeforeEnter>
-        <ApolloProvider client={client}>
-          <Router >
-            <div id="root" className="app-container">
-              <div className="content-wrapper">
-              <Header />
-              
+    <AnimatePresence exitBeforeEnter>
+      <ApolloProvider client={client}>
+        <Router >
+          <div id="root" className="app-container">
+            <Header />
+
+            <div className="content-wrapper">
+
               <Routes>
-                <Route path="/" element={<Home />} /> 
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
                 <Route path="/seattle" element={<Seattle />} />
                 <Route path="/spokane" element={<Spokane />} />
-                <Route path="/seattle/seattleexplorehunt" element={<SeattleExploreHunt />} />
-                <Route path="/seattle/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
+                <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/contact" element={<Contact />}/>
-                <Route path="/about" element={<About />}/>
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+
+                {/* hunt and hunt id routes */}
+                <Route path="/location/victory/:huntItemId"  />
+                <Route path="/location/hints/:huntItemId"  />
+                <Route path="/hunt/:huntId" />
+               
+                {/* organizer routes */}
+                <Route path="/hunt/create" />
+
+                {/* admin -- probably a pipe dream :D */}
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
+                <Route path="/admin/:huntId" />
+                <Route path="/admin/huntitem/update/:huntItemId"  />
+                <Route path="/admin/huntitem/create/:huntItemId" />
+                <Route path="/admin/hunt/update/:huntId" />
+                <Route path="/admin/hunt/create/:huntId" />
+
               </Routes>
-              </div>
-              <Footer />
+
             </div>
-          </Router>
-        </ApolloProvider>
-        
-      </AnimatePresence>
+
+            <Footer />
+          </div>
+        </Router>
+      </ApolloProvider>
+
+    </AnimatePresence>
 
   )
 }
