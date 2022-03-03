@@ -3,31 +3,28 @@
         "username": "johnjohnson",
         "email": "john@johnson.com",
         "password": "password12345",
-        "isAdmin": true
+        "userType": "admin"
     },
     {
         "username": "sallysallyson",
         "email": "sally@sallyson.com",
         "password": "password12345",
-        "isAdmin": false
+        "userType": "organizer"
     },
     {
         "username": "stevesteveson",
         "email": "steve@steveson.com",
-        "password": "password12345",
-        "isAdmin": false
+        "password": "password12345"
     },
     {
         "username": "janejaneson",
         "email": "jane@janeson.com",
-        "password": "password12345",
-        "isAdmin": false
+        "password": "password12345"
     },
     {
         "username": "bobbobson",
         "email": "bob@bobson.com",
-        "password": "password12345",
-        "isAdmin": false
+        "password": "password12345"
     }
 
 ]

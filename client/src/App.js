@@ -28,6 +28,7 @@ import Start from './pages/Start';
 import Seattle from './pages/Seattle';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
+import SeattleCustomHunt from './pages/SeattleCustomHunt';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
@@ -84,7 +85,6 @@ function App() {
                 <Route path="/start" element={<Start />} />
                 <Route path="/seattle" element={<Seattle />} />
                 <Route path="/spokane" element={<Spokane />} />
-                
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
@@ -92,6 +92,7 @@ function App() {
                 {/* hunt and hunt id routes Seattle*/}
                 <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                 <Route path="/seattle/indulge" element={<SeattleIndulgeHunt />} />
+                <Route path="/seattle/custom" element={<SeattleCustomHunt />} />
 
                 {/* hunt item and hunt routes */}
                 <Route path="/victory/:huntItemId"  />
