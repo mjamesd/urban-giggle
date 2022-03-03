@@ -86,24 +86,24 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
-                <Route path="/seattle" element={<Seattle />} />
+                {/* <Route path="/seattle" element={<Seattle />} /> */}
                 <Route path="/spokane" element={<Spokane />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
 
-                {/* hunt and hunt id routes Seattle*/}
-                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
-                <Route path="/custom" element={<Custom />} />
-
-                {/* hunt item and hunt routes */}
+                {/* hunt item routes */}
                 <Route path="/victory/:huntItemId"  />
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
-
-                <Route path="/hunt/:huntId" element={<Hunts />}/>
+                
+                {/* hunt routes */}
+                {/* explore will be removed and replaced with hunts/id */}
+                <Route path="/:huntCity" element={<Seattle />} />
+                <Route path="/hunt/:huntId" element={<Hunt />}/>
+                {/* <Route path="/seattle/explore" element={<SeattleExploreHunt />} /> */}
                
-                {/* organizer routes */}
-                <Route path="/hunt/create" />
+                {/* organizer routes -- this will be if we are able to add the organizer option in time */}
+                <Route path="/hunt/create" element={<Custom/>} />
 
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Admin />} />
