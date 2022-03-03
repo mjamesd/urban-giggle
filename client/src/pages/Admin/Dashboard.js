@@ -93,7 +93,9 @@ export const Admin = React.memo(function SolidGameCard() {
         >
             <Box>
                 <h1 style={{ textAlign: "center" }}>All Hunt Locations</h1>
+                <p style={{ textAlign: "center" }}><button>Add Hunt Location</button></p>
             </Box>
+            
             <Grid classes={gridStyles} container spacing={4} wrap={'wrap'}>
                 {huntItems &&
                     huntItems.map((huntItem) => (
