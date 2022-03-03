@@ -1,6 +1,7 @@
-import { React, useState, useEffect } from 'react'
+import { React } from 'react'
 import { motion } from 'framer-motion';
 import cx from 'clsx';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -69,7 +70,7 @@ const SeattleExploreHunt = () => {
                     heading={'SECRET LANDMARK'}
                     body={
                       <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
+                        <Button component={Link} to={'/'} className={buttonStyles}>Spokane</Button>
                       </div>
                     }
                   />
@@ -202,7 +203,7 @@ const SeattleExploreHunt = () => {
                   <TextInfoContent
                     classes={textCardContentStyles}
                     overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
+                    heading={'SECRET GEM'}
                     body={
                       <div>
                         <Button className={buttonStyles}>VIEW HINTS</Button>
