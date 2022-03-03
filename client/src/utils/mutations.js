@@ -27,14 +27,15 @@ import { gql } from '@apollo/client';
 
 //tested, works
 export const CREATE_USER = gql`
-  mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(username: $username, email: $email, password: $password) {
+  mutation createUser($username: String!, $email: String!, $userType: String, $password: String!) {
+    createUser(username: $username, email: $email, userType: $userType, password: $password) {
       token
       user {
         _id
         username
         email
         password
+        userType
       }
     }
   }
@@ -47,12 +48,14 @@ mutation updateThisUser(
   $password: String!
   $username: String
   $email: String
+  $userType: String
   $newPassword: String
 ) {
   updateUser(
     username: $username
     email: $email
     password: $password
+    userType: $userType
     newPassword: $newPassword
   ) {
     __typename
@@ -63,6 +66,7 @@ mutation updateThisUser(
       username
       email
       password
+      userType
     }
   }
 }
@@ -85,14 +89,14 @@ export const LOGIN_USER = gql`
 
 //couldnt test bc of auth
 export const REMOVE_USER = gql`
-  mutation removeUser($username: String, $email: String, $password: String) {
-    removeUser(username: $username) {
+  mutation removeUser($password: String!) {
+    removeUser(password: $password) {
       token
       user{
-      _id
-      username
-      email
-      password
+        _id
+        username
+        email
+        userType
       }
     }
   }
@@ -102,7 +106,7 @@ export const REMOVE_USER = gql`
 //tested in playground, works
 export const CREATE_HUNT = gql`
 mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID]){
-  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, $rewards: rewards){
+  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, rewards: $rewards){
     _id
     name
     description
@@ -154,7 +158,8 @@ mutation createHuntItem($name: String!,
   $solutionDescription: String!, 
   $solutionImg: String, 
   $points: Int!,
-	$city:String!){
+  $city:String!,
+  $category: String!){
       createHuntItem(name: $name, 
         hint1: $hint1, 
         hint2: $hint2, 
@@ -163,8 +168,11 @@ mutation createHuntItem($name: String!,
         solutionDescription: $solutionDescription, 
         solutionImg: $solutionImg, 
         points: $points
-      	city:$city){
+      	city:$city,
+        category:$category){
+            _id
           name
+          category
           hint1
           hint2
           hint3
@@ -173,6 +181,7 @@ mutation createHuntItem($name: String!,
           solutionImg
           points
           city
+          guestbook
       }
     }
 `
@@ -180,11 +189,12 @@ mutation createHuntItem($name: String!,
 // updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem!
 
 export const UPDATE_HUNT_ITEM = gql`
-    mutation updateHuntItem($_id: ID!, $newName: String, $newHint1: String, $newHint2: String, $newHint3: String, $newSolutionLocation: String, $newSolutionDescription: String, $newSolutionImg: String, $newPoints: Int){
-      updateHuntItem(_id: $_id, newName: $newName, newHint1: $newHint1, newHint2: $newHint2, newHint3: $newHint3, newSolutionLocation: $newSolutionLocation, newSolutionDescription: $newSolutionDescription, newSolutionImg: $newSolutionImg, newPoints: $newPoints){
+    mutation updateHuntItem($_id: ID!, $category: String, $newName: String, $newHint1: String, $newHint2: String, $newHint3: String, $newSolutionLocation: String, $newSolutionDescription: String, $newSolutionImg: String, $newPoints: Int, $guestbook: [String]){
+      updateHuntItem(_id: $_id, category: $category, newName: $newName, newHint1: $newHint1, newHint2: $newHint2, newHint3: $newHint3, newSolutionLocation: $newSolutionLocation, newSolutionDescription: $newSolutionDescription, newSolutionImg: $newSolutionImg, newPoints: $newPoints, guestbook: $guestbook){
         huntItem{
           _id
           newName
+          category
           newHint1
           newHint2
           newHint3
@@ -193,6 +203,7 @@ export const UPDATE_HUNT_ITEM = gql`
           newSolutionImg
           newPoints
           newCity
+          guestbook
         }
       }
     }
