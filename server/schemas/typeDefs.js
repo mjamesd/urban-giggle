@@ -81,6 +81,7 @@ const typeDefs = gql`
       description: String!
       points: Int
     ): Badge!
+
     updateBadge(
       badgeId: ID!
       name: String
@@ -88,6 +89,7 @@ const typeDefs = gql`
       description: String
       points: Int
     ): Badge!
+
     removeBadge(badgeId: ID!): Badge
 
     createHunt(
@@ -98,6 +100,7 @@ const typeDefs = gql`
       huntItems: [ID]
       rewards: [ID]
     ): Hunt!
+
     updateHunt(
       huntId: ID!
       name: String
@@ -107,21 +110,27 @@ const typeDefs = gql`
       huntItems: [ID]
       rewards: [ID]
     ): Hunt!
+
     removeHunt(huntId: ID!): Hunt
 
     createHuntItem(
       name: String!
+      qrId: String
       city: String!
       category: String!
       hint1: String!
       hint2: String!
       hint3: String!
+      hint2DisplayedTo: [ID]
+      hint3DisplayedTo: [ID]
       solutionLocation: String!
       solutionDescription: String!
       solutionImg: String
+      solutionDisplayedTo: [ID]
       points: Int!
       rewards: [ID]
     ): HuntItem!
+
     updateHuntItem(
       huntItemId: ID!
       name: String
@@ -139,9 +148,11 @@ const typeDefs = gql`
       points: Int
       rewards: [ID]
     ): HuntItem!
+
     removeHuntItem(huntItemId: ID!): HuntItem
 
     removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
+    
     userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
     userSignsHuntItemGuestbook(huntItemId: ID!, message: String!): HuntItem
 
@@ -151,6 +162,7 @@ const typeDefs = gql`
       password: String!
       userType: String
     ): Auth
+
     updateUser(
       password: String!
       username: String
@@ -158,13 +170,16 @@ const typeDefs = gql`
       userType: String
       newPassword: String
     ): Auth
+
     removeUser(
       password: String!
     ): Auth
+
     login(
       email: String!
       password: String!
     ): Auth
+
     changePoints(userId: ID!, pointsToChange: Int): Auth
     userFoundHuntItem(huntItemId: ID!): Auth
     userCompletedHunt(huntId: ID!): Auth

@@ -69,7 +69,7 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
             <Card className={classes.card}>
                 <CardMedia classes={mediaStyles} image={image} />
                 <CardContent className={classes.content}>
-                    <Typography className={classes.title} variant={'h2'}>
+                    <Typography className={classes.title} >
                         {title}
                     </Typography>
                     <Typography className={classes.subtitle}>{subtitle}</Typography>
@@ -98,7 +98,7 @@ export const Seattle = React.memo(function SolidGameCard() {
             </Box>
             <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
                 <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='./SeattleExploreHunt'>
+                    <Link style={{ textDecoration: 'none' }} to='./seattleexplorehunt'>
                         <CustomCard
                             classes={styles}
                             title={'EXPLORE'}

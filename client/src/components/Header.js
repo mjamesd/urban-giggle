@@ -14,6 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Auth from '../utils/auth';
 
 const styles = {
+  background: {
+    backgroundColor: 'white',
+  },
   title: {
     textDecoration: 'none',
     color: '#fd5238',
@@ -65,7 +68,7 @@ const Header = () => {
 
   return (
     <AppBar elevation={0} position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style={styles.background}>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
