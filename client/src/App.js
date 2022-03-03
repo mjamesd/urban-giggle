@@ -28,6 +28,7 @@ import Start from './pages/Start';
 import Seattle from './pages/Seattle';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
+import SeattleCustomHunt from './pages/SeattleCustomHunt';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
@@ -83,8 +84,9 @@ function App() {
                 <Route path="/start" element={<Start />} />
                 <Route path="/seattle" element={<Seattle />} />
                 <Route path="/spokane" element={<Spokane />} />
-                <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
-                <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                <Route path="/seattle/seattleexplorehunt" element={<SeattleExploreHunt />} />
+                <Route path="/seattle/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                <Route path="/seattle/seattlecustomhunt" element={<SeattleCustomHunt />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
