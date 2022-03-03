@@ -21,6 +21,7 @@ query user($userId: ID!) {
     username
     email
     password
+    userType
     points
     createdAt
     foundHuntItems {
@@ -98,6 +99,7 @@ query users{
     username
     email
     password
+    userType
     points
     createdAt
     foundHuntItems {
@@ -177,6 +179,7 @@ export const QUERY_ME = gql`
       username
       email
       password
+      userType
       points
       foundHuntItems {
         __typename
