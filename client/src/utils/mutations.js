@@ -341,6 +341,27 @@ export const REMOVE_HUNT_ITEM_FROM_HUNT = gql`
 
 `
 
+export const USER_ASKS_FOR_HINT = gql`
+    mutation userAsksForHint($huntItemId: ID!, $hint2: Boolean, $hint3: Boolean, $solution: Boolean){
+      userAsksForHint(huntItemId: $huntItemId, hint2: $hint2, hint3: $hint3, solution: $solution){
+        _id
+        hint2
+        hint3
+        solution
+        points
+        hint2DisplayedTo{
+          _id
+        }
+        hint3DisplayedTo{
+          _id
+        }
+        solutionDisplayedTo{
+          _id
+        }
+      }
+    }
+`
+
 // changePoints(pointsToChange: Int): Auth
 
 export const CHANGE_POINTS = gql`
@@ -361,7 +382,9 @@ export const USER_FOUND_HUNT_ITEM = gql`
     userFoundHuntItem(huntItemId: $huntItemId){
       token
       user{
-        foundItems
+        foundItems{
+          _id
+        }
       }
     }
   }
@@ -374,7 +397,9 @@ export const USER_COMPLETED_HUNT = gql`
     userCompletedHunt(huntId: $huntId){
       token
       user{
-        completedHunts
+        completedHunts{
+          _id
+        }
       }
     }
   }
