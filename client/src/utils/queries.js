@@ -294,6 +294,7 @@ query hunt($huntId: ID!) {
     	solutionDescription
     	solutionImg
     	points
+        guestbook
     }
     rewards{
       _id
@@ -326,6 +327,7 @@ query hunt{
     	solutionDescription
     	solutionImg
     	points
+        guestbook
     }
     rewards{
       _id

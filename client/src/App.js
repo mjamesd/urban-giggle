@@ -38,6 +38,9 @@ import HuntItem from './pages/HuntItem'
 //admin pages
 import Admin from './pages/Admin/Dashboard'
 import HuntItemAdmin from './pages/Admin/HuntItem'
+import HuntsAdmin from './pages/Admin/Hunts';
+import HuntsViewAdmin from './pages/Admin/HuntsView';
+import HuntsEditAdmin from './pages/Admin/HuntsEdit';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -105,6 +108,9 @@ function App() {
 
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/hunts" element={<HuntsAdmin />} />
+                <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
+                <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
                 <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
                 <Route path="/admin/:huntId" />
                 <Route path="/admin/huntitem/update/:huntItemId"  />
