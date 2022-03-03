@@ -5,7 +5,7 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 
 
 
-const SeattleIndulgeHunt = () => {
+const CustomHunt = () => {
   const textCardContentStyles = useN04TextInfoContentStyles();
 
   return (
@@ -32,4 +32,4 @@ const SeattleIndulgeHunt = () => {
 };
 
 
-export default SeattleIndulgeHunt
+export default CustomHunt
