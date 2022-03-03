@@ -27,13 +27,13 @@ import Signup from './pages/Signup';
 import Start from './pages/Start';
 import Seattle from './pages/Seattle';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
-import SeattleIndulgeHunt from './pages/SeattleIndulgeHunt';
-import SeattleCustomHunt from './pages/SeattleCustomHunt';
+import Custom from './pages/Custom';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
+import Hunt from './pages/Hunts.js'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
@@ -94,14 +94,13 @@ function App() {
 
                 {/* hunt and hunt id routes Seattle*/}
                 <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
-                <Route path="/seattle/indulge" element={<SeattleIndulgeHunt />} />
-                <Route path="/seattle/custom" element={<SeattleCustomHunt />} />
+                <Route path="/custom" element={<Custom />} />
 
                 {/* hunt item and hunt routes */}
                 <Route path="/victory/:huntItemId"  />
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
 
-                <Route path="/hunt/:huntId" />
+                <Route path="/hunt/:huntId" element={<Hunts />}/>
                
                 {/* organizer routes */}
                 <Route path="/hunt/create" />
