@@ -32,6 +32,7 @@ import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
+import HuntItem from './pages/HuntItem'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
@@ -83,15 +84,19 @@ function App() {
                 <Route path="/start" element={<Start />} />
                 <Route path="/seattle" element={<Seattle />} />
                 <Route path="/spokane" element={<Spokane />} />
-                <Route path="/seattleexplorehunt" element={<SeattleExploreHunt />} />
-                <Route path="/seattleindulgehunt" element={<SeattleIndulgeHunt />} />
+                
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
 
-                {/* hunt and hunt id routes */}
-                <Route path="/location/victory/:huntItemId"  />
-                <Route path="/location/hints/:huntItemId"  />
+                {/* hunt and hunt id routes Seattle*/}
+                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
+                <Route path="/seattle/indulge" element={<SeattleIndulgeHunt />} />
+
+                {/* hunt item and hunt routes */}
+                <Route path="/victory/:huntItemId"  />
+                <Route path="/hints/:huntItemId" element={<HuntItem />} />
+
                 <Route path="/hunt/:huntId" />
                
                 {/* organizer routes */}

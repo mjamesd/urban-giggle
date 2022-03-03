@@ -11,6 +11,9 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import { useQuery } from '@apollo/client';
+import { GET_HUNT_ITEMS } from '../utils/queries';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -35,11 +38,29 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
 
 
 const SeattleExploreHunt = () => {
+  const navigate = useNavigate()
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
   const gridStyles = useGridStyles();
   const { button: buttonStyles } = useBlogTextInfoContentStyles();
+
+  const { loading, data } = useQuery(GET_HUNT_ITEMS)
+
+    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    const huntItems = data?.huntItems || [];
+
+    console.log(huntItems)
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
+    const goToItem = (huntId) => {
+      console.log(huntId)
+      navigate(`../hints/${huntId}`)
+
+    }
 
   return (
     <>
@@ -61,192 +82,25 @@ const SeattleExploreHunt = () => {
             />
 
           <Grid classes={gridStyles} container spacing={2}>
+          {huntItems &&
+                    huntItems.map((huntItem) => (
             <Grid item xs={12} sm={6} md={4}>
               <Card className={cx(styles.root, shadowStyles.root)}>
                 <CardContent>
                   <TextInfoContent
                     classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
+                    overline={huntItem.city}
+                    heading={huntItem.name}
                     body={
                       <div>
-                        <Button component={Link} to={'/'} className={buttonStyles}>Spokane</Button>
+                        <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button>
                       </div>
                     }
                   />
                 </CardContent>
               </Card>
             </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'HIDDEN TREASURE'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET RESTAURANT'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET RESTAURANT'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET RESTAURANT'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid itemxs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET ATTRACTION'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET GEM'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET LANDMARK'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
+))}
           </Grid>
       </motion.div>
     </>
