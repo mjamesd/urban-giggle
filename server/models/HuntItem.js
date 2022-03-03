@@ -12,7 +12,11 @@ const huntItemSchema = new Schema({
     },
     city: {
         type: String,
-        required: true
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
     },
     hint1: {
         type: String,
@@ -64,7 +68,7 @@ const huntItemSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Badge',
-        }
+        },
     ],
     guestbook: [
         {

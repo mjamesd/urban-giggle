@@ -38,11 +38,14 @@ const resolvers = {
             if (!city)
                 return new MissingArgumentError('Hunt_huntsByCity: no city');
 
-            return Hunt.find({ city }).populate('huntItems').populate('rewards');
+            return Hunt.find({ city }).populate('huntItems').populate('rewards').populate({
+                path: 'huntItems',
+                populate: ['hint2DisplayedTo', 'hint3DisplayedTo', 'solutionDisplayedTo', 'rewards']
+            });
         },
         // HUNTITEM
         huntItems: async () => {
-            return HuntItem.find().populate('rewards');
+            return HuntItem.find().populate('rewards').populate('hint2DisplayedTo').populate('hint3DisplayedTo').populate('solutionDisplayedTo');
         },
         huntItem: async (parent, { huntItemId }) => {
             if (!huntItemId)
@@ -83,16 +86,18 @@ const resolvers = {
         },
     },
 
-    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
-    // MUTATIONS =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
-    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+    // MUTATIONS =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+    // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
 
     Mutation: {
         // BADGE
-        createBadge: async (parent, args) => {
+        createBadge: async (parent, args, context) => {
+            if (!context.user || context.user.userType !== 'admin') return new AuthenticationError('Access denied (createBadge)');
             return await Badge.create(args);
         },
-        updateBadge: async (parent, { badgeId, ...args }) => {
+        updateBadge: async (parent, { badgeId, ...args }, context) => {
+            if (!context.user || context.user.userType !== 'admin') return new AuthenticationError('Access denied (updateBadge)');
             if (Object.entries(args).length === 0)
                 return await Badge.findById(badgeId);
 
@@ -105,27 +110,18 @@ const resolvers = {
                 }
             );
         },
-        removeBadge: async (parent, { badgeId }) => {
+        removeBadge: async (parent, { badgeId }, context) => {
+            if (!context.user || context.user.userType !== 'admin') return new AuthenticationError('Access denied (removeBadge)');
             return await Badge.findByIdAndDelete(badgeId);
         },
         // HUNT
-        createHunt: async (parent, args) => {
-            // console.log(addRewards);
-            // console.log(args);
+        createHunt: async (parent, args, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (createHunt)');
             const hunt = await Hunt.create(args);
-            // if (addRewards) {
-            //     addRewards.forEach(reward => {
-            //         Hunt.rewards.push(reward);
-            //     });
-            //     await Hunt.save((err) => {
-            //         if (err)
-            //             return new Error('Failed to save `Hunt`');
-            //         console.log(hunt);
-            //     });
-            // }
             return await Hunt.findById(hunt._id).populate('huntItems').populate('rewards');
         },
-        updateHunt: async (parent, { huntId, ...args }) => {
+        updateHunt: async (parent, { huntId, ...args }, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (updateHunt)');
             if (Object.entries(args).length === 0) return await Hunt.findById(huntId).populate('huntItems');
             return await Hunt.findByIdAndUpdate(
                 huntId,
@@ -136,16 +132,19 @@ const resolvers = {
                 }
             ).populate('huntItems').populate('rewards');
         },
-        removeHunt: async (parent, { huntId }) => {
+        removeHunt: async (parent, { huntId }, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (removeHunt)');
             return await Hunt.findByIdAndDelete(huntId);
         },
         // HUNTITEM
-        createHuntItem: async (parent, args) => {
+        createHuntItem: async (parent, args, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (createHuntItem)');
             const huntItem = await HuntItem.create(args);
 
             return await HuntItem.findById(huntItem._id).populate('rewards');
         },
-        updateHuntItem: async (parent, { huntItemId, ...args }) => {
+        updateHuntItem: async (parent, { huntItemId, ...args }, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (updateHuntItem)');
             if (Object.entries(args).length === 0)
                 return await HuntItem.findById(huntItemId).populate('rewards');
             
@@ -158,17 +157,19 @@ const resolvers = {
                 }
             ).populate('rewards');
         },
-        removeHuntItem: async (parent, { huntItemId }) => {
+        removeHuntItem: async (parent, { huntItemId }, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (removeHuntItem)');
             return await HuntItem.findByIdAndDelete(huntItemId);
         },
-        removeHuntItemFromHunt: async (parent, { huntId, huntItemId }) => {
+        removeHuntItemFromHunt: async (parent, { huntId, huntItemId }, context) => {
+            if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (removeHuntItemFromHunt)');
             const hunt = await Hunt.findById(huntId);
             hunt.huntItems.id(huntItemId).remove();
             return hunt;
         },
         userAsksForHint: async (parent, { huntItemId, hint2, hint3, solution }, context) => {
+            if (!context.user) return new AuthenticationError('Access denied (userAsksForHint)');
             let toAddToSet = {};
-            const pointsToChange = -1;
             if (hint2) {
                 toAddToSet.hint2DisplayedTo = context.user._id;
             } else if (hint3) {
@@ -177,33 +178,37 @@ const resolvers = {
                 toAddToSet.solutionDisplayedTo = context.user._id;
             }
 
-            const user = await User.findByIdAndUpdate(
-                context.user._id,
-                {
-                    $inc: { points: pointsToChange }
-                },
-            );
+            const user = await User.findById(context.user._id);
+            if (user.points >= 1) {
+                user.points -= 1;
 
-            return await HuntItem.findByIdAndUpdate(
-                huntItemId,
-                {
-                    $addToSet: toAddToSet,
-                },
-                {
-                    new: true,
-                },
-            ).populate('rewards').populate('hint2DisplayedTo').populate('hint3DisplayedTo').populate('solutionDisplayedTo');
+                user.save((err) => {
+                    if (err) return new Error(err);
+                });
+
+                return await HuntItem.findByIdAndUpdate(
+                    huntItemId,
+                    {
+                        $addToSet: toAddToSet,
+                    },
+                    {
+                        new: true,
+                    },
+                ).populate('rewards').populate('hint2DisplayedTo').populate('hint3DisplayedTo').populate('solutionDisplayedTo');
+            } else {
+                return new Error('INSUFFICIENT_POINTS');
+            }
         },
         userSignsHuntItemGuestbook: async (parent, { huntItemId, message }, context) => {
             if (!context.user) return new AuthenticationError('You need to be logged in! (guestbook)');
-            const user = await User.findById(context.user._id);
+
             const months = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const nowStamp = new Date();
             const timestamp = `${months[nowStamp.getMonth()]} ${nowStamp.getDate()}, ${nowStamp.getFullYear()} @ ${(nowStamp.getHours() > 12) ? nowStamp.getHours() - 12 : nowStamp.getHours()}:${(nowStamp.getMinutes() < 10) ? '0' : ''}${nowStamp.getMinutes()}${(nowStamp.getHours() >= 12) ? 'pm' : 'am'}`;
             message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            let newMessage = `<div class="huntItemGuestbookItem">
+            let newMessage = `<div class="huntItemGuestbookItem" key="${context.user._id}">
     <div class="guestbook-message">${message}</div>
-    <div class="guestbook-author">${user.username}</div>
+    <div class="guestbook-author">${context.user.username}</div>
     <div class="guestbook-timestamp">${timestamp}</div>
 </div>`;
             const huntItem = await HuntItem.findById(huntItemId);
@@ -285,11 +290,13 @@ const resolvers = {
             return { token, user };
         },
         // add points to user, `pointsToChange` can be positive or negative
-        changePoints: async (parent, { pointsToChange }, context) => {
+        // this should not be used, the places where points are added or deducted have this coded into them already
+        changePoints: async (parent, { userId, pointsToChange }, context) => {
+            if (!context.user || context.user.userType !== 'admin') return new AuthenticationError('Access denied (changePoints)');
             if (!context.user)
                 return new AuthenticationError("You need to be logged in!");
             return await User.findByIdAndUpdate(
-                context.user._id,
+                userId,
                 {
                     $inc: {
                         points: pointsToChange, // what happens if it goes below zero?
@@ -383,6 +390,8 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+        // Hunts and huntItems that reward user with badge(s) already have this coded into them, so this is not needed for those actions.
+        // Use this for special badge rewards -- mostly for "{x}th found HuntItem" and "{x}th completed Hunt".
         userAddBadge: async (parent, { badgeId }, context) => {
             if (!context.user)
                 return new AuthenticationError("You need to be logged in!");

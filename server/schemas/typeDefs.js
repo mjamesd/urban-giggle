@@ -12,7 +12,7 @@ const typeDefs = gql`
     badges: [Badge]
     favoriteHunts: [Hunt]
     favoriteHuntItems: [HuntItem]
-    isAdmin: Boolean
+    userType: String!
     createdAt: String
   }
 
@@ -38,6 +38,7 @@ const typeDefs = gql`
     _id: ID
     name: String!
     city: String!
+    category: String!
     qrId: String
     hint1: String!
     hint2: String!
@@ -111,6 +112,7 @@ const typeDefs = gql`
     createHuntItem(
       name: String!
       city: String!
+      category: String!
       hint1: String!
       hint2: String!
       hint3: String!
@@ -124,15 +126,16 @@ const typeDefs = gql`
       huntItemId: ID!
       name: String
       city: String
+      category: String
       hint1: String
       hint2: String
-      hint2DisplayToUser: [ID]
+      hint2DisplayedTo: [ID]
       hint3: String
-      hint3DisplayToUser: [ID]
+      hint3DisplayedTo: [ID]
       solutionLocation: String
       solutionDescription: String
       solutionImg: String
-      solutionDisplayToUser: [ID]
+      solutionDisplayedTo: [ID]
       points: Int
       rewards: [ID]
     ): HuntItem!
@@ -143,26 +146,26 @@ const typeDefs = gql`
     userSignsHuntItemGuestbook(huntItemId: ID!, message: String!): HuntItem
 
     createUser(
-        username: String!
-        email: String!
-        password: String!
+      username: String!
+      email: String!
+      password: String!
+      userType: String
     ): Auth
     updateUser(
       password: String!
       username: String
       email: String
+      userType: String
       newPassword: String
     ): Auth
     removeUser(
-      username: String
-      email: String
-      password: String
+      password: String!
     ): Auth
     login(
-        email: String!
-        password: String!
+      email: String!
+      password: String!
     ): Auth
-    changePoints(pointsToChange: Int): Auth
+    changePoints(userId: ID!, pointsToChange: Int): Auth
     userFoundHuntItem(huntItemId: ID!): Auth
     userCompletedHunt(huntId: ID!): Auth
     userAddBadge(badgeId: ID!): Auth
