@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
@@ -46,13 +43,6 @@ const Start = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const textCardContentStyles = useN04TextInfoContentStyles();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
-    const cities = ['Seattle', 'Spokane']
-
-    const [city, setCity] = React.useState(true);
-
-    const handleChange = (event) => {
-        setCity(event.target.value);
-    };
 
     return (
         <>

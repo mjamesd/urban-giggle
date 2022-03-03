@@ -66,7 +66,7 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
       <Card className={classes.card}>
         <CardMedia classes={mediaStyles} image={image} />
         <CardContent className={classes.content}>
-          <Typography className={classes.title} variant={'h2'}>
+          <Typography className={classes.title}>
             {title}
           </Typography>
           <Typography className={classes.subtitle}>{subtitle}</Typography>
