@@ -28,8 +28,8 @@ module.exports = {
     // return the request object so it can be passed to the resolver as `context`
     return req;
   },
-  signToken: function ({ email, name, _id }, setExpiration) {
-    const payload = { email, name, _id };
+  signToken: function ({ email, username, _id, userType }, setExpiration) {
+    const payload = { _id, email, username, userType };
     // can supply optional `setExpiration`, i.e. set to Date.now()/1000 to make it immediately expire
     const thisExpiration = (setExpiration) ? setExpiration : expiration;
     return jwt.sign({ data: payload }, secret, { expiresIn: thisExpiration });

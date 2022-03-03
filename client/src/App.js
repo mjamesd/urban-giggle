@@ -25,8 +25,22 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
-import UpdateProfile from './pages/UpdateProfile';
+import Seattle from './pages/Seattle';
+import SeattleExploreHunt from './pages/SeattleExploreHunt';
+import Custom from './pages/Custom';
+import Spokane from './pages/Spokane';
+import Profile from './pages/Profile';
+import Contact from './pages/Contact';
+import About from './pages/About'
+import HuntItem from './pages/HuntItem'
+import Hunt from './pages/Hunts.js'
 
+//admin pages
+import Admin from './pages/Admin/Dashboard'
+import HuntItemAdmin from './pages/Admin/HuntItem'
+import HuntsAdmin from './pages/Admin/Hunts';
+import HuntsViewAdmin from './pages/Admin/HuntsView';
+import HuntsEditAdmin from './pages/Admin/HuntsEdit';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -59,26 +73,60 @@ function App() {
 
   return (
 
-      <AnimatePresence exitBeforeEnter>
-        <ApolloProvider client={client}>
-          <Router >
-            <div className="app-container">
-              <Header />
-              
+    <AnimatePresence exitBeforeEnter>
+      <ApolloProvider client={client}>
+        <Router >
+          <div id="root" className="app-container">
+            <Header />
+
+            <div className="content-wrapper">
+
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
-                <Route path="/profile" element={<UpdateProfile />} />
+                {/* <Route path="/seattle" element={<Seattle />} /> */}
+                <Route path="/spokane" element={<Spokane />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+
+                {/* hunt item routes */}
+                <Route path="/victory/:huntItemId"  />
+                <Route path="/hints/:huntItemId" element={<HuntItem />} />
+                
+                {/* hunt routes */}
+                {/* explore will be removed and replaced with hunts/id */}
+                <Route path="/:huntCity" element={<Seattle />} />
+                <Route path="/hunt/:huntId" element={<Hunt />}/>
+                {/* <Route path="/seattle/explore" element={<SeattleExploreHunt />} /> */}
+               
+                {/* organizer routes -- this will be if we are able to add the organizer option in time */}
+                <Route path="/hunt/create" element={<Custom/>} />
+
+                {/* admin -- probably a pipe dream :D */}
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/hunts" element={<HuntsAdmin />} />
+                <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
+                <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
+                <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
+                <Route path="/admin/:huntId" />
+                <Route path="/admin/huntitem/update/:huntItemId"  />
+                <Route path="/admin/huntitem/create/:huntItemId" />
+                <Route path="/admin/hunt/update/:huntId" />
+                <Route path="/admin/hunt/create/:huntId" />
+
               </Routes>
-              
-              <Footer />
+
             </div>
-          </Router>
-        </ApolloProvider>
-        
-      </AnimatePresence>
+
+            <Footer />
+          </div>
+        </Router>
+      </ApolloProvider>
+
+    </AnimatePresence>
 
   )
 }

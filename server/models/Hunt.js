@@ -25,6 +25,12 @@ const huntSchema = new Schema ({
             ref: 'HuntItem',
         }
     ],
+    rewards: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Badge',
+        }
+    ],
 });
 
 const Hunt = model('Hunt', huntSchema);

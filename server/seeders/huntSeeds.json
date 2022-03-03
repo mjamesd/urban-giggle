@@ -4,5 +4,11 @@
         "city": "Seattle",
         "description": "Discover all the best vegan restaurants in Seattle (according to Mark).",
         "points": 50
+      },
+      {
+        "name": "Seattle Tourism Hunt",
+        "city": "Seattle",
+        "description": "The most incredible & strange sights that Seattle has to offer.",
+        "points": 5
       }
 ]

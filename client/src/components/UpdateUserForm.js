@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
@@ -25,23 +25,20 @@ import {
 
 init("NZ0ltP_Q1eOniKe9w");
 
-const UpdateUserForm = ({user}) => {
+const UpdateUserForm = ({ user }) => {
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
+
 
     // form ref for sending any emails
     const form = useRef();
     const { _id } = useParams();
-
-   
+    const navigate = useNavigate()
 
     // username states
-    const [username, setUsername] = useState('')
-    const [newUsername, setNewUsername] = useState('')
+    const [username, setUsername] = useState(`${user.username}`)
 
-    console.log(username, "USERNAME STATE!!!!")
     // email states
-    const [email, setEmail] = useState(user.email)
-    const [newEmail, setNewEmail] = useState('')
+    const [email, setEmail] = useState(`${user.email}`)
 
     // password states
     const [password, setPassword] = useState('')
@@ -53,7 +50,7 @@ const UpdateUserForm = ({user}) => {
 
     // mutation for update user
     const [updateUser, { error, data }] = useMutation(UPDATE_USER);
-   
+
     // validation messages
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('')
@@ -77,16 +74,12 @@ const UpdateUserForm = ({user}) => {
     };
 
     const handleClickShowPassword = () => {
-        
-            setShowPassword(!showPassword);
-        
+        setShowPassword(!showPassword);
     };
 
     const handleClickShowPasswordConfirm = () => {
-       
-           setShowConfirmPassword(!showConfirmPassword);
-        
-   };
+        setShowConfirmPassword(!showConfirmPassword);
+    };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -94,7 +87,6 @@ const UpdateUserForm = ({user}) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(event)
         if (!username) {
             setErrorMessage('Please enter a username');
             return;
@@ -106,107 +98,112 @@ const UpdateUserForm = ({user}) => {
         }
 
         if (!password) {
-            setErrorMessage('please enter a valid password');
-            return;
+            setErrorMessage('Your current password is required to make updates')
         }
 
-        if (username && email && password) {
-            sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
-            setSuccessMessage(
-                'Welcome!! Your are now signed up!'
-            )
+        if (username && email && password && !newPassword) {
+            try {
+                const { data } = await updateUser({
+                    variables: { username: username, email: email, password: password },
+                });
+                setShowPassword(false)
+                setErrorMessage('');
+                await navigate("/dashboard");
+            } catch (e) {
+                setErrorMessage("I'm sorry, something has gone wrong. Please try again")
+                console.error(e);
+            }
+            return
         }
 
-
-
-        try {
-            const { data } = await updateUser({
-                variables: { username: username, email: email, password: password },
-            });
-            Auth.getProfile();
-        } catch (e) {
-            console.error(e);
+        if (password && newPassword && email && username) {
+            try {
+                const { data } = await updateUser({
+                    variables: { username: username, email: email, password: password, newPassword: newPassword },
+                });
+                setShowPassword(false)
+                setErrorMessage('');
+                await navigate("/dashboard");
+            } catch (e) {
+                setErrorMessage("I'm sorry, something has gone wrong. Please try again")
+                console.error(e);
+            }
+            return
         }
 
-
-        // clear form values
-        setUsername(`${user.username}`)
-        setEmail('')
-        setPassword('')
-        setShowPassword(false)
-        setErrorMessage('');
-    };
+    }
 
 
     return (
         <div>
-        {Auth.loggedIn() ? (
-        <form ref={form} onSubmit={handleFormSubmit}>
-                <FormControl variant="outlined">
-                    Update Your Username
-                    <TextField variant="outlined" name="username" type="text" value={user.username} onChange={handleChange} /><br /><br />
-                    Update Your Email
-                    <TextField variant="outlined" name="email" type="email" value={user.email} onChange={handleChange} /><br /><br />
-                    Update Your Password
+            {Auth.loggedIn() ? (
+                <form ref={form} onSubmit={handleFormSubmit}>
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-                        <OutlinedInput
-                            name="password"
-                            variant="outlined"
-                            id="password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={handleChange}
-                            endAdornment={<InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>}
-                            label="New Password" />
-                    </FormControl><br />
-                    <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirm New Password</InputLabel>
-                        <OutlinedInput
-                            name="confirmpassword"
-                            variant="outlined"
-                            id="password"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            value={newPassword}
-                            onChange={handleChange}
-                            endAdornment={<InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPasswordConfirm}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>}
-                            label="Confirm New Password" />
-                    </FormControl><br />
-                    <Button className={buttonStyles} type="submit" value="send">Submit Changes</Button></FormControl><br />
-                {errorMessage && (
+                        Username
+                        <TextField variant="outlined" name="username" type="text" value={username} onChange={handleChange} /><br />
+                        Email
+                        <TextField variant="outlined" name="email" type="email" value={email} onChange={handleChange} /><br />
+                        Current Password <br/>(Required to Submit Changes)
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Current Password</InputLabel>
+                            <OutlinedInput
+                                name="password"
+                                variant="outlined"
+                                id="password"
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={handleChange}
+                                endAdornment={<InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>}
+                                label="New Password" />
+                        </FormControl><br />
+                        Update Your Password
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+                            <OutlinedInput
+                                name="confirmpassword"
+                                variant="outlined"
+                                id="password"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                value={newPassword}
+                                onChange={handleChange}
+                                endAdornment={<InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPasswordConfirm}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>}
+                                label="Confirm New Password" />
+                        </FormControl><br />
+                        <Button className={buttonStyles} type="submit" value="send">Submit Changes</Button></FormControl><br />
+                    {errorMessage && (
 
-                    <p>{errorMessage}</p>
+                        <p>{errorMessage}</p>
 
-                )}
-                {successMessage && (
+                    )}
+                    {successMessage && (
 
-                    <p>{successMessage}</p>
+                        <p>{successMessage}</p>
 
-                )}</form> ) : (
-                    <p>
-                      You need to be logged in to update your profile. Please{' '}
-                      <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-                    </p>
-                  )}
-                  </div>
+                    )}</form>) : (
+                <p>
+                    You need to be logged in to update your profile. Please{' '}
+                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+                </p>
+            )}
+        </div>
     )
 }
 

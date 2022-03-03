@@ -12,7 +12,11 @@ const huntItemSchema = new Schema({
     },
     city: {
         type: String,
-        required: true
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
     },
     hint1: {
         type: String,
@@ -22,10 +26,22 @@ const huntItemSchema = new Schema({
         type: String,
         required: true,
     },
+    hint2DisplayedTo: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     hint3: {
         type: String,
         required: true,
     },
+    hint3DisplayedTo: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     solutionLocation: {
         type: String, // description and/or lat&long
         required: true,
@@ -37,11 +53,28 @@ const huntItemSchema = new Schema({
     solutionImg: {
         type: String,
     },
+    solutionDisplayedTo: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     points: {
         type: Number,
         default: 1,
         min: [1, "Must be a positive number"],
     },
+    rewards: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Badge',
+        },
+    ],
+    guestbook: [
+        {
+            type: String,
+        },
+    ],
 });
 
 huntItemSchema.pre('save', async function (next) {
