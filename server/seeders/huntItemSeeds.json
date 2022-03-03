@@ -80,5 +80,42 @@
         "solutionLocation":"On the corner of Broadway and Pine",
         "solutionDescription":"The Jimi Hendrix Statue",
         "city":"Seattle"
+    },
+    {
+        "name":"Kerry Park",
+        "hint1":"Royal view of Seattle",
+        "hint2":"Mountains and Monuments",
+        "hint3":"You might see this view on a postcard",
+        "solutionLocation":"Kerry Park on the top of Queen Anne",
+        "solutionDescription":"Kerry Park",
+        "city":"Seattle"
+    },
+    {
+        "name":"Bruce Lee's Gravesite",
+        "hint1":"The first Asian-American actor to ever have a lead role in a Hollywood film",
+        "hint2":"Be like water",
+        "hint3":"Credited by many as the most influential martial artist of all time",
+        "solutionLocation":"Bruce Lee's Gravesite, Lake View Cemetery",
+        "solutionDescription":"Bruce Lee's Gravesite",
+        "city":"Seattle"
+    },
+    {
+        "name":"Amazon Spheres",
+        "hint1":"Part of the headquarters of a major tech company",
+        "hint2":"Houses over 40,000 plants",
+        "hint3":"Three glass domes covered in pentagonal hexecontahedron panels",
+        "solutionLocation":"Amazon Spheres, Lenora Street",
+        "solutionDescription":"Amazon Spheres",
+        "city":"Seattle"
+    },
+    {
+        "name":"Volunteer Park Conservatory",
+        "qrId":"83838888",
+        "hint1":"Modeled on London's Crystal Palace",
+        "hint2":"Made up of 3,426 glass panes fit into a wood and iron framework",
+        "hint3":"Showcasing 5 distinct plant families, this greenhouse sits on the lush lawns of a park on a hill",
+        "solutionLocation":"Volunteer Park Conservatory, Volunteer Park, Capitol Hill",
+        "solutionDescription":"Volunteer Park Conservatory",
+        "city":"Seattle"
     }
 ]

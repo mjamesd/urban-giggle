@@ -79,6 +79,7 @@ const typeDefs = gql`
       description: String!
       points: Int
     ): Badge!
+
     updateBadge(
       badgeId: ID!
       name: String
@@ -86,6 +87,7 @@ const typeDefs = gql`
       description: String
       points: Int
     ): Badge!
+
     removeBadge(badgeId: ID!): Badge
 
     createHunt(
@@ -96,6 +98,7 @@ const typeDefs = gql`
       huntItems: [ID]
       rewards: [ID]
     ): Hunt!
+
     updateHunt(
       huntId: ID!
       name: String
@@ -105,39 +108,47 @@ const typeDefs = gql`
       huntItems: [ID]
       rewards: [ID]
     ): Hunt!
+
     removeHunt(huntId: ID!): Hunt
 
     createHuntItem(
       name: String!
+      qrId: String
       city: String!
       hint1: String!
       hint2: String!
       hint3: String!
+      hint2DisplayedTo: [ID]
+      hint3DisplayedTo: [ID]
       solutionLocation: String!
       solutionDescription: String!
       solutionImg: String
+      solutionDisplayedTo: [ID]
       points: Int!
       rewards: [ID]
     ): HuntItem!
+
     updateHuntItem(
       huntItemId: ID!
       name: String
       city: String
       hint1: String
       hint2: String
-      hint2DisplayToUser: [ID]
+      hint2DisplayedTo: [ID]
       hint3: String
-      hint3DisplayToUser: [ID]
+      hint3DisplayedTo: [ID]
       solutionLocation: String
       solutionDescription: String
       solutionImg: String
-      solutionDisplayToUser: [ID]
+      solutionDisplayedTo: [ID]
       points: Int
       rewards: [ID]
     ): HuntItem!
+
     removeHuntItem(huntItemId: ID!): HuntItem
 
     removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
+    
     userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
 
     createUser(
@@ -145,21 +156,25 @@ const typeDefs = gql`
         email: String!
         password: String!
     ): Auth
+
     updateUser(
       password: String!
       username: String
       email: String
       newPassword: String
     ): Auth
+
     removeUser(
       username: String
       email: String
       password: String
     ): Auth
+
     login(
         email: String!
         password: String!
     ): Auth
+
     changePoints(pointsToChange: Int): Auth
     userFoundHuntItem(huntItemId: ID!): Auth
     userCompletedHunt(huntId: ID!): Auth
