@@ -109,14 +109,16 @@ export const Seattle = React.memo(function SolidGameCard() {
                         /></Link>
                 </Grid>
                 <Grid item>
+                <Link style={{ textDecoration: 'none' }} to='./seattleindulgehunt'>
                     <CustomCard
                         classes={styles2}
                         title={'INDULGE'}
                         subtitle={'If you are a foodie this experience is for you. INDULGE yourself with hunting down the best bars and restaurants in the city'}
                         image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'}
-                    />
+                    /></Link>
                 </Grid>
                 <Grid item>
+                <Link style={{ textDecoration: 'none' }} to='./seattlecustomhunt'>
                     <CustomCard
                         classes={styles3}
                         title={'CREATE'}
@@ -124,7 +126,7 @@ export const Seattle = React.memo(function SolidGameCard() {
                         image={
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZJUOurbvAWIWA2CvDEknsve876BJBXrd-Q&usqp=CAU'
                         }
-                    />
+                    /></Link>
                 </Grid>
             </Grid>
         </motion.div>
