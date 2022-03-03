@@ -98,7 +98,7 @@ export const Seattle = React.memo(function SolidGameCard() {
             </Box>
             <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
                 <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='./seattleexplorehunt'>
+                    <Link style={{ textDecoration: 'none' }} to='./explore'>
                         <CustomCard
                             classes={styles}
                             title={'EXPLORE'}
