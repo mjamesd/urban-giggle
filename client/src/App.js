@@ -40,15 +40,19 @@ import Hunt from './pages/Hunts.js'
 //admin pages
 import Admin from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
+import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
 import HuntsEditAdmin from './pages/Admin/HuntsEdit';
 import HuntItemsIndexAdmin from './pages/Admin/HuntItemsIndex';
+import HuntItemsAddAdmin from './pages/Admin/HuntItemsAdd';
 import HuntItemsViewAdmin from './pages/Admin/HuntItemsView';
 import HuntItemsEditAdmin from './pages/Admin/HuntItemsEdit';
 import BadgesIndexAdmin from './pages/Admin/BadgesIndex';
+import BadgesAddAdmin from './pages/Admin/BadgesAdd';
 import BadgesViewAdmin from './pages/Admin/BadgesView';
 import BadgesEditAdmin from './pages/Admin/BadgesEdit';
 import UsersIndexAdmin from './pages/Admin/UsersIndex';
+import UsersAddAdmin from './pages/Admin/UsersAdd';
 import UsersViewAdmin from './pages/Admin/UsersView';
 import UsersEditAdmin from './pages/Admin/UsersEdit';
 
@@ -118,15 +122,19 @@ function App() {
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
+                <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
                 <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
                 <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
+                <Route path="/admin/huntItems/add" element={<HuntItemsAddAdmin />} />
                 <Route path="/admin/huntItems/view/:huntItemId" element={<HuntItemsViewAdmin />} />
                 <Route path="/admin/huntItems/edit/:huntItemId" element={<HuntItemsEditAdmin />} />
                 <Route path="/admin/badges" element={<BadgesIndexAdmin />} />
+                <Route path="/admin/badges/add" element={<BadgesAddAdmin />} />
                 <Route path="/admin/badges/view/:badgeId" element={<BadgesViewAdmin />} />
                 <Route path="/admin/badges/edit/:badgeId" element={<BadgesEditAdmin />} />
                 <Route path="/admin/users" element={<UsersIndexAdmin />} />
+                <Route path="/admin/users/add" element={<UsersAddAdmin />} />
                 <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
                 <Route path="/admin/users/edit/:iserId" element={<UsersEditAdmin />} />
 

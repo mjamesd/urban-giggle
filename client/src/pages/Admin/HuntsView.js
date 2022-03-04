@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { GET_HUNT } from '../../utils/queries';
@@ -23,7 +24,7 @@ const HuntsView = () => {
     console.log(hunt);
 
     return (
-        <div>
+        <div style={{ marginLeft: '2em' }}>
             <h1>{hunt.name}</h1>
             <p>City: {hunt.city}</p>
             <p>{hunt.description}</p>
@@ -43,11 +44,11 @@ const HuntsView = () => {
                             <p>{huntItem.hint3}</p>
                             <p>{huntItem.solutionLocation}</p>
                             <p>{huntItem.solutionDescription}</p>
-                            <p>{huntItem.solutionImg}</p>
+                            <p><img src={huntItem.solutionImg} alt="solution" style={{width: '100px', border: '1px solid black'}} /></p>
                             <p>Guestbook:</p>
                                 {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
                                 {huntItem.guestbook && huntItem.guestbook.map(message => (
-                                    <div>{message}</div>
+                                    <div>{ReactHtmlParser(message)}</div>
                                 ))}
                         </div>
                     </li>
