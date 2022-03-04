@@ -212,6 +212,7 @@ query huntItem($huntItemId: ID!) {
     name
     qrId 
     city
+    category
     hint1
     hint2
     hint2DisplayedTo{
@@ -234,7 +235,15 @@ query huntItem($huntItemId: ID!) {
     }
     solutionImg
     points
-   
+    guestbook
+    rewards {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+    }
   }
 }
 `
@@ -246,6 +255,7 @@ query huntItem{
     name
     qrId 
     city
+    category
     hint1
     hint2
     hint2DisplayedTo{
@@ -267,7 +277,16 @@ query huntItem{
       username
     }
     solutionImg
+    rewards {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+    }
     points
+    guestbook
   }
 }
 
