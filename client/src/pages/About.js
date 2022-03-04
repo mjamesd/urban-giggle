@@ -44,12 +44,12 @@ const About = () => {
                             body={
                                 <>
                                 <p>Just some cool devs doing cool things! 
-                                    <br/> Graduates of the University of Washington Full-Stack Coding program, to be changers of the WORLD!!</p>
-                                <h2><a href="https://github.com/DanPGolden">Dan Golden</a></h2>
-                                <h2><a href="https://github.com/JustinM099">Justin Meredith</a></h2>
-                                <h2><a href='https://github.com/lyssg2'>Lyss Garcia</a></h2>
-                                <h2><a href='https://github.com/mjamesd'>Mark Drummond</a></h2>
-                                <h2><a href="https://github.com/m-sherrill">Morgan Sherrill</a></h2>
+                                    <br/> Graduates of the University of Washington Full-Stack Coding program, to-be changers of the WORLD!!</p>
+                                <h2><a style={{color: '#fd5238' }} href="https://github.com/DanPGolden">Dan Golden</a></h2>
+                                <h2><a style={{color: '#fd5238' }} href="https://github.com/JustinM099">Justin Meredith</a></h2>
+                                <h2><a style={{color: '#fd5238' }} href='https://github.com/lyssg2'>Lyss Garcia</a></h2>
+                                <h2><a style={{color: '#fd5238' }} href='https://github.com/mjamesd'>Mark Drummond</a></h2>
+                                <h2><a style={{color: '#fd5238' }} href="https://github.com/m-sherrill">Morgan Sherrill</a></h2>
                                 </>
                             }
                         />
