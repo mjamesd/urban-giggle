@@ -15,7 +15,9 @@ import { setContext } from '@apollo/client/link/context';
 
 
 // Styling & Animation
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import { 
+    // motion, AnimateSharedLayout, 
+    AnimatePresence } from "framer-motion";
 import './index.css';
 
 // Components
@@ -26,7 +28,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
 import Seattle from './pages/Seattle';
-import SeattleExploreHunt from './pages/SeattleExploreHunt';
+// import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
@@ -37,10 +39,18 @@ import Hunt from './pages/Hunts.js'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
-import HuntItemAdmin from './pages/Admin/HuntItem'
-import HuntsAdmin from './pages/Admin/Hunts';
+import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
 import HuntsEditAdmin from './pages/Admin/HuntsEdit';
+import HuntItemsIndexAdmin from './pages/Admin/HuntItemsIndex';
+import HuntItemsViewAdmin from './pages/Admin/HuntItemsView';
+import HuntItemsEditAdmin from './pages/Admin/HuntItemsEdit';
+import BadgesIndexAdmin from './pages/Admin/BadgesIndex';
+import BadgesViewAdmin from './pages/Admin/BadgesView';
+import BadgesEditAdmin from './pages/Admin/BadgesEdit';
+import UsersIndexAdmin from './pages/Admin/UsersIndex';
+import UsersViewAdmin from './pages/Admin/UsersView';
+import UsersEditAdmin from './pages/Admin/UsersEdit';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -107,15 +117,25 @@ function App() {
 
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Admin />} />
-                <Route path="/admin/hunts" element={<HuntsAdmin />} />
+                <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
                 <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
-                <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
+                <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
+                <Route path="/admin/huntItems/view/:huntItemId" element={<HuntItemsViewAdmin />} />
+                <Route path="/admin/huntItems/edit/:huntItemId" element={<HuntItemsEditAdmin />} />
+                <Route path="/admin/badges" element={<BadgesIndexAdmin />} />
+                <Route path="/admin/badges/view/:badgeId" element={<BadgesViewAdmin />} />
+                <Route path="/admin/badges/edit/:badgeId" element={<BadgesEditAdmin />} />
+                <Route path="/admin/users" element={<UsersIndexAdmin />} />
+                <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
+                <Route path="/admin/users/edit/:iserId" element={<UsersEditAdmin />} />
+
+                {/* <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
                 <Route path="/admin/:huntId" />
                 <Route path="/admin/huntitem/update/:huntItemId"  />
                 <Route path="/admin/huntitem/create/:huntItemId" />
                 <Route path="/admin/hunt/update/:huntId" />
-                <Route path="/admin/hunt/create/:huntId" />
+                <Route path="/admin/hunt/create/:huntId" /> */}
 
               </Routes>
 
