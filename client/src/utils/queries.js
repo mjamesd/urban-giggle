@@ -367,4 +367,47 @@ query badge($badgeId: ID!){
 }
 `
 
+export const GET_HUNT_ITEM_BY_QR_ID = gql`
+query huntItemByQrCode($qrId: String!) {
+  huntItemByQrCode(qrId: $qrId) {
+    _id
+    name
+    qrId 
+    city
+    hint1
+    hint2
+    hint2DisplayedTo{
+      __typename
+      _id
+      username
+    }
+    hint3
+    hint3DisplayedTo{
+      __typename
+      _id
+      username
+    }
+    solutionLocation
+    solutionDescription
+    solutionDisplayedTo{
+      __typename
+      _id
+      username
+    }
+    solutionImg
+    points
+    rewards{
+      _id
+      name
+      icon
+      description
+      points
+
+    }
+   
+  }
+}
+
+`
+
 

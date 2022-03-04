@@ -34,6 +34,10 @@ import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
+
+import Hunt from './pages/Hunts.js'
+import Victory from './pages/Victory.js'
+
 import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 
@@ -105,9 +109,12 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
+                {/* <Route path="/victory" element={<Victory />} /> */}
 
                 {/* hunt item routes */}
-                <Route path="/victory/:qrID"  />
+
+                <Route path="/victory/:qrId" element={<Victory />} />
+
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
