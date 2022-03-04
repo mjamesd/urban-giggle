@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import {
     FormControl,
     FormGroup,
-    // FormControlLabel,
-    // Checkbox,
-    // InputAdornment,
-    // InputLabel,
-    // OutlinedInput,
-    // IconButton,
     TextField,
 } from '@mui/material/';
 // imports for select menus
@@ -49,7 +43,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntItemAdd = React.memo(() => {
+const HuntItemsAdd = React.memo(() => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -101,7 +95,7 @@ const HuntItemAdd = React.memo(() => {
         return badgeName;
     }
 
-    // get specified Hunt
+    // get specified HuntItem
     // need to specify unique name for loading, data, and error
     const { loading: loadingBadges, data: badgesData } = useQuery(GET_BADGES);
 
@@ -169,4 +163,4 @@ const HuntItemAdd = React.memo(() => {
   )
 });
 
-export default HuntItemAdd;
+export default HuntItemsAdd;

@@ -30,12 +30,13 @@ import { gql } from '@apollo/client';
 
 //tested, works
 export const CREATE_USER = gql`
-  mutation createUser($username: String!, $email: String!, $password: String!) {
-    createUser(username: $username, email: $email, password: $password) {
+  mutation createUser($username: String!, $email: String!, $password: String!, $userType: String) {
+    createUser(username: $username, email: $email, password: $password, userType: $userType) {
       token
       user {
         _id
         username
+        userType
         email
         password
       }
@@ -87,14 +88,14 @@ export const LOGIN_USER = gql`
 
 
 export const REMOVE_USER = gql`
-  mutation removeUser($username: String, $email: String, $password: String) {
-    removeUser(username: $username) {
+  mutation removeUser($password: String) {
+    removeUser(password: $password) {
       token
-      user{
-      _id
-      username
-      email
-      password
+      user {
+        _id
+        username
+        email
+        password
       }
     }
   }
@@ -420,15 +421,62 @@ export const USER_COMPLETED_HUNT = gql`
 // userAddBadge(badgeId: ID!): Auth
 //need auth to test
 export const CREATE_BADGE = gql`
-  mutation createBadge($badgeId: ID!){
-    createBadge(badgeId: $badgeId){
-      token
-      user{
-        badges
-      }
+mutation createNewBadge(
+    $name: String!
+    $icon: String!
+    $description: String!
+    $points: Int
+    ) {
+    createBadge(
+        name: $name
+        icon: $icon
+        description: $description
+        points: $points
+    ) {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
     }
-  }
-`
+}`
+
+export const UPDATE_BADGE = gql`
+mutation updateThisBadge(
+    $badgeId: ID!
+    $name: String
+    $icon: String
+    $description: String
+    $points: Int
+) {
+    updateBadge(
+        badgeId: $badgeId
+        name: $name
+        icon: $icon
+        description: $description
+        points: $points
+    ) {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+    }
+}`
+
+export const REMOVE_BADGE = gql`
+mutation deleteThisBadge($badgeId: ID!) {
+    removeBadge(badgeId: $badgeId) {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+    }
+}`
 
 // addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
 

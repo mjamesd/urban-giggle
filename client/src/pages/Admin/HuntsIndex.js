@@ -10,8 +10,6 @@ const Hunts = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNTS);
     const [removeHunt, { rHerror }] = useMutation(REMOVE_HUNT);
-
-    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const hunts = data?.hunts || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
