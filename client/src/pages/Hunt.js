@@ -14,6 +14,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useQuery } from '@apollo/client';
 import { GET_HUNTS } from '../utils/queries';
 import { useNavigate } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 
 /// Need to work on populating the hunt from the specific hunt clicked on -- this will be a use params
