@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useNavigate, Link } from "react-router-dom"
+import { 
+    // useNavigate, 
+    Link } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -28,7 +30,7 @@ const styles = {
   },
   dropdownLinks: {
     textDecoration: 'none',
-    color: '#fd5238',
+    // color: '#fd5238',
     padding: 5,
     flexWrap: 'wrap',
     color: '#0b3954'
@@ -39,7 +41,7 @@ const styles = {
 }
 
 const Header = () => {
-  let navigate = useNavigate();
+//   let navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,9 +53,9 @@ const Header = () => {
     Auth.logout();
   };
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+//   const handleOpenNavMenu = (event) => {
+//     setAnchorElNav(event.currentTarget);
+//   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
