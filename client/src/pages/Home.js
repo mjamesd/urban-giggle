@@ -21,7 +21,6 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
     maxWidth: '80%',
     margin: 'auto',
-    borderRadius: 0,
     position: 'relative',
     borderRadius: spacing(2), // 16px
     transition: '0.3s',

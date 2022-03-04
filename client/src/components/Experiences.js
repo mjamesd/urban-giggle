@@ -22,6 +22,7 @@ const useStyles = makeStyles(() => ({
   actionArea: {
     borderRadius: 16,
     transition: '0.2s',
+    disableRipple: 'true',
     '&:hover': {
       transform: 'scale(1.01)',
     },
@@ -30,7 +31,9 @@ const useStyles = makeStyles(() => ({
     marginTop: 10,
     width: 256,
     borderRadius: 16,
+    cursor: 'default',
     boxShadow: 'none',
+    disableRipple: 'true',
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
         .rotate(-12)
@@ -83,7 +86,7 @@ export const Experiences = React.memo(function SolidGameCard() {
   const styles3 = useStyles({ color: '#c81d25' });
 
   const { scrollYProgress } = useViewportScroll()
-  const scale = useTransform(scrollYProgress, [0, .3], [0.2, 1]);
+  const scale = useTransform(scrollYProgress, [0, .5], [0.2, 1]);
 
   return (
     <motion.div
