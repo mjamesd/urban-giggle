@@ -35,14 +35,13 @@ import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
 
-import Hunt from './pages/Hunts.js'
 import Victory from './pages/Victory.js'
 
 import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 
 //admin pages
-import Admin from './pages/Admin/Dashboard'
+import Dashboard from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
 import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
@@ -127,7 +126,7 @@ function App() {
                 <Route path="/hunt/create" element={<Custom/>} />
 
                 {/* admin -- probably a pipe dream :D */}
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin" element={<Dashboard />} />
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
@@ -143,7 +142,8 @@ function App() {
                 <Route path="/admin/users" element={<UsersIndexAdmin />} />
                 <Route path="/admin/users/add" element={<UsersAddAdmin />} />
                 <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
-                <Route path="/admin/users/edit/:iserId" element={<UsersEditAdmin />} />
+                {/* admins cannot edit user accounts! */}
+                {/* <Route path="/admin/users/edit/:userId" element={<UsersEditAdmin />} /> */}
 
                 {/* <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
                 <Route path="/admin/:huntId" />

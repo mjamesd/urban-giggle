@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ReactHtmlParser from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
@@ -25,6 +25,8 @@ const HuntsView = () => {
 
     return (
         <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
+            <Button onClick={()=> navigate('../admin/hunts')} className={buttonStyles}>Hunts</Button>
             <h1>{hunt.name}</h1>
             <p>City: {hunt.city}</p>
             <p>{hunt.description}</p>

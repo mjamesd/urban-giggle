@@ -6,7 +6,7 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { GET_HUNT_ITEMS } from '../../utils/queries';
 import { REMOVE_HUNT_ITEM } from '../../utils/mutations';
 
-const Hunts = () => {
+const HuntItemsIndex = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNT_ITEMS);
     const [removeHuntItem, { error: rHIerror }] = useMutation(REMOVE_HUNT_ITEM);
@@ -76,4 +76,4 @@ const Hunts = () => {
 
 }
 
-export default Hunts;
+export default HuntItemsIndex;

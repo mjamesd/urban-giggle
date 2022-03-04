@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ReactHtmlParser from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';

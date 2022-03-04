@@ -670,7 +670,7 @@ query getAllUsers {
         email
         password
         points
-        foundItems {
+        foundHuntItems {
             __typename
             _id
             name

@@ -1,77 +1,93 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import { GET_HUNTS } from '../../utils/queries';
-import { REMOVE_HUNT } from '../../utils/mutations';
+import { GET_USERS } from '../../utils/queries';
+import { REMOVE_USER } from '../../utils/mutations';
 
-const Hunts = () => {
+const UsersIndex = () => {
     const navigate = useNavigate();
-    const { loading, data } = useQuery(GET_HUNTS);
-    const [removeHunt, { rHerror }] = useMutation(REMOVE_HUNT);
+    const { loading, data } = useQuery(GET_USERS);
+    const [removeUser, { error: rUerror }] = useMutation(REMOVE_USER);
 
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
-    const hunts = data?.hunts || [];
+    const users = data?.users || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    if (loading) {
+    if (loading || users.length === 0) {
         return <h2>LOADING.....</h2>
     }
 
-    const deleteHunt = async (huntId, huntName) =>{
-        // eslint-disable-next-line no-restricted-globals
-        let confirmDelete = confirm(`Are you sure you want to delete the Scavenger Hunt "${huntName}"?`);
-        if (confirmDelete) {
-            try {
-                const { data } = await removeHunt({
-                    variables: { huntId: huntId },
-                });
-                alert(`Scavenger Hunt named "${data.removeHunt.name}" has been deleted.`);
-            } catch (err) {
-                console.log(err, rHerror);
-            }
-            window.location.reload();
+    /*
+
+        __typename
+        _id
+        userType
+        username
+        email
+        password
+        points
+        foundHuntItems {
+            __typename
+            _id
+            name
         }
-    }
+        completedHunts {
+            __typename
+            _id
+            name
+        }
+        badges {
+            __typename
+            _id
+            name
+            icon
+            description
+            points
+        }
+        createdAt
+    */
 
     return (
-        <table >
-            <thead>
-                <tr key="head">
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>City</th>
-                    <th>Description</th>
-                    <th>Points</th>
-                    <th>Hunt Items</th>
-                    <th>Rewards</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {hunts.map(hunt => (
-                <tr key={hunt._id}>
-                    <td>{hunt._id}</td>
-                    <td>{hunt.name}</td>
-                    <td>{hunt.city}</td>
-                    <td>{hunt.description}</td>
-                    <td>{hunt.points}</td>
-                    <td>{hunt.huntItems.length}</td>
-                    <td>{hunt.rewards.length}</td>
-                    <td>
-                        <Button onClick={() => navigate(`./view/${hunt._id}`)} className={buttonStyles}>View</Button>
-                        <Button onClick={() => navigate(`./edit/${hunt._id}`)} className={buttonStyles}>Edit</Button>
-                        <Button onClick={() => deleteHunt(hunt._id, hunt.name)} className={buttonStyles}>Delete</Button>
-                    </td>
-                </tr>
-            )
-        )}
-            </tbody>
-        </table>
+        <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
+            <h1>Hunt Items</h1>
+            <Button onClick={() => navigate('./add')} className={buttonStyles}>Add User</Button>
+            <table>
+                <thead>
+                    <tr key="head">
+                        <th>Username</th>
+                        <th>User Type</th>
+                        <th>Email</th>
+                        <th>Points</th>
+                        <th># of Completed Hunts</th>
+                        <th># of Found Hunt Items</th>
+                        <th># of Badges</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(user => (
+                        <tr key={user._id}>
+                            <td>{user.username}</td>
+                            <td>{user.userType}</td>
+                            <td>{user.email}</td>
+                            <td>{user.points}</td>
+                            <td>{user.completedHunts.length}</td>
+                            <td>{user.foundHuntItems.length}</td>
+                            <td>{user.badges.length}</td>
+                            <td>
+                                <Button onClick={() => navigate(`./view/${user._id}`)} className={buttonStyles}>View</Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 
 }
 
-export default Hunts;
+export default UsersIndex;

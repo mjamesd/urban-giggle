@@ -6,12 +6,6 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import {
     FormControl,
     FormGroup,
-    // FormControlLabel,
-    // Checkbox,
-    // InputAdornment,
-    // InputLabel,
-    // OutlinedInput,
-    // IconButton,
     TextField,
 } from '@mui/material/';
 // imports for select menus
@@ -95,16 +89,13 @@ const HuntItemsEdit = React.memo(() => {
         return badgeName;
     }
 
-    // get specified Hunt
+    // get specified HuntItem
     // need to specify unique name for loading, data, and error
     const { huntItemId } = useParams();
     const { loading: loadingHuntItem, data: huntItemData } = useQuery(GET_HUNT_ITEM, {
         variables: { huntItemId: huntItemId }
     });
-
     const { loading: loadingBadges, data: badgesData } = useQuery(GET_BADGES);
-
-
 
     // get response or nothing
     const huntItem = huntItemData?.huntItem || {};
@@ -114,17 +105,8 @@ const HuntItemsEdit = React.memo(() => {
     if (loadingHuntItem || loadingBadges) {
         return <h2>LOADING.....</h2>; // will reload/rerender here until data is loaded...
     } else if (!loadingHuntItem && !loadingBadges && !formState.name) {
-        // by now we have the specified Hunt and can update the formState with its values
+        // by now we have the specified HuntItem and can update the formState with its values
         setFormState({...huntItem, huntItemId: huntItem._id, rewards: huntItem.rewards.map(reward => reward._id)});
-        // setFormState({
-        //     huntItemId: huntItem._id,
-        //     name: huntItem.name,
-        //     city: huntItem.city,
-
-        //     description: huntItem.description,
-        //     points: huntItem.points,
-        //     rewards: huntItem.rewards.map(reward => reward._id),
-        // });
     }
 
     console.log('THIS HUNT ITEM:', huntItem);
