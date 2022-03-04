@@ -85,6 +85,7 @@
     },
     {
         "name": "Clock Tower",
+        "category": "explore",
         "city": "Spokane",
         "hint1": "The Great Northern Railroad depot was finished in 1902",
         "hint2": "An iconic landmark for the 1974 World's Fair",
@@ -94,6 +95,7 @@
     },
     {
         "name": "Fox Theater",
+        "category": "explore",
         "city": "Spokane",
         "hint1": "This iconic Art Deco building was opened in 1931.",
         "hint2": "After a recent renovation, the building is the home of the Spokane Symphony.",
@@ -103,6 +105,7 @@
     },
     {
         "name": "St Johns Cathedral",
+        "category": "explore",
         "city": "Spokane",
         "hint1": "This building is built entirely of cut stone with the carvings and figures in stained glass.",
         "hint2": "The organ was built and installed in 1957 with 4,039 pipes.",
@@ -112,6 +115,7 @@
     },
     {
         "name": "Steam Plant Brew Pub",
+        "category": "restaurant",
         "city": "Spokane",
         "hint1": "This building was originaly purposed to heat and supply power to homes and businesses",
         "hint2": "The twin iconic strucures tower 225 feet",
@@ -122,6 +126,7 @@
     },
     {
         "name": "Clinkerdagger",
+        "category":"restaurant",
         "city": "Spokane",
         "hint1": "40 year old steak house.",
         "hint2": "A Spokane landmark that overlooks the Spokane River and city skyline.",
@@ -133,6 +138,7 @@
     },
     {
         "name":"Pavilion",
+        "category": "explore",
         "qrId":"",
         "hint1":"This structure was a gift to Spokane from the United Stated government.",
         "hint2":"It's initial purpose was to house exibits that focused on enviornmental issues.", 
@@ -143,6 +149,7 @@
     },
     {
         "name": "Garland Milk Bottle",
+        "category": "restaurant",
         "city": "Spokane",
         "hint1": "The lactose intollerant need not apply.",
         "hint2": "This place was built in 1935 and designed to build better men and women by making milk more attractive to boys and girls.",
@@ -154,6 +161,7 @@
     },
     {
         "name": "Arbor Crest Wine Cellars",
+        "category":"bar",
         "city": "Spokane",
         "hint1": "This building has one heck of a view.",
         "hint2": "Overlooking the Spokane Valley it sits alone on a ridge.",
@@ -164,6 +172,7 @@
     },
     {
         "name":"Bowl and Pitcher",
+        "category": "explore",
         "qrId":"",
         "hint1":"You really need a lot of imagination to see these two things.",
         "hint2":"While you're there you might as well check out the famous rope bridge.",
@@ -173,6 +182,7 @@
         "city":"Spokane"
     },
     {   "name": "Taco Bell",
+        "category":"restaurant",
         "city": "Spokane",
         "hint1": "Feels like a sweatpants kind of night.",
         "hint2": "Your one stop shop for grilled stuffed burritos. And sadness.",
@@ -185,6 +195,7 @@
     },
     {
         "name":"Campbell House",
+        "category":"explore",
         "qrId":"",
         "hint1":"This is a historic house museum.",
         "hint2":"The Northwest Museum of Arts and Culture is nearby.",
@@ -195,6 +206,7 @@
     },
     {
         "name":"Manito Park",
+        "category":"explore",
         "qrId":"",
         "hint1":"A 90 acre park with an arboretum and conservatory.",
         "hint2":"This was at one time a zoo until 1932 when it was closed due to the Great Depression.",
@@ -271,5 +283,41 @@
         "solutionLocation":"Bathtub Gin & Co, Belltown, between 1st & 2nd, 50 ft north of Blanchard, look for the wooden door...",
         "solutionDescription":"Bathtub Gin & Co",
         "city":"Seattle"
+    },
+    {
+        "name": "Mizuna",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "Award winning resturaunt that's been open downtown since 1996.",
+        "hint2": "The kitchen is run by a James Beard award winning chef.",
+        "hint3": "The name may sound funny but that's the chef's last name.",
+        "solutionLocation": "214 N Howard",
+        "solutionDescription": "Mizuna",
+        "solutionImg": "https://i.imgur.com/MOjYg8T.jpg"
+    
+    },
+    {
+        "name": "Wooden City",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "This restaurant has locations in Tacoma and Spokane.",
+        "hint2": "The name seems a little stiff.",
+        "hint3": "Wood you like to order their pizza?",
+        "solutionLocation": "821 W Riverside Ave",
+        "solutionDescription": "Wooden City",
+        "solutionImg": "https://i.imgur.com/fnIQvwr.jpg"
+    
+    },
+    {
+        "name": "Nado Ramen House",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "No time to noodle around.",
+        "hint2": "This establishment has stunning graphic art inside the dinning room.",
+        "hint3": "Make sure you don't overlook their extensive sake menu.",
+        "solutionLocation": "818 W Sprague Ave",
+        "solutionDescription": "Nado Ramen House",
+        "solutionImg": "https://i.imgur.com/yPKZCoL.jpg"
+    
     }
 ]
