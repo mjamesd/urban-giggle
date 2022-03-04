@@ -44,6 +44,7 @@ import Dashboard from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
 import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
+import HuntsViewQRcodesAdmin from './pages/Admin/QrCodes';
 import HuntsEditAdmin from './pages/Admin/HuntsEdit';
 import HuntItemsIndexAdmin from './pages/Admin/HuntItemsIndex';
 import HuntItemsAddAdmin from './pages/Admin/HuntItemsAdd';
@@ -77,8 +78,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
-
+const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -88,7 +88,6 @@ function App() {
   }, [loading]);
 
   return (
-
     <AnimatePresence exitBeforeEnter>
       <ApolloProvider client={client}>
         <Router >
@@ -125,6 +124,7 @@ function App() {
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
+                <Route path="/admin/hunts/viewQRcodes/:huntId" element={<HuntsViewQRcodesAdmin />} />
                 <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
                 <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
                 <Route path="/admin/huntItems/add" element={<HuntItemsAddAdmin />} />
@@ -154,4 +154,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

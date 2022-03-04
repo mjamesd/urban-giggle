@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
-export const Dashboard = React.memo(function SolidGameCard() {
+const Dashboard = () => {
     const navigate = useNavigate();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
@@ -27,5 +27,5 @@ export const Dashboard = React.memo(function SolidGameCard() {
 
         </motion.div >
     );
-});
+};
 export default Dashboard;

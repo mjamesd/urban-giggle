@@ -45,7 +45,6 @@ const Hunts = () => {
                         <th>ID</th>
                         <th>Title</th>
                         <th>City</th>
-                        <th>Description</th>
                         <th>Points</th>
                         <th># of Hunt Items</th>
                         <th># of Rewards</th>
@@ -58,12 +57,12 @@ const Hunts = () => {
                             <td>{hunt._id}</td>
                             <td>{hunt.name}</td>
                             <td>{hunt.city}</td>
-                            <td>{hunt.description}</td>
                             <td>{hunt.points}</td>
                             <td>{hunt.huntItems.length}</td>
                             <td>{hunt.rewards.length}</td>
                             <td>
                                 <Button onClick={() => navigate(`./view/${hunt._id}`)} className={buttonStyles}>View</Button>
+                                <Button onClick={() => navigate(`./viewQRcodes/${hunt._id}`)} className={buttonStyles}>QR Codes</Button>
                                 <Button onClick={() => navigate(`./edit/${hunt._id}`)} className={buttonStyles}>Edit</Button>
                                 <Button onClick={() => deleteHunt(hunt._id, hunt.name)} className={buttonStyles}>Delete</Button>
                             </td>
