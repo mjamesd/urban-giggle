@@ -7,9 +7,11 @@ import CardContent from '@material-ui/core/CardContent';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USER, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
+
 
 // import Auth from '../utils/auth';
 import UpdateUserForm from '../components/UpdateUserForm'
@@ -58,6 +60,7 @@ const Profile = (props) => {
     >
 
     <main>
+    {Auth.loggedIn() ? (
       <Card className={cx(styles.root, shadowStyles.root)}>
         <CardContent>
           <TextInfoContent
@@ -69,7 +72,20 @@ const Profile = (props) => {
             }
           />
         </CardContent>
-      </Card>
+      </Card> ) : (
+
+<Card className={cx(styles.root, shadowStyles.root)}>
+    <CardContent>
+        <TextInfoContent
+            classes={textCardContentStyles}
+            overline={'Ooops...'}
+            heading={'Sign in to join the fun!'}
+            body={<p>You need to be logged in view this page. Please{' '}
+            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+        
+    </CardContent>
+</Card>
+)}
     </main>
     </motion.div>
   );
