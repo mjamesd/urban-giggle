@@ -24,8 +24,8 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 
 // imports for GQL
-import { GET_HUNT, GET_HUNT_ITEMS, GET_BADGES } from '../../utils/queries';
-import { UPDATE_HUNT } from '../../utils/mutations';
+import { GET_HUNT_ITEMS, GET_BADGES } from '../../utils/queries';
+import { CREATE_HUNT } from '../../utils/mutations';
 
 // MenuProps for multiple select
 const ITEM_HEIGHT = 48;
@@ -49,7 +49,7 @@ function getStyles(huntItem, huntItems, theme) {
     };
 }
 
-const HuntsEdit = React.memo(() => {
+const HuntAdd = React.memo(() => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -65,16 +65,15 @@ const HuntsEdit = React.memo(() => {
     });
 
     // mutation
-    const [updateHunt, { error: updateError }] = useMutation(UPDATE_HUNT);
+    const [createHunt, { error: createError }] = useMutation(CREATE_HUNT);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const pointsInt = parseInt(formState.points);
-            const { data } = await updateHunt({
-                variables: { ...formState, points: pointsInt },
+            const { data } = await createHunt({
+                variables: { ...formState },
             });
-            alert(`Scavenger Hunt "${formState.name}" updated!`);
+            alert(`Scavenger Hunt "${formState.name}" added!`);
         } catch (err) {
             console.log(err);
         }
@@ -111,39 +110,32 @@ const HuntsEdit = React.memo(() => {
 
     // get specified Hunt
     // need to specify unique name for loading, data, and error
-    const { huntId } = useParams();
-    const { loading: loadingHunt, data: huntData } = useQuery(GET_HUNT, {
-        variables: { huntId: huntId }
-    });
-
     const { loading: loadingHuntItems, data: huntItemsData } = useQuery(GET_HUNT_ITEMS);
     const { loading: loadingBadges, data: badgesData } = useQuery(GET_BADGES);
 
-
-
     // get response or nothing
-    const hunt = huntData?.hunt || {};
     const huntItems = huntItemsData?.huntItems || [];
     const badges = badgesData?.badges || [];
 
     // check if any are still loading
-    if (loadingHunt || loadingHuntItems || loadingBadges) {
+    if (loadingHuntItems || loadingBadges) {
         return <h2>LOADING.....</h2>; // will reload/rerender here until data is loaded...
-    } else if (!loadingHunt && !loadingHuntItems && !loadingBadges && !formState.name) {
-        // by now we have the specified Hunt and can update the formState with its values
-        setFormState({
-            huntId: hunt._id,
-            name: hunt.name,
-            city: hunt.city,
-            description: hunt.description,
-            points: hunt.points,
-            huntItems: hunt.huntItems.map(huntItem => huntItem._id),
-            rewards: hunt.rewards.map(reward => reward._id),
-        });
     }
+    // else if (!loadingHuntItems && !loadingBadges) {
+    //     // by now we have the specified Hunt and can update the formState with its values
+    //     setFormState({
+    //         huntId: hunt._id,
+    //         name: hunt.name,
+    //         city: hunt.city,
+    //         description: hunt.description,
+    //         points: hunt.points,
+    //         huntItems: hunt.huntItems.map(huntItem => huntItem._id),
+    //         rewards: hunt.rewards.map(reward => reward._id),
+    //     });
+    // }
     return (
         <div style={{ marginLeft: '2em' }}>
-            <h1>Edit Hunt "{hunt.name}"</h1>
+            <h1>Add a New Hunt</h1>
             <form onSubmit={handleFormSubmit}>
                 <FormControl variant='outlined'>
                     <TextField variant='outlined' label="name" name="name" type="text" value={formState.name} onChange={handleChange} /><br />
@@ -213,12 +205,12 @@ const HuntsEdit = React.memo(() => {
                     </FormGroup>
                     <br />
                     <FormGroup variant='outlined' key="submitForm">
-                        <Button className={buttonStyles} type="submit">Update Hunt</Button>
+                        <Button className={buttonStyles} type="submit">Create Hunt</Button>
                     </FormGroup>
                 </FormControl>
             </form>
         </div>
-    )
+  )
 });
 
-export default HuntsEdit;
+export default HuntAdd;

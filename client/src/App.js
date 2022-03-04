@@ -27,29 +27,36 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
-import Seattle from './pages/Seattle';
-// import SeattleExploreHunt from './pages/SeattleExploreHunt';
+import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
+
 import Hunt from './pages/Hunts.js'
 import Victory from './pages/Victory.js'
+
+import Hunt from './pages/Hunt.js'
+import Hunts from './pages/Hunts.js'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
+import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
 import HuntsEditAdmin from './pages/Admin/HuntsEdit';
 import HuntItemsIndexAdmin from './pages/Admin/HuntItemsIndex';
+import HuntItemsAddAdmin from './pages/Admin/HuntItemsAdd';
 import HuntItemsViewAdmin from './pages/Admin/HuntItemsView';
 import HuntItemsEditAdmin from './pages/Admin/HuntItemsEdit';
 import BadgesIndexAdmin from './pages/Admin/BadgesIndex';
+import BadgesAddAdmin from './pages/Admin/BadgesAdd';
 import BadgesViewAdmin from './pages/Admin/BadgesView';
 import BadgesEditAdmin from './pages/Admin/BadgesEdit';
 import UsersIndexAdmin from './pages/Admin/UsersIndex';
+import UsersAddAdmin from './pages/Admin/UsersAdd';
 import UsersViewAdmin from './pages/Admin/UsersView';
 import UsersEditAdmin from './pages/Admin/UsersEdit';
 
@@ -105,14 +112,16 @@ function App() {
                 {/* <Route path="/victory" element={<Victory />} /> */}
 
                 {/* hunt item routes */}
+
                 <Route path="/victory/:qrId" element={<Victory />} />
+
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
                 {/* explore will be removed and replaced with hunts/id */}
-                <Route path="/:huntCity" element={<Seattle />} />
+                <Route path="/:huntCity" element={<Hunts />} />
                 <Route path="/hunt/:huntId" element={<Hunt />}/>
-                {/* <Route path="/seattle/explore" element={<SeattleExploreHunt />} /> */}
+                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
@@ -120,15 +129,19 @@ function App() {
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
+                <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
                 <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
                 <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
+                <Route path="/admin/huntItems/add" element={<HuntItemsAddAdmin />} />
                 <Route path="/admin/huntItems/view/:huntItemId" element={<HuntItemsViewAdmin />} />
                 <Route path="/admin/huntItems/edit/:huntItemId" element={<HuntItemsEditAdmin />} />
                 <Route path="/admin/badges" element={<BadgesIndexAdmin />} />
+                <Route path="/admin/badges/add" element={<BadgesAddAdmin />} />
                 <Route path="/admin/badges/view/:badgeId" element={<BadgesViewAdmin />} />
                 <Route path="/admin/badges/edit/:badgeId" element={<BadgesEditAdmin />} />
                 <Route path="/admin/users" element={<UsersIndexAdmin />} />
+                <Route path="/admin/users/add" element={<UsersAddAdmin />} />
                 <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
                 <Route path="/admin/users/edit/:iserId" element={<UsersEditAdmin />} />
 

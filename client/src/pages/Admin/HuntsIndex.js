@@ -16,10 +16,6 @@ const Hunts = () => {
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    if (loading) {
-        return <h2>LOADING.....</h2>
-    }
-
     const deleteHunt = async (huntId, huntName) => {
         // eslint-disable-next-line no-restricted-globals
         let confirmDelete = confirm(`Are you sure you want to delete the Scavenger Hunt "${huntName}"?`);
@@ -36,8 +32,13 @@ const Hunts = () => {
         }
     }
 
+    if (loading || hunts.length === 0) {
+        return <h2>LOADING.....</h2>
+    }
+
     return (
-        <div>
+        <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <h1>Hunts</h1>
             <Button onClick={() => navigate('./add')} className={buttonStyles}>Add Hunt</Button>
             <table>
@@ -48,8 +49,8 @@ const Hunts = () => {
                         <th>City</th>
                         <th>Description</th>
                         <th>Points</th>
-                        <th>Hunt Items</th>
-                        <th>Rewards</th>
+                        <th># of Hunt Items</th>
+                        <th># of Rewards</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
