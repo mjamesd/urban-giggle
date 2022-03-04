@@ -83,13 +83,13 @@ export const Experiences = React.memo(function SolidGameCard() {
   const styles3 = useStyles({ color: '#c81d25' });
 
   const { scrollYProgress } = useViewportScroll()
-  const scale = useTransform(scrollYProgress, [0, 1], [0.2, 1]);
+  const scale = useTransform(scrollYProgress, [0, .3], [0.2, 1]);
 
   return (
     <motion.div
       style={{ scale }}
     >
-      <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
+      <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={4}>
         <Grid item>
           <CustomCard
             classes={styles}

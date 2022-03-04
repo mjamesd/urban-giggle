@@ -39,10 +39,10 @@ const MenuProps = {
     },
 };
 
-function getStyles(huntItem, huntItems, theme) {
+function getStyles(item, collection, theme) {
     return {
         fontWeight:
-            huntItems.indexOf(huntItem) === -1
+            collection.indexOf(item) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
         mx: '5px',
@@ -70,8 +70,9 @@ const HuntsEdit = React.memo(() => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+            const pointsInt = parseInt(formState.points);
             const { data } = await updateHunt({
-                variables: { ...formState },
+                variables: { ...formState, points: pointsInt },
             });
             alert(`Scavenger Hunt "${formState.name}" updated!`);
         } catch (err) {
@@ -142,6 +143,7 @@ const HuntsEdit = React.memo(() => {
     }
     return (
         <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <h1>Edit Hunt "{hunt.name}"</h1>
             <form onSubmit={handleFormSubmit}>
                 <FormControl variant='outlined'>

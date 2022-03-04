@@ -54,7 +54,7 @@ export const Home = React.memo(function BlogCard() {
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
     >
-    <TopMarquee />
+    {/* <TopMarquee /> */}
 
     <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
@@ -79,7 +79,6 @@ export const Home = React.memo(function BlogCard() {
         </CardContent>
       </CardActionArea>
     </Card>
-    <br />
     <Experiences />
     </motion.div>
   );

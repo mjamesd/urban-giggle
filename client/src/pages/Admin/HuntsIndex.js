@@ -37,7 +37,8 @@ const Hunts = () => {
     }
 
     return (
-        <div>
+        <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <h1>Hunts</h1>
             <Button onClick={() => navigate('./add')} className={buttonStyles}>Add Hunt</Button>
             <table>
