@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "./Marquee.css";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const firstMarqueeVariants = {
   animate: {
-    x: [-50, 450],
+    x: [-50, 400],
     transition: {
       x: {
         duration: 3,

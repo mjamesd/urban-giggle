@@ -81,7 +81,7 @@ const SeattleExploreHunt = () => {
               }
             />
 
-          <Grid classes={gridStyles} container spacing={2}>
+          <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={2}>
           {huntItems &&
                     huntItems.map((huntItem) => (
             <Grid item xs={12} sm={6} md={4}>
