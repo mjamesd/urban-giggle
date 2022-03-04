@@ -23,8 +23,9 @@ const HuntItemsView = () => {
 
     /*
     _id
-    name
+    nam
     qrId 
+    qrCode
     city
     category
     hint1
@@ -64,7 +65,8 @@ const HuntItemsView = () => {
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <Button onClick={()=> navigate('../admin/huntItems')} className={buttonStyles}>Hunt Items</Button>
             <h1>{huntItem.name}</h1>
-            <p>ID: {huntItem._id}</p>
+            <p>QR Code:</p>
+            <p><img src={huntItem.qrCode} alt={huntItem.qrCode} style={{width: '400px'}} /></p>
             <p>City: {huntItem.city}</p>
             <p>Category: {huntItem.category}</p>
             <p>Points awarded when found: {huntItem.points}</p>

@@ -29,23 +29,24 @@ const HuntsView = () => {
             <Button onClick={()=> navigate('../admin/hunts')} className={buttonStyles}>Hunts</Button>
             <h1>{hunt.name}</h1>
             <p>City: {hunt.city}</p>
-            <p>{hunt.description}</p>
+            <p>Description: {hunt.description}</p>
             <p>Points awarded when completed: {hunt.points}</p>
             <p>Locations to find in this Scavenger Hunt:</p>
             <ul key={`${hunt._id}-huntItems`}>
                 {hunt.huntItems.map(huntItem => (
                     <li key={huntItem._id}>
                         <div>
-                            <p>{huntItem._id}</p>
-                            <p>{huntItem.name}</p>
-                            <p>{huntItem.city}</p>
-                            <p>{huntItem.category}</p>
+                            <p>Title: {huntItem.name}</p>
+                            <p>City: {huntItem.city}</p>
+                            <p>Category: {huntItem.category}</p>
                             <p>Points awarded when found: {huntItem.points}</p>
-                            <p>{huntItem.hint1}</p>
-                            <p>{huntItem.hint2}</p>
-                            <p>{huntItem.hint3}</p>
-                            <p>{huntItem.solutionLocation}</p>
-                            <p>{huntItem.solutionDescription}</p>
+                            <p>QR Code:</p>
+                            <p><img src={huntItem.qrCode} alt={huntItem.qrCode} /></p>
+                            <p>Hint #1: {huntItem.hint1}</p>
+                            <p>Hint #2: {huntItem.hint2}</p>
+                            <p>Hint #3: {huntItem.hint3}</p>
+                            <p>Solution Location: {huntItem.solutionLocation}</p>
+                            <p>Solution Description: {huntItem.solutionDescription}</p>
                             <p><img src={huntItem.solutionImg} alt="solution" style={{width: '100px', border: '1px solid black'}} /></p>
                             <p>Guestbook:</p>
                                 {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}

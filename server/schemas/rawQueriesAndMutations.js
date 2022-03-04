@@ -642,6 +642,21 @@ HTTP HEADERS:
 {
   "Authorization": "Bearer pasteTokenHere"
 }
+mutation deleteThisHuntItem($huntItemId: ID!) {
+    removeHuntItem(huntItemId: $huntItemId) {
+        __typename
+        _id
+        name
+    }
+}
+QUERY VARIABLES:
+{
+  "huntItemId": "idGoesHere",
+}
+HTTP HEADERS:
+{
+  "Authorization": "Bearer pasteTokenHere"
+}
 mutation userSignsHuntItemGuestbook($huntItemId: ID!, $message: String!) {
     userSignsHuntItemGuestbook(huntItemId: $huntItemId, message: $message) {
         __typename

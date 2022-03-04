@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
@@ -116,6 +116,7 @@ const HuntsAdd = React.memo(() => {
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <h1>Add a New Hunt</h1>
+            <p><strong>Note:</strong> It's better to <Link style={{border: '1px solid red'}} to="/admin/huntItems/add">create your Scavenger Hunt Locations first</Link>, then you can add them to the Scavenger Hunt here.</p>
             <form onSubmit={handleFormSubmit}>
                 <FormControl variant='outlined'>
                     <TextField variant='outlined' label="name" name="name" type="text" value={formState.name} onChange={handleChange} /><br />
