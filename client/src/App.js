@@ -36,6 +36,7 @@ import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
 import Hunt from './pages/Hunts.js'
+import Victory from './pages/Victory.js'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
@@ -101,9 +102,10 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
+                {/* <Route path="/victory" element={<Victory />} /> */}
 
                 {/* hunt item routes */}
-                <Route path="/victory/:huntItemId"  />
+                <Route path="/victory/:qrId" element={<Victory />} />
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
