@@ -133,6 +133,7 @@ const typeDefs = gql`
 
     updateHuntItem(
       huntItemId: ID!
+      qrId: String
       name: String
       city: String
       category: String
@@ -152,7 +153,7 @@ const typeDefs = gql`
     removeHuntItem(huntItemId: ID!): HuntItem
 
     removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
-    
+
     userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
     userSignsHuntItemGuestbook(huntItemId: ID!, message: String!): HuntItem
 

@@ -21,9 +21,9 @@ query user($userId: ID!) {
     username
     email
     password
+    userType
     points
     createdAt
-    isAdmin
     foundHuntItems {
     	  _id
     		name
@@ -99,9 +99,9 @@ query users{
     username
     email
     password
+    userType
     points
     createdAt
-    isAdmin
     foundHuntItems {
     	  _id
     		name
@@ -179,6 +179,7 @@ export const QUERY_ME = gql`
       username
       email
       password
+      userType
       points
       foundHuntItems {
         __typename
@@ -198,7 +199,6 @@ export const QUERY_ME = gql`
         description
         points
       }
-      isAdmin
       createdAt
   }
   }
@@ -294,6 +294,7 @@ query hunt($huntId: ID!) {
     	solutionDescription
     	solutionImg
     	points
+        guestbook
     }
     rewards{
       _id
@@ -326,6 +327,7 @@ query hunt{
     	solutionDescription
     	solutionImg
     	points
+        guestbook
     }
     rewards{
       _id

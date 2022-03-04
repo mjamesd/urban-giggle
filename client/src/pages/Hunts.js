@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { motion } from 'framer-motion';
 import cx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,9 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import { useQuery } from '@apollo/client';
+import { GET_HUNTS } from '../utils/queries';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -34,12 +37,34 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
 }));
 
 
-const SeattleIndulgeHunt = () => {
+const SeattleExploreHunt = () => {
+  const { huntCity } = useParams();
+  const navigate = useNavigate()
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
   const gridStyles = useGridStyles();
   const { button: buttonStyles } = useBlogTextInfoContentStyles();
+
+  const { loading, data } = useQuery(GET_HUNTS, {
+    // pass URL parameter
+    variables: { huntCity: huntCity },
+});
+
+    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    const hunts= data?.hunts.city || [];
+
+    console.log(hunts)
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
+    const goToItem = (huntId) => {
+      console.log(huntId)
+      navigate(`../hints/${huntId}`)
+
+    }
 
   return (
     <>
@@ -52,7 +77,7 @@ const SeattleIndulgeHunt = () => {
             <TextInfoContent
               classes={textCardContentStyles}
               overline={'SEATTLE'}
-              heading={'INDULGE HUNT'}
+              heading={'EXPLORE HUNT'}
               body={
                 <div>
                   <h2>FIND YER BOOTY!</h2>
@@ -61,56 +86,25 @@ const SeattleIndulgeHunt = () => {
             />
 
           <Grid classes={gridStyles} container spacing={2}>
+          {hunts &&
+                    hunts.map((huntItem) => (
             <Grid item xs={12} sm={6} md={4}>
               <Card className={cx(styles.root, shadowStyles.root)}>
                 <CardContent>
                   <TextInfoContent
                     classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET EATS'}
+                    overline={huntItem.city}
+                    heading={huntItem.name}
                     body={
                       <div>
-                        <Button component={Link} to={'/'} className={buttonStyles}>Spokane</Button>
+                        <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button>
                       </div>
                     }
                   />
                 </CardContent>
               </Card>
             </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'HIDDEN DRINKS'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                  <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'SEATTLE'}
-                    heading={'SECRET SPEAKEASY'}
-                    body={
-                      <div>
-                        <Button className={buttonStyles}>VIEW HINTS</Button>
-                      </div>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
+))}
           </Grid>
       </motion.div>
     </>
@@ -118,4 +112,4 @@ const SeattleIndulgeHunt = () => {
 };
 
 
-export default SeattleIndulgeHunt
+export default SeattleExploreHunt

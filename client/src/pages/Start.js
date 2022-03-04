@@ -10,8 +10,9 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import {FormControl} from '@mui/material/'
-
+import { FormControl } from '@mui/material/'
+import { useQuery } from '@apollo/client';
+import { GET_HUNTS } from '../utils/queries';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -44,6 +45,24 @@ const Start = () => {
     const textCardContentStyles = useN04TextInfoContentStyles();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
+    // Execute the query on component load
+    const { loading, data } = useQuery(GET_HUNTS)
+
+    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    const hunts = data?.hunts || [];
+
+    console.log(hunts)
+
+    //filtering down to one city
+    
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
+    const cities = [...new Map(hunts.map(hunt => [hunt.city, hunt])).values()]
+    console.log(cities)
+
     return (
         <>
             <motion.div
@@ -52,19 +71,20 @@ const Start = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                    <Card className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={'Welcome'}
-                                heading={'Choose a City'} />
-                            <FormControl fullWidth>
-                                <Button component={Link} to={'/seattle'} className={buttonStyles}>Seattle</Button>
-                                <br/>
-                                <Button component={Link} to={'/spokane'} className={buttonStyles}>Spokane</Button>
-                            </FormControl>
-                        </CardContent>
-                    </Card>
+                <Card className={cx(styles.root, shadowStyles.root)}>
+                    <CardContent>
+                        <TextInfoContent
+                            classes={textCardContentStyles}
+                            overline={'Welcome'}
+                            heading={'Choose a City'} />
+                        <FormControl fullWidth>
+                            {
+                                cities.map((city) => (
+                                    <><Button component={Link} to={`../${city.city}`} className={buttonStyles}>{city.city}</Button><br /></>
+                                ))}
+                        </FormControl>
+                    </CardContent>
+                </Card>
             </motion.div >
             );
         </>
