@@ -13,6 +13,7 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { FormControl } from '@mui/material/'
 import { useQuery } from '@apollo/client';
 import { GET_HUNTS } from '../utils/queries';
+import Auth from '../utils/auth';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -53,9 +54,6 @@ const Start = () => {
 
     console.log(hunts)
 
-    //filtering down to one city
-    
-
     if (loading) {
         return <h2>LOADING.....</h2>
     }
@@ -64,13 +62,14 @@ const Start = () => {
     console.log(cities)
 
     return (
-        <>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 2 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-            >
+        <><motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 2 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+    >
+        {Auth.loggedIn() ? (
+            
                 <Card className={cx(styles.root, shadowStyles.root)}>
                     <CardContent>
                         <TextInfoContent
@@ -85,8 +84,22 @@ const Start = () => {
                         </FormControl>
                     </CardContent>
                 </Card>
+            
+            ) : (
+
+                <Card className={cx(styles.root, shadowStyles.root)}>
+                    <CardContent>
+                        <TextInfoContent
+                            classes={textCardContentStyles}
+                            overline={'Ooops...'}
+                            heading={'Sign in to join the fun!'}
+                            body={<p>You need to be logged in view this page. Please{' '}
+                            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+                        
+                    </CardContent>
+                </Card>
+            )}
             </motion.div >
-            );
         </>
     );
 };

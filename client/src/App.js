@@ -27,15 +27,15 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
-import Seattle from './pages/Seattle';
-// import SeattleExploreHunt from './pages/SeattleExploreHunt';
+import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
 import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
-import Hunt from './pages/Hunts.js'
+import Hunt from './pages/Hunt.js'
+import Hunts from './pages/Hunts.js'
 
 //admin pages
 import Admin from './pages/Admin/Dashboard'
@@ -107,14 +107,14 @@ function App() {
                 <Route path="/about" element={<About />} />
 
                 {/* hunt item routes */}
-                <Route path="/victory/:huntItemId"  />
+                <Route path="/victory/:qrID"  />
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
                 {/* explore will be removed and replaced with hunts/id */}
-                <Route path="/:huntCity" element={<Seattle />} />
+                <Route path="/:huntCity" element={<Hunts />} />
                 <Route path="/hunt/:huntId" element={<Hunt />}/>
-                {/* <Route path="/seattle/explore" element={<SeattleExploreHunt />} /> */}
+                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
