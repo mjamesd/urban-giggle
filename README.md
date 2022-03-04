@@ -9,5 +9,5 @@
 * [Contact](#contact)
 * [Repository](#repository)
 * [Example](#example)
-* [Link to Total Quest](#link-to-total-quest)
+* [Link to Total Quest](#link-to-total-quest) 
 ***
