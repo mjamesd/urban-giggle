@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -39,6 +39,35 @@ const styles = {
 }
 
 const Header = () => {
+    // control who can view the admin panel
+    const location = useLocation();
+    const organizerPaths = [
+        '/admin/hunts/add',
+        '/admin/huntItems/add',
+        '/admin/hunts/view/',
+        '/admin/huntItems/view/'
+    ];
+
+    React.useEffect(() => {
+        if (location.pathname.substring(0,6) === '/admin') {
+            if (!Auth.loggedIn()) {
+                alert('You must be logged in to view this page.');
+                window.location.replace('/');
+            }
+            if (Auth.getProfile().data.userType !== 'admin') {
+                if (Auth.getProfile().data.userType === 'organizer'
+                        && !organizerPaths.includes(location.pathname)
+                        && location.pathname.substring(0,organizerPaths[2].length) !== organizerPaths[2]
+                        && location.pathname.substring(0,organizerPaths[3].length) !== organizerPaths[3]) {
+                    alert('You must be an administrator to view this page.');
+                    window.location.replace('/');
+                }
+
+            }
+        }
+    });
+
+    // states for menu opened/closed
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
