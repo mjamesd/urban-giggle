@@ -76,3 +76,8 @@ h1 {
 footer {
   margin-bottom: 0 !important;
 }
+
+a {
+  text-decoration: none;
+  color: #fd5238 !important;
+}
