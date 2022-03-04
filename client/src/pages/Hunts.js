@@ -14,15 +14,12 @@ import { Box } from '@mui/system';
 import { useQuery } from '@apollo/client';
 import { GET_HUNTS_BY_CITY } from '../utils/queries';
 import { useNavigate, useParams } from 'react-router-dom';
-import HuntsEdit from './Admin/HuntItemsEdit';
-import { ConstructionOutlined } from '@mui/icons-material';
 import cx from 'clsx';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import Button from '@material-ui/core/Button';
-import SeattleExploreHunt from './SeattleExploreHunt';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {

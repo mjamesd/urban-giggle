@@ -29,7 +29,6 @@ import Signup from './pages/Signup';
 import Start from './pages/Start';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
-import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
@@ -117,7 +116,7 @@ function App() {
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
 
-                {/* admin -- probably a pipe dream :D */}
+                {/* admin -- YAY!!!*/}
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
