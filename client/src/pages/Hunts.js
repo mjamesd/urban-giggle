@@ -11,6 +11,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { Box } from '@mui/system';
+import { useQuery } from '@apollo/client';
+import { GET_HUNTS_BY_CITY } from '../utils/queries';
+import { useNavigate, useParams } from 'react-router-dom';
+import HuntsEdit from './Admin/HuntItemsEdit';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {
@@ -79,11 +84,37 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
     );
 };
 
-export const Seattle = React.memo(function SolidGameCard() {
+export const Hunts = React.memo(function SolidGameCard() {
     const gridStyles = useGridStyles();
     const styles = useStyles({ color: '#0b3954' });
     const styles2 = useStyles({ color: '#FF6F00' });
     const styles3 = useStyles({ color: '#c81d25' });
+    const { huntCity } = useParams();
+    const { loading, data } = useQuery(GET_HUNTS_BY_CITY, {
+           // pass URL parameter
+           variables: { city: huntCity },
+        });
+    
+console.log(data, "DATAAAAAA!!!")
+    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    const hunts = data?.huntsByCity || [];
+
+   
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
+    console.log(hunts, "HUNTS ON THE HUNTS PAGE!!")
+
+    
+    const exploreFilter = [...new Map(hunts.map(hunt => [`Explore ${hunt.city}`, hunt._id, hunt.city]))]
+    const indulgeFilter = [...new Map(hunts.map(hunt => [`Indulge ${hunt.city}`, hunt._id, hunt.city]))]
+    console.log(exploreFilter[0][1], "EXPLORE FILTER MAP!!!!")
+    console.log(indulgeFilter[0][1], "INDULGE FILTER MAP!!!!")
+    
+    const exploreId = [...new Map(exploreFilter.map(hunt => [hunt._id]))]
+    console.log(exploreId, "EXPLORE ID!!!!")
 
     return (
         <motion.div
@@ -98,7 +129,7 @@ export const Seattle = React.memo(function SolidGameCard() {
             </Box>
             <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
                 <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='./explore'>
+                    <Link style={{ textDecoration: 'none' }} to={`./${exploreFilter[0][1]}`}>
                         <CustomCard
                             classes={styles}
                             title={'EXPLORE'}
@@ -109,7 +140,7 @@ export const Seattle = React.memo(function SolidGameCard() {
                         /></Link>
                 </Grid>
                 <Grid item>
-                <Link style={{ textDecoration: 'none' }} to='./seattleindulgehunt'>
+                <Link style={{ textDecoration: 'none' }} to={`./${indulgeFilter[0][1]}`}>
                     <CustomCard
                         classes={styles2}
                         title={'INDULGE'}
@@ -132,4 +163,4 @@ export const Seattle = React.memo(function SolidGameCard() {
         </motion.div>
     );
 });
-export default Seattle
+export default Hunts
