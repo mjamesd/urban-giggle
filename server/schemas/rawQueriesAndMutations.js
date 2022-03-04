@@ -378,6 +378,14 @@ query getAllScavengerHuntItems {
         }
         points
         guestbook
+        rewards {
+            __typename
+            _id
+            name
+            icon
+            description
+            points
+        }
     }
 }
 // WORKS!!!

@@ -144,6 +144,7 @@ const HuntsEdit = React.memo(() => {
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
+            <Button onClick={()=> navigate('../admin/hunts')} className={buttonStyles}>Hunts</Button>
             <h1>Edit Hunt "{hunt.name}"</h1>
             <form onSubmit={handleFormSubmit}>
                 <FormControl variant='outlined'>

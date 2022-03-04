@@ -96,7 +96,7 @@ export const Admin = React.memo(function SolidGameCard() {
             exit={{ opacity: 0 }}
             transition={{ duration: 2 }}
         >
-            <Box>
+            <Box style={{ marginLeft: '2em' }}>
                 <h1>Total Quest Administrator Panel</h1>
                 <p><Button onClick={() => navigate(`./hunts`)} className={buttonStyles}>Hunts</Button></p>
                 <p><Button onClick={() => navigate(`./huntItems`)} className={buttonStyles}>HuntItems</Button></p>

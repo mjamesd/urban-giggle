@@ -83,10 +83,7 @@ const HuntAdd = React.memo(() => {
 
     const handleChange = (event) => {
         let { name, value } = event.target;
-        console.log('changed: ', name, ': ', value);
-
         setFormState({ ...formState, [name]: value });
-        console.log('STATE CHANGED!!!!', formState);
     };
 
     const getHuntItemName = (huntItemId) => {
@@ -101,8 +98,6 @@ const HuntAdd = React.memo(() => {
     const getBadgeName = (badgeId) => {
         let badgeName = '';
         badges.forEach(badge => {
-            console.log(badge._id);
-            console.log(badgeId);
             if (badge._id === badgeId)
                 badgeName = badge.name;
         });
@@ -122,18 +117,8 @@ const HuntAdd = React.memo(() => {
     if (loadingHuntItems || loadingBadges) {
         return <h2>LOADING.....</h2>; // will reload/rerender here until data is loaded...
     }
-    // else if (!loadingHuntItems && !loadingBadges) {
-    //     // by now we have the specified Hunt and can update the formState with its values
-    //     setFormState({
-    //         huntId: hunt._id,
-    //         name: hunt.name,
-    //         city: hunt.city,
-    //         description: hunt.description,
-    //         points: hunt.points,
-    //         huntItems: hunt.huntItems.map(huntItem => huntItem._id),
-    //         rewards: hunt.rewards.map(reward => reward._id),
-    //     });
-    // }
+
+    
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
