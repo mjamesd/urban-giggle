@@ -149,6 +149,7 @@ export const Hunts = React.memo(function SolidGameCard() {
             </Box>
 
             <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container center spacing={4} wrap={'wrap'}>
+                {exploreFilter && (
                 <Grid item>
                     <Link style={{ textDecoration: 'none' }} to={`./${exploreFilter._id}`}>
                         <CustomCard
@@ -161,6 +162,8 @@ export const Hunts = React.memo(function SolidGameCard() {
 
                         /></Link>
                 </Grid>
+                )}
+                {indulgeFilter && (
                 <Grid item>
                     <Link style={{ textDecoration: 'none' }} to={`./${indulgeFilter._id}`}>
                         <CustomCard
@@ -170,8 +173,9 @@ export const Hunts = React.memo(function SolidGameCard() {
                             image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'}
                         /></Link>
                 </Grid>
+                )}
                 <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='./seattlecustomhunt'>
+                    <Link style={{ textDecoration: 'none' }} to='../admin/hunts/add'>
                         <CustomCard
                             classes={styles3}
                             title={'CREATE'}

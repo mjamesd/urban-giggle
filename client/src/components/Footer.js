@@ -26,7 +26,7 @@ const Footer = () => {
     <footer>
       <div style={styles.container}>
       <Button><Link style={styles.links} to="/contact"><h2>CONTACT</h2></Link></Button>
-        <img style={styles.image} src="totalquestlogo.png" alt='logo' />
+        <img style={styles.image} src="/totalquestlogo.png" alt='logo' />
         <Button><Link style={styles.links} to="/about"><h2>ABOUT US</h2></Link></Button>
       </div>
     </footer>
