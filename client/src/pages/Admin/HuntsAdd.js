@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import {
     FormControl,
     FormGroup,
-    // FormControlLabel,
-    // Checkbox,
-    // InputAdornment,
-    // InputLabel,
-    // OutlinedInput,
-    // IconButton,
     TextField,
 } from '@mui/material/';
 // imports for select menus
@@ -49,7 +43,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntAdd = React.memo(() => {
+const HuntsAdd = React.memo(() => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -83,10 +77,7 @@ const HuntAdd = React.memo(() => {
 
     const handleChange = (event) => {
         let { name, value } = event.target;
-        console.log('changed: ', name, ': ', value);
-
         setFormState({ ...formState, [name]: value });
-        console.log('STATE CHANGED!!!!', formState);
     };
 
     const getHuntItemName = (huntItemId) => {
@@ -101,8 +92,6 @@ const HuntAdd = React.memo(() => {
     const getBadgeName = (badgeId) => {
         let badgeName = '';
         badges.forEach(badge => {
-            console.log(badge._id);
-            console.log(badgeId);
             if (badge._id === badgeId)
                 badgeName = badge.name;
         });
@@ -122,18 +111,7 @@ const HuntAdd = React.memo(() => {
     if (loadingHuntItems || loadingBadges) {
         return <h2>LOADING.....</h2>; // will reload/rerender here until data is loaded...
     }
-    // else if (!loadingHuntItems && !loadingBadges) {
-    //     // by now we have the specified Hunt and can update the formState with its values
-    //     setFormState({
-    //         huntId: hunt._id,
-    //         name: hunt.name,
-    //         city: hunt.city,
-    //         description: hunt.description,
-    //         points: hunt.points,
-    //         huntItems: hunt.huntItems.map(huntItem => huntItem._id),
-    //         rewards: hunt.rewards.map(reward => reward._id),
-    //     });
-    // }
+    
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
@@ -215,4 +193,4 @@ const HuntAdd = React.memo(() => {
   )
 });
 
-export default HuntAdd;
+export default HuntsAdd;

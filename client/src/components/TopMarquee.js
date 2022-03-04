@@ -4,7 +4,7 @@ import "./Marquee.css";
 
 const firstMarqueeVariants = {
   animate: {
-    x: [-50, 450],
+    x: [-50, 300],
     transition: {
       x: {
         duration: 3,
@@ -15,7 +15,7 @@ const firstMarqueeVariants = {
 
 const secondMarqueeVariants = {
   animate: {
-    x: [1300, 800],
+    x: [1300, 780],
     transition: {
       x: {
         duration: 3,

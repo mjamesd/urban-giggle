@@ -84,6 +84,137 @@
         "city":"Seattle"
     },
     {
+        "name": "Clock Tower",
+        "category": "explore",
+        "city": "Spokane",
+        "hint1": "The Great Northern Railroad depot was finished in 1902",
+        "hint2": "An iconic landmark for the 1974 World's Fair",
+        "hint3": "Was the only remaining building on Havermale Island after it was remodled",
+        "solutionLocation": "The Spokane Clock Tower at Riverfront Park",
+        "solutionDescription": "The Spokane Clock Tower"
+    },
+    {
+        "name": "Fox Theater",
+        "category": "explore",
+        "city": "Spokane",
+        "hint1": "This iconic Art Deco building was opened in 1931.",
+        "hint2": "After a recent renovation, the building is the home of the Spokane Symphony.",
+        "hint3": "It was part of the Fox Film Corporation Empire founded by studio mogul William Fox",
+        "solutionLocation": "Fox Theater, 1001 W. Sprague Ave.",
+        "solutionDescription": "The Martin Woldson Theater at the FOX" 
+    },
+    {
+        "name": "St Johns Cathedral",
+        "category": "explore",
+        "city": "Spokane",
+        "hint1": "This building is built entirely of cut stone with the carvings and figures in stained glass.",
+        "hint2": "The organ was built and installed in 1957 with 4,039 pipes.",
+        "hint3": "It rises prominently on the crest of a hill making it visable from much of downtown and areas to the north",
+        "solutionLocation": "127 E 12th Avenue.",
+        "solutionDescription": "St. John's Cathedral"    
+    },
+    {
+        "name": "Steam Plant Brew Pub",
+        "category": "restaurant",
+        "city": "Spokane",
+        "hint1": "This building was originaly purposed to heat and supply power to homes and businesses",
+        "hint2": "The twin iconic strucures tower 225 feet",
+        "hint3": "In the summer of 1996 it was transformed into a gastro pub",
+        "solutionLocation": "159 South Lincoln",
+        "solutionDescription": "You did it! 🎉 Show this page to your server to get 15% off your next meal!",
+        "solutionImg": "https://i.imgur.com/DQ5r4Fd.jpg"
+    },
+    {
+        "name": "Clinkerdagger",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "40 year old steak house.",
+        "hint2": "A Spokane landmark that overlooks the Spokane River and city skyline.",
+        "hint3": "That's one sharp sounding name!",
+        "solutionLocation": "The Flour Mill 621 W. Mallon Ave.",
+        "solutionDescription": "Congratulations! Show this page to your server to get 10% off any appetizer!",
+        "solutionImg": "https://i.imgur.com/18pYWHH.jpg",
+        "points": 4
+    },
+    {
+        "name":"Pavilion",
+        "category": "explore",
+        "qrId":"",
+        "hint1":"This structure was a gift to Spokane from the United Stated government.",
+        "hint2":"It's initial purpose was to house exibits that focused on enviornmental issues.", 
+        "hint3":"Richard Nixon delared that Expo '74 was officially open to all the citizens of the world at the base of this structure.",
+        "solutionLocation":"U.S. Pavillion, Riverfront Park",
+        "solutionDescription":"U.S. Pavilion",
+        "city":"Spokane"
+    },
+    {
+        "name": "Garland Milk Bottle",
+        "category": "restaurant",
+        "city": "Spokane",
+        "hint1": "The lactose intollerant need not apply.",
+        "hint2": "This place was built in 1935 and designed to build better men and women by making milk more attractive to boys and girls.",
+        "hint3": "Notable for it's bottle architecture.",
+        "solutionLocation": "802 W Garland Ave",
+        "solutionDescription": "You cheesed it! Show this page to your server for a free glass of milk! What fun.",
+        "solutionImg": "https://i.imgur.com/dgbRGzc.jpg",
+        "points": 2
+    },
+    {
+        "name": "Arbor Crest Wine Cellars",
+        "category":"bar",
+        "city": "Spokane",
+        "hint1": "This building has one heck of a view.",
+        "hint2": "Overlooking the Spokane Valley it sits alone on a ridge.",
+        "hint3": "Probably want to watch your step, especially with all this alcohol around. ",
+        "solutionLocation": "4705 N Fruit Hill Rd",
+        "solutionDescription": "Arbor Crest Wine Cellars",
+        "solutionImg":"https://i.imgur.com/vd62DNF.jpg"
+    },
+    {
+        "name":"Bowl and Pitcher",
+        "category": "explore",
+        "qrId":"",
+        "hint1":"You really need a lot of imagination to see these two things.",
+        "hint2":"While you're there you might as well check out the famous rope bridge.",
+        "hint3":"If you see a dead body just leave it for the wolves.",
+        "solutionLocation":"Riverside State Park swinging bridge",
+        "solutionDescription":"The Bowl and Pitcher at Riverside State Park",
+        "city":"Spokane" 
+    },
+    {   "name": "Taco Bell",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "Feels like a sweatpants kind of night.",
+        "hint2": "Your one stop shop for grilled stuffed burritos. And sadness.",
+        "hint3": "Go to the one on 3rd, next to the Carlise Hotel. Dinner and a show.",
+        "solutionLocation": "825 W 3rd Ave",
+        "solutionDescription": "Congratulations! You have diarrhea. Is it a coincidence that you're also at Taco Bell?",
+        "solutionImg": "https://i.imgur.com/qPlsR6y.jpg",
+        "points": 4
+
+    },
+    {
+        "name":"Campbell House",
+        "category":"explore",
+        "qrId":"",
+        "hint1":"This is a historic house museum.",
+        "hint2":"The Northwest Museum of Arts and Culture is nearby.",
+        "hint3":"The owner was in the mining business with the Rockefeller and Gould families.",
+        "solutionLocation":"2316 W 1st Ave",
+        "solutionDescription":"The Campbell House",
+        "city":"Spokane"
+    },
+    {
+        "name":"Manito Park",
+        "category":"explore",
+        "qrId":"",
+        "hint1":"A 90 acre park with an arboretum and conservatory.",
+        "hint2":"This was at one time a zoo until 1932 when it was closed due to the Great Depression.",
+        "hint3":"The lilac garden has over 100 cultivars represented. Spokane is known as the Lilac City.",
+        "solutionLocation":"1702 S Gran Blvd at the conservatory front desk",
+        "solutionDescription":"Manito Park",
+        "city":"Spokane",
+
         "name":"Kerry Park",
         "category":"explore",
         "hint1":"Royal view of Seattle",
@@ -152,5 +283,95 @@
         "solutionLocation":"Bathtub Gin & Co, Belltown, between 1st & 2nd, 50 ft north of Blanchard, look for the wooden door...",
         "solutionDescription":"Bathtub Gin & Co",
         "city":"Seattle"
+    },
+    {
+        "name": "Mizuna",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "Award winning resturaunt that's been open downtown since 1996.",
+        "hint2": "The kitchen is run by a James Beard award winning chef.",
+        "hint3": "The name may sound funny but that's the chef's last name.",
+        "solutionLocation": "214 N Howard",
+        "solutionDescription": "Mizuna",
+        "solutionImg": "https://i.imgur.com/MOjYg8T.jpg"
+    
+    },
+    {
+        "name": "Wooden City",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "This restaurant has locations in Tacoma and Spokane.",
+        "hint2": "The name seems a little stiff.",
+        "hint3": "Wood you like to order their pizza?",
+        "solutionLocation": "821 W Riverside Ave",
+        "solutionDescription": "Wooden City",
+        "solutionImg": "https://i.imgur.com/fnIQvwr.jpg"
+    
+    },
+    {
+        "name": "Nado Ramen House",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "No time to noodle around.",
+        "hint2": "This establishment has stunning graphic art inside the dinning room.",
+        "hint3": "Make sure you don't overlook their extensive sake menu.",
+        "solutionLocation": "818 W Sprague Ave",
+        "solutionDescription": "Nado Ramen House",
+        "solutionImg": "https://i.imgur.com/yPKZCoL.jpg"
+    
+    },
+    {
+        "name": "Wild Sage Bistro",
+        "category":"restaurant",
+        "city": "Spokane",
+        "hint1": "That's one crazy green-gray.",
+        "hint2": "This corner bistro has big frame windows for you to look out of while you sip your wine.",
+        "hint3": "Opened since 2006 it's become an award-winning local favorite.",
+        "solutionLocation": "916 W 2nd Ave ",
+        "solutionDescription": "Wild Save Bistro",
+        "solutionImg": "https://i.imgur.com/E3yedop.jpg"
+    
+    },
+    {
+        "name":"Beserk",
+        "category":"bar",
+        "hint1":"Not only is this a crazy name for a bar its also the title of a Japanese manga series.",
+        "hint2":"This is out of control.",
+        "hint3":"Even though the name would tell you otherwise don't break anything.",
+        "solutionLocation":"125 S Stevens St",
+        "solutionDescription":"Beserk Bar",
+        "city":"Spokane"
+    },
+    {
+        "name":"Mootsy's",
+        "category":"bar",
+        "hint1":"Spokane's quinessential rock dive.",
+        "hint2":"Live band venue that always has a party atmosphere.",
+        "hint3":"Sounds like a pet name for Bootsy Collins.",
+        "solutionLocation":"406 W Sprague Ave",
+        "solutionDescription":"Mootsy's",
+        "city":"Spokane"
+    },
+    {
+        "name":"Volstead Act",
+        "category":"bar",
+        "hint1":"This place feels like the Prohibition with its decor.",
+        "hint2":"It's named after a US law passed in 1919.",
+        "hint3":"Located in the heart of the Davenport District.",
+        "solutionLocation":"12 N Post St",
+        "solutionDescription":"Volstead Act",
+        "city":"Spokane"
+    },
+    {
+        "name":"Stormin Normans Shipfaced Saloon",
+        "category":"bar",
+        "hint1":"Named after a general famous from Desert Storm.",
+        "hint2":"There's also a ship in the title.",
+        "hint3":"Could possibly sound like a dirty name.",
+        "solutionLocation":"12303 E Trent Ave",
+        "solutionDescription":"Stormin Normans Shipfaced Saloon",
+        "city":"Spokane"
     }
+    
+
 ]

@@ -6,7 +6,7 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { GET_HUNT_ITEMS } from '../../utils/queries';
 import { REMOVE_HUNT_ITEM } from '../../utils/mutations';
 
-const Hunts = () => {
+const HuntItemsIndex = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNT_ITEMS);
     const [removeHuntItem, { error: rHIerror }] = useMutation(REMOVE_HUNT_ITEM);
@@ -16,7 +16,7 @@ const Hunts = () => {
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    if (loading) {
+    if (loading || huntItems.length === 0) {
         return <h2>LOADING.....</h2>
     }
 
@@ -44,39 +44,31 @@ const Hunts = () => {
             <table>
                 <thead>
                     <tr key="head">
-                        <th>ID</th>
                         <th>Title</th>
                         <th>City</th>
                         <th>Category</th>
                         <th>Points</th>
-                        <th>Hint 1</th>
-                        <th>Hint 2</th>
-                        <th>Hint 3</th>
                         <th>Solution Location</th>
-                        <th>Solution Description</th>
-                        <th>Solution Image</th>
-                        <th>Rewards</th>
+                        <th># of Rewards</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {huntItems.map(hunt => (
-                        <tr key={hunt._id}>
-                            <td>{hunt._id}</td>
-                            <td>{hunt.name}</td>
-                            <td>{hunt.city}</td>
-                            <td>{hunt.description}</td>
-                            <td>{hunt.points}</td>
-                            <td>{hunt.huntItems.length}</td>
-                            <td>{hunt.rewards.length}</td>
+                    {huntItems.map(huntItem => (
+                        <tr key={huntItem._id}>
+                            <td>{huntItem.name}</td>
+                            <td>{huntItem.city}</td>
+                            <td>{huntItem.category}</td>
+                            <td>{huntItem.points}</td>
+                            <td>{huntItem.solutionLocation}</td>
+                            <td>{huntItem.rewards.length}</td>
                             <td>
-                                <Button onClick={() => navigate(`./view/${hunt._id}`)} className={buttonStyles}>View</Button>
-                                <Button onClick={() => navigate(`./edit/${hunt._id}`)} className={buttonStyles}>Edit</Button>
-                                <Button onClick={() => deleteHuntItem(hunt._id, hunt.name)} className={buttonStyles}>Delete</Button>
+                                <Button onClick={() => navigate(`./view/${huntItem._id}`)} className={buttonStyles}>View</Button>
+                                <Button onClick={() => navigate(`./edit/${huntItem._id}`)} className={buttonStyles}>Edit</Button>
+                                <Button onClick={() => deleteHuntItem(huntItem._id, huntItem.name)} className={buttonStyles}>Delete</Button>
                             </td>
                         </tr>
-                    )
-                    )}
+                    ))}
                 </tbody>
             </table>
         </div>
@@ -84,4 +76,4 @@ const Hunts = () => {
 
 }
 
-export default Hunts;
+export default HuntItemsIndex;

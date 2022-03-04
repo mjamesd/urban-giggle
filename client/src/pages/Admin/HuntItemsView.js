@@ -1,62 +1,88 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import ReactHtmlParser from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import { GET_HUNT } from '../../utils/queries';
+import { GET_HUNT_ITEM } from '../../utils/queries';
 
-const HuntsView = () => {
+const HuntItemsView = () => {
     const navigate = useNavigate();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    const { huntId } = useParams();
-    const { loading, data } = useQuery(GET_HUNT, {
-        variables: { huntId: huntId }
+    const { huntItemId } = useParams();
+    const { loading, data } = useQuery(GET_HUNT_ITEM, {
+        variables: { huntItemId: huntItemId }
     });
-    const hunt = data?.hunt || [];
+    const huntItem = data?.huntItem || [];
 
     
     if (loading) {
         return <h2>LOADING.....</h2>
     }
 
-    console.log(hunt);
+    /*
+    _id
+    name
+    qrId 
+    city
+    category
+    hint1
+    hint2
+    hint2DisplayedTo{
+      __typename
+      _id
+      username
+    }
+    hint3
+    hint3DisplayedTo{
+      __typename
+      _id
+      username
+    }
+    solutionLocation
+    solutionDescription
+    solutionDisplayedTo{
+      __typename
+      _id
+      username
+    }
+    solutionImg
+    rewards {
+        __typename
+        _id
+        name
+        icon
+        description
+        points
+    }
+    points
+    */
 
     return (
-        <div>
-            <h1>{hunt.name}</h1>
-            <p>City: {hunt.city}</p>
-            <p>{hunt.description}</p>
-            <p>Points awarded when completed: {hunt.points}</p>
-            <p>Locations to find in this Scavenger Hunt:</p>
-            <ul key={`${hunt._id}-huntItems`}>
-                {hunt.huntItems.map(huntItem => (
-                    <li key={huntItem._id}>
-                        <div>
-                            <p>{huntItem._id}</p>
-                            <p>{huntItem.name}</p>
-                            <p>{huntItem.city}</p>
-                            <p>{huntItem.category}</p>
-                            <p>Points awarded when found: {huntItem.points}</p>
-                            <p>{huntItem.hint1}</p>
-                            <p>{huntItem.hint2}</p>
-                            <p>{huntItem.hint3}</p>
-                            <p>{huntItem.solutionLocation}</p>
-                            <p>{huntItem.solutionDescription}</p>
-                            <p>{huntItem.solutionImg}</p>
-                            <p>Guestbook:</p>
-                                {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
-                                {huntItem.guestbook && huntItem.guestbook.map(message => (
-                                    <div>{message}</div>
-                                ))}
-                        </div>
-                    </li>
+        <div style={{ marginLeft: '2em' }}>
+            <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
+            <Button onClick={()=> navigate('../admin/huntItems')} className={buttonStyles}>Hunt Items</Button>
+            <h1>{huntItem.name}</h1>
+            <p>ID: {huntItem._id}</p>
+            <p>City: {huntItem.city}</p>
+            <p>Category: {huntItem.category}</p>
+            <p>Points awarded when found: {huntItem.points}</p>
+            <p>Hint 1: {ReactHtmlParser(huntItem.hint1)}</p>
+            <p>Hint 2: {ReactHtmlParser(huntItem.hint2)}</p>
+            <p>Hint 3: {ReactHtmlParser(huntItem.hint3)}</p>
+            <p>Solution Location: {huntItem.solutionLocation}</p>
+            <p>Solution Description: {huntItem.solutionDescription}</p>
+            <p>Solution Image: <img src={huntItem.solutionImg} alt={huntItem.solutionImg} style={{width: '100px', border: '1px solid black'}} /></p>
+            <p>Guestbook:</p>
+                {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
+                {huntItem.guestbook && huntItem.guestbook.map(message => (
+                    <div>{ReactHtmlParser(message)}</div>
                 ))}
-            </ul>
-            <p>Rewards for completing this Scavenger Hunt:</p>
-            <ul key={`${hunt._id}-rewards`}>
-                {(hunt.rewards.length === 0) ? 'No rewards.' : ''}
-                {hunt.rewards && hunt.rewards.map(badge => (
+            <p>Rewards for finding this Scavenger Hunt Item:</p>
+            <ul key={`${huntItem._id}-rewards`}>
+                {(huntItem.rewards.length === 0) ? 'No rewards.' : ''}
+                {huntItem.rewards && huntItem.rewards.map(badge => (
                     <li key={badge._id}>
                         <div>
                             <p>{badge._id}</p>
@@ -72,4 +98,4 @@ const HuntsView = () => {
     )
 }
 
-export default HuntsView;
+export default HuntItemsView;

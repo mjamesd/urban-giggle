@@ -10,15 +10,9 @@ const Hunts = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNTS);
     const [removeHunt, { rHerror }] = useMutation(REMOVE_HUNT);
-
-    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const hunts = data?.hunts || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
-
-    if (loading) {
-        return <h2>LOADING.....</h2>
-    }
 
     const deleteHunt = async (huntId, huntName) => {
         // eslint-disable-next-line no-restricted-globals
@@ -36,6 +30,10 @@ const Hunts = () => {
         }
     }
 
+    if (loading || hunts.length === 0) {
+        return <h2>LOADING.....</h2>
+    }
+
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
@@ -49,8 +47,8 @@ const Hunts = () => {
                         <th>City</th>
                         <th>Description</th>
                         <th>Points</th>
-                        <th>Hunt Items</th>
-                        <th>Rewards</th>
+                        <th># of Hunt Items</th>
+                        <th># of Rewards</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

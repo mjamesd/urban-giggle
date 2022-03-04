@@ -378,6 +378,14 @@ query getAllScavengerHuntItems {
         }
         points
         guestbook
+        rewards {
+            __typename
+            _id
+            name
+            icon
+            description
+            points
+        }
     }
 }
 // WORKS!!!
@@ -662,7 +670,7 @@ query getAllUsers {
         email
         password
         points
-        foundItems {
+        foundHuntItems {
             __typename
             _id
             name

@@ -33,11 +33,14 @@ import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
+
+import Victory from './pages/Victory.js'
+
 import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 
 //admin pages
-import Admin from './pages/Admin/Dashboard'
+import Dashboard from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
 import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
@@ -102,9 +105,12 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
+                {/* <Route path="/victory" element={<Victory />} /> */}
 
                 {/* hunt item routes */}
-                <Route path="/victory/:qrID"  />
+
+                <Route path="/victory/:qrId" element={<Victory />} />
+
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
@@ -116,8 +122,10 @@ function App() {
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
 
-                {/* admin -- YAY!!!*/}
-                <Route path="/admin" element={<Admin />} />
+
+                {/* admin -- probably a pipe dream :D */}
+                <Route path="/admin" element={<Dashboard />} />
+
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
@@ -133,7 +141,8 @@ function App() {
                 <Route path="/admin/users" element={<UsersIndexAdmin />} />
                 <Route path="/admin/users/add" element={<UsersAddAdmin />} />
                 <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
-                <Route path="/admin/users/edit/:iserId" element={<UsersEditAdmin />} />
+                {/* admins cannot edit user accounts! */}
+                {/* <Route path="/admin/users/edit/:userId" element={<UsersEditAdmin />} /> */}
 
                 {/* <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
                 <Route path="/admin/:huntId" />

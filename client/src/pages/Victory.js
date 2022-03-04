@@ -7,11 +7,15 @@ import CardContent from '@material-ui/core/CardContent';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import Confetti from 'react-confetti'
+import { useQuery } from '@apollo/client';
+import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
+import { useParams } from 'react-router-dom';
 
 
 const useStyles = makeStyles(() => ({
     root: {
-        maxWidth: 500,
+        maxWidth: 343,
         margin: 'auto',
         borderRadius: 12,
         padding: 12,
@@ -21,11 +25,26 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const About = () => {
+const Victory = () => {
     const styles = useStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
+    const { qrId } = useParams();
+    console.log('qrId: ', qrId)
+    const { loading, data } = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
+        // pass URL parameter
+        variables: { qrId: qrId },
+    });
+    console.log('Hunt Item Data: ', data)
 
+    const huntItem = data?.huntItemByQrCode || {};
+ 
+
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    } 
+   console.log('HUNT ITEM: ', huntItem)
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -39,25 +58,20 @@ const About = () => {
                     <CardContent>
                         <TextInfoContent
                             classes={textCardContentStyles}
-                            overline={'Get to know us'}
-                            heading={'ABOUT'}
-                            body={
-                                <>
-                                <p>Just some cool devs doing cool things! 
-                                    <br/> Graduates of the University of Washington Full-Stack Coding program, to-be changers of the WORLD!!</p>
-                                <h2><a style={{color: '#fd5238' }} href="https://github.com/DanPGolden">Dan Golden</a></h2>
-                                <h2><a style={{color: '#fd5238' }} href="https://github.com/JustinM099">Justin Meredith</a></h2>
-                                <h2><a style={{color: '#fd5238' }} href='https://github.com/lyssg2'>Lyss Garcia</a></h2>
-                                <h2><a style={{color: '#fd5238' }} href='https://github.com/mjamesd'>Mark Drummond</a></h2>
-                                <h2><a style={{color: '#fd5238' }} href="https://github.com/m-sherrill">Morgan Sherrill</a></h2>
-                                </>
+                            overline={'You did it!'}
+                            heading={'CONGRATULATIONS'}
+                            body={<div>
+                                <p>Congratulations on completing your hunt! You found the {huntItem.name}!</p>
+                                <p>You just earned {huntItem.points} points!</p>
+                                </div>
                             }
                         />
                     </CardContent>
                 </Card>
             </main>
+            <Confetti />
         </motion.div>
     );
 };
 
-export default About
+export default Victory

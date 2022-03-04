@@ -6,12 +6,6 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import {
     FormControl,
     FormGroup,
-    // FormControlLabel,
-    // Checkbox,
-    // InputAdornment,
-    // InputLabel,
-    // OutlinedInput,
-    // IconButton,
     TextField,
 } from '@mui/material/';
 // imports for select menus
@@ -119,8 +113,6 @@ const HuntsEdit = React.memo(() => {
     const { loading: loadingHuntItems, data: huntItemsData } = useQuery(GET_HUNT_ITEMS);
     const { loading: loadingBadges, data: badgesData } = useQuery(GET_BADGES);
 
-
-
     // get response or nothing
     const hunt = huntData?.hunt || {};
     const huntItems = huntItemsData?.huntItems || [];
@@ -141,9 +133,11 @@ const HuntsEdit = React.memo(() => {
             rewards: hunt.rewards.map(reward => reward._id),
         });
     }
+    
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
+            <Button onClick={()=> navigate('../admin/hunts')} className={buttonStyles}>Hunts</Button>
             <h1>Edit Hunt "{hunt.name}"</h1>
             <form onSubmit={handleFormSubmit}>
                 <FormControl variant='outlined'>

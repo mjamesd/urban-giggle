@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import {
     FormControl,
     FormGroup,
-    // FormControlLabel,
-    // Checkbox,
-    // InputAdornment,
-    // InputLabel,
-    // OutlinedInput,
-    // IconButton,
     TextField,
 } from '@mui/material/';
 // imports for select menus
@@ -49,7 +43,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntItemAdd = React.memo(() => {
+const HuntItemsAdd = React.memo(() => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -74,6 +68,7 @@ const HuntItemAdd = React.memo(() => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log(formState);
         try {
             const pointsInt = parseInt(formState.points);
             const { data } = await createHuntItem({
@@ -94,15 +89,13 @@ const HuntItemAdd = React.memo(() => {
     const getBadgeName = (badgeId) => {
         let badgeName = '';
         badges.forEach(badge => {
-            console.log(badge._id);
-            console.log(badgeId);
             if (badge._id === badgeId)
                 badgeName = badge.name;
         });
         return badgeName;
     }
 
-    // get specified Hunt
+    // get specified HuntItem
     // need to specify unique name for loading, data, and error
     const { loading: loadingBadges, data: badgesData } = useQuery(GET_BADGES);
 
@@ -110,21 +103,10 @@ const HuntItemAdd = React.memo(() => {
     const badges = badgesData?.badges || [];
 
     // check if any are still loading
-    if (loadingBadges) {
+    if (loadingBadges || badges.length === 0) {
         return <h2>LOADING.....</h2>; // will reload/rerender here until data is loaded...
     }
-    // else if (!loadingHuntItems && !loadingBadges) {
-    //     // by now we have the specified Hunt and can update the formState with its values
-    //     setFormState({
-    //         huntId: hunt._id,
-    //         name: hunt.name,
-    //         city: hunt.city,
-    //         description: hunt.description,
-    //         points: hunt.points,
-    //         huntItems: hunt.huntItems.map(huntItem => huntItem._id),
-    //         rewards: hunt.rewards.map(reward => reward._id),
-    //     });
-    // }
+
     return (
         <div style={{ marginLeft: '2em' }}>
             <h1>Add a New Hunt Item</h1>
@@ -132,7 +114,7 @@ const HuntItemAdd = React.memo(() => {
                 <FormControl variant='outlined'>
                     <TextField variant='outlined' label="name" name="name" type="text" value={formState.name} onChange={handleChange} /><br />
                     <TextField variant='outlined' label="city" name="city" type="text" value={formState.city} onChange={handleChange} /><br />
-                    <TextField variant='outlined' label="category" name="description" type="text" value={formState.category} onChange={handleChange} /><br />
+                    <TextField variant='outlined' label="category" name="category" type="text" value={formState.category} onChange={handleChange} /><br />
                     <TextField variant='outlined' label="hint1" name="hint1" type="text" value={formState.hint1} onChange={handleChange} /><br />
                     <TextField variant='outlined' label="hint2" name="hint2" type="text" value={formState.hint2} onChange={handleChange} /><br />
                     <TextField variant='outlined' label="hint3" name="hint3" type="text" value={formState.hint3} onChange={handleChange} /><br />
@@ -181,4 +163,4 @@ const HuntItemAdd = React.memo(() => {
   )
 });
 
-export default HuntItemAdd;
+export default HuntItemsAdd;
