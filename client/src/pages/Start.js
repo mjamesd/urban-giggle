@@ -57,7 +57,7 @@ const Start = () => {
     
 
     if (loading) {
-        return <h2>LOADING.....</h2>
+        return <h2 style={{ justifyContent:'center'}}>LOADING.....</h2>
     }
 
     const cities = [...new Map(hunts.map(hunt => [hunt.city, hunt])).values()]

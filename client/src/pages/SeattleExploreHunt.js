@@ -53,7 +53,7 @@ const SeattleExploreHunt = () => {
     console.log(huntItems)
 
     if (loading) {
-        return <h2>LOADING.....</h2>
+        return <h2 style={{ justifyContent: 'center' }}>LOADING.....</h2>
     }
 
     const goToItem = (huntId) => {

@@ -46,7 +46,7 @@ const Profile = (props) => {
   const shadowStyles = useOverShadowStyles({ inactive: true });
 
   if (loading) {
-    return <h2>LOADING.....</h2>
+    return <h2 style={{ justifyContent: 'center' }}>LOADING.....</h2>
   }
 
   return (
