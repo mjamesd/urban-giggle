@@ -20,6 +20,7 @@ About.js -- about our team -- DONE!!
 
 Contact.js -- contact us form 
 - need to add in email.js so the email goes to us
+- no authentication is needed
 
 # Hunt Pages (USER)
 

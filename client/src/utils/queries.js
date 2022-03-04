@@ -359,6 +359,40 @@ query hunt{
 }
 `
 
+export const GET_HUNTS_BY_CITY = gql`
+query getAllScavengerHuntsInCity($city: String!) {
+  huntsByCity(city: $city) {
+      __typename
+      _id
+      name
+      city
+      description
+      points
+      huntItems {
+          __typename
+          _id
+          name
+          qrId
+          city
+          hint1
+          hint2
+          hint3
+          solutionLocation
+          solutionDescription
+          solutionImg
+          points
+      }
+      rewards {
+          __typename
+          _id
+          name
+          icon
+          description
+          points
+      }
+  }
+}
+`
 
 export const GET_BADGES = gql`
 query badge {

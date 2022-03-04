@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Color from 'color';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { Box } from '@mui/system';
+import { useQuery } from '@apollo/client';
+import { GET_HUNTS_BY_CITY } from '../utils/queries';
+import { useNavigate, useParams } from 'react-router-dom';
+import cx from 'clsx';
+import TextInfoContent from '@mui-treasury/components/content/textInfo';
+import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
+import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+import Button from '@material-ui/core/Button';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {
@@ -79,11 +88,53 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
     );
 };
 
-export const Seattle = React.memo(function SolidGameCard() {
+export const Hunts = React.memo(function SolidGameCard() {
+    const navigate = useNavigate()
     const gridStyles = useGridStyles();
+    const textCardContentStyles = useN04TextInfoContentStyles();
+    const shadowStyles = useOverShadowStyles({ inactive: true });
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const styles = useStyles({ color: '#0b3954' });
     const styles2 = useStyles({ color: '#FF6F00' });
     const styles3 = useStyles({ color: '#c81d25' });
+    const { huntCity } = useParams();
+    const { loading, data } = useQuery(GET_HUNTS_BY_CITY, {
+        // pass URL parameter
+        variables: { city: huntCity },
+    });
+    let exploreFilter
+    let indulgeFilter 
+
+    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    const hunts = data?.huntsByCity || [];
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
+    hunts.forEach(hunt => {
+        if(hunt.name == `Explore ${huntCity}`) {
+            console.log(hunt)
+            exploreFilter = hunt
+            return
+        }
+    }
+    )
+    
+   hunts.forEach(hunt => {
+        if(hunt.name == `Indulge ${huntCity}`) {
+            console.log(hunt)
+            indulgeFilter = hunt
+            return
+        }
+    }
+    )
+
+
+    const goToHunt = (huntId) => {
+        console.log(huntId)
+        navigate(`./${huntId}`)
+      }
 
     return (
         <motion.div
@@ -96,40 +147,66 @@ export const Seattle = React.memo(function SolidGameCard() {
                 <h1 style={{ textAlign: "center" }}>SEATTLE</h1>
                 <h2 style={{ textAlign: "center" }}>CHOOSE YOUR HUNT</h2>
             </Box>
-            <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
+
+            <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container center spacing={4} wrap={'wrap'}>
                 <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='./explore'>
+                    <Link style={{ textDecoration: 'none' }} to={`./${exploreFilter._id}`}>
                         <CustomCard
                             classes={styles}
                             title={'EXPLORE'}
                             subtitle={'Looking to explore the city? Try our EXPLORE experience to find the local spots, sightsee and EXPLORE the city the best way!'}
                             image={
                                 'https://s31606.pcdn.co/wp-content/uploads/2019/10/young-traveler-woman-in-kuala-lumpur-chinatown-district-picture-id1063308558.jpg'
-                            }
+                              }
+
                         /></Link>
                 </Grid>
                 <Grid item>
-                <Link style={{ textDecoration: 'none' }} to='./seattleindulgehunt'>
-                    <CustomCard
-                        classes={styles2}
-                        title={'INDULGE'}
-                        subtitle={'If you are a foodie this experience is for you. INDULGE yourself with hunting down the best bars and restaurants in the city'}
-                        image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'}
-                    /></Link>
+                    <Link style={{ textDecoration: 'none' }} to={`./${indulgeFilter._id}`}>
+                        <CustomCard
+                            classes={styles2}
+                            title={'INDULGE'}
+                            subtitle={'If you are a foodie this experience is for you. INDULGE yourself with hunting down the best bars and restaurants in the city'}
+                            image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'}
+                        /></Link>
                 </Grid>
                 <Grid item>
-                <Link style={{ textDecoration: 'none' }} to='./seattlecustomhunt'>
-                    <CustomCard
-                        classes={styles3}
-                        title={'CREATE'}
-                        subtitle={'Celebrating a Bachelorette? Planning a birthday party or event? Build your own scavenger hunt with the CREATE experience!'}
-                        image={
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZJUOurbvAWIWA2CvDEknsve876BJBXrd-Q&usqp=CAU'
-                        }
-                    /></Link>
+                    <Link style={{ textDecoration: 'none' }} to='./seattlecustomhunt'>
+                        <CustomCard
+                            classes={styles3}
+                            title={'CREATE'}
+                            subtitle={'Celebrating a Bachelorette? Planning a birthday party or event? Build your own scavenger hunt with the CREATE experience!'}
+                            image={
+                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZJUOurbvAWIWA2CvDEknsve876BJBXrd-Q&usqp=CAU'
+                            }
+                        /></Link>
                 </Grid>
             </Grid>
+
+            <br/><br/>
+            <h1 style={{ textAlign: "center" }}>Other Available Scavenger Hunts...</h1>
+            <br/><br/>
+            <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={4} wrap={'wrap'}>
+                {hunts &&
+                    hunts.map((hunt) => (
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Card className={cx(styles.root, shadowStyles.root)}>
+                                <CardContent>
+                                    <TextInfoContent
+                                        classes={textCardContentStyles}
+                                        overline={hunt.city}
+                                        heading={hunt.name}
+                                        body={<div>
+                                            <p>{hunt.description}</p>
+                                            <Button className={buttonStyles} onClick={() => goToHunt(hunt._id)}>Start Now!</Button>
+                                        </div>} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+            </Grid>
+
         </motion.div>
     );
 });
-export default Seattle
+export default Hunts

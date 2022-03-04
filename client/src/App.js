@@ -29,7 +29,6 @@ import Signup from './pages/Signup';
 import Start from './pages/Start';
 import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
-import Spokane from './pages/Spokane';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import About from './pages/About'
@@ -103,8 +102,6 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/start" element={<Start />} />
-                {/* <Route path="/seattle" element={<Seattle />} /> */}
-                <Route path="/spokane" element={<Spokane />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
@@ -119,14 +116,16 @@ function App() {
                 {/* hunt routes */}
                 {/* explore will be removed and replaced with hunts/id */}
                 <Route path="/:huntCity" element={<Hunts />} />
-                <Route path="/hunt/:huntId" element={<Hunt />}/>
+                <Route path="/:huntCity/:huntId" element={<Hunt />} />
                 <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
 
+
                 {/* admin -- probably a pipe dream :D */}
                 <Route path="/admin" element={<Dashboard />} />
+
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
