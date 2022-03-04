@@ -40,6 +40,7 @@ const typeDefs = gql`
     city: String!
     category: String!
     qrId: String
+    qrCode: String
     hint1: String!
     hint2: String!
     hint2DisplayedTo: [User]

@@ -210,7 +210,8 @@ query huntItem($huntItemId: ID!) {
   huntItem(huntItemId: $huntItemId) {
     _id
     name
-    qrId 
+    qrId
+    qrCode
     city
     category
     hint1
@@ -253,7 +254,8 @@ query huntItem{
   huntItems{
     _id
     name
-    qrId 
+    qrId
+    qrCode
     city
     category
     hint1
@@ -306,6 +308,7 @@ query hunt($huntId: ID!) {
     	name
     	city
     	qrId
+        qrCode
     	hint1
     	hint2
     	hint3
@@ -339,6 +342,7 @@ query hunt{
     	name
     	city
     	qrId
+        qrCode
     	hint1
     	hint2
     	hint3
@@ -373,6 +377,7 @@ query getAllScavengerHuntsInCity($city: String!) {
           _id
           name
           qrId
+          qrCode
           city
           hint1
           hint2
@@ -394,38 +399,13 @@ query getAllScavengerHuntsInCity($city: String!) {
 }
 `
 
-export const GET_BADGES = gql`
-query badge {
-  badges {
-    _id
-    name
-    icon
-    description
-    points
-  }
-
-}
-`
-
-export const GET_BADGE = gql`
-
-query badge($badgeId: ID!){
-  badge(badgeId: $badgeId){
-    _id
-    name
-    icon
-    description
-    points
-  }
-}
-`
-
 export const GET_HUNT_ITEM_BY_QR_ID = gql`
 query huntItemByQrCode($qrId: String!) {
   huntItemByQrCode(qrId: $qrId) {
     _id
     name
     qrId 
+    qrCode
     city
     hint1
     hint2
@@ -461,6 +441,32 @@ query huntItemByQrCode($qrId: String!) {
   }
 }
 
+`
+
+export const GET_BADGES = gql`
+query badge {
+  badges {
+    _id
+    name
+    icon
+    description
+    points
+  }
+
+}
+`
+
+export const GET_BADGE = gql`
+
+query badge($badgeId: ID!){
+  badge(badgeId: $badgeId){
+    _id
+    name
+    icon
+    description
+    points
+  }
+}
 `
 
 

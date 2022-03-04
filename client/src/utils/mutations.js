@@ -120,6 +120,7 @@ mutation createHunt($name: String!, $description: String!, $points: Int!, $city:
       _id
       name
       qrId
+      qrCode
       city
       hint1
       hint2
@@ -176,6 +177,7 @@ mutation updateHunt($huntId: ID!, $name: String, $city: String $description: Str
       _id
       name
       qrId
+      qrCode
       city
       hint1
       hint2
@@ -249,6 +251,7 @@ mutation createHuntItem($name: String!,
           _id
           name
           qrId
+          qrCode
           hint1
           hint2
           hint3
@@ -292,6 +295,7 @@ mutation updateHuntItem($huntItemId: ID!, $name: String, $hint1: String, $hint2:
       _id
       name
       qrId
+      qrCode
       hint1
       hint2
       hint3
@@ -477,15 +481,3 @@ mutation deleteThisBadge($badgeId: ID!) {
         points
     }
 }`
-
-// addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
-
-export const ADD_HUNT_ITEM_TO_HUNT = gql`
-  mutation addHuntItemToHunt($huntId: ID!, $huntItemId: ID!){
-    addHuntItemToHunt(huntId: $huntId, huntItemId: $huntItemId){
-      hunt{
-        huntItems
-      }
-    }
-  }
-`

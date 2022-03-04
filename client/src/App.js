@@ -56,7 +56,7 @@ import BadgesEditAdmin from './pages/Admin/BadgesEdit';
 import UsersIndexAdmin from './pages/Admin/UsersIndex';
 import UsersAddAdmin from './pages/Admin/UsersAdd';
 import UsersViewAdmin from './pages/Admin/UsersView';
-import UsersEditAdmin from './pages/Admin/UsersEdit';
+// import UsersEditAdmin from './pages/Admin/UsersEdit';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -105,12 +105,10 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
-                {/* <Route path="/victory" element={<Victory />} /> */}
 
                 {/* hunt item routes */}
 
                 <Route path="/victory/:qrId" element={<Victory />} />
-
                 <Route path="/hints/:huntItemId" element={<HuntItem />} />
                 
                 {/* hunt routes */}
@@ -122,10 +120,8 @@ function App() {
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
 
-
-                {/* admin -- probably a pipe dream :D */}
+                {/* admin */}
                 <Route path="/admin" element={<Dashboard />} />
-
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
@@ -143,13 +139,6 @@ function App() {
                 <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
                 {/* admins cannot edit user accounts! */}
                 {/* <Route path="/admin/users/edit/:userId" element={<UsersEditAdmin />} /> */}
-
-                {/* <Route path="/admin/:huntItemId" element={<HuntItemAdmin />} />
-                <Route path="/admin/:huntId" />
-                <Route path="/admin/huntitem/update/:huntItemId"  />
-                <Route path="/admin/huntitem/create/:huntItemId" />
-                <Route path="/admin/hunt/update/:huntId" />
-                <Route path="/admin/hunt/create/:huntId" /> */}
 
               </Routes>
 
