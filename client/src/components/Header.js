@@ -94,7 +94,6 @@ const Header = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
                         sx={{ mr: 2, flexGrow: 8, display: { xs: 'none', md: 'flex' } }}
                     >
                         <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
@@ -102,7 +101,7 @@ const Header = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
+                        
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
                         <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
