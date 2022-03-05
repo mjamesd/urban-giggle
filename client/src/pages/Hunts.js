@@ -20,6 +20,7 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import Button from '@material-ui/core/Button';
+import Auth from '../utils/auth';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {
@@ -143,73 +144,72 @@ export const Hunts = React.memo(function SolidGameCard() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <Box>
-                <h1 style={{ textAlign: "center" }}>SEATTLE</h1>
-                <h2 style={{ textAlign: "center" }}>CHOOSE YOUR HUNT</h2>
-            </Box>
-
-            <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container center spacing={4} wrap={'wrap'}>
-                {exploreFilter && (
-                <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to={`./${exploreFilter._id}`}>
-                        <CustomCard
-                            classes={styles}
-                            title={'EXPLORE'}
-                            subtitle={'Looking to explore the city? Try our EXPLORE experience to find the local spots, sightsee and EXPLORE the city the best way!'}
-                            image={
-                                'https://s31606.pcdn.co/wp-content/uploads/2019/10/young-traveler-woman-in-kuala-lumpur-chinatown-district-picture-id1063308558.jpg'
-                              }
-
-                        /></Link>
-                </Grid>
-                )}
-                {indulgeFilter && (
-                <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to={`./${indulgeFilter._id}`}>
-                        <CustomCard
-                            classes={styles2}
-                            title={'INDULGE'}
-                            subtitle={'If you are a foodie this experience is for you. INDULGE yourself with hunting down the best bars and restaurants in the city'}
-                            image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'}
-                        /></Link>
-                </Grid>
-                )}
-                <Grid item>
-                    <Link style={{ textDecoration: 'none' }} to='../admin/hunts/add'>
-                        <CustomCard
-                            classes={styles3}
-                            title={'CREATE'}
-                            subtitle={'Celebrating a Bachelorette? Planning a birthday party or event? Build your own scavenger hunt with the CREATE experience!'}
-                            image={
-                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZJUOurbvAWIWA2CvDEknsve876BJBXrd-Q&usqp=CAU'
-                            }
-                        /></Link>
-                </Grid>
-            </Grid>
-
-            <br/><br/>
-            <h1 style={{ textAlign: "center" }}>Other Available Scavenger Hunts...</h1>
-            <br/><br/>
-            <Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={4} wrap={'wrap'}>
-                {hunts &&
-                    hunts.map((hunt) => (
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Card className={cx(styles.root, shadowStyles.root)}>
-                                <CardContent>
-                                    <TextInfoContent
-                                        classes={textCardContentStyles}
-                                        overline={hunt.city}
-                                        heading={hunt.name}
-                                        body={<div>
-                                            <p>{hunt.description}</p>
-                                            <Button className={buttonStyles} onClick={() => goToHunt(hunt._id)}>Start Now!</Button>
-                                        </div>} />
-                                </CardContent>
-                            </Card>
+            {Auth.loggedIn() ? (
+            <><Box>
+                    <h1 style={{ textAlign: "center" }}>{huntCity}</h1>
+                    <h2 style={{ textAlign: "center" }}>CHOOSE YOUR HUNT</h2>
+                </Box><Grid style={{ justifyContent: 'center' }} classes={gridStyles} container center spacing={4} wrap={'wrap'}>
+                        {exploreFilter && (
+                            <Grid item>
+                                <Link style={{ textDecoration: 'none' }} to={`./${exploreFilter._id}`}>
+                                    <CustomCard
+                                        classes={styles}
+                                        title={'EXPLORE'}
+                                        subtitle={'Looking to explore the city? Try our EXPLORE experience to find the local spots, sightsee and EXPLORE the city the best way!'}
+                                        image={'https://s31606.pcdn.co/wp-content/uploads/2019/10/young-traveler-woman-in-kuala-lumpur-chinatown-district-picture-id1063308558.jpg'} /></Link>
+                            </Grid>
+                        )}
+                        {indulgeFilter && (
+                            <Grid item>
+                                <Link style={{ textDecoration: 'none' }} to={`./${indulgeFilter._id}`}>
+                                    <CustomCard
+                                        classes={styles2}
+                                        title={'INDULGE'}
+                                        subtitle={'If you are a foodie this experience is for you. INDULGE yourself with hunting down the best bars and restaurants in the city'}
+                                        image={'https://seattlerefined.com/resources/media/59384af0-18fb-4310-b25f-5cc0492a7513-large16x9__H9A1307.jpg?1629912946061'} /></Link>
+                            </Grid>
+                        )}
+                        <Grid item>
+                            <Link style={{ textDecoration: 'none' }} to='../admin/hunts/add'>
+                                <CustomCard
+                                    classes={styles3}
+                                    title={'CREATE'}
+                                    subtitle={'Celebrating a Bachelorette? Planning a birthday party or event? Build your own scavenger hunt with the CREATE experience!'}
+                                    image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZJUOurbvAWIWA2CvDEknsve876BJBXrd-Q&usqp=CAU'} /></Link>
                         </Grid>
-                    ))}
-            </Grid>
+                    </Grid><br /><br /><h1 style={{ textAlign: "center" }}>All Available Scavenger Hunts...</h1><br /><br /><Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={4} wrap={'wrap'}>
+                        {hunts &&
+                            hunts.map((hunt) => (
+                                <Grid item xs={12} sm={6} md={4}>
+                                    <Card className={cx(styles.root, shadowStyles.root)}>
+                                        <CardContent>
+                                            <TextInfoContent
+                                                classes={textCardContentStyles}
+                                                overline={hunt.city}
+                                                heading={hunt.name}
+                                                body={<div>
+                                                    <p>{hunt.description}</p>
+                                                    <Button className={buttonStyles} onClick={() => goToHunt(hunt._id)}>Start Now!</Button>
+                                                </div>} />
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            ))}
+                    </Grid></>
+) : (
 
+    <Card className={cx(styles.root, shadowStyles.root)}>
+        <CardContent>
+            <TextInfoContent
+                classes={textCardContentStyles}
+                overline={'Ooops...'}
+                heading={'Sign in to join the fun!'}
+                body={<p>You need to be logged in view this page. Please{' '}
+                <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+            
+        </CardContent>
+    </Card>
+)}
         </motion.div>
     );
 });

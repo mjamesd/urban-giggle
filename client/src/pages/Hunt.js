@@ -81,9 +81,10 @@ const SeattleExploreHunt = () => {
 {Auth.loggedIn() ? (
             <><TextInfoContent
             classes={textCardContentStyles}
-            overline={'SEATTLE'}
-            heading={'EXPLORE HUNT'}
+            overline={hunt.city}
+            heading={hunt.name}
             body={<div>
+              <h1>{hunt.description}</h1>
               <h2>FIND YER BOOTY!</h2>
             </div>} /><Grid classes={gridStyles} container spacing={2}>
               {hunt &&
@@ -94,7 +95,7 @@ const SeattleExploreHunt = () => {
                         <TextInfoContent
                           classes={textCardContentStyles}
                           overline={huntItem.city}
-                          heading={huntItem.name}
+                          heading={`Unknown Location`}
                           body={<div>
                             <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button>
                           </div>} />
