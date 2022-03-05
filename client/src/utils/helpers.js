@@ -3,7 +3,7 @@ export function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-export function validatePassword(password) {
-  const re = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
-  return re.test(String(password));
-}
+// export function validatePassword(password) {
+//   const re = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
+//   return re.test(String(password));
+// }
