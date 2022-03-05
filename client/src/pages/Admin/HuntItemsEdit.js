@@ -12,7 +12,6 @@ import {
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -43,7 +42,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntItemsEdit = React.memo(() => {
+const HuntItemsEdit = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -59,7 +58,7 @@ const HuntItemsEdit = React.memo(() => {
     });
 
     // mutation
-    const [updateHuntItem, { error: updateError }] = useMutation(UPDATE_HUNT_ITEM);
+    const [updateHuntItem] = useMutation(UPDATE_HUNT_ITEM);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -68,7 +67,7 @@ const HuntItemsEdit = React.memo(() => {
             const { data } = await updateHuntItem({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Scavenger Hunt Item "${formState.name}" updated!`);
+            alert(`Scavenger Hunt Item "${data.updateHuntItem.name}" updated!`);
         } catch (err) {
             console.log(err);
         }
@@ -161,6 +160,6 @@ const HuntItemsEdit = React.memo(() => {
             </form>
         </div>
     )
-});
+};
 
 export default HuntItemsEdit;

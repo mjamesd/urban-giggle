@@ -27,9 +27,9 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
-import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
 import Profile from './pages/Profile';
+import DashboardUser from './pages/DashboardUser'
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
@@ -40,7 +40,6 @@ import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 
 //admin pages
-import Dashboard from './pages/Admin/Dashboard'
 import HuntsIndexAdmin from './pages/Admin/HuntsIndex';
 import HuntsAddAdmin from './pages/Admin/HuntsAdd';
 import HuntsViewAdmin from './pages/Admin/HuntsView';
@@ -57,6 +56,7 @@ import BadgesEditAdmin from './pages/Admin/BadgesEdit';
 import UsersIndexAdmin from './pages/Admin/UsersIndex';
 import UsersAddAdmin from './pages/Admin/UsersAdd';
 import UsersViewAdmin from './pages/Admin/UsersView';
+import DashboardAdmin from './pages/Admin/DashboardAdmin';
 // import UsersEditAdmin from './pages/Admin/UsersEdit';
 
 const httpLink = createHttpLink({
@@ -104,6 +104,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/dashboard" element={<DashboardUser />} />
 
                 {/* hunt item routes */}
 
@@ -114,13 +115,12 @@ const App = () => {
                 {/* explore will be removed and replaced with hunts/id */}
                 <Route path="/:huntCity" element={<Hunts />} />
                 <Route path="/:huntCity/:huntId" element={<Hunt />} />
-                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
 
                 {/* admin */}
-                <Route path="/admin" element={<Dashboard />} />
+                <Route path="/admin" element={<DashboardAdmin />} />
                 <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
                 <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
                 <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />

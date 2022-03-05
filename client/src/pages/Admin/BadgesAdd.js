@@ -12,7 +12,7 @@ import {
 // imports for GQL
 import { CREATE_BADGE } from '../../utils/mutations';
 
-const BadgesAdd = React.memo(() => {
+const BadgesAdd = () => {
     const navigate = useNavigate();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
@@ -25,7 +25,7 @@ const BadgesAdd = React.memo(() => {
     });
 
     // mutation
-    const [createBadge, { error: createError }] = useMutation(CREATE_BADGE);
+    const [createBadge] = useMutation(CREATE_BADGE);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -34,7 +34,7 @@ const BadgesAdd = React.memo(() => {
             const { data } = await createBadge({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Badge "${formState.name}" added!`);
+            alert(`Badge "${data.createBadge.name}" added!`);
         } catch (err) {
             console.log(err);
         }
@@ -63,6 +63,6 @@ const BadgesAdd = React.memo(() => {
             </form>
         </div>
   )
-});
+};
 
 export default BadgesAdd;

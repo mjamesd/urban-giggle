@@ -3,11 +3,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-
 import { UPDATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { validateEmail, validatePassword } from '../utils/helpers';
-import { init, sendForm } from '@emailjs/browser';
+import { validateEmail } from '../utils/helpers';
 
 import {
     FormControl,
@@ -23,15 +21,13 @@ import {
 } from '@mui/icons-material'
 
 
-init("NZ0ltP_Q1eOniKe9w");
-
 const UpdateUserForm = ({ user }) => {
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
 
     // form ref for sending any emails
     const form = useRef();
-    const { _id } = useParams();
+   
     const navigate = useNavigate()
 
     // username states
@@ -53,7 +49,7 @@ const UpdateUserForm = ({ user }) => {
 
     // validation messages
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('');
 
 
     // handling the input changes as typed into the form
@@ -108,7 +104,7 @@ const UpdateUserForm = ({ user }) => {
                 });
                 setShowPassword(false)
                 setErrorMessage('');
-                await navigate("/dashboard");
+                await navigate("/");
             } catch (e) {
                 setErrorMessage("I'm sorry, something has gone wrong. Please try again")
                 console.error(e);
@@ -123,7 +119,7 @@ const UpdateUserForm = ({ user }) => {
                 });
                 setShowPassword(false)
                 setErrorMessage('');
-                await navigate("/dashboard");
+                await navigate("/");
             } catch (e) {
                 setErrorMessage("I'm sorry, something has gone wrong. Please try again")
                 console.error(e);

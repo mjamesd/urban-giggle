@@ -1,8 +1,56 @@
 [
     {
         "name": "The First Of Many",
-        "icon": "PlusOne",
-        "description": "You found your first scavenger hunt item!",
+        "icon": "firstmany.png",
+        "description": "You found your first scavenger hunt location! 🔍",
         "points": 5
+    },
+    {
+        "name": "The Big Ten",
+        "icon": "thebigten.png",
+        "description": "You found your tenth scavenger hunt location! 🏅",
+        "points": 10
+    },
+    {
+        "name": "Novice Hunter",
+        "icon": "novicehunter.png",
+        "description": "You completed your first scavenger hunt! 🥇",
+        "points": 10
+    },
+    {
+        "name": "Master Hunter",
+        "icon": "masterhunter.png",
+        "description": "You completed your tenth scavenger hunt! 🎖",
+        "points": 30
+    },
+    {
+        "name": "Bar Crawler",
+        "icon": "barcrawler.png",
+        "description": "You completed a bar crawl scavenger hunt! 🍻",
+        "points": 5
+    },
+    {
+        "name": "Hungry Hunter",
+        "icon": "hungryhunter.png",
+        "description": "You found a scavenger hunt location in a restaurant! 🍽",
+        "points": 2
+    },
+    {
+        "name": "Potent Potables",
+        "icon": "potentpotables.png",
+        "description": "You found a scavenger hunt location in a bar! 🍹",
+        "points": 2
+    },
+    {
+        "name": "Civilized Scavenger",
+        "icon": "civilizedscavenger.png",
+        "description": "You found a scavenger hunt location in a museum! 🖼",
+        "points": 2
+    },
+    {
+        "name": "Wild Wanderer",
+        "icon": "wildwanderer.png",
+        "description": "You found a scavenger hunt location in the great outdoors! 🌲",
+        "points": 2
     }
 ]

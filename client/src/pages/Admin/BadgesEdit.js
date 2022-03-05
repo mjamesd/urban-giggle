@@ -14,7 +14,7 @@ import { GET_BADGE } from '../../utils/queries';
 import { UPDATE_BADGE } from '../../utils/mutations';
 
 
-const BadgesEdit = React.memo(() => {
+const BadgesEdit = () => {
     const navigate = useNavigate();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
@@ -29,7 +29,7 @@ const BadgesEdit = React.memo(() => {
     });
 
     // mutation
-    const [updateBadge, { error: updateError }] = useMutation(UPDATE_BADGE);
+    const [updateBadge] = useMutation(UPDATE_BADGE);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -38,7 +38,7 @@ const BadgesEdit = React.memo(() => {
             const { data } = await updateBadge({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Badge "${formState.name}" updated!`);
+            alert(`Badge "${data.updateBadge.name}" updated!`);
         } catch (err) {
             console.log(err);
         }
@@ -69,8 +69,6 @@ const BadgesEdit = React.memo(() => {
         setFormState({...badge, badgeId: badge._id});
     }
 
-    console.log('THIS BADGE:', badge);
-
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
@@ -89,6 +87,6 @@ const BadgesEdit = React.memo(() => {
             </form>
         </div>
     )
-});
+};
 
 export default BadgesEdit;
