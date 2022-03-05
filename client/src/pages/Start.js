@@ -93,8 +93,8 @@ const Start = () => {
                             classes={textCardContentStyles}
                             overline={'Ooops...'}
                             heading={'Sign in to join the fun!'}
-                            body={<p>You need to be logged in view this page. Please{' '}
-                            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+                            body={<>You need to be logged in view this page. Please{' '}
+                            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
                         
                     </CardContent>
                 </Card>
