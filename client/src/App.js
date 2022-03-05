@@ -27,7 +27,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Start from './pages/Start';
-import SeattleExploreHunt from './pages/SeattleExploreHunt';
 import Custom from './pages/Custom';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
@@ -114,7 +113,6 @@ const App = () => {
                 {/* explore will be removed and replaced with hunts/id */}
                 <Route path="/:huntCity" element={<Hunts />} />
                 <Route path="/:huntCity/:huntId" element={<Hunt />} />
-                <Route path="/seattle/explore" element={<SeattleExploreHunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />

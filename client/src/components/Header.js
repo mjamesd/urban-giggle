@@ -124,7 +124,67 @@ const Header = () => {
                         </>
                     )}
                     {Auth.loggedIn() ? (
-                        <Button onClick={logout}><Link style={styles.links} to="/"><h2>LOGOUT</h2></Link></Button>
+                        <><Button onClick={logout}><Link style={styles.links} to="/"><h2>LOGOUT</h2></Link></Button><Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls={open ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={handleClick}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                }}
+                                PaperProps={{
+                                    elevation: 0,
+                                    sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+                                        '& .MuiAvatar-root': {
+                                            width: 32,
+                                            height: 32,
+                                            ml: -0.5,
+                                            mr: 1,
+                                        },
+                                        '&:before': {
+                                            content: '""',
+                                            display: 'block',
+                                            position: 'absolute',
+                                            top: 0,
+                                            right: 14,
+                                            width: 10,
+                                            height: 10,
+                                            bgcolor: 'background.paper',
+                                            transform: 'translateY(-50%) rotate(45deg)',
+                                            zIndex: 0,
+                                        },
+                                    },
+                                }}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link style={styles.dropdownLinks} to="/profile">PROFILE</Link>
+                                </MenuItem>
+                                <br />
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link style={styles.dropdownLinks} to="/dashboard">DASHBOARD</Link>
+                                </MenuItem>
+                            </Menu>
+
+                        </Box></>
                     ) : (
                         <>
                             <MenuItem onClick={handleCloseUserMenu}>
@@ -136,67 +196,6 @@ const Header = () => {
                         </>
                     )}
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls={open ? 'basic-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                                onClick={handleClick}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                            PaperProps={{
-                                elevation: 0,
-                                sx: {
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                    mt: 1.5,
-                                    '& .MuiAvatar-root': {
-                                        width: 32,
-                                        height: 32,
-                                        ml: -0.5,
-                                        mr: 1,
-                                    },
-                                    '&:before': {
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                            }}
-                            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                        >
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Link style={styles.dropdownLinks} to="/profile">PROFILE</Link>
-                            </MenuItem>
-                            <br />
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Link style={styles.dropdownLinks} to="/dashboard">DASHBOARD</Link>
-                            </MenuItem>
-                        </Menu>
-
-                    </Box>
                 </Toolbar>
             </Container>
         </AppBar>

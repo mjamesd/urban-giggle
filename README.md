@@ -42,7 +42,7 @@ If you have any questions about this application or would like to report and iss
 
 ### Example
 The following image demonstrates the site's application appearance and functionality.
-![Total Quest]()
+![Total Quest](example.png)
 ***
 
 ### Link to Total Quest
