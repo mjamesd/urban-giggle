@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams, Link } from 'react-router-dom';
@@ -49,6 +49,8 @@ const HuntItem = () => {
     const huntItem = huntItemData?.huntItem || {};
     const currentUser = userData?.me || {};
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     if (huntItemLoading) {
         return <h2>LOADING.....</h2>
     }
@@ -57,12 +59,41 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
+    let huntItemSeach = [currentUser.foundHuntItems]
+    let userFound 
+
+    huntItemSeach.forEach(huntItem => {
+        if(huntItem._id === huntItemId) {
+            userFound = true
+            return 
+        } else {
+            userFound = false
+            return
+        }
+    }
+    )
+
+    if (userFound) {
+        return (
+            <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+            <CardContent>
+                <TextInfoContent
+                    classes={textCardContentStyles}
+                    overline={huntItem.name}
+                    heading={'Congratulations! 🎉 '}
+                    body={<div>
+                        
+                        <p>You have found this location!</p>
+                        
+                    </div>} />
+            </CardContent>
+        </Card>
+            )
+    }
+
     const hintTwoDisplayedTo = huntItem.hint2DisplayedTo.map(user => user._id)
     const hintThreeDisplayedTo = huntItem.hint3DisplayedTo.map(user => user._id)
     const solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
-
-
-
 
     const hintBody = () => {
         
@@ -79,7 +110,9 @@ const HuntItem = () => {
                         <p>{ReactHtmlParser(huntItem.hint1)}</p>
                         
                     </div>} />
+                   
             </CardContent>
+            
         </Card>
               <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
@@ -91,7 +124,9 @@ const HuntItem = () => {
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
                                    
                                 </div>} />
+                                
                         </CardContent>
+                        
                     </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                             <CardContent>
                                 <TextInfoContent
@@ -102,6 +137,7 @@ const HuntItem = () => {
                                         <p>{ReactHtmlParser(huntItem.hint3)}</p>
                                         
                                     </div>} />
+                                    
                             </CardContent>
                         </Card>
             <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -155,7 +191,11 @@ const HuntItem = () => {
                                     body={<div>
                                         <p>{ReactHtmlParser(huntItem.hint3)}</p>
                                         <Button className={buttonStyles} onClick={displaySolution}>Need Final Hint? (-1 pt)</Button>
-                                    </div>} />
+                                    </div>} />{errorMessage && (
+
+<p>{errorMessage}</p>
+
+)}
                             </CardContent>
                         </Card></>
             )
@@ -184,7 +224,11 @@ const HuntItem = () => {
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
                                     <Button className={buttonStyles} onClick={displayHintThree}>Need another hint? (-1 pt)</Button>
-                                </div>} />
+                                </div>} />{errorMessage && (
+
+<p>{errorMessage}</p>
+
+)}
                         </CardContent>
                     </Card></>
              )
@@ -201,7 +245,11 @@ const HuntItem = () => {
                     body={<div>
                         <p>{ReactHtmlParser(huntItem.hint1)}</p>
                         <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
-                    </div>} />
+                    </div>} />{errorMessage && (
+
+<p>{errorMessage}</p>
+
+)}
             </CardContent>
         </Card>
              )
@@ -212,21 +260,33 @@ const HuntItem = () => {
 
 
     const displayHintTwo = async () => {
-        const { data: hintData } = await userAsksForHint({
+        try {
+            const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, hint2: true },
-        });
+        })} catch(e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+            
+        }
     }
 
     const displayHintThree = async () => {
+        try {
         const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, hint3: true },
-        });
+        })}
+        catch(e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+            
+        }
     }
 
     const displaySolution = async () => {
+        try {
         const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, solution: true },
-        });
+        })} catch(e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+        }
     }
 
 
