@@ -1,14 +1,44 @@
 [
     {
+        "name": "Explore Seattle",
+        "city": "Seattle",
+        "description": "The most incredible & strange sights that Seattle has to offer.",
+        "points": 20
+    },
+    {
+        "name": "Explore Spokane",
+        "city": "Spokane",
+        "description": "The most incredible & strange sights that Spokane has to offer.",
+        "points": 20
+    },
+    {
+        "name": "Indulge Seattle",
+        "city": "Seattle",
+        "description": "Discover new restaurants and bars in Seattle.",
+        "points": 10
+    },
+    {
+        "name": "Indulge Spokane",
+        "city": "Spokane",
+        "description": "Discover new restaurants and bars in Spokane.",
+        "points": 10
+    },
+    {
+        "name": "Seattle Bar Crawl",
+        "city": "Seattle",
+        "description": "Complete this scavenger hunt responsibly!",
+        "points": 5
+    },
+    {
+        "name": "Spokane Bar Crawl",
+        "city": "Spokane",
+        "description": "Complete this scavenger hunt responsibly!",
+        "points": 5
+    },
+    {
         "name": "Mark's Vegan Restaurant Scavenger Hunt!",
         "city": "Seattle",
         "description": "Discover all the best vegan restaurants in Seattle (according to Mark).",
-        "points": 50
-      },
-      {
-        "name": "Seattle Tourism Hunt",
-        "city": "Seattle",
-        "description": "The most incredible & strange sights that Seattle has to offer.",
-        "points": 5
-      }
+        "points": 10
+    }
 ]
