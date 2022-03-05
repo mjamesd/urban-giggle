@@ -63,6 +63,12 @@ const HuntsEdit = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+            setFormState({
+                ...formState,
+                huntItems: formState.huntItems.map(item => item._id),
+                rewards: formState.rewards.map(item => item._id)
+            });
+            console.log(formState);
             const pointsInt = parseInt(formState.points);
             const { data } = await updateHunt({
                 variables: { ...formState, points: pointsInt },
@@ -83,7 +89,7 @@ const HuntsEdit = () => {
         let huntItemName = '';
         huntItems.forEach(huntItem => {
             if (huntItem._id === huntItemId)
-            huntItemName = huntItem.name;
+                huntItemName = huntItem.name;
         });
         return huntItemName;
     }
@@ -164,7 +170,7 @@ const HuntsEdit = () => {
                                     value={huntItem._id}
                                     style={getStyles(huntItem._id, formState.huntItems, theme)}
                                 >
-                                    {huntItem.name}
+                                    {huntItem.name} ({huntItem.category}, {huntItem.city})
                                 </MenuItem>
                             ))}
                         </Select>

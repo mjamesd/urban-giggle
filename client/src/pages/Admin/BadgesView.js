@@ -33,7 +33,7 @@ const BadgesView = () => {
             <Button onClick={()=> navigate('../admin/badges')} className={buttonStyles}>Badges</Button>
             <h1>{badge.name}</h1>
             <p>Description: {badge.description}</p>
-            <p>Icon: <img src={badge.icon} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></p>
+            <p>Icon: <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></p>
             <p>Points awarded when completed: {badge.points}</p>
         </div>
     )

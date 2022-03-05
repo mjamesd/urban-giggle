@@ -11,6 +11,14 @@ import Confetti from 'react-confetti'
 import { useQuery } from '@apollo/client';
 import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
 import { useParams } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+import CardMedia from '@material-ui/core/CardMedia';
+import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+import Wall from '../components/Wall'
+import { CHANGE_POINTS } from '../utils/mutations'
+import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
 
 
 const useStyles = makeStyles(() => ({
@@ -27,8 +35,10 @@ const useStyles = makeStyles(() => ({
 
 const Victory = () => {
     const styles = useStyles();
+    const mediaStyles = useCoverCardMediaStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const { qrId } = useParams();
     console.log('qrId: ', qrId)
     const { loading, data } = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
@@ -38,13 +48,13 @@ const Victory = () => {
     console.log('Hunt Item Data: ', data)
 
     const huntItem = data?.huntItemByQrCode || {};
- 
+
 
 
     if (loading) {
         return <h2>LOADING.....</h2>
-    } 
-   console.log('HUNT ITEM: ', huntItem)
+    }
+    console.log('HUNT ITEM: ', huntItem)
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -53,8 +63,9 @@ const Victory = () => {
             transition={{ duration: 1 }}
         >
 
-            <main>
+            <main style={{ backgroundImage: `url(https://uploads.visitseattle.org/2017/02/30115610/IMG_1491.jpg)`, backgroundSize: 'cover', overflow: 'hidden', padding: '10vh' }}>
                 <Card className={cx(styles.root, shadowStyles.root)}>
+
                     <CardContent>
                         <TextInfoContent
                             classes={textCardContentStyles}
@@ -63,11 +74,16 @@ const Victory = () => {
                             body={<div>
                                 <p>Congratulations on completing your hunt! You found the {huntItem.name}!</p>
                                 <p>You just earned {huntItem.points} points!</p>
-                                </div>
+                                <p>{huntItem.rewards}</p>
+                                <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
+                            </div>
                             }
                         />
                     </CardContent>
                 </Card>
+                            <br />
+                <Wall huntItemId={huntItem._id} huntItem={huntItem} />
+
             </main>
             <Confetti />
         </motion.div>

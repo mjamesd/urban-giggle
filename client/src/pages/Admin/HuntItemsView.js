@@ -88,7 +88,7 @@ const HuntItemsView = () => {
                     <li key={badge._id}>
                         <div>
                             <p>Name: {badge.name}</p>
-                            <p><img src={badge.icon} alt={badge.icon} style={{width: '100px', border: '1px solid black'}} /></p>
+                            <p><img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></p>
                             <p>Description: {badge.description}</p>
                             <p>Points awarded when receive badge: {badge.points}</p>
                         </div>

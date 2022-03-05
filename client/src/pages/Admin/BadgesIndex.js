@@ -63,7 +63,7 @@ const BadgesIndex = () => {
                     {badges.map(badge => (
                         <tr key={badge._id}>
                             <td>{badge.name}</td>
-                            <td><img src={badge.icon} alt={badge.icon} style={{width: '100px', border: '1px solid black'}} /></td>
+                            <td><img src={`../../img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></td>
                             <td>{badge.description}</td>
                             <td>{badge.points}</td>
                             <td>
