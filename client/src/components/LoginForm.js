@@ -72,6 +72,7 @@ const LoginForm = () => {
             });
             Auth.login(data.login.token);
             setSuccessMessage('Login Successful! Welcome Back!')
+            window.history.go(-1)
         } catch (e) {
             console.error(e);
             setErrorMessage('Something has gone wrong');
