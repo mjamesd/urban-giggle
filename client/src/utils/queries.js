@@ -16,79 +16,55 @@ import { gql } from '@apollo/client';
 //tested in playground, works
 export const GET_USER = gql`
 query user($userId: ID!) {
-  user(userId: $userId) {
-    _id
-    username
-    email
-    password
-    userType
-    points
-    createdAt
-    foundHuntItems {
-    	  _id
-    		name
-   			city
-    		qrId
-    		hint1
-    		hint2
-    		hint3
-    		solutionLocation
-   			solutionDescription
-    		solutionImg
-    		points
-    }
-    completedHunts{
-      _id
-    	name
-      city
-    	description
-    	points
-    	huntItems{
-         _id
-    		name
-   			city
-    		qrId
-    		hint1
-    		hint2
-    		hint3
-    		solutionLocation
-   			solutionDescription
-    		solutionImg
-    		points
-      }
-    }
-    badges{
-      _id
-    	name
-   		icon
-    	description
-    	points
-    }
-    favoriteHunts{
-      name
-      city
-      description
-      points
-      huntItems{
-        name
-        qrId
-        city
-        hint1
-        hint2
-        hint3
-        solutionLocation
-        solutionDescription
-        solutionImg
+    user(userId: $userId) {
+        _id
+        username
+        email
+        password
+        userType
         points
-        rewards{
-          name
-          icon
-          description
-          points
+        createdAt
+        foundHuntItems {
+            _id
+            name
+            city
+            qrId
+            hint1
+            hint2
+            hint3
+            solutionLocation
+            solutionDescription
+            solutionImg
+            points
         }
-      }
+        completedHunts {
+            _id
+            name
+            city
+            description
+            points
+            huntItems {
+                _id
+                name
+                city
+                qrId
+                hint1
+                hint2
+                hint3
+                solutionLocation
+                solutionDescription
+                solutionImg
+                points
+            }
+        }
+        badges {
+            _id
+            name
+            icon
+            description
+            points
+        }
     }
-  }
 }
 `
 //tested in playground, works

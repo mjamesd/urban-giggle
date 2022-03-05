@@ -68,21 +68,21 @@ const resolvers = {
         // USER
         users: async () => {
             return User.find().populate('completedHunts').populate('foundHuntItems')
-                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
+                .populate('badges');
         },
         user: async (parent, { userId }) => {
             if (!userId)
                 return new MissingArgumentError('User_user: no userId');
 
-            return User.findById(userId).populate('completedHunts').populate('foundHuntItems')
-                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
+            return User.findById(userId).populate('completedHunts').populate({path: 'completedHunts', populate: ['huntItems']})
+                .populate('foundHuntItems').populate('badges');
         },
         me: async (parent, args, context) => {
             if (!context.user)
                 return new AuthenticationError("You need to be logged in! (me)");
 
             return User.findById(context.user._id).populate('completedHunts').populate('foundHuntItems')
-                .populate('badges').populate('favoriteHunts').populate('favoriteHuntItems');
+                .populate('badges');
         },
     },
 
@@ -383,12 +383,13 @@ const resolvers = {
         userCompletedHunt: async (parent, { huntId }, context) => {
             if (!context.user)
                 return new AuthenticationError("You need to be logged in!");
-            const hunt = await Hunt.findById(huntId);
+            const hunt = await Hunt.findById(huntId).populate('huntItems').populate('rewards');
+            let badgesToAdd = hunt.rewards.map(item => item._id);
             const user = await User.findByIdAndUpdate(
                 context.user._id,
                 {
                     $inc: { points: hunt.points },
-                    $addToSet: { completedHunts: huntId, badges: hunt.rewards },
+                    $addToSet: { completedHunts: huntId, badges: badgesToAdd },
                 },
                 {
                     new: true,

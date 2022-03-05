@@ -40,8 +40,6 @@ const DashboardUser = () => {
     });
     const user = data?.user || [];
 
-    
-
     if (loading) {
         return <h2>LOADING.....</h2>
     }
