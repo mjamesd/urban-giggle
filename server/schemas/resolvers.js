@@ -217,7 +217,6 @@ const resolvers = {
     <div class="guestbook-timestamp">${timestamp}</div>
 </div>`;
             const huntItem = await HuntItem.findById(huntItemId);
-            // console.log(huntItem);
             huntItem.guestbook.push(newMessage);
             huntItem.save((err) => {
                 if (err) return new Error(err);
@@ -396,7 +395,6 @@ const resolvers = {
                 }
             ).populate('completedHunts').populate('foundHuntItems');
             const token = signToken(user);
-            console.log(user);
             return { token, user };
         },
         // Hunts and huntItems that reward user with badge(s) already have this coded into them, so this is not needed for those actions.
