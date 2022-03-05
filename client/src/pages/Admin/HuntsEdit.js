@@ -63,6 +63,12 @@ const HuntsEdit = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+            setFormState({
+                ...formState,
+                huntItems: formState.huntItems.map(item => item._id),
+                rewards: formState.rewards.map(item => item._id)
+            });
+            console.log(formState);
             const pointsInt = parseInt(formState.points);
             const { data } = await updateHunt({
                 variables: { ...formState, points: pointsInt },
