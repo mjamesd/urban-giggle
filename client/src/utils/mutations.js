@@ -397,7 +397,7 @@ export const USER_FOUND_HUNT_ITEM = gql`
     userFoundHuntItem(huntItemId: $huntItemId){
       token
       user{
-        foundItems{
+        foundHuntItems{
           _id
         }
       }

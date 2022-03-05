@@ -8,8 +8,6 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import Confetti from 'react-confetti'
-import { useQuery } from '@apollo/client';
-import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
 import { useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
@@ -17,7 +15,9 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import CardMedia from '@material-ui/core/CardMedia';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import Wall from '../components/Wall'
-import { CHANGE_POINTS } from '../utils/mutations'
+import { useQuery } from '@apollo/client';
+import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
+import { useMutation } from '@apollo/client';
 import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
 
 
@@ -40,21 +40,37 @@ const Victory = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const { qrId } = useParams();
-    console.log('qrId: ', qrId)
-    const { loading, data } = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
+
+
+    const { loading: qrLoading, data: qrData} = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
         // pass URL parameter
         variables: { qrId: qrId },
     });
-    console.log('Hunt Item Data: ', data)
 
-    const huntItem = data?.huntItemByQrCode || {};
+    const [userFoundHuntItem, { error }] = useMutation(USER_FOUND_HUNT_ITEM);
+
+    const huntItem = qrData?.huntItemByQrCode || {};
 
 
 
-    if (loading) {
+    if (qrLoading) {
         return <h2>LOADING.....</h2>
     }
-    console.log('HUNT ITEM: ', huntItem)
+
+
+    const claimPrize = async () => {
+        try {
+            const { data: foundData } = await userFoundHuntItem({
+                variables: { huntItemId: huntItem._id},
+            })
+            console.log(foundData)
+        }
+            catch(e) {
+                console.log(e)
+            }
+    }
+
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -71,12 +87,13 @@ const Victory = () => {
                             classes={textCardContentStyles}
                             overline={'You did it!'}
                             heading={'CONGRATULATIONS'}
-                            body={<div>
-                                <p>Congratulations on completing your hunt! You found the {huntItem.name}!</p>
-                                <p>You just earned {huntItem.points} points!</p>
-                                <p>{huntItem.rewards}</p>
+                            body={<>
+                                Congratulations on completing your hunt! You found the {huntItem.name}!<br/><br/>
+
+                                <Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br/><br/>
+
                                 <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
-                            </div>
+                            </>
                             }
                         />
                     </CardContent>
