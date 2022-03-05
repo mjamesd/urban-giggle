@@ -1,26 +1,17 @@
 import React, { useState, useRef } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { validateEmail, validatePassword } from '../utils/helpers';
-import { init, sendForm } from '@emailjs/browser';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { motion } from 'framer-motion';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import Confetti from 'react-confetti'
-import { useQuery } from '@apollo/client';
-import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
 import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { SIGN_GUEST_BOOK } from '../utils/mutations'
+import ReactHtmlParser from 'react-html-parser';
 
 import {
     FormControl,
@@ -52,7 +43,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-const Wall = ({ huntItemId}) => {
+const Wall = ({ huntItemId, huntItem }) => {
 
     const styles = useStyles();
     const mediaStyles = useCoverCardMediaStyles();
@@ -85,7 +76,7 @@ const Wall = ({ huntItemId}) => {
 
         try {
             const { data } = await post({
-                variables: { huntItemId,  message: message },
+                variables: { huntItemId, message: message },
             });
 
         } catch (err) {
@@ -98,21 +89,41 @@ const Wall = ({ huntItemId}) => {
 
     };
 
+    console.log("HUNTITEM", huntItem)
+    console.log(huntItemId, "huntItemId")
 
-
-    return (
+    return (<>
         <Card className={cx(styles.root, shadowStyles.root)}>
             <CardContent>
                 <FormGroup>
-                <FormControl>
-                    <InputLabel htmlFor="note-input">Sign the wall!</InputLabel>
-                    <Input id="note-input" aria-describedby="note-helper-text" onChange={handleChange}/>
-                    <FormHelperText id="note-helper-text">Leave a note for those who will come later.</FormHelperText>
-                    <Button onClick={handleFormSubmit} className={buttonStyles}>Submit</Button>
-                </FormControl>
+                    <FormControl>
+                        <InputLabel htmlFor="note-input">Sign the wall!</InputLabel>
+                        <Input id="note-input" aria-describedby="note-helper-text" onChange={handleChange} />
+                        <FormHelperText id="note-helper-text">Leave a note for those who will come later.</FormHelperText>
+                        <Button onClick={handleFormSubmit} className={buttonStyles}>Submit</Button>
+                    </FormControl>
                 </FormGroup>
             </CardContent>
-        </Card>)
+        </Card>
+        <br />
+        <Card style={{textAlign: 'center'}} className={cx(styles.root, shadowStyles.root)}>
+            <h1>THE WALL</h1>
+            {huntItem.guestbook && huntItem.guestbook.map(message => (
+                <div>
+                    <Card className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <h2>{ReactHtmlParser(message)}</h2>
+                        </CardContent>
+                    </Card>
+                    <br />
+                </div>
+            ))}
+        </Card>
+
+
+    </>
+    )
+
 }
 
 export default Wall

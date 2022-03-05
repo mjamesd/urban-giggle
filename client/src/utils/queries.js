@@ -437,7 +437,7 @@ query huntItemByQrCode($qrId: String!) {
       points
 
     }
-   
+   guestbook
   }
 }
 
