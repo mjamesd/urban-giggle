@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -15,6 +15,7 @@ import { useMutation } from '@apollo/client';
 import { GET_HUNT_ITEM, QUERY_ME } from '../utils/queries';
 import { USER_ASKS_FOR_HINT } from '../utils/mutations';
 import Stack from '@mui/material/Stack';
+import Auth from '../utils/auth';
 
 
 const useStyles = makeStyles(() => ({
@@ -37,7 +38,6 @@ const HuntItem = () => {
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
     const { huntItemId } = useParams()
-    console.log(huntItemId)
     const { data: huntItemData, loading: huntItemLoading } = useQuery(GET_HUNT_ITEM, {
         // pass URL parameter
         variables: { huntItemId: huntItemId },
@@ -55,10 +55,6 @@ const HuntItem = () => {
     if (userLoading) {
         return <h2>LOADING.....</h2>
     }
-
-
-    console.log(huntItem, "HUNT ITEM")
-    console.log(currentUser, "CURRENT USER!!")
 
     const hintTwoDisplayedTo = huntItem.hint2DisplayedTo.map(user => user._id)
     const hintThreeDisplayedTo = huntItem.hint3DisplayedTo.map(user => user._id)
@@ -215,34 +211,28 @@ const HuntItem = () => {
 
 
     const displayHintTwo = async () => {
-        console.log("HINT ONE CLICKED!!!")
         const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, hint2: true },
         });
-        console.log(hintData)
     }
 
     const displayHintThree = async () => {
-        console.log("HINT TWO CLICKED!!!")
         const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, hint3: true },
         });
-        console.log(hintData)
     }
 
     const displaySolution = async () => {
-        console.log("Solution CLICKED!!!")
         const { data: hintData } = await userAsksForHint({
             variables: { huntItemId: huntItemId, solution: true },
         });
-        console.log(hintData)
     }
 
 
 
 
     return (
-
+        
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 2 }}
@@ -251,10 +241,24 @@ const HuntItem = () => {
         >
 
             <main>
+            {Auth.loggedIn() ? (
                 <Stack spacing={2} justifyContent="center" alignItems="center">
                     
                    {hintBody()}
-                </Stack>
+                </Stack>) : (
+
+<Card className={cx(styles.root, shadowStyles.root)}>
+    <CardContent>
+        <TextInfoContent
+            classes={textCardContentStyles}
+            overline={'Ooops...'}
+            heading={'Sign in to join the fun!'}
+            body={<p>You need to be logged in view this page. Please{' '}
+            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+        
+    </CardContent>
+</Card>
+)}
             </main>
         </motion.div>
     );
