@@ -172,6 +172,10 @@ const Header = () => {
                                         </>
                                     )}
                                     <MenuItem onClick={handleClose}>
+                                        <Button><Link style={styles.links} to="/profile">CURRENT POINTS : {Auth.getProfile().data.points}</Link></Button>
+                                    </MenuItem>
+                                    <br />
+                                    <MenuItem onClick={handleClose}>
                                         <Button><Link style={styles.links} to="/profile">PROFILE</Link></Button>
                                     </MenuItem>
                                     <br />

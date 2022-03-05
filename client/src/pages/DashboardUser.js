@@ -1,15 +1,12 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
@@ -31,8 +28,6 @@ const DashboardUser = () => {
     const styles = useStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
-    const navigate = useNavigate();
-    const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
     
     const { loading, data } = useQuery(GET_USER, {

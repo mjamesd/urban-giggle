@@ -424,6 +424,29 @@ export const USER_COMPLETED_HUNT = gql`
 `
 
 // userAddBadge(badgeId: ID!): Auth
+export const USER_ADD_BADGE = gql`
+mutation userAwardedBadge($badgeId: ID!) {
+    userAddBadge(badgeId: $badgeId) {
+        token
+        user {
+            __typename
+            _id
+            username
+            points
+            badges {
+                __typename
+                _id
+                name
+                icon
+                description
+                points
+            }
+        }
+    }
+}
+`;
+
+
 //need auth to test
 export const CREATE_BADGE = gql`
 mutation createNewBadge(
