@@ -12,7 +12,6 @@ import {
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -43,7 +42,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntsEdit = React.memo(() => {
+const HuntsEdit = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -59,7 +58,7 @@ const HuntsEdit = React.memo(() => {
     });
 
     // mutation
-    const [updateHunt, { error: updateError }] = useMutation(UPDATE_HUNT);
+    const [updateHunt] = useMutation(UPDATE_HUNT);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -68,19 +67,16 @@ const HuntsEdit = React.memo(() => {
             const { data } = await updateHunt({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Scavenger Hunt "${formState.name}" updated!`);
+            alert(`Scavenger Hunt "${data.updateHunt.name}" updated!`);
         } catch (err) {
             console.log(err);
         }
-        navigate('../admin/hunts '); // go to index page
+        navigate('../admin/hunts'); // go to index page
     };
 
     const handleChange = (event) => {
         let { name, value } = event.target;
-        console.log('changed: ', name, ': ', value);
-
         setFormState({ ...formState, [name]: value });
-        console.log('STATE CHANGED!!!!', formState);
     };
 
     const getHuntItemName = (huntItemId) => {
@@ -95,8 +91,6 @@ const HuntsEdit = React.memo(() => {
     const getBadgeName = (badgeId) => {
         let badgeName = '';
         badges.forEach(badge => {
-            console.log(badge._id);
-            console.log(badgeId);
             if (badge._id === badgeId)
                 badgeName = badge.name;
         });
@@ -214,6 +208,6 @@ const HuntsEdit = React.memo(() => {
             </form>
         </div>
     )
-});
+};
 
 export default HuntsEdit;
