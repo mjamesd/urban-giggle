@@ -12,10 +12,10 @@ import {
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import Auth from '../../utils/auth';
 
 // imports for GQL
 import { GET_HUNT_ITEMS, GET_BADGES } from '../../utils/queries';
@@ -43,7 +43,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntsAdd = React.memo(() => {
+const HuntsAdd = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -59,7 +59,7 @@ const HuntsAdd = React.memo(() => {
     });
 
     // mutation
-    const [createHunt, { error: createError }] = useMutation(CREATE_HUNT);
+    const [createHunt] = useMutation(CREATE_HUNT);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -69,10 +69,14 @@ const HuntsAdd = React.memo(() => {
                 variables: { ...formState, points: pointsInt },
             });
             alert(`Scavenger Hunt "${formState.name}" added!`);
+            if (Auth.getProfile().data.userType === 'organizer') {
+                navigate(`./view/${data.createHunt._id}`);
+            } else {
+                navigate('../admin/hunts '); // go to index page
+            }
         } catch (err) {
             console.log(err);
         }
-        navigate('../admin/hunts '); // go to index page
     };
 
     const handleChange = (event) => {
@@ -192,6 +196,6 @@ const HuntsAdd = React.memo(() => {
             </form>
         </div>
   )
-});
+};
 
 export default HuntsAdd;

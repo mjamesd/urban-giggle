@@ -15,12 +15,9 @@ const BadgesView = () => {
     });
     const badge = data?.badge || [];
 
-
     if (loading) {
         return <h2>LOADING.....</h2>
     }
-
-    console.log(badge);
     /*
         __typename
         _id

@@ -9,7 +9,7 @@ import { REMOVE_HUNT } from '../../utils/mutations';
 const Hunts = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNTS);
-    const [removeHunt, { rHerror }] = useMutation(REMOVE_HUNT);
+    const [removeHunt, { error: rHerror }] = useMutation(REMOVE_HUNT);
     const hunts = data?.hunts || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -37,7 +37,7 @@ const Hunts = () => {
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
-            <h1>Hunts</h1>
+            <h1>Scavenger Hunts</h1>
             <Button onClick={() => navigate('./add')} className={buttonStyles}>Add Hunt</Button>
             <table>
                 <thead>
