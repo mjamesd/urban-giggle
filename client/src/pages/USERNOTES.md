@@ -54,3 +54,5 @@ HuntItem.js -- The hint page
 
 /victory/:huntItemId (Victory page for that hunt item)
 
+huntItem
+
