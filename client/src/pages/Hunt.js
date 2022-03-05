@@ -95,9 +95,9 @@ const SeattleExploreHunt = () => {
                         <TextInfoContent
                           classes={textCardContentStyles}
                           overline={huntItem.city}
-                          heading={`Unknown Location`}
+                          heading={`Unknown ${huntItem.category}`}
                           body={<div>
-                            <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button>
+                            <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button><br/><br/>
                           </div>} />
                       </CardContent>
                     </Card>

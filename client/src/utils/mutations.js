@@ -363,7 +363,6 @@ export const USER_ASKS_FOR_HINT = gql`
         _id
         hint2
         hint3
-        solution
         points
         hint2DisplayedTo{
           _id
