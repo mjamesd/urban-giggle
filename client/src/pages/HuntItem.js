@@ -16,6 +16,7 @@ import { GET_HUNT_ITEM, QUERY_ME } from '../utils/queries';
 import { USER_ASKS_FOR_HINT } from '../utils/mutations';
 import Stack from '@mui/material/Stack';
 import Auth from '../utils/auth';
+import ReactHtmlParser from 'react-html-parser';
 
 
 const useStyles = makeStyles(() => ({
@@ -75,7 +76,7 @@ const HuntItem = () => {
                     overline={`Unknown ${huntItem.category}`}
                     heading={`HINT NUMBER 1`}
                     body={<div>
-                        <p>{huntItem.hint1}</p>
+                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
                         
                     </div>} />
             </CardContent>
@@ -87,7 +88,7 @@ const HuntItem = () => {
                                 overline={`Unknown ${huntItem.category}`}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
-                                    <p>{huntItem.hint2}</p>
+                                    <p>{ReactHtmlParser(huntItem.hint2)}</p>
                                    
                                 </div>} />
                         </CardContent>
@@ -98,7 +99,7 @@ const HuntItem = () => {
                                     overline={`Unknown ${huntItem.category}`}
                                     heading={`HINT NUMBER 3`}
                                     body={<div>
-                                        <p>{huntItem.hint3}</p>
+                                        <p>{ReactHtmlParser(huntItem.hint3)}</p>
                                         
                                     </div>} />
                             </CardContent>
@@ -110,8 +111,8 @@ const HuntItem = () => {
                         overline={`Unknown ${huntItem.category}`}
                         heading={`FINAL HINT`}
                         body={<div>
-                            <p>{huntItem.solutionDescription}</p>
-                            <p>{huntItem.solutionLocation}</p>
+                            <p>{ReactHtmlParser(huntItem.solutionDescription)}</p>
+                            <p>{ReactHtmlParser(huntItem.solutionLocation)}</p>
                         </div>} />
                 </CardContent>
             </Card></>
@@ -129,7 +130,7 @@ const HuntItem = () => {
                     overline={`Unknown ${huntItem.category}`}
                     heading={`HINT NUMBER 1`}
                     body={<div>
-                        <p>{huntItem.hint1}</p>
+                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
                         
                     </div>} />
             </CardContent>
@@ -141,7 +142,7 @@ const HuntItem = () => {
                                 overline={`Unknown ${huntItem.category}`}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
-                                    <p>{huntItem.hint2}</p>
+                                    <p>{ReactHtmlParser(huntItem.hint2)}</p>
                                     
                                 </div>} />
                         </CardContent>
@@ -152,7 +153,7 @@ const HuntItem = () => {
                                     overline={`Unknown ${huntItem.category}`}
                                     heading={`HINT NUMBER 3`}
                                     body={<div>
-                                        <p>{huntItem.hint3}</p>
+                                        <p>{ReactHtmlParser(huntItem.hint3)}</p>
                                         <Button className={buttonStyles} onClick={displaySolution}>Need Final Hint? (-1 pt)</Button>
                                     </div>} />
                             </CardContent>
@@ -170,7 +171,7 @@ const HuntItem = () => {
                             overline={`Unknown ${huntItem.category}`}
                             heading={`HINT NUMBER 1`}
                             body={<div>
-                                <p>{huntItem.hint1}</p>
+                                <p>{ReactHtmlParser(huntItem.hint1)}</p>
                                 
                             </div>} />
                     </CardContent>
@@ -181,7 +182,7 @@ const HuntItem = () => {
                                 overline={`Unknown ${huntItem.category}`}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
-                                    <p>{huntItem.hint2}</p>
+                                    <p>{ReactHtmlParser(huntItem.hint2)}</p>
                                     <Button className={buttonStyles} onClick={displayHintThree}>Need another hint? (-1 pt)</Button>
                                 </div>} />
                         </CardContent>
@@ -198,7 +199,7 @@ const HuntItem = () => {
                     overline={`Unknown ${huntItem.category}`}
                     heading={`HINT NUMBER 1`}
                     body={<div>
-                        <p>{huntItem.hint1}</p>
+                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
                         <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
                     </div>} />
             </CardContent>
