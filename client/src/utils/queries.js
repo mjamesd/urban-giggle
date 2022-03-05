@@ -267,7 +267,6 @@ query huntItem{
     guestbook
   }
 }
-
 `
 
 //tested in playground, works
@@ -383,28 +382,6 @@ query huntItemByQrCode($qrId: String!) {
     name
     qrId 
     qrCode
-    city
-    hint1
-    hint2
-    hint2DisplayedTo{
-      __typename
-      _id
-      username
-    }
-    hint3
-    hint3DisplayedTo{
-      __typename
-      _id
-      username
-    }
-    solutionLocation
-    solutionDescription
-    solutionDisplayedTo{
-      __typename
-      _id
-      username
-    }
-    solutionImg
     points
     rewards{
       _id
@@ -412,12 +389,10 @@ query huntItemByQrCode($qrId: String!) {
       icon
       description
       points
-
     }
    guestbook
   }
 }
-
 `
 
 export const GET_BADGES = gql`
@@ -429,12 +404,10 @@ query badge {
     description
     points
   }
-
 }
 `
 
 export const GET_BADGE = gql`
-
 query badge($badgeId: ID!){
   badge(badgeId: $badgeId){
     _id
@@ -445,5 +418,3 @@ query badge($badgeId: ID!){
   }
 }
 `
-
-
