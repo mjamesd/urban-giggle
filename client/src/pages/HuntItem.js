@@ -60,12 +60,12 @@ const HuntItem = () => {
     }
 
     let huntItemSeach = [currentUser.foundHuntItems]
-    let userFound 
+    let userFound
 
     huntItemSeach.forEach(huntItem => {
-        if(huntItem._id === huntItemId) {
+        if (huntItem._id === huntItemId) {
             userFound = true
-            return 
+            return
         } else {
             userFound = false
             return
@@ -76,19 +76,20 @@ const HuntItem = () => {
     if (userFound) {
         return (
             <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-            <CardContent>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={huntItem.name}
-                    heading={'Congratulations! 🎉 '}
-                    body={<div>
-                        
-                        <p>You have found this location!</p>
-                        
-                    </div>} />
-            </CardContent>
-        </Card>
-            )
+                <CardContent>
+                    <TextInfoContent
+                        classes={textCardContentStyles}
+                        overline={`${huntItem.solutionLocation}`}
+                        heading={'Congratulations! 🎉 '}
+                        body={<div>
+
+                            <p>You have found this location!</p>
+                            <p>{huntItem.solutionDescription}</p>
+
+                        </div>} />
+                </CardContent>
+            </Card>
+        )
     }
 
     const hintTwoDisplayedTo = huntItem.hint2DisplayedTo.map(user => user._id)
@@ -96,25 +97,38 @@ const HuntItem = () => {
     const solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
 
     const hintBody = () => {
-        
+
         if (solutionDisplayed.includes(currentUser._id)) {
             return (
-              <>  
-              <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-            <CardContent>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={`Unknown ${huntItem.category}`}
-                    heading={`HINT NUMBER 1`}
-                    body={<div>
-                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                        
-                    </div>} />
-                   
-            </CardContent>
-            
-        </Card>
-              <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                <>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                // overline={`Unknown ${huntItem.category}`}
+                                heading={`Unknown ${huntItem.category}`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.name)}</p>
+
+                                </div>} />
+
+                        </CardContent>
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 1`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+
+                                </div>} />
+
+                        </CardContent>
+
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
@@ -122,55 +136,68 @@ const HuntItem = () => {
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
-                                   
+
                                 </div>} />
-                                
+
                         </CardContent>
-                        
+
                     </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                            <CardContent>
-                                <TextInfoContent
-                                    classes={textCardContentStyles}
-                                    overline={`Unknown ${huntItem.category}`}
-                                    heading={`HINT NUMBER 3`}
-                                    body={<div>
-                                        <p>{ReactHtmlParser(huntItem.hint3)}</p>
-                                        
-                                    </div>} />
-                                    
-                            </CardContent>
-                        </Card>
-            <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                    <TextInfoContent
-                        classes={textCardContentStyles}
-                        overline={`Unknown ${huntItem.category}`}
-                        heading={`FINAL HINT`}
-                        body={<div>
-                            <p>{ReactHtmlParser(huntItem.solutionDescription)}</p>
-                            <p>{ReactHtmlParser(huntItem.solutionLocation)}</p>
-                        </div>} />
-                </CardContent>
-            </Card></>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 3`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint3)}</p>
+
+                                </div>} />
+
+                        </CardContent>
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`FINAL HINT`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.solutionDescription)}</p>
+                                    <p>{ReactHtmlParser(huntItem.solutionLocation)}</p>
+                                </div>} />
+                        </CardContent>
+                    </Card></>
             )
         }
-           
+
 
         if (hintThreeDisplayedTo.includes(currentUser._id)) {
-                return( 
-                    <>
+            return (
+                <>
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-            <CardContent>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={`Unknown ${huntItem.category}`}
-                    heading={`HINT NUMBER 1`}
-                    body={<div>
-                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                        
-                    </div>} />
-            </CardContent>
-        </Card>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                // overline={`Unknown ${huntItem.category}`}
+                                heading={`Unknown ${huntItem.category}`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.name)}</p>
+
+                                </div>} />
+
+                        </CardContent>
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 1`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+
+                                </div>} />
+                        </CardContent>
+                    </Card>
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -179,43 +206,57 @@ const HuntItem = () => {
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
-                                    
+
                                 </div>} />
                         </CardContent>
                     </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                            <CardContent>
-                                <TextInfoContent
-                                    classes={textCardContentStyles}
-                                    overline={`Unknown ${huntItem.category}`}
-                                    heading={`HINT NUMBER 3`}
-                                    body={<div>
-                                        <p>{ReactHtmlParser(huntItem.hint3)}</p>
-                                        <Button className={buttonStyles} onClick={displaySolution}>Need Final Hint? (-1 pt)</Button>
-                                    </div>} />{errorMessage && (
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 3`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint3)}</p>
+                                    <Button className={buttonStyles} onClick={displaySolution}>Need Final Hint? (-1 pt)</Button>
+                                </div>} />{errorMessage && (
 
-<p>{errorMessage}</p>
+                                    <p>{errorMessage}</p>
 
-)}
-                            </CardContent>
-                        </Card></>
+                                )}
+                        </CardContent>
+                    </Card></>
             )
         }
 
 
         if (hintTwoDisplayedTo.includes(currentUser._id)) {
-            return( 
-                <><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                    <CardContent>
-                        <TextInfoContent
-                            classes={textCardContentStyles}
-                            overline={`Unknown ${huntItem.category}`}
-                            heading={`HINT NUMBER 1`}
-                            body={<div>
-                                <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                                
-                            </div>} />
-                    </CardContent>
-                </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+            return (
+                <>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                // overline={`Unknown ${huntItem.category}`}
+                                heading={`Unknown ${huntItem.category}`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.name)}</p>
+
+                                </div>} />
+
+                        </CardContent>
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 1`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+
+                                </div>} />
+                        </CardContent>
+                    </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
@@ -226,35 +267,50 @@ const HuntItem = () => {
                                     <Button className={buttonStyles} onClick={displayHintThree}>Need another hint? (-1 pt)</Button>
                                 </div>} />{errorMessage && (
 
-<p>{errorMessage}</p>
+                                    <p>{errorMessage}</p>
 
-)}
+                                )}
                         </CardContent>
                     </Card></>
-             )
-         }
+            )
+        }
 
-         else {
-             return(
-            <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-            <CardContent>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={`Unknown ${huntItem.category}`}
-                    heading={`HINT NUMBER 1`}
-                    body={<div>
-                        <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                        <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
-                    </div>} />{errorMessage && (
+        else {
+            return (
+                <>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                // overline={`Unknown ${huntItem.category}`}
+                                heading={`Unknown ${huntItem.category}`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.name)}</p>
 
-<p>{errorMessage}</p>
+                                </div>} />
 
-)}
-            </CardContent>
-        </Card>
-             )
-         }
-        
+                        </CardContent>
+                    </Card>
+                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={`Unknown ${huntItem.category}`}
+                                heading={`HINT NUMBER 1`}
+                                body={<div>
+                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+                                    <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
+                                </div>} />{errorMessage && (
+
+                                    <p>{errorMessage}</p>
+
+                                )}
+                        </CardContent>
+                    </Card>
+                </>
+            )
+        }
+
     }
 
 
@@ -262,29 +318,32 @@ const HuntItem = () => {
     const displayHintTwo = async () => {
         try {
             const { data: hintData } = await userAsksForHint({
-            variables: { huntItemId: huntItemId, hint2: true },
-        })} catch(e) {
+                variables: { huntItemId: huntItemId, hint2: true },
+            })
+        } catch (e) {
             setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-            
+
         }
     }
 
     const displayHintThree = async () => {
         try {
-        const { data: hintData } = await userAsksForHint({
-            variables: { huntItemId: huntItemId, hint3: true },
-        })}
-        catch(e) {
+            const { data: hintData } = await userAsksForHint({
+                variables: { huntItemId: huntItemId, hint3: true },
+            })
+        }
+        catch (e) {
             setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-            
+
         }
     }
 
     const displaySolution = async () => {
         try {
-        const { data: hintData } = await userAsksForHint({
-            variables: { huntItemId: huntItemId, solution: true },
-        })} catch(e) {
+            const { data: hintData } = await userAsksForHint({
+                variables: { huntItemId: huntItemId, solution: true },
+            })
+        } catch (e) {
             setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
         }
     }
@@ -293,7 +352,7 @@ const HuntItem = () => {
 
 
     return (
-        
+
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 2 }}
@@ -302,24 +361,24 @@ const HuntItem = () => {
         >
 
             <main>
-            {Auth.loggedIn() ? (
-                <Stack spacing={2} justifyContent="center" alignItems="center">
-                    
-                   {hintBody()}
-                </Stack>) : (
+                {Auth.loggedIn() ? (
+                    <Stack spacing={2} justifyContent="center" alignItems="center">
 
-<Card className={cx(styles.root, shadowStyles.root)}>
-    <CardContent>
-        <TextInfoContent
-            classes={textCardContentStyles}
-            overline={'Ooops...'}
-            heading={'Sign in to join the fun!'}
-            body={<p>You need to be logged in view this page. Please{' '}
-            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
-        
-    </CardContent>
-</Card>
-)}
+                        {hintBody()}
+                    </Stack>) : (
+
+                    <Card className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'Ooops...'}
+                                heading={'Sign in to join the fun!'}
+                                body={<p>You need to be logged in view this page. Please{' '}
+                                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+
+                        </CardContent>
+                    </Card>
+                )}
             </main>
         </motion.div>
     );
