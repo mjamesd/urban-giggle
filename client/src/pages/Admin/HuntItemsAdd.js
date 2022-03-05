@@ -12,7 +12,6 @@ import {
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -20,6 +19,8 @@ import Chip from '@mui/material/Chip';
 // imports for GQL
 import { GET_BADGES } from '../../utils/queries';
 import { CREATE_HUNT_ITEM } from '../../utils/mutations';
+
+import Auth from '../../utils/auth';
 
 // MenuProps for multiple select
 const ITEM_HEIGHT = 48;
@@ -43,7 +44,7 @@ function getStyles(item, collection, theme) {
     };
 }
 
-const HuntItemsAdd = React.memo(() => {
+const HuntItemsAdd = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -64,21 +65,24 @@ const HuntItemsAdd = React.memo(() => {
     });
 
     // mutation
-    const [createHuntItem, { error: createError }] = useMutation(CREATE_HUNT_ITEM);
+    const [createHuntItem] = useMutation(CREATE_HUNT_ITEM);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
         try {
             const pointsInt = parseInt(formState.points);
             const { data } = await createHuntItem({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Scavenger Hunt "${formState.name}" added!`);
+            alert(`Scavenger Hunt Item "${data.createHuntItem.name}" added!`);
+            if (Auth.getProfile().data.userType === 'organizer') {
+                navigate(`./view/${data.createHuntItem._id}`);
+            } else {
+                navigate('../admin/huntItems '); // go to index page
+            }
         } catch (err) {
             console.log(err);
         }
-        navigate('../admin/huntItems '); // go to index page
     };
 
     const handleChange = (event) => {
@@ -132,11 +136,11 @@ const HuntItemsAdd = React.memo(() => {
                             onChange={handleChange}
                             input={<OutlinedInput id="select-multiple-rewards-chip" label="Chip" />}
                             renderValue={(selected) => (
-                              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                {selected.map((value) => (
-                                  <Chip key={value} label={getBadgeName(value)} />
-                                ))}
-                              </Box>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={getBadgeName(value)} />
+                                    ))}
+                                </Box>
                             )}
                             MenuProps={MenuProps}
                             name="rewards"
@@ -160,7 +164,7 @@ const HuntItemsAdd = React.memo(() => {
                 </FormControl>
             </form>
         </div>
-  )
-});
+    )
+};
 
 export default HuntItemsAdd;

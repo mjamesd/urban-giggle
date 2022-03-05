@@ -9,9 +9,8 @@ import { REMOVE_BADGE } from '../../utils/mutations';
 const BadgesIndex = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_BADGES);
-    const [removeBadge, { rBerror }] = useMutation(REMOVE_BADGE);
+    const [removeBadge, { error: rBerror }] = useMutation(REMOVE_BADGE);
 
-    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const badges = data?.badges || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -64,7 +63,7 @@ const BadgesIndex = () => {
                     {badges.map(badge => (
                         <tr key={badge._id}>
                             <td>{badge.name}</td>
-                            <td>{badge.icon}</td>
+                            <td><img src={`../../img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></td>
                             <td>{badge.description}</td>
                             <td>{badge.points}</td>
                             <td>

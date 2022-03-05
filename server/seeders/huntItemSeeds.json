@@ -1,378 +1,404 @@
 [
     {
-        "name": "Space Needle",
+        "name": "Seattle's Landmark",
         "city": "Seattle",
-        "category":"explore",
+        "category":"landmark",
         "hint1": "It had the same designer as the nation's first shopping mall.",
         "hint2": "Built for the 1962 World's Fair",
         "hint3": "Iconic landmark in Lower Queen Anne",
         "solutionLocation": "Seattle Center",
-        "solutionDescription": "The Space Needle"
+        "solutionDescription": "The Space Needle",
+        "points": 1
 
     },
     {
-        "name": "The Gum Wall",
+        "name": "A Sticky Situation",
         "city": "Seattle",
-        "category":"explore",
-        "hint1": "A <em>sticky</em> situation.",
+        "category":"landmark",
+        "hint1": "It's a sticky situation.",
         "hint2": "Tourists add their own contributions, after chewing them.",
         "hint3": "Kinda gross attraction at Pike Place Market",
         "solutionLocation": "Pike Place Market",
-        "solutionDescription": "The Gum Wall at Pike Place Market"
+        "solutionDescription": "The Gum Wall at Pike Place Market",
+        "points": 2
     },
     {
-        "name": "Wayward Vegan Café",
+        "name": "Find the Compass",
         "city": "Seattle",
         "category":"restaurant",
         "hint1": "Southern cooking for <strong>\"LOST\"</strong> vegans.",
         "hint2": "It's in the Ravenna neighborhood of Seattle.",
         "hint3": "Distant Worlds Coffee Shop is just down the street and had to change it's name to stop being confused with this establishment.",
-        "solutionLocation": "801 NE 65th St Suite C, Seattle, WA 98115",
+        "solutionLocation": "Wayward Vegan Café, 801 NE 65th St Suite C, Seattle, WA 98115",
         "solutionDescription": "Congratulations! 🍗 Show this page to your server to get 10% off any appetizer!",
-        "solutionImg": "http://www.waywardvegancafe.com/img/waywardlogofinal.png"
+        "solutionImg": "http://www.waywardvegancafe.com/img/waywardlogofinal.png",
+        "points": 4
     },
     {
-        "name": "Vegan Pizza Pi",
+        "name": "Circle the Pizza",
         "city": "Seattle",
         "category":"restaurant",
         "hint1": "You = hungry for vegan ⒫<em>i</em>z<sup>2</sup>α.",
         "hint2": "It's in the University District of Seattle.",
         "hint3": "Location hint: FDR was <em>not</em> the 53rd president.",
-        "solutionLocation": "5301 Roosevelt Way NE, Seattle, WA 98105",
-        "solutionDescription": "Far out! 🍕 Show this page to your server for 15% off any salad or dessert!",
-        "solutionImg": "https://images.squarespace-cdn.com/content/v1/5a9a3e5eaa49a12b3dd005fe/1571176758171-OYT8HDIB2PMWVUOXTSTS/pivegan_logo_standard.png"
+        "solutionLocation": "Vegan Pizza Pi, 5301 Roosevelt Way NE, Seattle, WA 98105",
+        "solutionDescription": "Mathematical! 🍕 Show this page to your server for 15% off any salad or dessert!",
+        "solutionImg": "https://images.squarespace-cdn.com/content/v1/5a9a3e5eaa49a12b3dd005fe/1571176758171-OYT8HDIB2PMWVUOXTSTS/pivegan_logo_standard.png",
+        "points": 2
     },
     {
-        "name": "El Borracho (Ballard)",
+        "name": "Vegan Mexican Food Joint",
         "city": "Seattle",
         "category":"restaurant",
         "hint1": "This plant-based Mexican restaurant can make you the drunk, too.",
         "hint2": "Mexican food in the Swedish district??",
         "hint3": "You've walked right by it if you've been to the Ballard Sunday Market!",
-        "solutionLocation": "5465 Leary Ave NW, Seattle, WA 98107",
+        "solutionLocation": "El Borracho (Ballard), 5465 Leary Ave NW, Seattle, WA 98107",
         "solutionDescription": "Congratulations! 🎉 Show this page to your server to get a free vegan queso!",
-        "solutionImg": "https://images.squarespace-cdn.com/content/v1/59b9e816e9bfdf9e756fbee3/b248096f-0ddd-49c0-be8e-7e452cc59522/ElBorracho+2.0-Logo-Final-02.png"
+        "solutionImg": "https://images.squarespace-cdn.com/content/v1/59b9e816e9bfdf9e756fbee3/b248096f-0ddd-49c0-be8e-7e452cc59522/ElBorracho+2.0-Logo-Final-02.png",
+        "points": 2
     },
     {
-        "name":"Seattle Great Wheel",
-        "category":"explore",
+        "name":"Round and Round We Go",
+        "city":"Seattle",
+        "category":"landmark",
         "hint1":"There are great views from this revolving attraction.",
         "hint2":"An iconic part of the Seattle skyline since 2012",
         "hint3":"Maybe get some fish at Ivar's while you're nearby.",
         "solutionLocation":"Pier 57, at the ticket kiosk",
         "solutionDescription":"The Seattle Great Wheel",
-        "city":"Seattle"
+        "points": 2
     },
     {
-        "name":"Smith Tower",
-        "category":"explore",
+        "name":"The tallest building west of the... well, nevermind",
+        "city":"Seattle",
+        "category":"landmark",
         "hint1":"This was once the tallest building West of the Mississippi",
         "hint2":"There's a great bar at the top.",
         "hint3":"The observation deck has great views of Elliott Bay and Pioneer Square",
         "solutionLocation":"Smith Tower, at the ticket kiosk",
         "solutionDescription":"Smith Tower",
-        "city":"Seattle"
+        "points": 2
     },
     {
-        "name":"Jimi Hendrix Statue",
-        "category":"explore",
-        "hint1":"One of the greatest American musicians, remembered.",
+        "name":"Electric Coffeeland",
+        "city":"Seattle",
+        "category":"landmark",
+        "hint1":"One of the greatest American musicians, remembered with this statue in the Capitol Hill district.",
         "hint2":"A guitar legend of the 60s.",
         "hint3":"Excuse me while I kiss the sky.",
         "solutionLocation":"On the corner of Broadway and Pine",
         "solutionDescription":"The Jimi Hendrix Statue",
-        "city":"Seattle"
+        "points": 2
     },
     {
-        "name": "Clock Tower",
-        "category": "explore",
+        "name": "Watch Out!",
         "city": "Spokane",
+        "category": "landmark",
         "hint1": "The Great Northern Railroad depot was finished in 1902",
         "hint2": "An iconic landmark for the 1974 World's Fair",
         "hint3": "Was the only remaining building on Havermale Island after it was remodled",
         "solutionLocation": "The Spokane Clock Tower at Riverfront Park",
-        "solutionDescription": "The Spokane Clock Tower"
+        "solutionDescription": "The Spokane Clock Tower",
+        "points": 2
     },
     {
-        "name": "Fox Theater",
-        "category": "explore",
+        "name": "Crazy Like A...",
         "city": "Spokane",
+        "category": "landmark",
         "hint1": "This iconic Art Deco building was opened in 1931.",
         "hint2": "After a recent renovation, the building is the home of the Spokane Symphony.",
         "hint3": "It was part of the Fox Film Corporation Empire founded by studio mogul William Fox",
         "solutionLocation": "Fox Theater, 1001 W. Sprague Ave.",
-        "solutionDescription": "The Martin Woldson Theater at the FOX" 
+        "solutionDescription": "The Martin Woldson Theater at the FOX" ,
+        "points": 2
     },
     {
-        "name": "St Johns Cathedral",
-        "category": "explore",
+        "name": "A prominent place of worship for Spokanites",
         "city": "Spokane",
+        "category": "religious",
         "hint1": "This building is built entirely of cut stone with the carvings and figures in stained glass.",
         "hint2": "The organ was built and installed in 1957 with 4,039 pipes.",
         "hint3": "It rises prominently on the crest of a hill making it visable from much of downtown and areas to the north",
         "solutionLocation": "127 E 12th Avenue.",
-        "solutionDescription": "St. John's Cathedral"    
+        "solutionDescription": "St. John's Cathedral"    ,
+        "points": 2
     },
     {
-        "name": "Steam Plant Brew Pub",
-        "category": "restaurant",
+        "name": "The Twin Towers of Spokane",
         "city": "Spokane",
+        "category": "restaurant",
         "hint1": "This building was originaly purposed to heat and supply power to homes and businesses",
         "hint2": "The twin iconic strucures tower 225 feet",
         "hint3": "In the summer of 1996 it was transformed into a gastro pub",
-        "solutionLocation": "159 South Lincoln",
+        "solutionLocation": "Steam Plant Brew Pub, 159 S Lincoln St, Spokane, WA 99201",
         "solutionDescription": "You did it! 🎉 Show this page to your server to get 15% off your next meal!",
-        "solutionImg": "https://i.imgur.com/DQ5r4Fd.jpg"
+        "solutionImg": "https://i.imgur.com/DQ5r4Fd.jpg",
+        "points": 2
     },
     {
-        "name": "Clinkerdagger",
-        "category":"restaurant",
+        "name": "Steak Night!",
         "city": "Spokane",
+        "category":"restaurant",
         "hint1": "40 year old steak house.",
         "hint2": "A Spokane landmark that overlooks the Spokane River and city skyline.",
         "hint3": "That's one sharp sounding name!",
-        "solutionLocation": "The Flour Mill 621 W. Mallon Ave.",
+        "solutionLocation": "Clinkerdagger, The Flour Mill Mall, 621 W. Mallon Ave.",
         "solutionDescription": "Congratulations! Show this page to your server to get 10% off any appetizer!",
         "solutionImg": "https://i.imgur.com/18pYWHH.jpg",
         "points": 4
     },
     {
-        "name":"Pavilion",
-        "category": "explore",
-        "qrId":"",
-        "hint1":"This structure was a gift to Spokane from the United Stated government.",
+        "name":"Spokane Central",
+        "city":"Spokane",
+        "category": "landmark",
+        "hint1":"This structure was a gift to Spokane from the United States government.",
         "hint2":"It's initial purpose was to house exibits that focused on enviornmental issues.", 
         "hint3":"Richard Nixon delared that Expo '74 was officially open to all the citizens of the world at the base of this structure.",
-        "solutionLocation":"U.S. Pavillion, Riverfront Park",
+        "solutionLocation":"U.S. Pavilion, Riverfront Park, 4 E 5th Ave, Spokane, WA 99202, 47°39'41. 117°25'08.",
         "solutionDescription":"U.S. Pavilion",
-        "city":"Spokane"
+        "points": 2
     },
     {
-        "name": "Garland Milk Bottle",
-        "category": "restaurant",
+        "name": "A Cow's Nightmare",
         "city": "Spokane",
+        "category": "restaurant",
         "hint1": "The lactose intollerant need not apply.",
         "hint2": "This place was built in 1935 and designed to build better men and women by making milk more attractive to boys and girls.",
         "hint3": "Notable for it's bottle architecture.",
-        "solutionLocation": "802 W Garland Ave",
+        "solutionLocation": "Garland Milk Bottle, 802 W Garland Ave, Spokane, Wa",
         "solutionDescription": "You cheesed it! Show this page to your server for a free glass of milk! What fun.",
         "solutionImg": "https://i.imgur.com/dgbRGzc.jpg",
         "points": 2
     },
     {
-        "name": "Arbor Crest Wine Cellars",
+        "name": "Stop whining, start wining",
         "category":"bar",
         "city": "Spokane",
         "hint1": "This building has one heck of a view.",
         "hint2": "Overlooking the Spokane Valley it sits alone on a ridge.",
-        "hint3": "Probably want to watch your step, especially with all this alcohol around. ",
-        "solutionLocation": "4705 N Fruit Hill Rd",
+        "hint3": "Probably want to watch your step, especially with all this alcohol around.",
+        "solutionLocation": "4705 N Fruit Hill Rd, Spokane, Wa",
         "solutionDescription": "Arbor Crest Wine Cellars",
-        "solutionImg":"https://i.imgur.com/vd62DNF.jpg"
+        "solutionImg":"https://i.imgur.com/vd62DNF.jpg",
+        "points": 2
     },
     {
-        "name":"Bowl and Pitcher",
-        "category": "explore",
-        "qrId":"",
+        "name":"Natural Formations",
+        "city":"Spokane" ,
+        "category": "outdoors",
         "hint1":"You really need a lot of imagination to see these two things.",
         "hint2":"While you're there you might as well check out the famous rope bridge.",
         "hint3":"If you see a dead body just leave it for the wolves.",
         "solutionLocation":"Riverside State Park swinging bridge",
         "solutionDescription":"The Bowl and Pitcher at Riverside State Park",
-        "city":"Spokane" 
+        "points": 4
     },
-    {   "name": "Taco Bell",
-        "category":"restaurant",
+    {   "name": "Sadly, America's Favorite Mexican Restaurant",
         "city": "Spokane",
+        "category":"restaurant",
         "hint1": "Feels like a sweatpants kind of night.",
         "hint2": "Your one stop shop for grilled stuffed burritos. And sadness.",
         "hint3": "Go to the one on 3rd, next to the Carlise Hotel. Dinner and a show.",
-        "solutionLocation": "825 W 3rd Ave",
+        "solutionLocation": "Taco Bell, 825 W 3rd Ave, Spokane, Wa",
         "solutionDescription": "Congratulations! You have diarrhea. Is it a coincidence that you're also at Taco Bell?",
         "solutionImg": "https://i.imgur.com/qPlsR6y.jpg",
-        "points": 4
+        "points": 1
 
     },
     {
-        "name":"Campbell House",
-        "category":"explore",
-        "qrId":"",
+        "name":"A Museum in Spokane",
+        "city":"Spokane",
+        "category":"museum",
         "hint1":"This is a historic house museum.",
         "hint2":"The Northwest Museum of Arts and Culture is nearby.",
         "hint3":"The owner was in the mining business with the Rockefeller and Gould families.",
-        "solutionLocation":"2316 W 1st Ave",
+        "solutionLocation":"Campbell House, 2316 W 1st Ave, Spokane, Wa",
         "solutionDescription":"The Campbell House",
-        "city":"Spokane"
+        "points": 2
     },
     {
-        "name":"Manito Park",
-        "category":"explore",
-        "qrId":"",
+        "name":"Quite the trek",
+        "city":"Spokane",
+        "category":"outdoors",
         "hint1":"A 90 acre park with an arboretum and conservatory.",
         "hint2":"This was at one time a zoo until 1932 when it was closed due to the Great Depression.",
         "hint3":"The lilac garden has over 100 cultivars represented. Spokane is known as the Lilac City.",
-        "solutionLocation":"1702 S Gran Blvd at the conservatory front desk",
+        "solutionLocation":"Manito Park, 1702 S Gran Blvd at the conservatory front desk",
         "solutionDescription":"Manito Park",
-        "city":"Spokane"
+        "points": 2
     },
     {
-        "name":"Kerry Park",
-        "category":"explore",
+        "name":"Seattle's Best View",
+        "city":"Seattle",
+        "category":"outdoors",
         "hint1":"Royal view of Seattle",
         "hint2":"Mountains and Monuments",
         "hint3":"You might see this view on a postcard",
-        "solutionLocation":"Kerry Park on the top of Queen Anne",
-        "solutionDescription":"Kerry Park",
-        "city":"Seattle"
+        "solutionLocation":"Kerry Park, 211 W Highland Dr, Seattle, WA 98119",
+        "solutionDescription":"Kerry Park on the top of Queen Anne",
+        "points": 2
     },
     {
-        "name":"Bruce Lee's Gravesite",
-        "category":"explore",
+        "name":"A Kick in the Face",
+        "category":"landmark",
         "hint1":"The first Asian-American actor to ever have a lead role in a Hollywood film",
         "hint2":"Be like water",
         "hint3":"Credited by many as the most influential martial artist of all time",
         "solutionLocation":"Bruce Lee's Gravesite, Lake View Cemetery",
         "solutionDescription":"Bruce Lee's Gravesite",
+        "points": 2,
         "city":"Seattle"
     },
     {
-        "name":"Amazon Spheres",
-        "category":"explore",
+        "name":"Bubbles",
+        "city":"Seattle",
+        "category":"landmark",
         "hint1":"Part of the headquarters of a major tech company",
         "hint2":"Houses over 40,000 plants",
         "hint3":"Three glass domes covered in pentagonal hexecontahedron panels",
         "solutionLocation":"Amazon Spheres, Lenora Street",
         "solutionDescription":"Amazon Spheres",
-        "city":"Seattle"
+        "points": 2
     },
     {
-        "name":"Volunteer Park Conservatory",
-        "category":"explore",
+        "name":"Best Plants on the Hill",
+        "city":"Seattle",
+        "category":"museum",
         "hint1":"Modeled on London's Crystal Palace",
         "hint2":"Made up of 3,426 glass panes fit into a wood and iron framework",
         "hint3":"Showcasing 5 distinct plant families, this greenhouse sits on the lush lawns of a park on a hill",
         "solutionLocation":"Volunteer Park Conservatory, Volunteer Park, Capitol Hill",
         "solutionDescription":"Volunteer Park Conservatory",
-        "city":"Seattle"
+        "points": 4
     },
     {
-        "name":"The Walrus & the Carpenter",
+        "name":"Down the rabbit hole",
+        "city":"Seattle",
         "category":"bar",
         "hint1":"/The time has come,/ the ---- said, /To talk of many things, Of shoes and ships and sealing wax- Of cabbages- and kings...",
         "hint2":"One of many Sea Creatures...",
         "hint3":"Named after characters in Alice and Wonderland, this space marries restaurant to fishing pub in a delightfully delicious manner",
         "solutionLocation":"The Walrus & the Carpenter, Old Ballard",
         "solutionDescription":"The Walrus & the Carpenter",
-        "city":"Seattle"
+        "points": 4
     },
     {
-        "name":"Deep Dive",
+        "name":"Not a pool",
+        "city":"Seattle",
         "category":"bar",
         "hint1":"Eat and drink inside of a Curtis Steiner art installation",
         "hint2":"A new classic, inspired by marquee hotel bars the world over",
         "hint3":"Smart attire encouraged, this upscale bar isn't found in your typical brick building...",
         "solutionLocation":"Deep Dive, Amazon Spheres, Lenora Street",
         "solutionDescription":"Deep Dive",
-        "city":"Seattle"
+        "points": 4
     },
     {
-        "name":"Bathtub Gin & Co",
+        "name":"Cozy Speakeasy",
+        "city":"Seattle",
         "category":"bar",
         "hint1":"You will have to venture down an alley to find this cozy speakeasy",
         "hint2":"Nestled in the basement of an old brick hotel, in a former broiler room in the back of a building...",
         "hint3":"Get squeaky clean in this prohibition style spot",
         "solutionLocation":"Bathtub Gin & Co, Belltown, between 1st & 2nd, 50 ft north of Blanchard, look for the wooden door...",
         "solutionDescription":"Bathtub Gin & Co",
-        "city":"Seattle"
+        "points": 2
     },
     {
-        "name": "Mizuna",
+        "name": "Innovative Northwest Cuisine",
         "category":"restaurant",
         "city": "Spokane",
         "hint1": "Award winning resturaunt that's been open downtown since 1996.",
         "hint2": "The kitchen is run by a James Beard award winning chef.",
         "hint3": "The name may sound funny but that's the chef's last name.",
-        "solutionLocation": "214 N Howard",
+        "solutionLocation": "Mizuna, 214 N Howard, Spokane, Wa",
         "solutionDescription": "Mizuna",
-        "solutionImg": "https://i.imgur.com/MOjYg8T.jpg"
+        "solutionImg": "https://i.imgur.com/MOjYg8T.jpg",
+        "points": 2
     
     },
     {
-        "name": "Wooden City",
-        "category":"restaurant",
+        "name": "We Built This City on... Lumber",
         "city": "Spokane",
+        "category":"restaurant",
         "hint1": "This restaurant has locations in Tacoma and Spokane.",
         "hint2": "The name seems a little stiff.",
         "hint3": "Wood you like to order their pizza?",
-        "solutionLocation": "821 W Riverside Ave",
+        "solutionLocation": "Wooden City, 821 W Riverside Ave, Spokane, Wa",
         "solutionDescription": "Wooden City",
-        "solutionImg": "https://i.imgur.com/fnIQvwr.jpg"
+        "solutionImg": "https://i.imgur.com/fnIQvwr.jpg",
+        "points": 2
     
     },
     {
-        "name": "Nado Ramen House",
-        "category":"restaurant",
+        "name": "No Time To Noodle Around",
         "city": "Spokane",
+        "category":"restaurant",
         "hint1": "No time to noodle around.",
         "hint2": "This establishment has stunning graphic art inside the dinning room.",
         "hint3": "Make sure you don't overlook their extensive sake menu.",
-        "solutionLocation": "818 W Sprague Ave",
-        "solutionDescription": "Nado Ramen House",
-        "solutionImg": "https://i.imgur.com/yPKZCoL.jpg"
+        "solutionLocation": "Nado Ramen House, 818 W Sprague Ave, Spokane, Wa",
+        "solutionDescription": "Show this to your server for 10% off!",
+        "solutionImg": "https://i.imgur.com/yPKZCoL.jpg",
+        "points": 2
     
     },
     {
-        "name": "Wild Sage Bistro",
+        "name": "A Local Favorite Restaurant",
         "category":"restaurant",
         "city": "Spokane",
         "hint1": "That's one crazy green-gray.",
         "hint2": "This corner bistro has big frame windows for you to look out of while you sip your wine.",
         "hint3": "Opened since 2006 it's become an award-winning local favorite.",
-        "solutionLocation": "916 W 2nd Ave ",
-        "solutionDescription": "Wild Save Bistro",
-        "solutionImg": "https://i.imgur.com/E3yedop.jpg"
+        "solutionLocation": "Wild Sage Bistro, 916 W 2nd Ave, Spokane, Wa",
+        "solutionDescription": "Show this to your server for 10% off!",
+        "solutionImg": "https://i.imgur.com/E3yedop.jpg",
+        "points": 4
     
     },
     {
-        "name":"Beserk",
+        "name":"It's Out Of Control!",
+        "city":"Spokane",
         "category":"bar",
         "hint1":"Not only is this a crazy name for a bar its also the title of a Japanese manga series.",
         "hint2":"This is out of control.",
         "hint3":"Even though the name would tell you otherwise don't break anything.",
-        "solutionLocation":"125 S Stevens St",
-        "solutionDescription":"Beserk Bar",
-        "city":"Spokane"
+        "solutionLocation":"Beserk, 125 S Stevens St, Spokane, Wa",
+        "solutionDescription":"Show this to your server for 10% off!",
+        "points": 2
     },
     {
-        "name":"Mootsy's",
+        "name":"Quinessential Rock Dive Bar",
+        "city":"Spokane",
         "category":"bar",
         "hint1":"Spokane's quinessential rock dive.",
         "hint2":"Live band venue that always has a party atmosphere.",
         "hint3":"Sounds like a pet name for Bootsy Collins.",
-        "solutionLocation":"406 W Sprague Ave",
-        "solutionDescription":"Mootsy's",
-        "city":"Spokane"
+        "solutionLocation":"Mootsy's, 406 W Sprague Ave, Spokane, Wa",
+        "solutionDescription":"Show this to your server for 10% off!",
+        "points": 4
     },
     {
-        "name":"Volstead Act",
+        "name":"Prohibition's Nemesis",
+        "city":"Spokane",
         "category":"bar",
         "hint1":"This place feels like the Prohibition with its decor.",
         "hint2":"It's named after a US law passed in 1919.",
         "hint3":"Located in the heart of the Davenport District.",
-        "solutionLocation":"12 N Post St",
-        "solutionDescription":"Volstead Act",
-        "city":"Spokane"
+        "solutionLocation":"Volstead Act, 12 N Post St, Spokane, Wa",
+        "solutionDescription":"Show this to your server for 10% off!",
+        "points": 2
     },
     {
-        "name":"Stormin Normans Shipfaced Saloon",
+        "name":"A Bar Named After a Famous General",
+        "city":"Spokane",
         "category":"bar",
         "hint1":"Named after a general famous from Desert Storm.",
         "hint2":"There's also a ship in the title.",
         "hint3":"Could possibly sound like a dirty name.",
-        "solutionLocation":"12303 E Trent Ave",
-        "solutionDescription":"Stormin Normans Shipfaced Saloon",
-        "city":"Spokane"
+        "solutionLocation":"Stormin Normans Shipfaced Saloon, 12303 E Trent Ave, Spokane, Wa",
+        "solutionDescription":"Show this to your server for 10% off!",
+        "points": 2
     }
-    
-
 ]

@@ -9,7 +9,7 @@ import { REMOVE_HUNT } from '../../utils/mutations';
 const Hunts = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_HUNTS);
-    const [removeHunt, { rHerror }] = useMutation(REMOVE_HUNT);
+    const [removeHunt, { error: rHerror }] = useMutation(REMOVE_HUNT);
     const hunts = data?.hunts || [];
 
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -37,12 +37,11 @@ const Hunts = () => {
     return (
         <div style={{ marginLeft: '2em' }}>
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
-            <h1>Hunts</h1>
+            <h1>Scavenger Hunts</h1>
             <Button onClick={() => navigate('./add')} className={buttonStyles}>Add Hunt</Button>
             <table>
                 <thead>
                     <tr key="head">
-                        <th>ID</th>
                         <th>Title</th>
                         <th>City</th>
                         <th>Points</th>
@@ -54,7 +53,6 @@ const Hunts = () => {
                 <tbody>
                     {hunts.map(hunt => (
                         <tr key={hunt._id}>
-                            <td>{hunt._id}</td>
                             <td>{hunt.name}</td>
                             <td>{hunt.city}</td>
                             <td>{hunt.points}</td>

@@ -12,6 +12,8 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import Modal from '@mui/material/Modal';
+
 
 
 const useStyles = makeStyles(() => ({
@@ -20,6 +22,7 @@ const useStyles = makeStyles(() => ({
         margin: 'auto',
         borderRadius: 12,
         padding: 12,
+        justifyContent: 'center',
     },
     media: {
         borderRadius: 6,
@@ -31,6 +34,11 @@ const Contact = () => {
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
+
+    // modal states open/close
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <motion.div
@@ -46,7 +54,7 @@ const Contact = () => {
                         <TextInfoContent
                             classes={textCardContentStyles}
                             overline={'We Need To Talk...'}
-                            heading={'CONTACT'}
+                            heading={'CONTACT US'}
                             body={
                                 <Box
                                     sx={{
@@ -65,7 +73,27 @@ const Contact = () => {
                                         placeholder="..."
                                         style={{ width: 300, height: 100 }}
                                     />
-                                    <Button className={buttonStyles}>Send</Button>
+                                    <Button onClick={handleOpen} className={buttonStyles}>Send</Button>
+                                    <Modal
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                    >
+                                        <Card className={cx(styles.root, shadowStyles.root)}>
+                                            <CardContent>
+                                                <TextInfoContent
+                                                    classes={textCardContentStyles}
+                                                    heading={'THANKS FOR REACHING OUT!'}
+                                                    body={
+                                                        <>
+                                                            <p>We will get back to you very soon :)</p>
+                                                        </>
+                                                    }
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </Modal>
                                 </Box>
                             }
                         />
