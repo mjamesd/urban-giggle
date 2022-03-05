@@ -95,8 +95,8 @@ const Hunt = () => {
                         <TextInfoContent
                           classes={textCardContentStyles}
                           overline={huntItem.city}
-                          heading={`Unknown ${huntItem.category}`}
-                          body={<><div>
+                          heading={huntItem.name}
+                          body={<div>
                             <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button><br/><br/>
                           </div></>} />
                       </CardContent>
