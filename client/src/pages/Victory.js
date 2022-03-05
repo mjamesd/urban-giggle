@@ -17,6 +17,8 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import CardMedia from '@material-ui/core/CardMedia';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import Wall from '../components/Wall'
+import { CHANGE_POINTS } from '../utils/mutations'
+import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
 
 
 const useStyles = makeStyles(() => ({
@@ -80,7 +82,7 @@ const Victory = () => {
                     </CardContent>
                 </Card>
                             <br />
-                <Wall huntItemId={huntItem._id} />
+                <Wall huntItemId={huntItem._id} huntItem={huntItem} />
 
             </main>
             <Confetti />
