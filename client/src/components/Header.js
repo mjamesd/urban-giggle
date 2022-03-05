@@ -105,15 +105,6 @@ const Header = () => {
                         <Link style={styles.title} to="/"><h2>TOTAL QUEST</h2></Link>
                     </Typography>
 
-                    {/* {Auth.loggedIn() && Auth.getProfile().data.userType === 'admin' && (
-                        <Button><Link style={styles.links} to="/admin"><h2>ADMIN PANEL</h2></Link></Button>
-                    )}
-                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'organizer' && (
-                        <>
-                            <Button><Link style={styles.links} to="/admin/hunts/add"><h2>CREATE SCAVENGER HUNT</h2></Link></Button>
-                            <Button><Link style={styles.links} to="/admin/huntItems/add"><h2>CREATE SCAVENGER HUNT LOCATIONS</h2></Link></Button>
-                        </>
-                    )} */}
                     {Auth.loggedIn() ? (
                         <>
                             <Box sx={{ flexGrow: 0 }}>
@@ -183,7 +174,7 @@ const Header = () => {
                                     </MenuItem>
                                     <br />
                                     <MenuItem onClick={handleClose}>
-                                        <Button><Link style={styles.links} to="/dashboard">DASHBOARD</Link></Button>
+                                        <Button><Link style={styles.links} to="/admin">DASHBOARD</Link></Button>
                                     </MenuItem>
                                     <br />
                                     <MenuItem onClick={handleClose}>
