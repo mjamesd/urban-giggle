@@ -83,7 +83,7 @@ const HuntsEdit = () => {
         let huntItemName = '';
         huntItems.forEach(huntItem => {
             if (huntItem._id === huntItemId)
-            huntItemName = huntItem.name;
+                huntItemName = huntItem.name;
         });
         return huntItemName;
     }
@@ -164,7 +164,7 @@ const HuntsEdit = () => {
                                     value={huntItem._id}
                                     style={getStyles(huntItem._id, formState.huntItems, theme)}
                                 >
-                                    {huntItem.name}
+                                    {huntItem.name} ({huntItem.category}, {huntItem.city})
                                 </MenuItem>
                             ))}
                         </Select>

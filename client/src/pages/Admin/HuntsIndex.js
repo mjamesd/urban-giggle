@@ -42,7 +42,6 @@ const Hunts = () => {
             <table>
                 <thead>
                     <tr key="head">
-                        <th>ID</th>
                         <th>Title</th>
                         <th>City</th>
                         <th>Points</th>
@@ -54,7 +53,6 @@ const Hunts = () => {
                 <tbody>
                     {hunts.map(hunt => (
                         <tr key={hunt._id}>
-                            <td>{hunt._id}</td>
                             <td>{hunt.name}</td>
                             <td>{hunt.city}</td>
                             <td>{hunt.points}</td>
