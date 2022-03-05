@@ -106,7 +106,7 @@ const HuntItem = () => {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 // overline={`Unknown ${huntItem.category}`}
-                                heading={`Unknown ${huntItem.name}`}
+                                heading={huntItem.name}
                                 body={<div>
                                     <p>Category: {ReactHtmlParser(huntItem.category)}</p>
 
@@ -118,7 +118,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 1`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint1)}</p>
@@ -132,7 +132,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
                                     <p>Category: {ReactHtmlParser(huntItem.hint2)}</p>
@@ -145,7 +145,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 3`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint3)}</p>
@@ -158,7 +158,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`FINAL HINT`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.solutionDescription)}</p>
@@ -178,7 +178,7 @@ const HuntItem = () => {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 // overline={`Unknown ${huntItem.category}`}
-                                heading={`Unknown ${huntItem.name}`}
+                                heading={huntItem.name}
                                 body={<div>
                                     <p>Category: {ReactHtmlParser(huntItem.category)}</p>
 
@@ -190,7 +190,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 1`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint1)}</p>
@@ -202,7 +202,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
@@ -213,7 +213,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 3`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint3)}</p>
@@ -237,7 +237,7 @@ const HuntItem = () => {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 // overline={`Unknown ${huntItem.category}`}
-                                heading={`Unknown ${huntItem.name}`}
+                                heading={huntItem.name}
                                 body={<div>
                                     <p>Category: {ReactHtmlParser(huntItem.category)}</p>
 
@@ -249,7 +249,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 1`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint1)}</p>
@@ -260,7 +260,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 2`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint2)}</p>
@@ -283,7 +283,7 @@ const HuntItem = () => {
                             <TextInfoContent
                                 classes={textCardContentStyles}
                                 // overline={`Unknown ${huntItem.category}`}
-                                heading={`Unknown ${huntItem.name}`}
+                                heading={huntItem.name}
                                 body={<div>
                                     <p>Category: {ReactHtmlParser(huntItem.category)}</p>
 
@@ -295,7 +295,7 @@ const HuntItem = () => {
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
-                                overline={`Unknown ${huntItem.category}`}
+                                overline={huntItem.category}
                                 heading={`HINT NUMBER 1`}
                                 body={<div>
                                     <p>{ReactHtmlParser(huntItem.hint1)}</p>
