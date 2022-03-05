@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Color from 'color';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -113,7 +113,7 @@ export const Hunts = React.memo(function SolidGameCard() {
     }
 
     hunts.forEach(hunt => {
-        if(hunt.name == `Explore ${huntCity}`) {
+        if(hunt.name === `Explore ${huntCity}`) {
             console.log(hunt)
             exploreFilter = hunt
             return
@@ -122,7 +122,7 @@ export const Hunts = React.memo(function SolidGameCard() {
     )
     
    hunts.forEach(hunt => {
-        if(hunt.name == `Indulge ${huntCity}`) {
+        if(hunt.name === `Indulge ${huntCity}`) {
             console.log(hunt)
             indulgeFilter = hunt
             return
