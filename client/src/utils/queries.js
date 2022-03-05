@@ -312,6 +312,7 @@ query hunt($huntId: ID!) {
     	hint1
     	hint2
     	hint3
+      category
     	solutionLocation
     	solutionDescription
     	solutionImg
