@@ -25,28 +25,14 @@ Contact.js -- contact us form
 # Hunt Pages (USER)
 
 Hunts.js -- the list of available hunts to select -- this will have a hard programmed explore and indulge page
-- need to add authentication 
-- need to query the hunts and display onto cards
+- need to add authentication -- DONE
+- need to query the hunts and display onto cards -- DONE
 
 Hunt.js -- inside the selected hunt -- displaying the individual hunt items 
 - need to add authentication -- DONE
-- need to populate the items via params from the hunts.js page when they select hunt title. -- query in place!
+- need to populate the items via params from the hunts.js page when they select hunt title. -- query in place! -- DONE!
+- Create the explore and indulge hunts dynamically -- Done
 
-/Seattle/Explore.js -- same as hunt.js but hard targetted the seattle explore hunt page 
-- need to add authentication
-- have template just need to create file and pull explore hunt data into it 
-
-/Seattle/Indulge.js -- same as the hunt.js but hard targetted to seattle indulge hunt page
-- need to add authentication
-- have template just need to create file and pull indulge hunt data into it 
-
-/Spokane/Explore.js -- same as hunt.js but hard targetted the spokane explore hunt page
-- need to add authentication
-- have template just need to create file and pull explore hunt data into it 
-
-/Spokane/Indulge.js -- same as hunt.js but hard targetted the spokane indulge hunt page
-- need to add authentication
-- have template just need to create file and pull indulge hunt data into it 
 
 # Hunt Item Pages (USER)
 

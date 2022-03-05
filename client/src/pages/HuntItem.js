@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
@@ -11,7 +11,9 @@ import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoConte
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useQuery } from '@apollo/client';
-import { GET_HUNT_ITEM } from '../utils/queries';
+import { useMutation } from '@apollo/client';
+import { GET_HUNT_ITEM, QUERY_ME } from '../utils/queries';
+import { USER_ASKS_FOR_HINT, CHANGE_POINTS } from '../utils/mutations';
 
    
 const useStyles = makeStyles(() => ({
@@ -32,27 +34,75 @@ const HuntItem = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
-    const { huntItemId } = useParams();
+    const { huntItemId } = useParams()
     console.log(huntItemId)
-    const { loading, data } = useQuery(GET_HUNT_ITEM, {
+    const { data: huntItemData, loading: huntItemLoading } = useQuery(GET_HUNT_ITEM, {
         // pass URL parameter
         variables: { huntItemId: huntItemId },
     });
+    const { data: userData, loading: userLoading } = useQuery(QUERY_ME) 
+    const [userAsksForHint, { error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
 
-    const huntItem = data?.huntItem || {};
-    console.log(huntItem)
+    const huntItem = huntItemData?.huntItem || {};
+    const currentUser = userData?.me || {};
+    console.log(huntItem, "HUNT ITEM")
+    console.log(currentUser, "CURRENT USER!!")
 
-    const CardBody = () => {
+    const [hintState, setHintState] = useState({
+        _id: huntItemId,
+        hint2: hint2DisplayedTo,
+        hint3: huntItem.hint3,
+    });
+
+    console.log(hintState)
+
+    const HintOneBody = () => {
         return (
             <div>
                 <h2>HINT NUMBER 1</h2>
                 <p>{huntItem.hint1}</p>
-                <Button className={buttonStyles}>Need another hint? (-1 pt)</Button>
+                <Button className={buttonStyles} onClick={hintTwo}>Need another hint? (-1 pt)</Button>
             </div>
         )
     }  
 
-    if (loading) {
+    const HintTwoBody = () => {
+        return (
+            <div>
+                <h2>HINT NUMBER 1</h2>
+                <p>{huntItem.hint2}</p>
+                <Button className={buttonStyles} onClick={hintThree}>Need another hint? (-1 pt)</Button>
+            </div>
+        )
+    } 
+
+    const HintThreeBody = () => {
+        return (
+            <div>
+                <h2>HINT NUMBER 1</h2>
+                <p>{huntItem.hint3}</p>  
+                    <Button className={buttonStyles} onClick={huntItemSolution}>Need another hint? (-1 pt)</Button>
+            </div>
+        )
+    } 
+
+    const DisplayHintTwo = async () => {
+        console.log("HINT ONE CLICKED!!!")
+        // const { data: hintData } = await userAsksForHint({
+        //     variables: { ...hintState,
+        //     points: deductPoint },
+        // });
+    }
+
+    const displayHintThree = async () => {
+        console.log("HINT TWO CLICKED!!!")
+        // const { data: hintData } = await userAsksForHint({
+        //     variables: { ...hintState,
+        //     points: deductPoint },
+        // });
+    }
+
+    if (huntItemLoading) {
         return <h2>LOADING.....</h2>
     } 
 
@@ -72,7 +122,7 @@ const HuntItem = () => {
                         classes={textCardContentStyles}
                             overline={'SEATTLE'}
                             heading={'SECRET RESTAURANT'}
-                            body={<CardBody />} />
+                            body={<CardOneBody />} />
                         />
                     </CardContent>
                 </Card>
