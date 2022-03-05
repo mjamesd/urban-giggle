@@ -122,7 +122,9 @@ const resolvers = {
         },
         updateHunt: async (parent, { huntId, ...args }, context) => {
             if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (updateHunt)');
-            if (Object.entries(args).length === 0) return await Hunt.findById(huntId).populate('huntItems');
+            if (Object.entries(args).length === 0) return await Hunt.findById(huntId).populate('huntItems').populate('rewards').populate({
+                path: 'huntItems',
+                populate: ['hint2DisplayedTo', 'hint3DisplayedTo', 'solutionDisplayedTo', 'rewards']});
             return await Hunt.findByIdAndUpdate(
                 huntId,
                 args,
@@ -130,7 +132,10 @@ const resolvers = {
                     new: true,
                     runValidators: true,
                 }
-            ).populate('huntItems').populate('rewards');
+            ).populate('huntItems').populate('rewards').populate({
+                path: 'huntItems',
+                populate: ['hint2DisplayedTo', 'hint3DisplayedTo', 'solutionDisplayedTo', 'rewards']
+            });
         },
         removeHunt: async (parent, { huntId }, context) => {
             if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (removeHunt)');
@@ -378,16 +383,19 @@ const resolvers = {
         userCompletedHunt: async (parent, { huntId }, context) => {
             if (!context.user)
                 return new AuthenticationError("You need to be logged in!");
+            const hunt = await Hunt.findById(huntId);
             const user = await User.findByIdAndUpdate(
                 context.user._id,
                 {
-                    $addToSet: { completedHunts: huntId },
+                    $inc: { points: hunt.points },
+                    $addToSet: { completedHunts: huntId, badges: hunt.rewards },
                 },
                 {
                     new: true,
                 }
-            );
+            ).populate('completedHunts').populate('foundHuntItems');
             const token = signToken(user);
+            console.log(user);
             return { token, user };
         },
         // Hunts and huntItems that reward user with badge(s) already have this coded into them, so this is not needed for those actions.

@@ -414,6 +414,8 @@ export const USER_COMPLETED_HUNT = gql`
       user{
         completedHunts{
           _id
+          name
+          points
         }
       }
     }

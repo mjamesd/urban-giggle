@@ -55,6 +55,10 @@ const Header = () => {
                 alert('You must be logged in to view this page.');
                 window.location.replace('/');
             }
+            if (Auth.getProfile().data.userType === 'hunter') {
+                alert('You must be an administrator to view this page.');
+                window.location.replace('/');
+            }
             if (Auth.getProfile().data.userType !== 'admin') {
                 if (Auth.getProfile().data.userType === 'organizer'
                     && !organizerPaths.includes(location.pathname)
@@ -63,7 +67,6 @@ const Header = () => {
                     alert('You must be an administrator to view this page.');
                     window.location.replace('/');
                 }
-
             }
         }
     });
@@ -174,7 +177,7 @@ const Header = () => {
                                     </MenuItem>
                                     <br />
                                     <MenuItem onClick={handleClose}>
-                                        <Button><Link style={styles.links} to="/admin">DASHBOARD</Link></Button>
+                                        <Button><Link style={styles.links} to="/dashboard">DASHBOARD</Link></Button>
                                     </MenuItem>
                                     <br />
                                     <MenuItem onClick={handleClose}>

@@ -11,6 +11,10 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../utils/queries';
+
 const useStyles = makeStyles(() => ({
     root: {
         maxWidth: 500,
@@ -30,6 +34,18 @@ const DashboardUser = () => {
     const navigate = useNavigate();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
+    
+    const { loading, data } = useQuery(GET_USER, {
+        variables: { userId: Auth.getProfile().data._id }
+    });
+    const user = data?.user || [];
+
+    
+
+    if (loading) {
+        return <h2>LOADING.....</h2>
+    }
+
     return (
 
         <motion.div
@@ -45,12 +61,37 @@ const DashboardUser = () => {
                             classes={textCardContentStyles}
                             overline={'Total Quest'}
                             heading={'User Dashboard'}
-                            body={
+                            body={(
                                 <>
-                                    <p><Button onClick={() => navigate(`./hunts`)} className={buttonStyles}>Completed Hunts</Button></p>
-                                    <p><Button onClick={() => navigate(`./badges`)} className={buttonStyles}>Badges</Button></p>
+                                    <div key="completedHunts">
+                                        <h2>Completed Scavenger Hunts</h2>
+                                        {user.completedHunts && user.completedHunts.map(hunt => (
+                                            <div key={hunt._id}>
+                                                <h3>{hunt.name}</h3>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div key="foundHuntItems">
+                                        <h2>Found Hunt Locations</h2>
+                                        {user.foundHuntItems && user.foundHuntItems.map(item => (
+                                            <div key={item._id}>
+                                                <h3>{item.name}</h3>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div key="badges">
+                                        <h2>Badges</h2>
+                                        {user.badges && user.badges.map(badge => (
+                                            <div key={badge._id} style={{display: 'flex'}}>
+                                                <div>
+                                                    <h3>{badge.name}</h3>
+                                                    <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '200px', border: '1px solid black' }} />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </>
-                            }
+                            )}
                         />
                     </CardContent>
                 </Card>
