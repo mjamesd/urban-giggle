@@ -213,8 +213,9 @@
         "hint3":"The lilac garden has over 100 cultivars represented. Spokane is known as the Lilac City.",
         "solutionLocation":"1702 S Gran Blvd at the conservatory front desk",
         "solutionDescription":"Manito Park",
-        "city":"Spokane",
-
+        "city":"Spokane"
+    },
+    {
         "name":"Kerry Park",
         "category":"explore",
         "hint1":"Royal view of Seattle",

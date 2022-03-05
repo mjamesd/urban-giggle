@@ -481,3 +481,13 @@ mutation deleteThisBadge($badgeId: ID!) {
         points
     }
 }`
+
+export const SIGN_GUEST_BOOK = gql`
+mutation userSignsHuntItemGuestbook($huntItemId: ID!, $message: String!) {
+  userSignsHuntItemGuestbook(huntItemId: $huntItemId, message: $message) {
+      __typename
+      _id
+      guestbook
+  }
+}
+`
