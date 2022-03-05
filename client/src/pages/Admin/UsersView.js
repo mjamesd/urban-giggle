@@ -22,7 +22,6 @@ const UsersView = () => {
     }
 
     /*
-
         __typename
         _id
         userType
@@ -56,7 +55,6 @@ const UsersView = () => {
             <Button onClick={()=> navigate('../admin')} className={buttonStyles}>Admin Panel Home</Button>
             <Button onClick={()=> navigate('../admin/users')} className={buttonStyles}>Users</Button>
             <h1>{user.username}</h1>
-            <p>ID: {user._id}</p>
             <p>User Type: <strong>{user.userType}</strong></p>
             <p>Email address: {user.email}</p>
             <p>Current # of Points: {user.points}</p>
@@ -67,7 +65,6 @@ const UsersView = () => {
                 {user.completedHunts && user.completedHunts.map(hunt => (
                     <li key={hunt._id}>
                         <div>
-                            <p>ID: {hunt._id}</p>
                             <p>Name: {hunt.name}</p>
                             <p>City: {hunt.city}</p>
                             <p>Description: {hunt.description}</p>
@@ -81,7 +78,6 @@ const UsersView = () => {
                 {user.foundHuntItems && user.foundHuntItems.map(huntItem => (
                     <li key={huntItem._id}>
                         <div>
-                            <p>ID: {huntItem._id}</p>
                             <p>Name: {huntItem.name}</p>
                             <p>City: {huntItem.city}</p>
                             <p>Category: {huntItem.category}</p>
@@ -106,7 +102,6 @@ const UsersView = () => {
                 {user.badges && user.badges.map(badge => (
                     <li key={badge._id}>
                         <div>
-                            <p>ID: {badge._id}</p>
                             <p>Name: {badge.name}</p>
                             <p>Icon: <img src={badge.icon} alt={badge.icon} style={{width: '100px', border: '1px solid black'}} /></p>
                             <p>Description: {badge.description}</p>

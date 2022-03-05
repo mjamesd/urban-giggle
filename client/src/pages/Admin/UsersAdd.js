@@ -25,7 +25,7 @@ const UsersAdd = React.memo(() => {
     });
 
     // mutation
-    const [createUser, { error: createError }] = useMutation(CREATE_USER);
+    const [createUser] = useMutation(CREATE_USER);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -35,11 +35,11 @@ const UsersAdd = React.memo(() => {
             const { data } = await createUser({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`User "${formState.username}" added!`);
+            alert(`User "${data.createUser.username}" added!`);
         } catch (err) {
             console.log(err);
         }
-        navigate('../admin/users '); // go to index page
+        navigate('../admin/users'); // go to index page
     };
 
     const handleChange = (event) => {
@@ -61,7 +61,7 @@ const UsersAdd = React.memo(() => {
                     <TextField variant='outlined' label="email" name="email" type="text" value={formState.email} onChange={handleChange} /><br />
                     <TextField variant='outlined' label="password" name="password" type="password" value={formState.password} onChange={handleChange} /><br />
                     <FormGroup variant='outlined' key="submitForm">
-                        <Button className={buttonStyles} type="submit">Create Hunt Item</Button>
+                        <Button className={buttonStyles} type="submit">Create User</Button>
                     </FormGroup>
                 </FormControl>
             </form>

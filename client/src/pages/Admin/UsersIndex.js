@@ -1,15 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { GET_USERS } from '../../utils/queries';
-import { REMOVE_USER } from '../../utils/mutations';
+// import { REMOVE_USER } from '../../utils/mutations';
 
 const UsersIndex = () => {
     const navigate = useNavigate();
     const { loading, data } = useQuery(GET_USERS);
-    const [removeUser, { error: rUerror }] = useMutation(REMOVE_USER);
+    // const [removeUser, { error: rUerror }] = useMutation(REMOVE_USER);
 
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const users = data?.users || [];

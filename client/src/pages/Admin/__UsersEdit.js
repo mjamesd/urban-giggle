@@ -12,7 +12,6 @@ import {
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -34,9 +33,6 @@ const MenuProps = {
 };
 
 function getStyles(item, collection, theme) {
-    console.log('item', item);
-    console.log('collection', collection);
-    console.log('-----------------------------------------------------------------');
     if (collection && collection.length > 0) {
         return {
             fontWeight:
@@ -49,7 +45,7 @@ function getStyles(item, collection, theme) {
     return null;
 }
 
-const UsersEdit = React.memo(() => {
+const UsersEdit = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
@@ -90,7 +86,7 @@ const UsersEdit = React.memo(() => {
             const { data } = await updateUser({
                 variables: { ...formState, points: pointsInt },
             });
-            alert(`Scavenger Hunt Item "${formState.name}" updated!`);
+            alert(`User "${formState.name}" updated!`);
         } catch (err) {
             console.log(err);
         }
@@ -143,8 +139,6 @@ const UsersEdit = React.memo(() => {
             badges: user.badges.map(item => item._id)
         });
     }
-
-    console.log('THIS USER:', user);
 
     return (
         <div style={{ marginLeft: '2em' }}>
@@ -258,6 +252,6 @@ const UsersEdit = React.memo(() => {
             </form>
         </div>
     )
-});
+};
 
 export default UsersEdit;

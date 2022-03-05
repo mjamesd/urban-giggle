@@ -15,13 +15,10 @@ const HuntsView = () => {
         variables: { huntId: huntId }
     });
     const hunt = data?.hunt || [];
-
     
     if (loading) {
         return <h2>LOADING.....</h2>
     }
-
-    console.log(hunt);
 
     return (
         <div style={{ marginLeft: '2em' }}>
@@ -32,6 +29,7 @@ const HuntsView = () => {
             <p>Description: {hunt.description}</p>
             <p>Points awarded when completed: {hunt.points}</p>
             <p>Locations to find in this Scavenger Hunt:</p>
+            {hunt.huntItems.length === 0 ? 'No locations for this scavenger hunt.' : ''}
             <ul key={`${hunt._id}-huntItems`}>
                 {hunt.huntItems.map(huntItem => (
                     <li key={huntItem._id}>
@@ -59,14 +57,13 @@ const HuntsView = () => {
             </ul>
             <p>Rewards for completing this Scavenger Hunt:</p>
             <ul key={`${hunt._id}-rewards`}>
-                {(hunt.rewards.length === 0) ? 'No rewards.' : ''}
+                {(hunt.rewards.length === 0) ? 'No rewards for this scavenger hunt.' : ''}
                 {hunt.rewards && hunt.rewards.map(badge => (
                     <li key={badge._id}>
                         <div>
-                            <p>{badge._id}</p>
-                            <p>{badge.name}</p>
-                            <p>{badge.icon}</p>
-                            <p>{badge.description}</p>
+                            <p>Name: {badge.name}</p>
+                            <p><img src={badge.icon} alt={badge.icon} style={{width: '100px', border: '1px solid black'}} /></p>
+                            <p>Description{badge.description}</p>
                             <p>Points awarded when receive badge: {badge.points}</p>
                         </div>
                     </li>
