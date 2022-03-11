@@ -33,9 +33,7 @@ import DashboardUser from './pages/DashboardUser'
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
-
 import Victory from './pages/Victory.js'
-
 import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 

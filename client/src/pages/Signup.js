@@ -1,19 +1,19 @@
+// React Imports
 import React from 'react';
+
+// Style Imports
 import cx from 'clsx';
 import { motion } from 'framer-motion';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { Card, CardContent } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-// import { Link } from 'react-router-dom';
-// import { useMutation } from '@apollo/client';
 
-// import Auth from '../utils/auth';
-
+// Components
 import SignUpForm from '../components/SignUpForm'
 
+// Styles
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 343,
@@ -26,8 +26,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+// main function to export
 const Signup = () => {
-
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });

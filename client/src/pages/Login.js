@@ -1,16 +1,19 @@
+// React Imports
 import React from 'react';
+
+// Styles Imports
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { Card, CardContent }from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
-// import Auth from '../utils/auth';
+// Components
 import LoginForm from '../components/LoginForm'
 
+// Styles
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 343,
@@ -23,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
+// main export function
 const Login = (props) => {
 
   const styles = useStyles();
