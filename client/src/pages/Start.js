@@ -76,7 +76,7 @@ const Start = () => {
                         <FormControl fullWidth>
                             {
                                 cities.map((city) => (
-                                    <><Button component={Link} to={`../${city.city}`} className={buttonStyles}>{city.city}</Button><br /></>
+                                    <><Button component={Link} to={`../city/${city.city}`} className={buttonStyles}>{city.city}</Button><br /></>
                                 ))}
                         </FormControl>
                     </CardContent>
