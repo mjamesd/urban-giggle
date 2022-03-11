@@ -2,6 +2,7 @@ import { React } from 'react'
 import { motion } from 'framer-motion';
 import cx from 'clsx';
 import { Link, useParams } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -40,7 +41,7 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
 }));
 
 
-const Hunt = () => {
+const SeattleExploreHunt = () => {
   const { huntId } = useParams();
   const navigate = useNavigate()
   const styles = useStyles();
@@ -79,10 +80,10 @@ const Hunt = () => {
             classes={textCardContentStyles}
             overline={hunt.city}
             heading={hunt.name}
-            body={
-              <><h1>{hunt.description}</h1>
-              <h2>FIND YER BOOTY!</h2></>
-            } /><Grid classes={gridStyles} container spacing={2}>
+            body={<div>
+              <h1>{hunt.description}</h1>
+              <h2>FIND YER BOOTY!</h2>
+            </div>} /><Grid classes={gridStyles} container spacing={2}>
               {hunt &&
                 hunt.huntItems.map((huntItem) => (
                   <Grid item xs={12} sm={6} md={4}>
@@ -91,10 +92,10 @@ const Hunt = () => {
                         <TextInfoContent
                           classes={textCardContentStyles}
                           overline={huntItem.city}
-                          heading={`Unknown ${huntItem.category}`}
-                          body={<><div>
+                          heading={ReactHtmlParser(`Category: ${huntItem.category}<br /> "${huntItem.name}"`)}
+                          body={<div>
                             <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button><br/><br/>
-                          </div></>} />
+                          </div>} />
                       </CardContent>
                     </Card>
                   </Grid>
@@ -103,16 +104,16 @@ const Hunt = () => {
           ) : (
 
             <Card className={cx(styles.root, shadowStyles.root)}>
-            <CardContent>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={'Ooops...'}
-                    heading={'Sign in to join the fun!'}
-                    body={<>You need to be logged in view this page. Please{' '}
-                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
-                
-            </CardContent>
-        </Card>
+                <CardContent>
+                    <TextInfoContent
+                        classes={textCardContentStyles}
+                        overline={'Ooops...'}
+                        heading={'Sign in to join the fun!'}
+                        body={<p>You need to be logged in view this page. Please{' '}
+                        <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+                    
+                </CardContent>
+            </Card>
         )}
       </motion.div>
     </>
@@ -120,4 +121,4 @@ const Hunt = () => {
 };
 
 
-export default Hunt
+export default SeattleExploreHunt
