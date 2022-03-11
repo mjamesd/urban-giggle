@@ -59,7 +59,7 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
-    let huntItemSeach = [currentUser.foundHuntItems]
+    let huntItemSeach = [currentUser.foundHuntItems[0]]
     let userFound
 
     huntItemSeach.forEach(huntItem => {
