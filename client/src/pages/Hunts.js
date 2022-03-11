@@ -24,7 +24,8 @@ import Auth from '../utils/auth';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {
-        [breakpoints.up('md')]: {
+        MarginTop: '10px',
+        [breakpoints.up('sm')]: {
             justifyContent: 'center',
         },
     },
@@ -39,7 +40,6 @@ const useStyles = makeStyles(() => ({
         },
     },
     card: ({ color }) => ({
-        marginTop: 10,
         width: 256,
         borderRadius: 16,
         boxShadow: 'none',
@@ -67,8 +67,10 @@ const useStyles = makeStyles(() => ({
         color: '#fff',
         opacity: 0.87,
         marginTop: '2rem',
+        marginBottom: '2rem',
         fontWeight: 500,
         fontSize: 14,
+
     },
 }));
 
@@ -129,7 +131,6 @@ export const Hunts = React.memo(function SolidGameCard() {
     }
     )
 
-
     const goToHunt = (huntId) => {
         navigate(`./${huntId}`)
       }
@@ -177,7 +178,7 @@ export const Hunts = React.memo(function SolidGameCard() {
                     </Grid><br /><br /><h1 style={{ textAlign: "center" }}>All Available Scavenger Hunts...</h1><br /><br /><Grid style={{ justifyContent: 'center' }} classes={gridStyles} container spacing={4} wrap={'wrap'}>
                         {hunts &&
                             hunts.map((hunt) => (
-                                <Grid item xs={12} sm={6} md={4}>
+                                <Grid item xs={12} sm={12} md={4}>
                                     <Card className={cx(styles.root, shadowStyles.root)}>
                                         <CardContent>
                                             <TextInfoContent
