@@ -115,7 +115,6 @@ export const Hunts = React.memo(function SolidGameCard() {
 
     hunts.forEach(hunt => {
         if(hunt.name === `Explore ${huntCity}`) {
-            console.log(hunt)
             exploreFilter = hunt
             return
         }
@@ -124,7 +123,6 @@ export const Hunts = React.memo(function SolidGameCard() {
     
    hunts.forEach(hunt => {
         if(hunt.name === `Indulge ${huntCity}`) {
-            console.log(hunt)
             indulgeFilter = hunt
             return
         }
@@ -133,7 +131,6 @@ export const Hunts = React.memo(function SolidGameCard() {
 
 
     const goToHunt = (huntId) => {
-        console.log(huntId)
         navigate(`./${huntId}`)
       }
 

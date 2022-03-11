@@ -52,14 +52,11 @@ const Start = () => {
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const hunts = data?.hunts || [];
 
-    console.log(hunts)
-
     if (loading) {
         return <h2 style={{ justifyContent:'center'}}>LOADING.....</h2>
     }
 
     const cities = [...new Map(hunts.map(hunt => [hunt.city, hunt])).values()]
-    console.log(cities)
 
     return (
         <><motion.div
