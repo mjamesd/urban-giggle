@@ -16,10 +16,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import Wall from '../components/Wall'
 import { useQuery } from '@apollo/client';
-import { GET_HUNT_ITEM_BY_QR_ID } from '../utils/queries';
+import { GET_HUNT_ITEM_BY_QR_ID, QUERY_ME } from '../utils/queries';
 import { useMutation } from '@apollo/client';
 import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
-
+import Auth from '../utils/auth';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -40,7 +40,10 @@ const Victory = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const { qrId } = useParams();
+ 
+    const {loading, data} =useQuery(QUERY_ME)
 
+    const currentUser = data?.me || {};
 
     const { loading: qrLoading, data: qrData} = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
         // pass URL parameter
@@ -51,12 +54,40 @@ const Victory = () => {
 
     const huntItem = qrData?.huntItemByQrCode || {};
 
+    console.log(huntItem)
 
-
-    if (qrLoading) {
+    if (qrLoading || loading) {
         return <h2>LOADING.....</h2>
     }
 
+    let huntItemId = huntItem._id
+
+    console.log(huntItemId)
+
+    let huntItemsSearch = [currentUser.foundHuntItems[0]]
+    let userFound 
+
+    huntItemsSearch.forEach(huntItemSearch => {
+        console.log(huntItemSearch, "In THE FOR EACH!!")
+        if(huntItemSearch._id === huntItemId) {
+            userFound = true
+            return 
+        } else {
+            userFound = false
+            return
+        }
+    }
+    )
+
+    console.log(userFound)
+    const userCompletedHuntItem = () => {
+        if (userFound) {
+            return (<><h3>You have previously found and claimed coins for this location.</h3><br /><br /></> )
+        }
+        else {
+            return (<><Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br/><br/></>)
+        }
+    }
 
     const claimPrize = async () => {
         try {
@@ -80,7 +111,8 @@ const Victory = () => {
         >
 
             <main style={{ backgroundImage: `url(https://uploads.visitseattle.org/2017/02/30115610/IMG_1491.jpg)`, backgroundSize: 'cover', overflow: 'hidden', padding: '10vh' }}>
-                <Card className={cx(styles.root, shadowStyles.root)}>
+            {Auth.loggedIn() ? (
+               <> <Card className={cx(styles.root, shadowStyles.root)}>
 
                     <CardContent>
                         <TextInfoContent
@@ -88,9 +120,10 @@ const Victory = () => {
                             overline={'You did it!'}
                             heading={'CONGRATULATIONS'}
                             body={<>
-                                Congratulations on completing your hunt! You found the {huntItem.name}!<br/><br/>
+                            <h1>🎉🎉🎉</h1>
+                               <h2>You found the {huntItem.name}!</h2><br></br>
 
-                                <Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br/><br/>
+                                {userCompletedHuntItem()}
 
                                 <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
                             </>
@@ -100,9 +133,23 @@ const Victory = () => {
                 </Card>
                             <br />
                 <Wall huntItemId={huntItem._id} huntItem={huntItem} />
+                <Confetti /></>
+                ) : (
 
+<Card className={cx(styles.root, shadowStyles.root)}>
+                <CardContent>
+                    <TextInfoContent
+                        classes={textCardContentStyles}
+                        overline={'Ooops...'}
+                        heading={'Sign in to join the fun!'}
+                        body={<>You need to be logged in view this page. Please{' '}
+                        <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
+                    
+                </CardContent>
+            </Card>
+)}
             </main>
-            <Confetti />
+            
         </motion.div>
     );
 };

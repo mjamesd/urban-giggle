@@ -58,16 +58,12 @@ const SeattleExploreHunt = () => {
     // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const hunt = data?.hunt || [];
 
-    console.log(hunt)
-
     if (loading) {
         return <h2>LOADING.....</h2>
     }
 
     const goToItem = (huntId) => {
-      console.log(huntId)
       navigate(`../hints/${huntId}`)
-
     }
 
   return (

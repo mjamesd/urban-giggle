@@ -1,22 +1,21 @@
+// React Imports
 import  React from 'react';
 import { Link } from 'react-router-dom';
+
+// Styling
 import cx from 'clsx';
 import { motion } from 'framer-motion';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import Box from '@material-ui/core/Box';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import { CardActionArea, CardContent, CardMedia, Box, Card, Button } from '@material-ui/core';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 
-
+// Components
 import TopMarquee from '../components/TopMarquee'
 import Experiences from '../components/Experiences';
 
+// Styles
 const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   root: {
     maxWidth: '80%',
@@ -38,6 +37,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
   },
 }));
 
+// main export function
 export const Home = React.memo(function BlogCard() {
   const styles = useStyles();
   const {

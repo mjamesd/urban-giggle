@@ -33,9 +33,7 @@ import DashboardUser from './pages/DashboardUser'
 import Contact from './pages/Contact';
 import About from './pages/About'
 import HuntItem from './pages/HuntItem'
-
 import Victory from './pages/Victory.js'
-
 import Hunt from './pages/Hunt.js'
 import Hunts from './pages/Hunts.js'
 
@@ -113,8 +111,8 @@ const App = () => {
                 
                 {/* hunt routes */}
                 {/* explore will be removed and replaced with hunts/id */}
-                <Route path="/:huntCity" element={<Hunts />} />
-                <Route path="/:huntCity/:huntId" element={<Hunt />} />
+                <Route path="/city/:huntCity" element={<Hunts />} />
+                <Route path="/city/:huntCity/:huntId" element={<Hunt />} />
                
                 {/* organizer routes -- this will be if we are able to add the organizer option in time */}
                 <Route path="/hunt/create" element={<Custom/>} />
