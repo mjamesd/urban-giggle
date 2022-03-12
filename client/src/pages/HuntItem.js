@@ -48,6 +48,8 @@ const HuntItem = () => {
 
     const huntItem = huntItemData?.huntItem || {};
     const currentUser = userData?.me || {};
+    console.log('HUNTITEM: ', huntItem)
+    console.log('CURRENTUSER: ', currentUser)
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -59,10 +61,15 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
-    let huntItemSeach = [currentUser.foundHuntItems[0]]
+    let huntItemSearch = [currentUser.foundHuntItems]
     let userFound
+    console.log('HUNT ITEM SEARCH: ', huntItemSearch)
 
-    huntItemSeach.forEach(huntItem => {
+    if (huntItemSearch){
+
+    huntItemSearch.forEach(huntItem => {
+        console.log('CURRENT USER IN SEARCH: ', currentUser)
+        console.log("HUNTITEM IN SEARCH: ", huntItem)
         if (huntItem._id === huntItemId) {
             userFound = true
             return
@@ -71,7 +78,7 @@ const HuntItem = () => {
             return
         }
     }
-    )
+    )}
 
     if (userFound) {
         return (
@@ -92,12 +99,21 @@ const HuntItem = () => {
         )
     }
 
-    const hintTwoDisplayedTo = huntItem.hint2DisplayedTo.map(user => user._id)
-    const hintThreeDisplayedTo = huntItem.hint3DisplayedTo.map(user => user._id)
-    const solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
+    var hintTwoDisplayedTo = []
+    var hintThreeDisplayedTo = []
+    var solutionDisplayed = []
+
+    if(huntItem.hint2DisplayedTo){
+        hintTwoDisplayedTo = huntItem.hint2DisplayedTo.map(user => user._id)
+    }
+    if(huntItem.hint3DisplayedTo){
+        hintThreeDisplayedTo = huntItem.hint3DisplayedTo.map(user => user._id)
+    }
+    if(huntItem.solutionDisplayedTo){
+        solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
+    }
 
     const hintBody = () => {
-
         if (solutionDisplayed.includes(currentUser._id)) {
             return (
                 <>
