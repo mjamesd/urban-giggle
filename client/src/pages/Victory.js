@@ -20,6 +20,7 @@ import { GET_HUNT_ITEM_BY_QR_ID, QUERY_ME } from '../utils/queries';
 import { useMutation } from '@apollo/client';
 import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
 import Auth from '../utils/auth';
+import useWindowSize from 'react-use/lib/useWindowSize'
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -40,12 +41,13 @@ const Victory = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const { qrId } = useParams();
- 
-    const {loading, data} =useQuery(QUERY_ME)
+    const { width, height } = useWindowSize()
+
+    const { loading, data } = useQuery(QUERY_ME)
 
     const currentUser = data?.me || {};
 
-    const { loading: qrLoading, data: qrData} = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
+    const { loading: qrLoading, data: qrData } = useQuery(GET_HUNT_ITEM_BY_QR_ID, {
         // pass URL parameter
         variables: { qrId: qrId },
     });
@@ -54,7 +56,7 @@ const Victory = () => {
 
     const huntItem = qrData?.huntItemByQrCode || {};
 
-    console.log(huntItem)
+    console.log('THE HUNT ITEM: ', huntItem)
 
     if (qrLoading || loading) {
         return <h2>LOADING.....</h2>
@@ -64,14 +66,14 @@ const Victory = () => {
 
     console.log(huntItemId)
 
-    let huntItemsSearch = [currentUser.foundHuntItems[0]]
-    let userFound 
+    let huntItemsSearch = [currentUser.foundHuntItems]
+    let userFound
 
     huntItemsSearch.forEach(huntItemSearch => {
         console.log(huntItemSearch, "In THE FOR EACH!!")
-        if(huntItemSearch._id === huntItemId) {
+        if (huntItemSearch._id === huntItemId) {
             userFound = true
-            return 
+            return
         } else {
             userFound = false
             return
@@ -82,23 +84,23 @@ const Victory = () => {
     console.log(userFound)
     const userCompletedHuntItem = () => {
         if (userFound) {
-            return (<><h3>You have previously found and claimed coins for this location.</h3><br /><br /></> )
+            return (<><h3>You have previously found and claimed coins for this location.</h3><br /><br /></>)
         }
         else {
-            return (<><Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br/><br/></>)
+            return (<><Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br /><br /></>)
         }
     }
 
     const claimPrize = async () => {
         try {
             const { data: foundData } = await userFoundHuntItem({
-                variables: { huntItemId: huntItem._id},
+                variables: { huntItemId: huntItem._id },
             })
             console.log(foundData)
         }
-            catch(e) {
-                console.log(e)
-            }
+        catch (e) {
+            console.log(e)
+        }
     }
 
 
@@ -111,45 +113,48 @@ const Victory = () => {
         >
 
             <main style={{ backgroundImage: `url(https://uploads.visitseattle.org/2017/02/30115610/IMG_1491.jpg)`, backgroundSize: 'cover', overflow: 'hidden', padding: '10vh' }}>
-            {Auth.loggedIn() ? (
-               <> <Card className={cx(styles.root, shadowStyles.root)}>
+                {Auth.loggedIn() ? (
+                    <> <Card className={cx(styles.root, shadowStyles.root)}>
 
-                    <CardContent>
-                        <TextInfoContent
-                            classes={textCardContentStyles}
-                            overline={'You did it!'}
-                            heading={'CONGRATULATIONS'}
-                            body={<>
-                            <h1>🎉🎉🎉</h1>
-                               <h2>You found the {huntItem.name}!</h2><br></br>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'You did it!'}
+                                heading={'CONGRATULATIONS'}
+                                body={<>
+                                    <h1>🎉🎉🎉</h1>
+                                    <h2>You found: {huntItem.solutionDescription}!</h2><br></br>
 
-                                {userCompletedHuntItem()}
+                                    {userCompletedHuntItem()}
 
-                                <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
-                            </>
-                            }
-                        />
-                    </CardContent>
-                </Card>
-                            <br />
-                <Wall huntItemId={huntItem._id} huntItem={huntItem} />
-                <Confetti /></>
+                                    <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
+                                </>
+                                }
+                            />
+                        </CardContent>
+                    </Card>
+                        <br />
+                        <Wall huntItemId={huntItem._id} huntItem={huntItem} />
+                        <Confetti
+                            width={width}
+                            height={height}
+                        /></>
                 ) : (
 
-<Card className={cx(styles.root, shadowStyles.root)}>
-                <CardContent>
-                    <TextInfoContent
-                        classes={textCardContentStyles}
-                        overline={'Ooops...'}
-                        heading={'Sign in to join the fun!'}
-                        body={<>You need to be logged in view this page. Please{' '}
-                        <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
-                    
-                </CardContent>
-            </Card>
-)}
+                    <Card className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'Ooops...'}
+                                heading={'Sign in to join the fun!'}
+                                body={<>You need to be logged in view this page. Please{' '}
+                                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
+
+                        </CardContent>
+                    </Card>
+                )}
             </main>
-            
+
         </motion.div>
     );
 };
