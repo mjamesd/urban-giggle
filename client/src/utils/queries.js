@@ -383,6 +383,7 @@ query huntItemByQrCode($qrId: String!) {
     qrId 
     qrCode
     points
+    solutionDescription
     rewards{
       _id
       name
@@ -390,7 +391,7 @@ query huntItemByQrCode($qrId: String!) {
       description
       points
     }
-   guestbook
+  guestbook
   }
 }
 `

@@ -56,7 +56,7 @@ const Victory = () => {
 
     const huntItem = qrData?.huntItemByQrCode || {};
 
-    console.log(huntItem)
+    console.log('THE HUNT ITEM: ', huntItem)
 
     if (qrLoading || loading) {
         return <h2>LOADING.....</h2>
@@ -123,7 +123,7 @@ const Victory = () => {
                                 heading={'CONGRATULATIONS'}
                                 body={<>
                                     <h1>🎉🎉🎉</h1>
-                                    <h2>You found the {huntItem.name}!</h2><br></br>
+                                    <h2>You found: {huntItem.solutionDescription}!</h2><br></br>
 
                                     {userCompletedHuntItem()}
 
