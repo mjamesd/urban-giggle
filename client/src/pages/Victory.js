@@ -71,8 +71,8 @@ const Victory = () => {
 
     console.log('huntItemsSearch: ', huntItemsSearch)
 
-    huntItemsSearch.forEach(huntItemSearch => {
-        console.log(huntItemSearch, "In THE FOR EACH!!")
+    huntItemsSearch.forEach(huntItemsSearch => {
+        console.log(huntItemsSearch, "In THE FOR EACH!!")
         if (huntItemsSearch._id === huntItemId) {
             userFound = true
             return
