@@ -61,8 +61,8 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
-    let huntItemSearch = [currentUser.foundHuntItems]
-    let userFound
+    let huntItemSearch = currentUser.foundHuntItems
+    let userFound = false
     console.log('HUNT ITEM SEARCH: ', huntItemSearch)
 
     if (huntItemSearch){
@@ -73,13 +73,10 @@ const HuntItem = () => {
         if (huntItem._id === huntItemId) {
             userFound = true
             return
-        } else {
-            userFound = false
-            return
         }
     }
     )}
-
+    console.log('USERFOUND: ', userFound)
     if (userFound) {
         return (
             <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -92,7 +89,7 @@ const HuntItem = () => {
 
                             <p>You have found this location!</p>
                             <p>{huntItem.solutionDescription}</p>
-
+                            <Button component={Link} to={`../`} className={buttonStyles}>Start Again</Button>
                         </div>} />
                 </CardContent>
             </Card>
