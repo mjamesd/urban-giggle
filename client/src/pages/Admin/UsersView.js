@@ -59,9 +59,9 @@ const UsersView = () => {
             <p>Email address: {user.email}</p>
             <p>Current # of Points: {user.points}</p>
             <p>Created: {user.createdAt}</p>
-            <p>Completed Scavenger Hunts:</p>
-            <ul key="completedHunts">
-                {(user.completedHunts.length === 0) ? 'No completed scavenger hunts.' : ''}
+            <p><strong>Completed Scavenger Hunts:</strong></p>
+            <ul key="completedHunts" style={{borderBottom: '1px solid #000'}}>
+                {(!user.completedHunts || user.completedHunts.length === 0) ? (<p><em>No completed scavenger hunts</em></p>) : ''}
                 {user.completedHunts && user.completedHunts.map(hunt => (
                     <li key={hunt._id}>
                         <div>
@@ -72,23 +72,22 @@ const UsersView = () => {
                     </li>
                 ))}
             </ul>
-            <p>Found Scavenger Hunt Locations:</p>
-            <ul key="foundHuntItems">
-                {(user.foundHuntItems.length === 0) ? 'No found scavenger hunt locations.' : ''}
+            <p><strong>Found Scavenger Hunt Locations:</strong></p>
+            <ul key="foundHuntItems" style={{borderBottom: '1px solid #000'}}>
+                {(!user.foundHuntItems || user.foundHuntItems.length === 0) ? (<p><em>No found scavenger hunt locations</em></p>) : ''}
                 {user.foundHuntItems && user.foundHuntItems.map(huntItem => (
                     <li key={huntItem._id}>
                         <div>
                             <p>Name: {huntItem.name}</p>
                             <p>City: {huntItem.city}</p>
                             <p>Category: {huntItem.category}</p>
-                            <p>Hint 1: {huntItem.hint1}</p>
-                            <p>Hint 2: {huntItem.hint2}</p>
-                            <p>Hint 3: {huntItem.hint3}</p>
                             <p>Solution Location: {huntItem.solutionLocation}</p>
                             <p>Solution Description: {huntItem.solutionDescription}</p>
-                            <p>Solution Image: <img src={huntItem.solutionImg} alt={huntItem.solutionImg} style={{width: '100px', border: '1px solid black'}} /></p>
+                            <p>Solution Image:<br />
+                                <img src={huntItem.solutionImg} alt={huntItem.solutionImg} style={{width: '100px', border: '1px solid #000'}} />
+                            </p>
                             <p>Guestbook:</p>
-                                {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
+                                {(!huntItem.guestbook || huntItem.guestbook.length === 0) ? (<p><em>No guestbook entries</em></p>) : ''}
                                 {huntItem.guestbook && huntItem.guestbook.map(message => (
                                     <div>{ReactHtmlParser(message)}</div>
                                 ))}
@@ -96,14 +95,16 @@ const UsersView = () => {
                     </li>
                 ))}
             </ul>
-            <p>Badges:</p>
+            <p><strong>Badges:</strong></p>
             <ul key="badges">
-                {(user.badges.length === 0) ? 'No badges.' : ''}
+                {(!user.badges || user.badges.length === 0) ? (<p><em>No badges</em></p>) : ''}
                 {user.badges && user.badges.map(badge => (
                     <li key={badge._id}>
                         <div>
                             <p>Name: {badge.name}</p>
-                            <p>Icon: <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid black' }} /></p>
+                            <p>Icon:<br />
+                                <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '100px', border: '1px solid #000' }} />
+                            </p>
                             <p>Description: {badge.description}</p>
                             <p>Points: {badge.points}</p>
                         </div>

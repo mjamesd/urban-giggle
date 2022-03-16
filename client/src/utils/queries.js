@@ -17,14 +17,15 @@ import { gql } from '@apollo/client';
 export const GET_USER = gql`
 query user($userId: ID!) {
     user(userId: $userId) {
+        __typename
         _id
         username
         email
         password
         userType
         points
-        createdAt
         foundHuntItems {
+            __typename
             _id
             name
             city
@@ -36,14 +37,24 @@ query user($userId: ID!) {
             solutionDescription
             solutionImg
             points
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
         }
+        foundHuntItemsCount
         completedHunts {
+            __typename
             _id
             name
             city
             description
             points
             huntItems {
+                __typename
                 _id
                 name
                 city
@@ -56,126 +67,204 @@ query user($userId: ID!) {
                 solutionImg
                 points
             }
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
         }
+        completedHuntsCount
         badges {
+            __typename
             _id
             name
             icon
             description
             points
         }
+        favoriteHunts {
+            __typename
+            _id
+            name
+        }
+        favoriteHuntItems {
+            __typename
+            _id
+            name
+        }
+        createdAt
     }
 }
 `
 //tested in playground, works
 export const GET_USERS = gql`
 query users{
-  users{
-    _id
-    username
-    email
-    password
-    userType
-    points
-    createdAt
-    foundHuntItems {
-    	  _id
-    		name
-   			city
-    		qrId
-    		hint1
-    		hint2
-    		hint3
-    		solutionLocation
-   			solutionDescription
-    		solutionImg
-    		points
-    }
-    completedHunts{
-      _id
-    	name
-      city
-    	description
-    	points
-    	huntItems{
-         _id
-    		name
-   			city
-    		qrId
-    		hint1
-    		hint2
-    		hint3
-    		solutionLocation
-   			solutionDescription
-    		solutionImg
-    		points
-      }
-    }
-    badges{
-      _id
-    	name
-   		icon
-    	description
-    	points
-    }
-    favoriteHunts{
-      name
-      city
-      description
-      points
-      huntItems{
-        name
-        qrId
-        city
-        hint1
-        hint2
-        hint3
-        solutionLocation
-        solutionDescription
-        solutionImg
+    users {
+        __typename
+        _id
+        username
+        email
+        password
+        userType
         points
-        rewards{
-          name
-          icon
-          description
-          points
+        foundHuntItems {
+            __typename
+            _id
+            name
+            city
+            qrId
+            hint1
+            hint2
+            hint3
+            solutionLocation
+            solutionDescription
+            solutionImg
+            points
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
         }
-      }
+        foundHuntItemsCount
+        completedHunts {
+            __typename
+            _id
+            name
+            city
+            description
+            points
+            huntItems {
+                __typename
+                _id
+                name
+                city
+                qrId
+                hint1
+                hint2
+                hint3
+                solutionLocation
+                solutionDescription
+                solutionImg
+                points
+            }
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
+        }
+        completedHuntsCount
+        badges {
+            __typename
+            _id
+            name
+            icon
+            description
+            points
+        }
+        favoriteHunts {
+            __typename
+            _id
+            name
+        }
+        favoriteHuntItems {
+            __typename
+            _id
+            name
+        }
+        createdAt
     }
-  }
-  
 }
 `
 //tested in playground, works
 export const QUERY_ME = gql`
   query me {
     me {
-      __typename
-      _id
-      username
-      email
-      password
-      userType
-      points
-      foundHuntItems {
         __typename
         _id
-        name
-      }
-      completedHunts {
-        __typename
-        _id
-        name
-      }
-      badges {
-        __typename
-        _id
-        name
-        icon
-        description
+        username
+        email
+        password
+        userType
         points
-      }
-      createdAt
+        foundHuntItems {
+            __typename
+            _id
+            name
+            city
+            qrId
+            hint1
+            hint2
+            hint3
+            solutionLocation
+            solutionDescription
+            solutionImg
+            points
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
+        }
+        foundHuntItemsCount
+        completedHunts {
+            __typename
+            _id
+            name
+            city
+            description
+            points
+            huntItems {
+                __typename
+                _id
+                name
+                city
+                qrId
+                hint1
+                hint2
+                hint3
+                solutionLocation
+                solutionDescription
+                solutionImg
+                points
+            }
+            rewards {
+                __typename
+                _id
+                name
+                description
+                points
+            }
+        }
+        completedHuntsCount
+        badges {
+            __typename
+            _id
+            name
+            icon
+            description
+            points
+        }
+        favoriteHunts {
+            __typename
+            _id
+            name
+        }
+        favoriteHuntItems {
+            __typename
+            _id
+            name
+        }
+        createdAt
   }
   }
 `

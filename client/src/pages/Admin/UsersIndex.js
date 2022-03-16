@@ -8,47 +8,16 @@ import { GET_USERS } from '../../utils/queries';
 
 const UsersIndex = () => {
     const navigate = useNavigate();
-    const { loading, data } = useQuery(GET_USERS);
+    const { button: buttonStyles } = useBlogTextInfoContentStyles();
+    const { loading, data, error } = useQuery(GET_USERS);
     // const [removeUser, { error: rUerror }] = useMutation(REMOVE_USER);
 
-    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+    if (error) console.log('GET_USERS query error:', error);
     const users = data?.users || [];
-
-    const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
     if (loading || users.length === 0) {
         return <h2>LOADING.....</h2>
     }
-
-    /*
-
-        __typename
-        _id
-        userType
-        username
-        email
-        password
-        points
-        foundHuntItems {
-            __typename
-            _id
-            name
-        }
-        completedHunts {
-            __typename
-            _id
-            name
-        }
-        badges {
-            __typename
-            _id
-            name
-            icon
-            description
-            points
-        }
-        createdAt
-    */
 
     return (
         <div style={{ marginLeft: '2em' }}>
@@ -75,8 +44,8 @@ const UsersIndex = () => {
                             <td>{user.userType}</td>
                             <td>{user.email}</td>
                             <td>{user.points}</td>
-                            <td>{user.completedHunts.length}</td>
-                            <td>{user.foundHuntItems.length}</td>
+                            <td>{user.completedHuntsCount}</td>
+                            <td>{user.foundHuntItemsCount}</td>
                             <td>{user.badges.length}</td>
                             <td>
                                 <Button onClick={() => navigate(`./view/${user._id}`)} className={buttonStyles}>View</Button>

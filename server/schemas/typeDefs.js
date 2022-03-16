@@ -6,13 +6,15 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    userType: String!
     points: Int
     foundHuntItems: [HuntItem]
+    foundHuntItemsCount: Int
     completedHunts: [Hunt]
+    completedHuntsCount: Int
     badges: [Badge]
     favoriteHunts: [Hunt]
     favoriteHuntItems: [HuntItem]
-    userType: String!
     createdAt: String
   }
 

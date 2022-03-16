@@ -56,7 +56,7 @@ const resolvers = {
         huntItemByQrCode: async (parent, { qrId }) => {
             if (!qrId)
                 return new MissingArgumentError('HuntItem_huntItemByQrCode: no qrId');
-            
+
             return await HuntItem.findOne({ qrId }).populate('rewards');
         },
         huntItemsByCity: async (parent, { city }) => {
@@ -67,22 +67,19 @@ const resolvers = {
         },
         // USER
         users: async () => {
-            return User.find().populate('completedHunts').populate('foundHuntItems')
-                .populate('badges');
+            return User.find().populate('completedHunts').populate({ path: 'completedHunts', populate: ['huntItems', 'rewards'] }).populate('foundHuntItems').populate({ path: 'foundHuntItems', populate: ['rewards'] }).populate('badges');
         },
         user: async (parent, { userId }) => {
             if (!userId)
                 return new MissingArgumentError('User_user: no userId');
 
-            return User.findById(userId).populate('completedHunts').populate({path: 'completedHunts', populate: ['huntItems']})
-                .populate('foundHuntItems').populate('badges');
+            return User.findById(userId).populate('completedHunts').populate({ path: 'completedHunts', populate: ['huntItems', 'rewards'] }).populate('foundHuntItems').populate({ path: 'foundHuntItems', populate: ['rewards'] }).populate('badges');
         },
         me: async (parent, args, context) => {
             if (!context.user)
                 return new AuthenticationError("You need to be logged in! (me)");
 
-            return User.findById(context.user._id).populate('completedHunts').populate('foundHuntItems')
-                .populate('badges');
+            return User.findById(context.user._id).populate('completedHunts').populate({ path: 'completedHunts', populate: ['huntItems', 'rewards'] }).populate('foundHuntItems').populate({ path: 'foundHuntItems', populate: ['rewards'] }).populate('badges');
         },
     },
 
@@ -124,7 +121,8 @@ const resolvers = {
             if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (updateHunt)');
             if (Object.entries(args).length === 0) return await Hunt.findById(huntId).populate('huntItems').populate('rewards').populate({
                 path: 'huntItems',
-                populate: ['hint2DisplayedTo', 'hint3DisplayedTo', 'solutionDisplayedTo', 'rewards']});
+                populate: ['hint2DisplayedTo', 'hint3DisplayedTo', 'solutionDisplayedTo', 'rewards']
+            });
             return await Hunt.findByIdAndUpdate(
                 huntId,
                 args,
@@ -152,7 +150,7 @@ const resolvers = {
             if (!context.user || context.user.userType === 'hunter') return new AuthenticationError('Access denied (updateHuntItem)');
             if (Object.entries(args).length === 0)
                 return await HuntItem.findById(huntItemId).populate('rewards');
-            
+
             return await HuntItem.findByIdAndUpdate(
                 huntItemId,
                 args,
@@ -312,37 +310,51 @@ const resolvers = {
                 }
             );
         },
+        // Badge names taken from /server/seeders/badgeSeeds.json
+        // We give specific badges for special events, i.e., your first completed scavenger hunt.
+        // TO DO: make this dynamic so you can make n^th special events.
         userFoundHuntItem: async (parent, { huntItemId }, context) => {
             if (!context.user) {
                 return new AuthenticationError("You need to be logged in!");
             }
             const user = await User.findById(context.user._id).populate('completedHunts').populate('foundHuntItems');
-            user.foundHuntItems.push(huntItemId);
 
             let newPoints = 0;
-            const huntItem = await HuntItem.findByIdAndUpdate(
-                huntItemId,
-                {
-                    $addToSet: {
-                        hint2DisplayedTo: context.user._id,
-                        hint3DisplayedTo: context.user._id,
-                        solutionDisplayedTo: context.user._id
-                    },
-                },
-                {
-                    new: true,
-                },
-            ).populate('rewards');
-            newPoints += huntItem.points;
-            huntItem.rewards.forEach((reward) => {
-                newPoints += reward.points;
-            });
-
-            let completedHunts = [];
             let newBadges = [];
+            let completedHunts = [];
+            const isFirstFoundHuntItem = user.foundHuntItems.length === 0;
+            const isFirstCompletedHunt = user.completedHunts.length === 0;
+
+            if (isFirstFoundHuntItem) {
+                const firstFoundHuntItemBadge = await Badge.findOne({ name: 'The First Of Many'});
+                newBadges.push(firstFoundHuntItemBadge._id);
+                newPoints += firstFoundHuntItemBadge.points;
+            }
+
+            if (true) {
+                const huntItem = await HuntItem.findByIdAndUpdate(
+                    huntItemId,
+                    {
+                        $addToSet: {
+                            hint2DisplayedTo: context.user._id,
+                            hint3DisplayedTo: context.user._id,
+                            solutionDisplayedTo: context.user._id
+                        },
+                    },
+                    {
+                        new: true,
+                    },
+                ).populate('rewards');
+                newPoints += huntItem.points;
+                huntItem.rewards.forEach((reward) => {
+                    newBadges.push(reward._id);
+                    newPoints += reward.points;
+                });
+            }
             const hunts = await Hunt.find({});
-            hunts.forEach((hunt) => {
+            hunts.forEach(async (hunt) => {
                 if (hunt.huntItems.includes(huntItemId)) {
+                    // TO DO: replace this with a reducer
                     user.foundHuntItems.forEach((foundHuntItem) => {
                         const hiIndex = hunt.huntItems.indexOf(foundHuntItem._id);
                         if (hiIndex !== -1) {
@@ -352,18 +364,36 @@ const resolvers = {
                     if (hunt.huntItems.length === 0) {
                         newPoints += hunt.points;
                         hunt.rewards.forEach((reward) => {
-                            newPoints += reward.points;
                             newBadges.push(reward._id);
+                            newPoints += reward.points;
                         });
                         completedHunts.push(hunt._id);
+                        if (isFirstCompletedHunt) {
+                            const firstCompletedHuntBadge = await Badge.findOne({ name: 'Novice Hunter'});
+                            newBadges.push(firstCompletedHuntBadge._id);
+                            newPoints += firstCompletedHuntBadge.points;
+                        }
                     }
                 }
             });
+
+            // add arrays to object which will be saved
             let toAddToSet = {};
             toAddToSet.foundHuntItems = huntItemId;
-            toAddToSet.badges = huntItem.rewards;
-            if (completedHunts) {
-                toAddToSet.completedHunts = completedHunts;
+            toAddToSet.badges = newBadges;
+            if (completedHunts.length > 0) toAddToSet.completedHunts = completedHunts;
+
+            // award 10th found hunt item badge if applicable
+            if (toAddToSet.foundHuntItems.length + user.foundHuntItems.length === 10 && !user.foundHuntItems.includes(huntItemId)) {
+                const tenthFoundHuntItemBadge = await Badge.findOne({ name: 'The Big Ten' });
+                newBadges.push(tenthFoundHuntItemBadge._id);
+                newPoints += tenthFoundHuntItemBadge.points;
+            }
+            // award 10th completed hunt if applicable
+            if (user.completedHunts === 9 && !user.completedHunts.includes(completedHunts[0])) {
+                const tenthCompletedHunt = await Badge.findOne({ name: 'Master Hunter' });
+                newBadges.push(tenthCompletedHunt._id);
+                newPoints += tenthCompletedHunt.points;
             }
 
             const updatedUser = await User.findByIdAndUpdate(
