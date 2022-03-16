@@ -160,55 +160,53 @@ const Header = () => {
                                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                 >
-                                    {Auth.loggedIn() && (
-                                        <>
-                                            <div>
+                                    {Auth.loggedIn() && [(
+                                            <div key="username">
                                                 {Auth.getProfile().data.username}
-                                            </div><br />
-                                        </>
-                                    )}
-                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'admin' && (
-                                        <>
-                                            <MenuItem onClick={handleClose}>
+                                            </div>,
+                                            <br key="usernameBr" />
+                                    )]}
+                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'admin' && [(
+                                            <MenuItem onClick={handleClose} key="adminPanel">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin">Admin Panel</Link>
                                                 </Button>
-                                            </MenuItem><br />
-                                        </>
-                                    )}
-                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'organizer' && (
-                                        <>
-                                            <MenuItem onClick={handleClose}>
+                                            </MenuItem>,
+                                            <br key="adminPanelBr" />
+                                    )]}
+                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'organizer' && [(
+                                            <MenuItem onClick={handleClose} key="createHunt">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin/hunts/add">Create Scavenger Hunt</Link>
                                                 </Button>
-                                            </MenuItem><br />
-                                            <MenuItem onClick={handleClose}>
+                                            </MenuItem>,
+                                            <br key="createHuntBr" />,
+                                            <MenuItem onClick={handleClose} key="createHuntItem">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin/huntItems/add">Create Locations</Link>
                                                 </Button>
-                                            </MenuItem><br />
-                                        </>
-                                    )}
-                                    <MenuItem onClick={handleClose}>
+                                            </MenuItem>,
+                                            <br key="createHuntItemBr" />
+                                    )]}
+                                    <MenuItem onClick={handleClose} key="currentPoints">
                                         <Button>
                                             <Link style={styles.links} to="/profile">Current Points: {Auth.getProfile().data.points}</Link>
                                         </Button>
                                     </MenuItem>
-                                    <br />
-                                    <MenuItem onClick={handleClose}>
+                                    <br key="currentPointsBr" />
+                                    <MenuItem onClick={handleClose} key="profile">
                                         <Button>
                                             <Link style={styles.links} to="/profile">Profile</Link>
                                         </Button>
                                     </MenuItem>
-                                    <br />
-                                    <MenuItem onClick={handleClose}>
+                                    <br key="profileBr" />
+                                    <MenuItem onClick={handleClose} key="dashboard">
                                         <Button>
                                             <Link style={styles.links} to="/dashboard">Dashboard</Link>
                                         </Button>
                                     </MenuItem>
-                                    <br />
-                                    <MenuItem onClick={handleClose}>
+                                    <br key="dashboardBr" />
+                                    <MenuItem onClick={handleClose} key="logout">
                                         <Button onClick={logout}>
                                             <Link style={styles.links} to="/">Logout</Link>
                                         </Button>
