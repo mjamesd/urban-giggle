@@ -54,7 +54,7 @@ const Header = () => {
         if (location.pathname.substring(0, 6) === '/admin') {
             if (!Auth.loggedIn()) {
                 alert('You must be logged in to view this page.');
-                window.location.replace('/');
+                window.location.replace('/login');
             }
             if (Auth.getProfile().data.userType === 'hunter') {
                 alert('You must be an administrator to view this page.');
@@ -160,12 +160,9 @@ const Header = () => {
                                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                 >
-                                    {Auth.loggedIn() && [(
-                                            <div key="username">
-                                                {Auth.getProfile().data.username}
-                                            </div>,
-                                            <br key="usernameBr" />
-                                    )]}
+                                    <div key="username" style={{ textAlign: 'center', fontSize: '1.5rem', fontStyle: 'italic', paddingBottom: '5px', borderBottom: '1px solid #000', }}>
+                                        {Auth.getProfile().data.username}
+                                    </div>
                                     {Auth.loggedIn() && Auth.getProfile().data.userType === 'admin' && [(
                                             <MenuItem onClick={handleClose} key="adminPanel">
                                                 <Button>
@@ -216,12 +213,12 @@ const Header = () => {
                             </Box></>
                     ) : (
                         <>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem>
                                 <Button>
                                     <Link style={styles.links} to="/login">Login</Link>
                                 </Button>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem>
                                 <Button>
                                     <Link style={styles.links} to="/signup">Sign Up</Link>
                                 </Button>
