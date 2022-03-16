@@ -14,7 +14,7 @@ import { GET_USER } from '../utils/queries';
 
 const useStyles = makeStyles(() => ({
     root: {
-        maxWidth: 500,
+        maxWidth: 900,
         margin: 'auto',
         borderRadius: 12,
         padding: 12,
@@ -29,7 +29,7 @@ const DashboardUser = () => {
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
 
-    
+
     const { loading, data } = useQuery(GET_USER, {
         variables: { userId: Auth.getProfile().data._id }
     });
@@ -61,6 +61,7 @@ const DashboardUser = () => {
                                         {user.completedHunts && user.completedHunts.map(hunt => (
                                             <div key={hunt._id}>
                                                 <h3>{hunt.name}</h3>
+                                                <p>+{hunt.points} Qoin{hunt.points > 1 && 's'}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -69,19 +70,21 @@ const DashboardUser = () => {
                                         {user.foundHuntItems && user.foundHuntItems.map(item => (
                                             <div key={item._id}>
                                                 <h3>{item.name}</h3>
+                                                <p>+{item.points} Qoin{item.points > 1 && 's'}</p>
                                             </div>
                                         ))}
                                     </div>
                                     <div key="badges">
                                         <h2>Badges</h2>
-                                        {user.badges && user.badges.map(badge => (
-                                            <div key={badge._id} style={{display: 'flex'}}>
-                                                <div>
+                                        <div style={{ display: 'flex', }}>
+                                            {user.badges && user.badges.map(badge => (
+                                                <div key={badge._id} style={{ margin: '0 2rem',  }}>
                                                     <h3>{badge.name}</h3>
+                                                    <p>+{badge.points} Qoin{badge.points > 1 && 's'}</p>
                                                     <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '200px', border: '1px solid black' }} />
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
                                 </>
                             )}
