@@ -1,9 +1,11 @@
 const { Schema, model } = require('mongoose');
-const { v4: uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
 
+// Mark's API key for Happi.dev -- if needed, update here and in /server/models/HuntItem.js
 const happiDevApiKey = `8aa80fF4TsMsXsB2d59W5W467VbH3gss5bZhonBPURMZMU1opXZCRPQq`;
-const happiDevApiUrl = `https://api.happi.dev/v1/qrcode?apikey=${happiDevApiKey}&data=http://www.totalquest.us/victory/`;
+// we give it a URL with https here: https://www.totalquest.us/victory/...
+const happiDevApiUrl = `https://api.happi.dev/v1/qrcode?apikey=${happiDevApiKey}&data=https://www.totalquest.us/victory/`;
 
 const huntItemSchema = new Schema({
     name: {
@@ -13,9 +15,11 @@ const huntItemSchema = new Schema({
     },
     qrId: {
         type: String, // see .pre function below
+        unique: true,
     },
     qrCode: {
         type: String, // see .pre function below
+        unique: true,
     },
     city: {
         type: String,
@@ -86,7 +90,7 @@ const huntItemSchema = new Schema({
 
 huntItemSchema.pre('save', async function (next) {
     if (this.isNew) {
-        this.qrId = uuidv4();
+        this.qrId = uuidv4(); //.substring(0,8); // make them only 8 characters long
 
         // create and store QR Code as base64 PNG
         try {

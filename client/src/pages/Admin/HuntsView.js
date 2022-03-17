@@ -38,6 +38,7 @@ const HuntsView = () => {
                             <p>City: {huntItem.city}</p>
                             <p>Category: {huntItem.category}</p>
                             <p>Points awarded when found: {huntItem.points}</p>
+                            <p>QR ID: {huntItem.qrId}</p>
                             <p>QR Code:</p>
                             <p><img src={huntItem.qrCode} alt={huntItem.qrCode} /></p>
                             <p>Hint #1: {huntItem.hint1}</p>

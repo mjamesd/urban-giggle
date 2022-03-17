@@ -13,6 +13,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        trim: true,
         match: [/.+@.+\..+/, 'Must match an email address!'],
     },
     password: {
@@ -89,6 +90,12 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
+userSchema.virtual('foundHuntItemsCount').get(function() {
+    return this.foundHuntItems.length;
+});
+userSchema.virtual('completedHuntsCount').get(function() {
+    return this.completedHunts.length;
+});
 
 const User = model('User', userSchema);
 

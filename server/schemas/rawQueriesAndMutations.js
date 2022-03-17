@@ -703,7 +703,7 @@ query getAllUsers {
             description
             points
         }
-        isAdmin
+        userType
         createdAt
     }
 }
