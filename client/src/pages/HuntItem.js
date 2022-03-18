@@ -23,6 +23,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
 // components
 import ClueHeader from '../components/cards/ClueHeader'
+import ClueOne from '../components/cards/ClueOne'
 
 
 const useStyles = makeStyles(() => ({
@@ -66,12 +67,11 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
+    // Searching to see if this user has already completed this hunt location 
     let huntItemSearch = currentUser.foundHuntItems
     let userFound = false
-    console.log('HUNT ITEM SEARCH: ', huntItemSearch)
 
     if (huntItemSearch){
-
     huntItemSearch.forEach(huntItem => {
         console.log('CURRENT USER IN SEARCH: ', currentUser)
         console.log("HUNTITEM IN SEARCH: ", huntItem)
@@ -81,7 +81,8 @@ const HuntItem = () => {
         }
     }
     )}
-    console.log('USERFOUND: ', userFound)
+
+    // display if the user has found this item previously, so they cannot complete it for points twice
     if (userFound) {
         return (
             <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -101,6 +102,7 @@ const HuntItem = () => {
         )
     }
 
+    // mapping to see where this user is in their clues 
     var hintTwoDisplayedTo = []
     var hintThreeDisplayedTo = []
     var solutionDisplayed = []
@@ -115,26 +117,15 @@ const HuntItem = () => {
         solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
     }
 
+    // conditional displaying of which clues the user sees when this item location is loaded 
     const hintBody = () => {
         if (solutionDisplayed.includes(currentUser._id)) {
             return (
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
-                                </div>} />
-
-                        </CardContent>
-
-                    </Card>
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -182,18 +173,9 @@ const HuntItem = () => {
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
-                                </div>} />
-                        </CardContent>
-                    </Card>
+
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -230,18 +212,9 @@ const HuntItem = () => {
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
-
-                                </div>} />
-                        </CardContent>
-                    </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
+                   
+                   <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
@@ -262,26 +235,11 @@ const HuntItem = () => {
 
         else {
             return (
-                <>
+            
+                  <>
                   <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
-                  
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                                    <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
-                                </div>} />{errorMessage && (
-
-                                    <p>{errorMessage}</p>
-
-                                )}
-                        </CardContent>
-                    </Card>
-                </>
+                  <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={true}/>
+                  </>
             )
         }
 

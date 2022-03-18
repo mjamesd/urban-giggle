@@ -5,7 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 // styles
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, Button, CardContent } from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
@@ -35,10 +35,9 @@ const ClueHeader = ({ huntItemName, huntItemCategory, huntItemCity }) => {
                 <TextInfoContent
                     classes={textCardContentStyles}
                     overline={huntItemCity}
-                    heading={ReactHtmlParser(huntItemName)}
-                    body={<h2>Undiscovered {ReactHtmlParser(category)}</h2>}
-                    />
-
+                    heading={ReactHtmlParser(huntItemName)} 
+                />
+                <h2 style={{ textAlign: 'center' }}>{ReactHtmlParser(category)}</h2>
             </CardContent>
         </Card>
     )
