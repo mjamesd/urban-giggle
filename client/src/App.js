@@ -80,6 +80,10 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // force HTTPS
+    if (window.location.protocol !== 'https:' && process.env.PRODUCTION === true) {
+        window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+    }
     loading
       ? document.querySelector("body").classList.add("loading")
       : document.querySelector("body").classList.remove("loading");
