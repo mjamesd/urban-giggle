@@ -11,6 +11,9 @@ class MissingArgumentError extends Error {
 
 const resolvers = {
     Query: {
+        // environment_vars: () => {
+        //     return process.env;
+        // },
         // BADGE
         badges: async () => {
             return Badge.find().populate('huntItems').populate('rewards');
