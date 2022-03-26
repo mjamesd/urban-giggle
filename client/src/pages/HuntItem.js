@@ -1,22 +1,29 @@
+//react
 import React, { useState } from 'react'
-import cx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import CardContent from '@material-ui/core/CardContent';
-import TextInfoContent from '@mui-treasury/components/content/textInfo';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
-import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import ReactHtmlParser from 'react-html-parser';
+
+// Apollo Imports and Auth
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { GET_HUNT_ITEM, QUERY_ME } from '../utils/queries';
 import { USER_ASKS_FOR_HINT } from '../utils/mutations';
-import Stack from '@mui/material/Stack';
 import Auth from '../utils/auth';
-import ReactHtmlParser from 'react-html-parser';
+
+//styling 
+import { motion } from 'framer-motion';
+import cx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, Button, CardContent } from '@material-ui/core';
+import Stack from '@mui/material/Stack';
+import TextInfoContent from '@mui-treasury/components/content/textInfo';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
+import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+
+// components
+import ClueHeader from '../components/cards/ClueHeader'
+import ClueOne from '../components/cards/ClueOne'
 
 
 const useStyles = makeStyles(() => ({
@@ -40,9 +47,8 @@ const HuntItem = () => {
 
     const { huntItemId } = useParams()
     const { data: huntItemData, loading: huntItemLoading } = useQuery(GET_HUNT_ITEM, {
-        // pass URL parameter
         variables: { huntItemId: huntItemId },
-    });
+    })
     const { data: userData, loading: userLoading } = useQuery(QUERY_ME)
     const [userAsksForHint, { error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
 
@@ -61,12 +67,11 @@ const HuntItem = () => {
         return <h2>LOADING.....</h2>
     }
 
+    // Searching to see if this user has already completed this hunt location 
     let huntItemSearch = currentUser.foundHuntItems
     let userFound = false
-    console.log('HUNT ITEM SEARCH: ', huntItemSearch)
 
     if (huntItemSearch){
-
     huntItemSearch.forEach(huntItem => {
         console.log('CURRENT USER IN SEARCH: ', currentUser)
         console.log("HUNTITEM IN SEARCH: ", huntItem)
@@ -76,7 +81,8 @@ const HuntItem = () => {
         }
     }
     )}
-    console.log('USERFOUND: ', userFound)
+
+    // display if the user has found this item previously, so they cannot complete it for points twice
     if (userFound) {
         return (
             <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -96,6 +102,7 @@ const HuntItem = () => {
         )
     }
 
+    // mapping to see where this user is in their clues 
     var hintTwoDisplayedTo = []
     var hintThreeDisplayedTo = []
     var solutionDisplayed = []
@@ -110,37 +117,15 @@ const HuntItem = () => {
         solutionDisplayed = huntItem.solutionDisplayedTo.map(user => user._id)
     }
 
+    // conditional displaying of which clues the user sees when this item location is loaded 
     const hintBody = () => {
         if (solutionDisplayed.includes(currentUser._id)) {
             return (
                 <>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                // overline={`Unknown ${huntItem.category}`}
-                                heading={huntItem.name}
-                                body={<div>
-                                    <p>Category: {ReactHtmlParser(huntItem.category)}</p>
+                    <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                                </div>} />
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
-                        </CardContent>
-                    </Card>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
-
-                                </div>} />
-
-                        </CardContent>
-
-                    </Card>
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -186,31 +171,11 @@ const HuntItem = () => {
         if (hintThreeDisplayedTo.includes(currentUser._id)) {
             return (
                 <>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                // overline={`Unknown ${huntItem.category}`}
-                                heading={huntItem.name}
-                                body={<div>
-                                    <p>Category: {ReactHtmlParser(huntItem.category)}</p>
+                    <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                                </div>} />
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
-                        </CardContent>
-                    </Card>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
 
-                                </div>} />
-                        </CardContent>
-                    </Card>
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
@@ -245,31 +210,11 @@ const HuntItem = () => {
         if (hintTwoDisplayedTo.includes(currentUser._id)) {
             return (
                 <>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                // overline={`Unknown ${huntItem.category}`}
-                                heading={huntItem.name}
-                                body={<div>
-                                    <p>Category: {ReactHtmlParser(huntItem.category)}</p>
+                    <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
 
-                                </div>} />
-
-                        </CardContent>
-                    </Card>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
-
-                                </div>} />
-                        </CardContent>
-                    </Card><Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+                    <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
+                   
+                   <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
                             <TextInfoContent
                                 classes={textCardContentStyles}
@@ -290,37 +235,11 @@ const HuntItem = () => {
 
         else {
             return (
-                <>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                // overline={`Unknown ${huntItem.category}`}
-                                heading={huntItem.name}
-                                body={<div>
-                                    <p>Category: {ReactHtmlParser(huntItem.category)}</p>
-
-                                </div>} />
-
-                        </CardContent>
-                    </Card>
-                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
-                        <CardContent>
-                            <TextInfoContent
-                                classes={textCardContentStyles}
-                                overline={huntItem.category}
-                                heading={`HINT NUMBER 1`}
-                                body={<div>
-                                    <p>{ReactHtmlParser(huntItem.hint1)}</p>
-                                    <Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>
-                                </div>} />{errorMessage && (
-
-                                    <p>{errorMessage}</p>
-
-                                )}
-                        </CardContent>
-                    </Card>
-                </>
+            
+                  <>
+                  <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
+                  <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={true}/>
+                  </>
             )
         }
 
