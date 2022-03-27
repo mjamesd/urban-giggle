@@ -24,6 +24,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 // components
 import ClueHeader from '../components/cards/ClueHeader'
 import ClueOne from '../components/cards/ClueOne'
+import Loading from '../components/Loading';
 
 
 const useStyles = makeStyles(() => ({
@@ -50,7 +51,7 @@ const HuntItem = () => {
         variables: { huntItemId: huntItemId },
     })
     const { data: userData, loading: userLoading } = useQuery(QUERY_ME)
-    const [userAsksForHint, { error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
+    const [userAsksForHint,{ error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
 
     const huntItem = huntItemData?.huntItem || {};
     const currentUser = userData?.me || {};
@@ -60,11 +61,11 @@ const HuntItem = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     if (huntItemLoading) {
-        return <h2>LOADING.....</h2>
+        return (<Loading />);
     }
 
     if (userLoading) {
-        return <h2>LOADING.....</h2>
+        return (<Loading />);
     }
 
     // Searching to see if this user has already completed this hunt location 

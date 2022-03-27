@@ -11,6 +11,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
+import Loading from '../components/Loading';
 
 
 // import Auth from '../utils/auth';
@@ -48,7 +49,7 @@ const Profile = (props) => {
   const shadowStyles = useOverShadowStyles({ inactive: true });
 
   if (loading) {
-    return <h2 style={{ justifyContent: 'center' }}>LOADING.....</h2>
+    return (<Loading />);
   }
 
   return (

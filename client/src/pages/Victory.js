@@ -20,7 +20,8 @@ import { GET_HUNT_ITEM_BY_QR_ID, QUERY_ME } from '../utils/queries';
 import { useMutation } from '@apollo/client';
 import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
 import Auth from '../utils/auth';
-import useWindowSize from 'react-use/lib/useWindowSize'
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Loading from '../components/Loading';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -41,9 +42,9 @@ const Victory = () => {
     const shadowStyles = useOverShadowStyles({ inactive: true });
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
     const { qrId } = useParams();
-    const { width, height } = useWindowSize()
-
-    const { loading, data } = useQuery(QUERY_ME)
+    const { width, height } = useWindowSize();
+    
+    const { loading, data } = useQuery(QUERY_ME);
 
     const currentUser = data?.me || {};
 
@@ -56,33 +57,33 @@ const Victory = () => {
 
     const huntItem = qrData?.huntItemByQrCode || {};
 
-    console.log('THE HUNT ITEM: ', huntItem)
+    console.log('THE HUNT ITEM: ', huntItem);
 
     if (qrLoading || loading) {
-        return <h2>LOADING.....</h2>
+        return (<Loading />);
     }
 
-    let huntItemId = huntItem._id
+    let huntItemId = huntItem._id;
 
-    console.log("huntItemId: ", huntItemId)
+    console.log("huntItemId: ", huntItemId);
 
     var huntItemsSearch = []
     if (currentUser.foundHuntItems) {
-        huntItemsSearch = currentUser.foundHuntItems
-        console.log("huntItemsSearch Populated: ", huntItemsSearch)
+        huntItemsSearch = currentUser.foundHuntItems;
+        console.log("huntItemsSearch Populated: ", huntItemsSearch);
     }
-    let userFound = false
+    let userFound = false;
 
-    console.log('huntItemsSearch: ', huntItemsSearch)
+    console.log('huntItemsSearch: ', huntItemsSearch);
 
 
     
     huntItemsSearch.forEach(huntItemsSearch => {
-        console.log(huntItemsSearch, "In THE FOR EACH!!")
+        console.log(huntItemsSearch, "In THE FOR EACH!!");
         if (huntItemsSearch._id === huntItemId) {
-            userFound = true
-            console.log("found it! userFound: ", userFound)
-            return
+            userFound = true;
+            console.log("found it! userFound: ", userFound);
+            return;
         }
     }
     )
@@ -90,10 +91,10 @@ const Victory = () => {
     console.log(userFound)
     const userCompletedHuntItem = () => {
         if (userFound) {
-            return (<><h3>You have previously found and claimed coins for this location.</h3><br /><br /></>)
+            return (<><h3>You have previously found and claimed coins for this location.</h3><br /><br /></>);
         }
         else {
-            return (<><Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br /><br /></>)
+            return (<><Button onClick={claimPrize} className={buttonStyles}>Claim Your Prize!</Button><br /><br /></>);
         }
     }
 
@@ -101,11 +102,11 @@ const Victory = () => {
         try {
             const { data: foundData } = await userFoundHuntItem({
                 variables: { huntItemId: huntItem._id },
-            })
-            console.log(foundData)
+            });
+            Auth.setToken(foundData.userFoundHuntItem.token);
         }
         catch (e) {
-            console.log(e)
+            console.log('CLAIM PRIZE ERROR:', e);
         }
     }
 
@@ -155,7 +156,6 @@ const Victory = () => {
                                 heading={'Sign in to join the fun!'}
                                 body={<>You need to be logged in view this page. Please{' '}
                                     <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
-
                         </CardContent>
                     </Card>
                 )}
@@ -165,4 +165,4 @@ const Victory = () => {
     );
 };
 
-export default Victory
+export default Victory;
