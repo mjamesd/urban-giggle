@@ -16,6 +16,7 @@ import { useQuery } from '@apollo/client';
 import { GET_HUNT } from '../utils/queries';
 import { useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
+import Loading from '../components/Loading';
 
 
 /// Need to work on populating the hunt from the specific hunt clicked on -- this will be a use params
@@ -59,7 +60,7 @@ const SeattleExploreHunt = () => {
     const hunt = data?.hunt || [];
 
     if (loading) {
-        return <h2>LOADING.....</h2>
+        return (<Loading />);
     }
 
     const goToItem = (huntId) => {

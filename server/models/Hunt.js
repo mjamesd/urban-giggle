@@ -31,6 +31,9 @@ const huntSchema = new Schema ({
             ref: 'Badge',
         }
     ],
+    image: {
+        type: String,
+    },
 });
 
 const Hunt = model('Hunt', huntSchema);
