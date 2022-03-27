@@ -1,34 +1,7 @@
 import { gql } from '@apollo/client';
 
-
-// createBadge(name: String! icon: String! description: String! points: Int!): Badge!
-// updateBadge(badgeId: ID! newName: String newIcon: String newDescription: String newPoints: Int ): Badge!
-// removeBadge(badgeId: ID!): Badge
-
-// createHunt(name: String!, description: String!, points: Int!): Hunt! -- done JM
-// updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt! -- done JM
-// removeHunt(huntId: ID!): Hunt -- done JM
-
-// createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem! -- done JM
-// updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem! -- done JM
-// removeHuntItem(huntItemId: ID!): HuntItem  -- done JM
-
-// createUser(username: String!, email: String!, password: String!): Auth  -- done JM
-// updateUser(username: String! newUsername: String email: String! newEmail: String password: String! newPassword: String!): Auth - done
-// removeUser: User --done JM
-// login(email: String!, password: String!): Auth --done JM
-
-
-// changePoints(pointsToChange: Int): Auth  -- done JM
-// userFoundHuntItem(huntItemId: ID!): Auth -- done JM
-// userCompletedHunt(huntId: ID!): Auth -- done JM
-// userAddBadge(badgeId: ID!): Auth -- done JM
-// addHuntItemToHunt(huntId: ID!, huntItemId: ID!): Hunt!
-
-
 //~~~~~~~~~~USER~~~~~~~~~~~
 
-//tested, works
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!, $userType: String) {
     createUser(username: $username, email: $email, password: $password, userType: $userType) {
@@ -44,7 +17,6 @@ export const CREATE_USER = gql`
   }
 `;
 
-//tested, works
 export const UPDATE_USER = gql`
 mutation updateThisUser(
   $password: String!
@@ -71,9 +43,6 @@ mutation updateThisUser(
 }
 `;
 
-
-
-//works
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -103,15 +72,13 @@ export const REMOVE_USER = gql`
 
 
 //~~~~~~~~~~HUNT~~~~~~~~~~~~~
-
-// createHunt(name: String!, description: String!, points: Int!): Hunt!
-//tested in playground, works
 export const CREATE_HUNT = gql`
-mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID]){
-  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, rewards: $rewards){
+mutation createHunt($name: String!, $description: String!, $points: Int!, $city: String!, $huntItems: [ID], $rewards: [ID], $image: String){
+  createHunt(name: $name, description: $description, points: $points, city: $city, huntItems: $huntItems, rewards: $rewards, image: $image){
     _id
     name
     description
+    image
     points
     city
     description
@@ -164,11 +131,12 @@ mutation createHunt($name: String!, $description: String!, $points: Int!, $city:
 // updateHunt( huntId: ID! newName: String newDescription: String newPoints: Int): Hunt! -- is this going to work?
 
 export const UPDATE_HUNT = gql`
-mutation updateHunt($huntId: ID!, $name: String, $city: String $description: String, $points: Int, $huntItems: [ID], $rewards: [ID]){
-  updateHunt(huntId: $huntId, name: $name, city: $city, description: $description, points: $points, huntItems: $huntItems, rewards: $rewards){
+mutation updateHunt($huntId: ID!, $name: String, $city: String $description: String, $points: Int, $huntItems: [ID], $rewards: [ID], $image: String){
+  updateHunt(huntId: $huntId, name: $name, city: $city, description: $description, points: $points, huntItems: $huntItems, rewards: $rewards, image: $image){
     _id
     name
     description
+    image
     points
     city
     description
@@ -225,13 +193,10 @@ mutation removeHunt($huntId: ID!){
     name
   }
 }
-
 `
 
 //~~~~~~~~~~~~~~~HUNT ITEM~~~~~~~~~~~~~~~
 
-// createHuntItem(name: String! hint1: String! hint2: String! hint3: String! solutionLocation: String! solutionDescription: String! solutionImg: String points: Int!): HuntItem!
-//tested in playground, works
 export const CREATE_HUNT_ITEM = gql`
 mutation createHuntItem($name: String!,
     $hint1: String!,
@@ -284,10 +249,6 @@ mutation createHuntItem($name: String!,
       }
     }
 `
-
-
-
-// updateHuntItem(huntItemId: ID! newName: String newHint1: String newHint2: String newHint3: String newSolutionLocation: String newSolutionDescription: String newSolutionImg: String newPoints: Int): HuntItem!
 
 export const UPDATE_HUNT_ITEM = gql`
 mutation updateHuntItem($huntItemId: ID!, $name: String, $hint1: String, $hint2: String, $hint3: String, $solutionLocation: String, $solutionDescription: String, $solutionImg: String, $points: Int, $city:String, $qrId: String, $hint2DisplayedTo: [ID], $hint3DisplayedTo: [ID], $rewards: [ID]){
@@ -415,6 +376,7 @@ export const USER_COMPLETED_HUNT = gql`
         completedHunts{
           _id
           name
+          image
           points
         }
       }

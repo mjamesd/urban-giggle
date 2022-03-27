@@ -34,6 +34,7 @@ const typeDefs = gql`
     points: Int
     huntItems: [HuntItem!]!
     rewards: [Badge]
+    image: String
   }
 
   type HuntItem {
@@ -102,6 +103,7 @@ const typeDefs = gql`
       points: Int
       huntItems: [ID]
       rewards: [ID]
+      image: String
     ): Hunt!
 
     updateHunt(
@@ -112,6 +114,7 @@ const typeDefs = gql`
       points: Int
       huntItems: [ID]
       rewards: [ID]
+      image: String
     ): Hunt!
 
     removeHunt(huntId: ID!): Hunt
@@ -157,7 +160,7 @@ const typeDefs = gql`
 
     removeHuntItemFromHunt(huntId: ID!, huntItemId: ID!): Hunt!
 
-    userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): HuntItem!
+    userAsksForHint(huntItemId: ID!, hint2: Boolean, hint3: Boolean, solution: Boolean): Auth
     userSignsHuntItemGuestbook(huntItemId: ID!, message: String!): HuntItem
 
     createUser(
