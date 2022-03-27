@@ -191,8 +191,10 @@ const resolvers = {
                 user.save((err) => {
                     if (err) return new Error(err);
                 });
+                const token = signToken(user);
 
-                return await HuntItem.findByIdAndUpdate(
+
+                const huntItem = await HuntItem.findByIdAndUpdate(
                     huntItemId,
                     {
                         $addToSet: toAddToSet,
@@ -200,7 +202,8 @@ const resolvers = {
                     {
                         new: true,
                     },
-                ).populate('rewards').populate('hint2DisplayedTo').populate('hint3DisplayedTo').populate('solutionDisplayedTo');
+                );
+                return { token, user };
             } else {
                 return new Error('INSUFFICIENT_POINTS');
             }
