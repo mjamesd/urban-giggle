@@ -163,43 +163,43 @@ const Header = () => {
                                     <div key="username" style={{ textAlign: 'center', fontSize: '1.5rem', fontStyle: 'italic', paddingBottom: '5px', borderBottom: '1px solid #000', }}>
                                         {Auth.getProfile().data.username}
                                     </div>
-                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'admin' && [(
+                                    {Auth.getProfile().data.userType === 'admin' && [(
                                             <MenuItem onClick={handleClose} key="adminPanel">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin">Admin Panel</Link>
                                                 </Button>
-                                            </MenuItem>,
+                                            </MenuItem>),(
                                             <br key="adminPanelBr" />
                                     )]}
-                                    {Auth.loggedIn() && Auth.getProfile().data.userType === 'organizer' && [(
+                                    {Auth.getProfile().data.userType === 'organizer' && [(
                                             <MenuItem onClick={handleClose} key="createHunt">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin/hunts/add">Create Scavenger Hunt</Link>
                                                 </Button>
-                                            </MenuItem>,
-                                            <br key="createHuntBr" />,
+                                            </MenuItem>),(
+                                            <br key="createHuntBr" />),(
                                             <MenuItem onClick={handleClose} key="createHuntItem">
                                                 <Button>
                                                     <Link style={styles.links} to="/admin/huntItems/add">Create Locations</Link>
                                                 </Button>
-                                            </MenuItem>,
+                                            </MenuItem>),(
                                             <br key="createHuntItemBr" />
                                     )]}
                                     <MenuItem onClick={handleClose} key="currentPoints">
                                         <Button>
-                                            <Link style={styles.links} to="/profile">Current Points: {Auth.getProfile().data.points}</Link>
-                                        </Button>
-                                    </MenuItem>
-                                    <br key="currentPointsBr" />
-                                    <MenuItem onClick={handleClose} key="profile">
-                                        <Button>
-                                            <Link style={styles.links} to="/profile">Profile</Link>
+                                            <Link style={styles.links} to="#" onClick={function(e) { e.preventDefault() }}>Current Points: {Auth.getProfile().data.points}</Link>
                                         </Button>
                                     </MenuItem>
                                     <br key="profileBr" />
                                     <MenuItem onClick={handleClose} key="dashboard">
                                         <Button>
                                             <Link style={styles.links} to="/dashboard">Dashboard</Link>
+                                        </Button>
+                                    </MenuItem>
+                                    <br key="currentPointsBr" />
+                                    <MenuItem onClick={handleClose} key="profile">
+                                        <Button>
+                                            <Link style={styles.links} to="/profile">Update Profile</Link>
                                         </Button>
                                     </MenuItem>
                                     <br key="dashboardBr" />
