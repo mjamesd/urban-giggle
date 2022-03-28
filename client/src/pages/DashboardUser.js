@@ -11,6 +11,7 @@ import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
+import Loading from '../components/Loading';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -36,7 +37,7 @@ const DashboardUser = () => {
     const user = data?.user || [];
 
     if (loading) {
-        return <h2>LOADING.....</h2>
+        return (<Loading />);
     }
 
     return (

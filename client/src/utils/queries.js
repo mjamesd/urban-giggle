@@ -74,6 +74,7 @@ query user($userId: ID!) {
                 description
                 points
             }
+            image
         }
         completedHuntsCount
         badges {
@@ -88,6 +89,7 @@ query user($userId: ID!) {
             __typename
             _id
             name
+            image
         }
         favoriteHuntItems {
             __typename
@@ -159,6 +161,7 @@ query users{
                 description
                 points
             }
+            image
         }
         completedHuntsCount
         badges {
@@ -173,6 +176,7 @@ query users{
             __typename
             _id
             name
+            image
         }
         favoriteHuntItems {
             __typename
@@ -244,6 +248,7 @@ export const QUERY_ME = gql`
                 description
                 points
             }
+            image
         }
         completedHuntsCount
         badges {
@@ -390,6 +395,7 @@ query hunt($huntId: ID!) {
       description
       points
     }
+    image
   }
 }
 `
@@ -424,6 +430,7 @@ query hunt{
       description
       points
     }
+    image
   }
 }
 `
@@ -460,6 +467,7 @@ query getAllScavengerHuntsInCity($city: String!) {
           description
           points
       }
+      image
   }
 }
 `

@@ -38,7 +38,7 @@ const useStyles = makeStyles(({ breakpoints, spacing }) => ({
 }));
 
 // main export function
-export const Home = React.memo(function BlogCard() {
+export const Home = () => {
   const styles = useStyles();
   const {
     button: buttonStyles,
@@ -81,6 +81,6 @@ export const Home = React.memo(function BlogCard() {
     <Experiences />
     </motion.div>
   );
-});
+};
 
 export default Home

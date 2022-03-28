@@ -18,6 +18,10 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
+// Components
+import Loading from '../components/Loading';
+
+
 const useStyles = makeStyles(() => ({
     root: {
         maxWidth: 343,
@@ -57,7 +61,7 @@ const Start = () => {
 
     // making sure the data is loaded before things start being assigned to the page. 
     if (loading) {
-        return <h2 style={{ justifyContent:'center'}}>LOADING.....</h2>
+        return (<Loading />);
     }
 
     // Removes duplicates in the cities
