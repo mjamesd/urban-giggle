@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) => {
+const ClueOne = ({ huntItemCategory, huntItemClueOne, showButton }) => {
     // style variables
     const styles = useStyles()
     const textCardContentStyles = useN04TextInfoContentStyles();
@@ -34,27 +34,10 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
 
     // database and mutation variables
     const { huntItemId } = useParams()
-    const [userAsksForHint] = useMutation(USER_ASKS_FOR_HINT);
+    const [userAsksForHint, { error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
 
     // states
     const [errorMessage, setErrorMessage] = useState('');
-
-
-    // deciding which hint to display 
-    const handleNewHint = async () => {
-        if (clueNumber == 1) {
-            displayHintTwo()
-        } 
-        
-        if (clueNumber == 2) {
-            displayHintThree() 
-        } 
-
-        if (clueNumber == 3 ) {
-            displaySolution()
-        }
-    }
-
 
     // validation for points
     const displayHintTwo = async () => {
@@ -67,32 +50,9 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
         }
     }
 
-    const displayHintThree = async () => {
-        try {
-            const { data: hintData } = await userAsksForHint({
-                variables: { huntItemId: huntItemId, hint3: true },
-            })
-        }
-        catch (e) {
-            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-
-        }
-    }
-
-    const displaySolution = async () => {
-        try {
-            const { data: hintData } = await userAsksForHint({
-                variables: { huntItemId: huntItemId, solution: true },
-            })
-        } catch (e) {
-            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-        }
-    }
-
-    // The display button for getting the next hint
     const displayButton = () => {
         if (showButton) {
-            return (<Button className={buttonStyles} onClick={handleNewHint}>Need another hint? (-1 pt)</Button>)
+            return (<Button className={buttonStyles} onClick={displayHintTwo}>Need another hint? (-1 pt)</Button>)
         }
     }
 
@@ -103,10 +63,10 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
                     component="div"
                     classes={textCardContentStyles}
                     overline={huntItemCategory}
-                    heading={`CLUE NUMBER ${clueNumber}`}
+                    heading={`CLUE NUMBER 1`}
                 />
                 <div style={{ textAlign: 'center' }}>
-                    <p>{ReactHtmlParser(huntItemClue)}</p>
+                    <p>{ReactHtmlParser(huntItemClueOne)}</p>
                     <p>{displayButton()}</p>
                     {errorMessage && (
 
@@ -117,4 +77,4 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
     )
 }
 
-export default ClueCard
+export default ClueOne
