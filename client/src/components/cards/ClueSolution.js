@@ -9,7 +9,6 @@ import { Card, CardContent } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
 const useStyles = makeStyles(() => ({
     root: {
