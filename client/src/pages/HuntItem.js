@@ -20,6 +20,7 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 // components
 import ClueHeader from '../components/cards/ClueHeader'
@@ -57,6 +58,22 @@ const HuntItem = () => {
     const currentUser = userData?.me || {};
     console.log('HUNTITEM: ', huntItem)
     console.log('CURRENTUSER: ', currentUser)
+
+    const howToPlay = () => (
+        <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+        <CardContent>
+            <TextInfoContent
+                classes={textCardContentStyles}
+                overline="how to play"
+                heading={<QrCodeScannerIcon />}
+                body={<div>
+                    <p>Find the QR code and scan it with your phone to mark the location as complete!</p>
+                </div>} />
+
+        </CardContent>
+
+    </Card>
+    );
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -124,7 +141,7 @@ const HuntItem = () => {
             return (
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
-
+                    {howToPlay()}
                     <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
                     <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -173,7 +190,7 @@ const HuntItem = () => {
             return (
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
-
+                    {howToPlay()}
                     <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
 
 
@@ -212,7 +229,7 @@ const HuntItem = () => {
             return (
                 <>
                     <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
-
+                    {howToPlay()}
                     <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={false}/>
                    
                    <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
@@ -239,6 +256,7 @@ const HuntItem = () => {
             
                   <>
                   <ClueHeader huntItemName={huntItem.name} huntItemCategory={huntItem.category} huntItemCity={huntItem.city} />
+                  {howToPlay()}
                   <ClueOne huntItemCategory={huntItem.Category} huntItemClueOne={huntItem.hint1} showButton={true}/>
                   </>
             )
