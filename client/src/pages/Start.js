@@ -12,7 +12,7 @@ import cx from 'clsx';
 import { motion } from 'framer-motion';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl } from '@mui/material/'
-import { Card, Button, CardContent }  from '@material-ui/core';
+import { Card, Button, CardContent } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
@@ -61,49 +61,52 @@ const Start = () => {
 
     // making sure the data is loaded before things start being assigned to the page. 
     if (loading) {
-        return (<Loading />);
+        return <Loading />;
     }
 
     // Removes duplicates in the cities
     const cities = [...new Map(hunts.map(hunt => [hunt.city, hunt])).values()]
 
     return (
-        <><motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 2 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }}
-    >
-        {Auth.loggedIn() ? (
-                <Card className={cx(styles.root, shadowStyles.root)}>
-                    <CardContent>
-                        <TextInfoContent
-                            classes={textCardContentStyles}
-                            overline={'Welcome'}
-                            heading={'Choose a City'} />
-                        <FormControl fullWidth>
-                            {
-                                cities.map((city) => (
-                                    <><Button component={Link} to={`../city/${city.city}`} className={buttonStyles}>{city.city}</Button><br /></>
-                                ))}
-                        </FormControl>
-                    </CardContent>
-                </Card>
-            
-            ) : (
+        <>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 2 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+            >
+                {Auth.loggedIn() ? (
+                    <Card className={cx(styles.root, shadowStyles.root)} key="start">
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'Let the hunt begin'}
+                                heading={'Choose a City'} />
+                            <FormControl fullWidth>
+                                {
+                                    cities.map((city) => [(
+                                        <Button component={Link} to={`../city/${city.city}`} className={buttonStyles} key={city._id}>{city.city}</Button>),(
+                                        <br key={`cityBr-${city._id}`} />
+                                    )])
+                                }
+                            </FormControl>
+                        </CardContent>
+                    </Card>
 
-                <Card className={cx(styles.root, shadowStyles.root)}>
-                    <CardContent>
-                        <TextInfoContent
-                            classes={textCardContentStyles}
-                            overline={'Ooops...'}
-                            heading={'Sign in to join the fun!'}
-                            body={<>You need to be logged in view this page. Please{' '}
-                            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></>} />
-                        
-                    </CardContent>
-                </Card>
-            )}
+                ) : (
+
+                    <Card className={cx(styles.root, shadowStyles.root)} key="signin">
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'Ooops...'}
+                                heading={'Sign in to join the fun!'}
+                                body={<>You need to be logged in view this page. Please{' '}
+                                    <Link to="/login">login</Link> or <Link to="/signup">sign up.</Link></>}
+                            />
+                        </CardContent>
+                    </Card>
+                )}
             </motion.div >
         </>
     );
