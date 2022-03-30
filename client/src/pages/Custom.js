@@ -1,10 +1,16 @@
+// React Imports
 import { React } from 'react'
+
+// Apollo Imports and Auth
+
+// Styling
 import { motion } from 'framer-motion';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 
+// Components
 
-
+// main export function
 const CustomHunt = () => {
   const textCardContentStyles = useN04TextInfoContentStyles();
 

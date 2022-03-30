@@ -11,7 +11,7 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
 // Components
-import SignUpForm from '../components/SignUpForm'
+import SignUpForm from '../components/forms/SignUpForm'
 
 // Styles
 const useStyles = makeStyles(() => ({

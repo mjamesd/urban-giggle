@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { validateEmail, validatePassword } from '../utils/helpers';
+import { CREATE_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
+import { validateEmail, validatePassword } from '../../utils/helpers';
 import { init, sendForm } from '@emailjs/browser';
 
 

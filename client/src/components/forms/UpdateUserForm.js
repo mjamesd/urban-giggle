@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { validateEmail } from '../utils/helpers';
+import { UPDATE_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
+import { validateEmail } from '../../utils/helpers';
 
 import {
     FormControl,

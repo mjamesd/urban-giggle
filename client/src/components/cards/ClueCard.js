@@ -42,15 +42,15 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
 
     // deciding which hint to display 
     const handleNewHint = async () => {
-        if (clueNumber == 1) {
+        if (clueNumber === 1) {
             displayHintTwo()
         } 
         
-        if (clueNumber == 2) {
+        if (clueNumber === 2) {
             displayHintThree() 
         } 
 
-        if (clueNumber == 3 ) {
+        if (clueNumber === 3 ) {
             displaySolution()
         }
     }

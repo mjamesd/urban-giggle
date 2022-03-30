@@ -1,7 +1,7 @@
 // React Imports
 import React from 'react';
 
-// Styles Imports
+// Styling
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 
 // Components
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/forms/LoginForm'
 
 // Styles
 const useStyles = makeStyles(() => ({

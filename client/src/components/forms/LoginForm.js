@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { validateEmail, validatePassword } from '../utils/helpers';
+import { LOGIN_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
+import { validateEmail, validatePassword } from '../../utils/helpers';
 import { Link } from 'react-router-dom';
 
 import {

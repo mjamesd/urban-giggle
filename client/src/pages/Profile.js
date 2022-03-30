@@ -1,4 +1,13 @@
+// React Imports
 import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+
+// Apollo Imports and Auth
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_USER, QUERY_ME } from '../utils/queries';
+
+// Styling
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
@@ -7,16 +16,12 @@ import CardContent from '@material-ui/core/CardContent';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { GET_USER, QUERY_ME } from '../utils/queries';
-import Auth from '../utils/auth';
+
+// Components
+import UpdateUserForm from '../components/forms/UpdateUserForm'
 import Loading from '../components/Loading';
 
-
-// import Auth from '../utils/auth';
-import UpdateUserForm from '../components/UpdateUserForm'
-
+// styles
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 343,
@@ -29,7 +34,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
+// main export function
 const Profile = (props) => {
     const { _id } = useParams();
 
