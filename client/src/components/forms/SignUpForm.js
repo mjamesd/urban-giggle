@@ -1,29 +1,25 @@
+// react imports
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+
+// auth and apollo imports
+import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../../utils/mutations';
-import Auth from '../../utils/auth';
+
+// styling
+import Button from '@material-ui/core/Button';
+import { FormControl, InputAdornment, InputLabel, OutlinedInput, IconButton, TextField } from '@mui/material/'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+
+// helpers and other modules
 import { validateEmail, validatePassword } from '../../utils/helpers';
 import { init, sendForm } from '@emailjs/browser';
 
-
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  IconButton,
-  TextField,
-} from '@mui/material/'
-import {
-  Visibility,
-  VisibilityOff
-} from '@mui/icons-material'
-
 init("NZ0ltP_Q1eOniKe9w");
 
+//main export function
 const SignUpForm = () => {
   const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
@@ -37,7 +33,7 @@ const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   // mutation for creating the user
-  const [createUser, { error, data }] = useMutation(CREATE_USER);
+  const [createUser] = useMutation(CREATE_USER);
 
   // validation messages
   const [errorMessage, setErrorMessage] = useState('');
@@ -47,7 +43,7 @@ const SignUpForm = () => {
   const handleChange = (event) => {
     const { target } = event;
     const inputType = target.name;
-    const inputValue = target.value;
+    const inputValue = target.value.trim();
 
     if (inputType === 'username') {
       setUsername(inputValue);
@@ -87,20 +83,17 @@ const SignUpForm = () => {
       return;
     }
 
-
-
     // creating the new user
     try {
       const { data } = await createUser({
         variables: { username: username, email: email, password: password },
       });
-      Auth.login(data.createUser.token);
+      Auth.signup(data.createUser.token);
       setSuccessMessage('Welcome!! Your are now signed up!')
       sendForm("service_k0uycid", "template_0jr5hbi", form.current, "NZ0ltP_Q1eOniKe9w")
-      window.location.assign('/')
+      
     } catch (e) {
       setErrorMessage("I'm sorry, something has gone wrong. Please try again")
-      console.error(e);
     }
 
 
@@ -109,7 +102,6 @@ const SignUpForm = () => {
     setEmail('')
     setPassword('')
     setShowPassword(false)
-    setErrorMessage('');
   };
 
 

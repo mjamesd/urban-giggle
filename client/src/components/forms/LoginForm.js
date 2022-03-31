@@ -1,26 +1,22 @@
+// React Imports
 import React, { useState } from 'react'
-import Button from '@material-ui/core/Button';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../../utils/mutations';
-import Auth from '../../utils/auth';
-import { validateEmail, validatePassword } from '../../utils/helpers';
 import { Link } from 'react-router-dom';
 
-import {
-    FormControl,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    IconButton,
-    TextField,
-} from '@mui/material/'
-import {
-    Visibility,
-    VisibilityOff
-} from '@mui/icons-material'
+// Auth and Apollo Imports
+import Auth from '../../utils/auth';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
 
+// Styling
+import Button from '@material-ui/core/Button';
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+import {FormControl, InputAdornment, InputLabel, OutlinedInput, IconButton, TextField } from '@mui/material/'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
+// Helpers
+import { validateEmail, validatePassword } from '../../utils/helpers';
+
+// main export function 
 const LoginForm = () => {
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
@@ -31,7 +27,7 @@ const LoginForm = () => {
         password: '',
         showPassword: false,
     });
-    const [login, { error, data }] = useMutation(LOGIN_USER);
+    const [login] = useMutation(LOGIN_USER);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('')
 
@@ -72,10 +68,9 @@ const LoginForm = () => {
             });
             Auth.login(data.login.token);
             setSuccessMessage('Login Successful! Welcome Back!')
-            window.history.go(-1)
-        } catch (e) {
-            console.error(e);
-            setErrorMessage('Something has gone wrong');
+
+        } catch (error) {
+            setErrorMessage(`Something went wrong. Please try again!`);
         }
 
 
@@ -86,15 +81,13 @@ const LoginForm = () => {
             showPassword: false,
         });
 
-        setErrorMessage('');
-
     };
 
 
     return (
-        <><form onSubmit={handleFormSubmit}>
+        <form style={{ textAlign: "center" }} onSubmit={handleFormSubmit}>
             <FormControl variant="outlined">
-                <TextField variant="outlined" label="Email" value={values.email} onChange={handleChange('email')} /><br />
+                <TextField variant="outlined" type="email" label="Email" value={values.email} onChange={handleChange('email')} /><br />
 
                 <FormControl variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -127,7 +120,7 @@ const LoginForm = () => {
                 <p>{successMessage}</p>
 
             )}
-        </form><br /><span>First time here? <Link to="/signup">Create New Account!</Link></span></>
+            <br /><span>First time here? <Link to="/signup">Create New Account!</Link></span></form>
     )
 }
 

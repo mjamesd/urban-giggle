@@ -48,10 +48,8 @@ const Login = (props) => {
             classes={textCardContentStyles}
             overline={'Welcome Back'}
             heading={'Login'}
-            body={
-              <LoginForm />
-            }
           />
+          <LoginForm />
         </CardContent>
       </Card>
     </main>
