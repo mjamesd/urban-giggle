@@ -107,6 +107,7 @@ const Victory = () => {
                 variables: { huntItemId: huntItem._id },
             });
             Auth.setToken(foundData.userFoundHuntItem.token);
+            window.location.reload()
         }
         catch (e) {
             console.log('CLAIM PRIZE ERROR:', e);

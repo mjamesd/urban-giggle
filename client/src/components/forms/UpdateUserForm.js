@@ -9,7 +9,7 @@ import { UPDATE_USER } from '../../utils/mutations';
 
 // styling
 import Button from '@material-ui/core/Button';
-import { FormControl, InputLabel, OutlinedInput, IconButton, TextField } from '@mui/material/'
+import { FormControl, InputLabel, OutlinedInput, IconButton, TextField, InputAdornment } from '@mui/material/'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
