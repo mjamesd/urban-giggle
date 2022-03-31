@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 
-// queries, mutations, and auth 
+// Auth and Apollo Imports
 import { useMutation } from '@apollo/client';
 import { USER_ASKS_FOR_HINT } from '../../utils/mutations';
 
