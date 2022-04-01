@@ -92,8 +92,9 @@ mutation createHunt($name: String!, $description: String!, $points: Int!, $city:
       hint1
       hint2
       hint3
+      solutionName
       solutionLocation
-      solutionDescription
+      solutionRewardText
       solutionImg
       points
       hint2DisplayedTo{
@@ -111,7 +112,7 @@ mutation createHunt($name: String!, $description: String!, $points: Int!, $city:
         _id
         username
       }
-			rewards{
+      rewards{
         name
         icon
         description
@@ -150,8 +151,9 @@ mutation updateHunt($huntId: ID!, $name: String, $city: String $description: Str
       hint1
       hint2
       hint3
+      solutionName
       solutionLocation
-      solutionDescription
+      solutionRewardText
       solutionImg
       points
       hint2DisplayedTo{
@@ -203,7 +205,8 @@ mutation createHuntItem($name: String!,
     $hint2: String!,
     $hint3: String!,
     $solutionLocation: String!,
-    $solutionDescription: String!,
+    $solutionName: String!,
+    $solutionRewardText: String,
     $solutionImg: String,
     $points: Int!,
     $city: String!,
@@ -212,7 +215,7 @@ mutation createHuntItem($name: String!,
     $hint2DisplayedTo: [ID],
     $hint3DisplayedTo: [ID],
     $rewards: [ID]){
-      createHuntItem(name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionDescription: $solutionDescription, solutionImg: $solutionImg, points: $points, city: $city, category: $category, qrId: $qrId, hint2DisplayedTo: $hint2DisplayedTo, hint3DisplayedTo: $hint3DisplayedTo, rewards: $rewards){
+      createHuntItem(name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionName: $solutionName, solutionRewardText: $solutionRewardText, solutionImg: $solutionImg, points: $points, city: $city, category: $category, qrId: $qrId, hint2DisplayedTo: $hint2DisplayedTo, hint3DisplayedTo: $hint3DisplayedTo, rewards: $rewards){
           _id
           name
           qrId
@@ -220,8 +223,9 @@ mutation createHuntItem($name: String!,
           hint1
           hint2
           hint3
+          solutionName
           solutionLocation
-          solutionDescription
+          solutionRewardText
           solutionImg
           points
           city
@@ -251,8 +255,8 @@ mutation createHuntItem($name: String!,
 `
 
 export const UPDATE_HUNT_ITEM = gql`
-mutation updateHuntItem($huntItemId: ID!, $name: String, $hint1: String, $hint2: String, $hint3: String, $solutionLocation: String, $solutionDescription: String, $solutionImg: String, $points: Int, $city:String, $qrId: String, $hint2DisplayedTo: [ID], $hint3DisplayedTo: [ID], $rewards: [ID]){
-  updateHuntItem(huntItemId: $huntItemId, name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionDescription: $solutionDescription, solutionImg: $solutionImg, points: $points, city: $city, qrId: $qrId, hint2DisplayedTo: $hint2DisplayedTo, hint3DisplayedTo: $hint3DisplayedTo, rewards: $rewards){
+mutation updateHuntItem($huntItemId: ID!, $name: String, $hint1: String, $hint2: String, $hint3: String, $solutionLocation: String, $solutionName: String, $solutionRewardText: String, $solutionImg: String, $points: Int, $city:String, $qrId: String, $hint2DisplayedTo: [ID], $hint3DisplayedTo: [ID], $rewards: [ID]){
+  updateHuntItem(huntItemId: $huntItemId, name: $name, hint1: $hint1, hint2: $hint2, hint3: $hint3, solutionLocation: $solutionLocation, solutionName: $solutionName, solutionRewardText: $solutionRewardText, solutionImg: $solutionImg, points: $points, city: $city, qrId: $qrId, hint2DisplayedTo: $hint2DisplayedTo, hint3DisplayedTo: $hint3DisplayedTo, rewards: $rewards){
       _id
       name
       qrId
@@ -260,8 +264,9 @@ mutation updateHuntItem($huntItemId: ID!, $name: String, $hint1: String, $hint2:
       hint1
       hint2
       hint3
+      solutionName
       solutionLocation
-      solutionDescription
+      solutionRewardText
       solutionImg
       points
       city

@@ -33,8 +33,9 @@ query user($userId: ID!) {
             hint1
             hint2
             hint3
+            solutionName
             solutionLocation
-            solutionDescription
+            solutionRewardText
             solutionImg
             points
             rewards {
@@ -62,8 +63,9 @@ query user($userId: ID!) {
                 hint1
                 hint2
                 hint3
+                solutionName
                 solutionLocation
-                solutionDescription
+                solutionRewardText
                 solutionImg
                 points
             }
@@ -120,8 +122,9 @@ query users{
             hint1
             hint2
             hint3
+            solutionName
             solutionLocation
-            solutionDescription
+            solutionRewardText
             solutionImg
             points
             rewards {
@@ -149,8 +152,9 @@ query users{
                 hint1
                 hint2
                 hint3
+                solutionName
                 solutionLocation
-                solutionDescription
+                solutionRewardText
                 solutionImg
                 points
             }
@@ -207,8 +211,9 @@ export const QUERY_ME = gql`
             hint1
             hint2
             hint3
+            solutionName
             solutionLocation
-            solutionDescription
+            solutionRewardText
             solutionImg
             points
             rewards {
@@ -236,8 +241,9 @@ export const QUERY_ME = gql`
                 hint1
                 hint2
                 hint3
+                solutionName
                 solutionLocation
-                solutionDescription
+                solutionRewardText
                 solutionImg
                 points
             }
@@ -297,14 +303,15 @@ query huntItem($huntItemId: ID!) {
       _id
       username
     }
+    solutionName
     solutionLocation
-    solutionDescription
+    solutionRewardText
+    solutionImg
     solutionDisplayedTo{
       __typename
       _id
       username
     }
-    solutionImg
     points
     guestbook
     rewards {
@@ -341,14 +348,15 @@ query huntItem{
       _id
       username
     }
+    solutionName
     solutionLocation
-    solutionDescription
+    solutionRewardText
+    solutionImg
     solutionDisplayedTo{
       __typename
       _id
       username
     }
-    solutionImg
     rewards {
         __typename
         _id
@@ -381,10 +389,11 @@ query hunt($huntId: ID!) {
     	hint1
     	hint2
     	hint3
-      category
-    	solutionLocation
-    	solutionDescription
-    	solutionImg
+        category
+        solutionName
+        solutionLocation
+        solutionRewardText
+        solutionImg
     	points
         guestbook
     }
@@ -417,9 +426,10 @@ query hunt{
     	hint1
     	hint2
     	hint3
-    	solutionLocation
-    	solutionDescription
-    	solutionImg
+        solutionName
+        solutionLocation
+        solutionRewardText
+        solutionImg
     	points
         guestbook
     }
@@ -454,8 +464,9 @@ query getAllScavengerHuntsInCity($city: String!) {
           hint1
           hint2
           hint3
+          solutionName
           solutionLocation
-          solutionDescription
+          solutionRewardText
           solutionImg
           points
       }
@@ -480,7 +491,10 @@ query huntItemByQrCode($qrId: String!) {
     qrId 
     qrCode
     points
-    solutionDescription
+    solutionName
+    solutionLocation
+    solutionRewardText
+    solutionImg
     rewards{
       _id
       name
