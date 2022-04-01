@@ -1,21 +1,23 @@
+// React Imports
 import React from 'react'
+
+// Apollo Imports and Auth
+
+// Styling
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
-import Card from '@material-ui/core/Card';
-import Box from '@mui/material/Box';
-import Button from '@material-ui/core/Button';
-import TextField from '@mui/material/TextField';
-import CardContent from '@material-ui/core/CardContent';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import { Card, Box, Button, CardContent } from '@material-ui/core';
+import { TextField, TextareaAutosize, Modal } from '@mui/material';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import Modal from '@mui/material/Modal';
 
+// Components
+// Maybe move the form into a component
 
-
+// Styles
 const useStyles = makeStyles(() => ({
     root: {
         maxWidth: 500,
@@ -29,6 +31,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// main export function
 const Contact = () => {
     const styles = useStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();

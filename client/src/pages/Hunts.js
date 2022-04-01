@@ -1,37 +1,29 @@
-// IMPORTS
+// React Imports
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
+
+// Apollo Imports and Auth
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_HUNTS_BY_CITY } from '../utils/queries';
+
+// Styling
 import cx from 'clsx';
 import Color from 'color';
 import { motion } from 'framer-motion';
-import ReactHtmlParser from 'react-html-parser';
-import { Link, useParams } from 'react-router-dom';
-// import { useNavigate, useParams } from 'react-router-dom';
-// MUI
-import { Box } from '@mui/system';
-// Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Card, CardActionArea, CardContent, CardMedia } from '@material-ui/core';
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-// import CardActionArea from '@material-ui/core/CardActionArea';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Button from '@material-ui/core/Button';
-// MUI Treasury
+import { Box } from '@mui/system';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-// import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-// GraphQL
-import { useQuery } from '@apollo/client';
-import { GET_HUNTS_BY_CITY } from '../utils/queries';
+
 // Components
-import Auth from '../utils/auth';
 import Loading from '../components/Loading';
 
-
+// Styles
 const useGridStyles = makeStyles(({ breakpoints }) => ({
     root: {
         MarginTop: '10px',
@@ -68,10 +60,11 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         fontFamily: 'Keania One',
-        fontSize: '2rem',
+        fontSize: '1.5rem',
         color: '#fff',
-        textTransform: 'uppercase',
-        justifyContent: 'center'
+        // textTransform: 'uppercase',
+        justifyContent: 'center',
+        textAlign: 'center'
     },
     subtitle: {
         color: '#fff',
@@ -84,6 +77,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// I think we should move this custom card into a component
 const CustomCard = ({ classes, image, title, subtitle }) => {
     const mediaStyles = useFourThreeCardMediaStyles();
     return (
@@ -101,19 +95,14 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
     );
 };
 
+// main export function
 export const Hunts = () => {
-    // const navigate = useNavigate();
     const gridStyles = useGridStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();
     const shadowStyles = useOverShadowStyles({ inactive: true });
-    // const { button: buttonStyles } = useBlogTextInfoContentStyles();
-    // const styles = useStyles({ color: '#0b3954' });
-    // const styles2 = useStyles({ color: '#FF6F00' });
-    // const styles3 = useStyles({ color: '#c81d25' });
     const styles = useStyles({ color: '#c81d25' });
     const { huntCity } = useParams();
     const { loading, data } = useQuery(GET_HUNTS_BY_CITY, {
-        // pass URL parameter
         variables: { city: huntCity },
     });
 

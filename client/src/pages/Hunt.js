@@ -1,25 +1,28 @@
+// React Imports
 import { React } from 'react'
-import { motion } from 'framer-motion';
-import cx from 'clsx';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+
+// Apollo Imports and Auth
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { GET_HUNT } from '../utils/queries';
+
+// Styling
+import cx from 'clsx';
+import { motion } from 'framer-motion';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
+import { Card, Button, Grid, CardContent } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { useQuery } from '@apollo/client';
-import { GET_HUNT } from '../utils/queries';
-import { useNavigate } from 'react-router-dom';
-import Auth from '../utils/auth';
+
+// Components
 import Loading from '../components/Loading';
 
 
-/// Need to work on populating the hunt from the specific hunt clicked on -- this will be a use params
+// Styles
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 343,
@@ -41,8 +44,8 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-
-const SeattleExploreHunt = () => {
+// main export function
+const Hunt = () => {
   const { huntId } = useParams();
   const navigate = useNavigate()
   const styles = useStyles();
@@ -52,11 +55,9 @@ const SeattleExploreHunt = () => {
   const { button: buttonStyles } = useBlogTextInfoContentStyles();
 
   const { loading, data } = useQuery(GET_HUNT, {
-    // pass URL parameter
     variables: { huntId: huntId },
 });
 
-    // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
     const hunt = data?.hunt || [];
 
     if (loading) {
@@ -122,4 +123,4 @@ const SeattleExploreHunt = () => {
 };
 
 
-export default SeattleExploreHunt
+export default Hunt

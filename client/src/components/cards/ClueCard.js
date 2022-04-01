@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 
-// queries, mutations, and auth 
+// Auth and Apollo Imports
 import { useMutation } from '@apollo/client';
 import { USER_ASKS_FOR_HINT } from '../../utils/mutations';
 
@@ -42,15 +42,15 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
 
     // deciding which hint to display 
     const handleNewHint = async () => {
-        if (clueNumber == 1) {
+        if (clueNumber === 1) {
             displayHintTwo()
         } 
         
-        if (clueNumber == 2) {
+        if (clueNumber === 2) {
             displayHintThree() 
         } 
 
-        if (clueNumber == 3 ) {
+        if (clueNumber === 3 ) {
             displaySolution()
         }
     }

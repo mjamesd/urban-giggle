@@ -1,13 +1,10 @@
-//react
-import React, { useState } from 'react'
+// React Imports
+import React from 'react'
 import { useParams, Link } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
 
 // Apollo Imports and Auth
 import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
 import { GET_HUNT_ITEM, QUERY_ME } from '../utils/queries';
-import { USER_ASKS_FOR_HINT } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 //styling 
@@ -27,7 +24,7 @@ import ClueCard from '../components/cards/ClueCard'
 import ClueSolution from '../components/cards/ClueSolution'
 import Loading from '../components/Loading';
 
-
+// Styles
 const useStyles = makeStyles(() => ({
     root: {
         Width: '250',
@@ -40,7 +37,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-
+// main export function
 const HuntItem = () => {
     const styles = useStyles();
     const textCardContentStyles = useN04TextInfoContentStyles();
@@ -52,14 +49,11 @@ const HuntItem = () => {
         variables: { huntItemId: huntItemId },
     })
     const { data: userData, loading: userLoading } = useQuery(QUERY_ME)
-    const [userAsksForHint,{ error: userAsksForHintError }] = useMutation(USER_ASKS_FOR_HINT);
 
     const huntItem = huntItemData?.huntItem || {};
     const currentUser = userData?.me || {};
     console.log('HUNTITEM: ', huntItem)
     console.log('CURRENTUSER: ', currentUser)
-
-    const [errorMessage, setErrorMessage] = useState('');
 
     if (huntItemLoading) {
         return (<Loading />);

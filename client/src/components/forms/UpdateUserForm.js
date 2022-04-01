@@ -1,26 +1,22 @@
+// react imports
 import React, { useState, useRef } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
+import { Link, useNavigate } from 'react-router-dom';
+
+// auth and apollo imports
+import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { validateEmail } from '../utils/helpers';
+import { UPDATE_USER } from '../../utils/mutations';
 
-import {
-    FormControl,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    IconButton,
-    TextField,
-} from '@mui/material/'
-import {
-    Visibility,
-    VisibilityOff
-} from '@mui/icons-material'
+// styling
+import Button from '@material-ui/core/Button';
+import { FormControl, InputLabel, OutlinedInput, IconButton, TextField, InputAdornment } from '@mui/material/'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 
+// helpers
+import { validateEmail } from '../../utils/helpers';
 
+// main export function 
 const UpdateUserForm = ({ user }) => {
     const { button: buttonStyles } = useBlogTextInfoContentStyles();
 

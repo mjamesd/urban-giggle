@@ -1,6 +1,10 @@
+// react imports
 import React from 'react';
+
+// styling
 import CircularProgress from '@mui/material/CircularProgress';
 
+// main export function
 const Loading = () => {
     return (
         <div className="loadingDiv">

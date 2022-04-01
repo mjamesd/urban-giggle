@@ -1,26 +1,29 @@
+// React Imports
 import React from 'react'
+import { useParams, Link } from 'react-router-dom';
+import useWindowSize from 'react-use/lib/useWindowSize';
+
+// Apollo Imports and Auth
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { GET_HUNT_ITEM_BY_QR_ID, QUERY_ME } from '../utils/queries';
+import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
+
+// Styling
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { motion } from 'framer-motion';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Confetti from 'react-confetti'
+import { Card, CardContent, Button } from '@material-ui/core';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import Confetti from 'react-confetti'
-import { useParams } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-import CardMedia from '@material-ui/core/CardMedia';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+
+// Components
 import Wall from '../components/Wall'
-import { useQuery } from '@apollo/client';
-import { GET_HUNT_ITEM_BY_QR_ID, QUERY_ME } from '../utils/queries';
-import { useMutation } from '@apollo/client';
-import { USER_FOUND_HUNT_ITEM } from '../utils/mutations'
-import Auth from '../utils/auth';
-import useWindowSize from 'react-use/lib/useWindowSize';
 import Loading from '../components/Loading';
 
 const useStyles = makeStyles(() => ({
@@ -104,6 +107,7 @@ const Victory = () => {
                 variables: { huntItemId: huntItem._id },
             });
             Auth.setToken(foundData.userFoundHuntItem.token);
+            window.location.reload()
         }
         catch (e) {
             console.log('CLAIM PRIZE ERROR:', e);

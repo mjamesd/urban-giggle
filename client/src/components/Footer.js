@@ -1,7 +1,11 @@
+// react imports
 import React from 'react'
 import { Link } from "react-router-dom"
+
+// styling
 import Button from '@mui/material/Button';
 
+// styles
 const styles = {
   container: {
     display: 'flex',
@@ -21,6 +25,7 @@ const styles = {
   },
 }
 
+// main export function
 const Footer = () => {
   return (
     <footer>
