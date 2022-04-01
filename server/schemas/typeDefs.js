@@ -50,7 +50,8 @@ const typeDefs = gql`
     hint3: String!
     hint3DisplayedTo: [User]
     solutionLocation: String!
-    solutionDescription: String!
+    solutionName: String!
+    solutionRewardText: String
     solutionImg: String
     solutionDisplayedTo: [User]
     points: Int
@@ -130,7 +131,8 @@ const typeDefs = gql`
       hint2DisplayedTo: [ID]
       hint3DisplayedTo: [ID]
       solutionLocation: String!
-      solutionDescription: String!
+      solutionName: String!
+      solutionRewardText: String
       solutionImg: String
       solutionDisplayedTo: [ID]
       points: Int!
@@ -149,7 +151,8 @@ const typeDefs = gql`
       hint3: String
       hint3DisplayedTo: [ID]
       solutionLocation: String
-      solutionDescription: String
+      solutionName: String
+      solutionRewardText: String
       solutionImg: String
       solutionDisplayedTo: [ID]
       points: Int

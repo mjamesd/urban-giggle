@@ -51,16 +51,20 @@ const huntItemSchema = new Schema({
             ref: 'User',
         },
     ],
-    solutionLocation: {
-        type: String, // description and/or lat&long
+    solutionName: {
+        type: String, // the name of the location
         required: true,
     },
-    solutionDescription: {
-        type: String,
+    solutionLocation: {
+        type: String, // address or lat&long
         required: true,
     },
     solutionImg: {
         type: String,
+    },
+    solutionRewardText: {
+        type: String, // text to display when user finds it -- i.e., a reward from the business
+        required: false,
     },
     solutionDisplayedTo: [
         {
