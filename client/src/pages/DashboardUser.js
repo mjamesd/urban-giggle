@@ -57,46 +57,42 @@ const DashboardUser = () => {
         >
             <main>
                 <Card className={cx(styles.root, shadowStyles.root)}>
-                    <CardContent>
+                    <CardContent style={{ textAlign: 'center' }}>
                         <TextInfoContent
                             classes={textCardContentStyles}
                             overline={'Total Quest'}
                             heading={'User Dashboard'}
-                            body={(
-                                <>
-                                    <div key="completedHunts">
-                                        <h2>Completed Scavenger Hunts</h2>
-                                        {user.completedHunts && user.completedHunts.map(hunt => (
-                                            <div key={hunt._id}>
-                                                <h3>{hunt.name}</h3>
-                                                <p>+{hunt.points} Qoin{hunt.points > 1 && 's'}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div key="foundHuntItems">
-                                        <h2>Found Hunt Locations</h2>
-                                        {user.foundHuntItems && user.foundHuntItems.map(item => (
-                                            <div key={item._id}>
-                                                <h3>{item.name}</h3>
-                                                <p>+{item.points} Qoin{item.points > 1 && 's'}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div key="badges">
-                                        <h2>Badges</h2>
-                                        <div style={{ display: 'flex', }}>
-                                            {user.badges && user.badges.map(badge => (
-                                                <div key={badge._id} style={{ margin: '0 2rem',  }}>
-                                                    <h3>{badge.name}</h3>
-                                                    <p>+{badge.points} Qoin{badge.points > 1 && 's'}</p>
-                                                    <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '200px', border: '1px solid black' }} />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </>
-                            )}
                         />
+                        <div key="completedHunts">
+                            <h2>Completed Scavenger Hunts</h2>
+                            {user.completedHunts && user.completedHunts.map(hunt => (
+                                <div key={hunt._id}>
+                                    <h3>{hunt.name}</h3>
+                                    <p>+{hunt.points} Qoin{hunt.points > 1 && 's'}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div key="foundHuntItems">
+                            <h2>Found Hunt Locations</h2>
+                            {user.foundHuntItems && user.foundHuntItems.map(item => (
+                                <div key={item._id}>
+                                    <h3>{item.name}</h3>
+                                    <p>+{item.points} Qoin{item.points > 1 && 's'}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div key="badges">
+                            <h2>Badges</h2>
+                            <div style={{ display: 'flex', }}>
+                                {user.badges && user.badges.map(badge => (
+                                    <div key={badge._id} style={{ margin: '0 2rem', }}>
+                                        <h3>{badge.name}</h3>
+                                        <p>+{badge.points} Qoin{badge.points > 1 && 's'}</p>
+                                        <img src={`/img/badges/${badge.icon}`} alt={badge.icon} style={{ width: '200px', border: '1px solid black' }} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </CardContent>
                 </Card>
             </main>
