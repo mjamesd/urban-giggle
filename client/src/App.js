@@ -1,24 +1,24 @@
 // Dependencies
 import { React, useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
+    BrowserRouter as Router,
+    Routes,
+    Route,
 } from "react-router-dom";
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 
 // Styling & Animation
-import { 
+import {
     // motion, AnimateSharedLayout, 
-    AnimatePresence } from "framer-motion";
-import './index.css';
+    AnimatePresence
+} from "framer-motion";
 
 // Components
 import Header from './components/Header';
@@ -57,103 +57,110 @@ import UsersViewAdmin from './pages/Admin/UsersView';
 import DashboardAdmin from './pages/Admin/DashboardAdmin';
 // import UsersEditAdmin from './pages/Admin/UsersEdit';
 
+// OnePirate Theme imports
+import ProductCategories from './modules/views/ProductCategories';
+import ProductSmokingHero from './modules/views/ProductSmokingHero';
+import AppFooter from './modules/views/AppFooter';
+import ProductHero from './modules/views/ProductHero';
+import ProductValues from './modules/views/ProductValues';
+import ProductHowItWorks from './modules/views/ProductHowItWorks';
+import ProductCTA from './modules/views/ProductCTA';
+import AppAppBar from './modules/views/AppAppBar';
+import withRoot from './modules/withRoot';
+
 const httpLink = createHttpLink({
-  uri: '/graphql',
+    uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
+    const token = localStorage.getItem('id_token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
 });
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // force HTTPS
-    if (window.location.protocol !== 'https:' && process.env.PRODUCTION === true) {
-        window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
-    }
-    loading
-      ? document.querySelector("body").classList.add("loading")
-      : document.querySelector("body").classList.remove("loading");
-  }, [loading]);
+    useEffect(() => {
+        // force HTTPS
+        if (window.location.protocol !== 'https:' && process.env.PRODUCTION === true) {
+            window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+        }
+        loading
+            ? document.querySelector("body").classList.add("loading")
+            : document.querySelector("body").classList.remove("loading");
+    }, [loading]);
 
-  return (
-    <AnimatePresence exitBeforeEnter>
-      <ApolloProvider client={client}>
-        <Router >
-          <div id="root" className="app-container">
-            <Header />
+    return (
+        <ApolloProvider client={client}>
+            <Router >
+                {/* <Header /> */}
+                <AppAppBar />
+                <ProductHero />
+                <ProductValues />
+                <ProductCategories />
+                <ProductHowItWorks />
+                <ProductCTA />
+                <ProductSmokingHero />
+                <AppFooter />
+                <div className="content-wrapper">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/start" element={<Start />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/dashboard" element={<DashboardUser />} />
 
-            <div className="content-wrapper">
+                        {/* hunt item routes */}
+                        <Route path="/victory/:qrId" element={<Victory />} />
+                        <Route path="/hints/:huntItemId" element={<HuntItem />} />
 
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/start" element={<Start />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/dashboard" element={<DashboardUser />} />
+                        {/* hunt routes */}
+                        {/* explore will be removed and replaced with hunts/id */}
+                        <Route path="/city/:huntCity" element={<Hunts />} />
+                        <Route path="/city/:huntCity/:huntId" element={<Hunt />} />
 
-                {/* hunt item routes */}
+                        {/* organizer routes -- this will be if we are able to add the organizer option in time */}
+                        <Route path="/hunt/create" element={<Custom />} />
 
-                <Route path="/victory/:qrId" element={<Victory />} />
-                <Route path="/hints/:huntItemId" element={<HuntItem />} />
-                
-                {/* hunt routes */}
-                {/* explore will be removed and replaced with hunts/id */}
-                <Route path="/city/:huntCity" element={<Hunts />} />
-                <Route path="/city/:huntCity/:huntId" element={<Hunt />} />
-               
-                {/* organizer routes -- this will be if we are able to add the organizer option in time */}
-                <Route path="/hunt/create" element={<Custom/>} />
+                        {/* admin */}
+                        <Route path="/admin" element={<DashboardAdmin />} />
+                        <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
+                        <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
+                        <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
+                        <Route path="/admin/hunts/viewQRcodes/:huntId" element={<HuntsViewQRcodesAdmin />} />
+                        <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
+                        <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
+                        <Route path="/admin/huntItems/add" element={<HuntItemsAddAdmin />} />
+                        <Route path="/admin/huntItems/view/:huntItemId" element={<HuntItemsViewAdmin />} />
+                        <Route path="/admin/huntItems/edit/:huntItemId" element={<HuntItemsEditAdmin />} />
+                        <Route path="/admin/badges" element={<BadgesIndexAdmin />} />
+                        <Route path="/admin/badges/add" element={<BadgesAddAdmin />} />
+                        <Route path="/admin/badges/view/:badgeId" element={<BadgesViewAdmin />} />
+                        <Route path="/admin/badges/edit/:badgeId" element={<BadgesEditAdmin />} />
+                        <Route path="/admin/users" element={<UsersIndexAdmin />} />
+                        <Route path="/admin/users/add" element={<UsersAddAdmin />} />
+                        <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
+                        {/* admins cannot edit user accounts! */}
+                        {/* <Route path="/admin/users/edit/:userId" element={<UsersEditAdmin />} /> */}
+                    </Routes>
+                </div>
+                <Footer />
+            </Router>
+        </ApolloProvider>
+    );
+};
 
-                {/* admin */}
-                <Route path="/admin" element={<DashboardAdmin />} />
-                <Route path="/admin/hunts" element={<HuntsIndexAdmin />} />
-                <Route path="/admin/hunts/add" element={<HuntsAddAdmin />} />
-                <Route path="/admin/hunts/view/:huntId" element={<HuntsViewAdmin />} />
-                <Route path="/admin/hunts/viewQRcodes/:huntId" element={<HuntsViewQRcodesAdmin />} />
-                <Route path="/admin/hunts/edit/:huntId" element={<HuntsEditAdmin />} />
-                <Route path="/admin/huntItems" element={<HuntItemsIndexAdmin />} />
-                <Route path="/admin/huntItems/add" element={<HuntItemsAddAdmin />} />
-                <Route path="/admin/huntItems/view/:huntItemId" element={<HuntItemsViewAdmin />} />
-                <Route path="/admin/huntItems/edit/:huntItemId" element={<HuntItemsEditAdmin />} />
-                <Route path="/admin/badges" element={<BadgesIndexAdmin />} />
-                <Route path="/admin/badges/add" element={<BadgesAddAdmin />} />
-                <Route path="/admin/badges/view/:badgeId" element={<BadgesViewAdmin />} />
-                <Route path="/admin/badges/edit/:badgeId" element={<BadgesEditAdmin />} />
-                <Route path="/admin/users" element={<UsersIndexAdmin />} />
-                <Route path="/admin/users/add" element={<UsersAddAdmin />} />
-                <Route path="/admin/users/view/:userId" element={<UsersViewAdmin />} />
-                {/* admins cannot edit user accounts! */}
-                {/* <Route path="/admin/users/edit/:userId" element={<UsersEditAdmin />} /> */}
-
-              </Routes>
-
-            </div>
-
-            <Footer />
-          </div>
-        </Router>
-      </ApolloProvider>
-
-    </AnimatePresence>
-
-  )
-}
-
-export default App;
+export default withRoot(App);

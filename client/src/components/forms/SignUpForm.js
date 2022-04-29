@@ -67,6 +67,8 @@ const SignUpForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    // console.log("form?", form);
+
     // validation process
     if (!username) {
       setErrorMessage('Please enter a username');

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { useMutation } from '@apollo/client';
 import cx from 'clsx';
@@ -7,7 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import Confetti from 'react-confetti'
 import Button from '@material-ui/core/Button';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { SIGN_GUEST_BOOK } from '../utils/mutations'
