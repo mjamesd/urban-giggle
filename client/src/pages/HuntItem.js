@@ -23,7 +23,6 @@ import ClueHeader from '../components/cards/ClueHeader'
 import ClueCard from '../components/cards/ClueCard'
 import ClueSolution from '../components/cards/ClueSolution'
 import Loading from '../components/Loading';
-import NeedToSignIn from '../components/NeedToSignIn';
 
 // Styles
 const useStyles = makeStyles(() => ({
@@ -184,7 +183,17 @@ const HuntItem = () => {
                         {hintBody()}
                     </Stack>) : (
 
-                    <NeedToSignIn />
+                    <Card className={cx(styles.root, shadowStyles.root)}>
+                        <CardContent>
+                            <TextInfoContent
+                                classes={textCardContentStyles}
+                                overline={'Ooops...'}
+                                heading={'Sign in to join the fun!'}
+                                body={<p>You need to be logged in view this page. Please{' '}
+                                    <Link to="/login">login</Link> or <Link to="/signup">signup.</Link></p>} />
+
+                        </CardContent>
+                    </Card>
                 )}
             </main>
         </motion.div>
