@@ -1,40 +1,101 @@
-/*
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html,
+root {
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  min-height: 100vh;
 
-font-family: 'Amatic SC', cursive;
-font-family: 'Fredoka One', cursive;
-font-family: 'Neucha', cursive;
-font-family: 'Permanent Marker', cursive;
-font-family: 'Special Elite', cursive;
+  height: 100%;
+  background-color: white;
+  overflow-x: hidden;
+}
 
-*/
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Fredoka+One&family=Neucha&family=Permanent+Marker&family=Special+Elite&display=swap');
+header {
+  background-color: white;
+  position: fixed;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100&display=swap');
+/* Sections
+   ========================================================================== */
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+  margin: 0;
+  font-family: "Darker Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  padding: 0 !important;
+}
 
-.marquee {
-    position: relative;
-    width: 100vw;
-    max-width: 100%;
-    margin-top: -10;
-    height: 130px;
-    overflow-x: none;
-    overflow-y: none;
+p {
+  font-family: "Darker Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+main {
+  display: block;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+/* LOADING SPINNER */
+.loadingDiv {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+  font-family: "Poiret One", cursive;
+  color: #fd5238 !important;
+}
+
+h1 {
+  font-family: "Poiret One", cursive;
+  font-size: 40px;
+  color: #fd5238 !important;
+}
+
+footer {
+  margin-bottom: 0 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 370px) and (max-width: 850px) {
+  .marquee {
+    display: none;
   }
-  
-  .track {
-    position: absolute;
-    white-space: nowrap;
-  }
-  
-  .track > h1 {
-    margin: 30px 0;
-    font-size: 90px;
-    font-weight: normal;
-    overflow-x: none;
-    overflow-y: hidden;
-    font-family: 'Barlow Semi Condensed', sans-serif;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #f4955c;
-    -webkit-text-fill-color: white;
-    text-transform: uppercase;
-  }
+}

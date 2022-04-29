@@ -21,7 +21,7 @@ const typeDefs = gql`
   type Badge {
     _id: ID
     name: String!
-    icon: String
+    icon: String!
     description: String!
     points: Int
   }
@@ -82,7 +82,7 @@ const typeDefs = gql`
   type Mutation {
     createBadge(
       name: String!
-      icon: String
+      icon: String!
       description: String!
       points: Int
     ): Badge!

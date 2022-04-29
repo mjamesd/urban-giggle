@@ -326,10 +326,18 @@ export const REMOVE_HUNT_ITEM_FROM_HUNT = gql`
 export const USER_ASKS_FOR_HINT = gql`
     mutation userAsksForHint($huntItemId: ID!, $hint2: Boolean, $hint3: Boolean, $solution: Boolean){
       userAsksForHint(huntItemId: $huntItemId, hint2: $hint2, hint3: $hint3, solution: $solution){
-        token
-        user {
-            _id
-            points
+        _id
+        hint2
+        hint3
+        points
+        hint2DisplayedTo{
+          _id
+        }
+        hint3DisplayedTo{
+          _id
+        }
+        solutionDisplayedTo{
+          _id
         }
       }
     }

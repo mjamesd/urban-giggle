@@ -6,7 +6,6 @@ import ReactHtmlParser from 'react-html-parser';
 // Auth and Apollo Imports
 import { useMutation } from '@apollo/client';
 import { USER_ASKS_FOR_HINT } from '../../utils/mutations';
-import Auth from '../../utils/auth';
 
 // styles
 import cx from 'clsx';
@@ -16,7 +15,6 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
-
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -44,69 +42,52 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
 
     // deciding which hint to display 
     const handleNewHint = async () => {
-        let clueRequested = clueNumber+1;
-        let varsForHint = { huntItemId: huntItemId };
-        if (clueRequested === 2) varsForHint.hint2 = true;
-        if (clueRequested === 3) varsForHint.hint3 = true;
-        if (clueRequested === 4) varsForHint.solution = true;
-
-        try {
-            const { data: hintData } = await userAsksForHint({
-                variables: { ...varsForHint },
-            });
-            Auth.setToken(hintData.userAsksForHint.token);
-            window.location.reload();
-        } catch (e) {
-            setErrorMessage("😭 I'm sorry, you have run out of points! 😭");
-            console.log("MUTATION ERROR: ", e);
-        }
-
-        // if (clueNumber === 1) {
-        //     displayHintTwo()
-        // } 
+        if (clueNumber === 1) {
+            displayHintTwo()
+        } 
         
-        // if (clueNumber === 2) {
-        //     displayHintThree() 
-        // } 
+        if (clueNumber === 2) {
+            displayHintThree() 
+        } 
 
-        // if (clueNumber === 3 ) {
-        //     displaySolution()
-        // }
+        if (clueNumber === 3 ) {
+            displaySolution()
+        }
     }
 
 
     // validation for points
-    // const displayHintTwo = async () => {
-    //     try {
-    //         const { data: hintData } = await userAsksForHint({
-    //             variables: { huntItemId: huntItemId, hint2: true },
-    //         })
-    //     } catch (e) {
-    //         setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-    //     }
-    // }
+    const displayHintTwo = async () => {
+        try {
+            const { data: hintData } = await userAsksForHint({
+                variables: { huntItemId: huntItemId, hint2: true },
+            })
+        } catch (e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+        }
+    }
 
-    // const displayHintThree = async () => {
-    //     try {
-    //         const { data: hintData } = await userAsksForHint({
-    //             variables: { huntItemId: huntItemId, hint3: true },
-    //         })
-    //     }
-    //     catch (e) {
-    //         setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+    const displayHintThree = async () => {
+        try {
+            const { data: hintData } = await userAsksForHint({
+                variables: { huntItemId: huntItemId, hint3: true },
+            })
+        }
+        catch (e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
 
-    //     }
-    // }
+        }
+    }
 
-    // const displaySolution = async () => {
-    //     try {
-    //         const { data: hintData } = await userAsksForHint({
-    //             variables: { huntItemId: huntItemId, solution: true },
-    //         })
-    //     } catch (e) {
-    //         setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
-    //     }
-    // }
+    const displaySolution = async () => {
+        try {
+            const { data: hintData } = await userAsksForHint({
+                variables: { huntItemId: huntItemId, solution: true },
+            })
+        } catch (e) {
+            setErrorMessage("😭 I'm sorry, you have run out of points! 😭")
+        }
+    }
 
     // The display button for getting the next hint
     const displayButton = () => {
@@ -116,7 +97,7 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
     }
 
     return (
-        <Card key={`clue-${clueNumber}`} style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
+        <Card style={{ width: '400px' }} className={cx(styles.root, shadowStyles.root)}>
             <CardContent>
                 <TextInfoContent
                     component="div"
@@ -136,4 +117,4 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
     )
 }
 
-export default ClueCard;
+export default ClueCard
