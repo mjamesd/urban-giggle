@@ -7,8 +7,7 @@ const badgeSchema = new Schema ({
         unique: true,
     },
     icon: {
-        type: String, // FontAwesome? Materialize? Other?
-        required: true,
+        type: String, // full name of image in /img/huntItems/ , including extension
         unique: true,
     },
     description: {

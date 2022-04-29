@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
+require('dotenv').config()
 
 // we give it a URL with https here: https://www.totalquest.us/victory/...
 const happiDevApiUrl = `https://api.happi.dev/v1/qrcode?apikey=${process.env.HAPPI_DEV_API_KEY}&data=https://www.totalquest.us/victory/`;
