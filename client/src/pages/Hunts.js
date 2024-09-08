@@ -1,7 +1,7 @@
 // React Imports
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 // Apollo Imports and Auth
 import Auth from '../utils/auth';
@@ -86,9 +86,11 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
                 <CardMedia classes={mediaStyles} image={image} />
                 <CardContent className={classes.content}>
                     <Typography className={classes.title}>
-                        {ReactHtmlParser(title)}
+                        {/* {ReactHtmlParser(title)} */}
+                        {title}
                     </Typography>
-                    <Typography className={classes.subtitle}>{ReactHtmlParser(subtitle)}</Typography>
+                    {/* <Typography className={classes.subtitle}>{ReactHtmlParser(subtitle)}</Typography> */}
+                    <Typography className={classes.subtitle}>{subtitle}</Typography>
                 </CardContent>
             </Card>
         </CardActionArea>

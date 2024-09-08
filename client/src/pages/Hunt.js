@@ -1,7 +1,7 @@
 // React Imports
 import { React } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 // Apollo Imports and Auth
 import Auth from '../utils/auth';
@@ -94,7 +94,8 @@ const Hunt = () => {
                         <TextInfoContent
                           classes={textCardContentStyles}
                           overline={huntItem.city}
-                          heading={ReactHtmlParser(`Category: ${huntItem.category}<br /> "${huntItem.name}"`)}
+                          // heading={ReactHtmlParser(`Category: ${huntItem.category} - "${huntItem.name}"`)}
+                          heading={`Category: ${huntItem.category} - "${huntItem.name}"`}
                           body={<div>
                             <Button onClick={() => goToItem(huntItem._id)} className={buttonStyles}>Start Now!</Button><br/><br/>
                           </div>} />
