@@ -1,7 +1,7 @@
 //react
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 // Auth and Apollo Imports
 import { useMutation } from '@apollo/client';
@@ -106,7 +106,8 @@ const ClueCard = ({ huntItemCategory, huntItemClue, clueNumber, showButton }) =>
                     heading={`CLUE NUMBER ${clueNumber}`}
                 />
                 <div style={{ textAlign: 'center' }}>
-                    <p>{ReactHtmlParser(huntItemClue)}</p>
+                    {/* <p>{ReactHtmlParser(huntItemClue)}</p> */}
+                    <p>{huntItemClue}</p>
                     <p>{displayButton()}</p>
                     {errorMessage && (
 

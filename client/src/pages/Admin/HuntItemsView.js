@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { GET_HUNT_ITEM } from '../../utils/queries';
@@ -71,16 +71,20 @@ const HuntItemsView = () => {
             <p>City: {huntItem.city}</p>
             <p>Category: {huntItem.category}</p>
             <p>Points awarded when found: {huntItem.points}</p>
-            <p>Hint 1: {ReactHtmlParser(huntItem.hint1)}</p>
+            {/* <p>Hint 1: {ReactHtmlParser(huntItem.hint1)}</p>
             <p>Hint 2: {ReactHtmlParser(huntItem.hint2)}</p>
-            <p>Hint 3: {ReactHtmlParser(huntItem.hint3)}</p>
+            <p>Hint 3: {ReactHtmlParser(huntItem.hint3)}</p> */}
+            <p>Hint 1: {huntItem.hint1}</p>
+            <p>Hint 2: {huntItem.hint2}</p>
+            <p>Hint 3: {huntItem.hint3}</p>
             <p>Solution Location: {huntItem.solutionLocation}</p>
             <p>Solution Description: {huntItem.solutionDescription}</p>
             <p>Solution Image: <img src={huntItem.solutionImg} alt={huntItem.solutionImg} style={{width: '100px', border: '1px solid black'}} /></p>
             <p>Guestbook:</p>
                 {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
                 {huntItem.guestbook && huntItem.guestbook.map(message => (
-                    <div>{ReactHtmlParser(message)}</div>
+                    // <div>{ReactHtmlParser(message)}</div>
+                    <div>{message}</div>
                 ))}
             <p>Rewards for finding this Scavenger Hunt Item:</p>
             <ul key={`${huntItem._id}-rewards`}>

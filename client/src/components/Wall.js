@@ -11,7 +11,7 @@ import Confetti from 'react-confetti'
 import Button from '@material-ui/core/Button';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { SIGN_GUEST_BOOK } from '../utils/mutations'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 import {
     FormControl,
@@ -112,7 +112,8 @@ const Wall = ({ huntItemId, huntItem }) => {
                 <div>
                     <Card className={cx(styles.root, shadowStyles.root)}>
                         <CardContent>
-                            <h2>{ReactHtmlParser(message)}</h2>
+                            {/* <h2>{ReactHtmlParser(message)}</h2> */}
+                            <h2>{message}</h2>
                         </CardContent>
                     </Card>
                     <br />

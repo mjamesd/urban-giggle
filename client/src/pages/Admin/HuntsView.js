@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import { useBlogTextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/blog';
 import { GET_HUNT } from '../../utils/queries';
@@ -50,7 +50,8 @@ const HuntsView = () => {
                             <p>Guestbook:</p>
                                 {(huntItem.guestbook.length === 0) ? 'No guestbook entries.' : ''}
                                 {huntItem.guestbook && huntItem.guestbook.map(message => (
-                                    <div>{ReactHtmlParser(message)}</div>
+                                    // <div>{ReactHtmlParser(message)}</div>
+                                    <div>{message}</div>
                                 ))}
                         </div>
                     </li>

@@ -1,6 +1,6 @@
 //react
 import React from 'react'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 // styles
 import cx from 'clsx';
@@ -34,8 +34,10 @@ const ClueSolution = ({ huntItemSolution, huntItemLocation, huntItemCategory }) 
                     heading={`FINAL HINT`}
                     />
                     <div style={{ textAlign: 'center' }}>
-                        <p>{ReactHtmlParser(huntItemSolution)}</p>
-                        <p>{ReactHtmlParser(huntItemLocation)}</p>
+                        {/* <p>{ReactHtmlParser(huntItemSolution)}</p>
+                        <p>{ReactHtmlParser(huntItemLocation)}</p> */}
+                        <p>{huntItemSolution}</p>
+                        <p>{huntItemLocation}</p>
                     </div>
             </CardContent>
         </Card>

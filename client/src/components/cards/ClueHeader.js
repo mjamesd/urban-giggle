@@ -1,6 +1,6 @@
 //react
 import React from 'react'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 // styles
 import cx from 'clsx';
@@ -35,9 +35,11 @@ const ClueHeader = ({ huntItemName, huntItemCategory, huntItemCity }) => {
                 <TextInfoContent
                     classes={textCardContentStyles}
                     overline={huntItemCity}
-                    heading={ReactHtmlParser(huntItemName)} 
+                    // heading={ReactHtmlParser(huntItemName)} 
+                    heading={huntItemName} 
                 />
-                <h2 style={{ textAlign: 'center' }}>{ReactHtmlParser(category)}</h2>
+                {/* <h2 style={{ textAlign: 'center' }}>{ReactHtmlParser(category)}</h2> */}
+                <h2 style={{ textAlign: 'center' }}>{category}</h2>
             </CardContent>
         </Card>
     )
