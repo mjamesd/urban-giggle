@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "js-base64": "^3.7.2",
-    "react-html-parser": "^2.0.2",
     "uuid": "^8.3.2"
   }
 }
