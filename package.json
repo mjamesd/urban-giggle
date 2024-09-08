@@ -1,9 +1,6 @@
 {
   "name": "urban-giggle",
-  "version": "0.0.1",
-  "engines": {
-    "node": "18.12.0"
-  },
+  "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
   "scripts": {
